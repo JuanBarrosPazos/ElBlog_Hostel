@@ -1,7 +1,7 @@
 <?php
 
-	//require 'Gch.Inclu/error_hidden.php';
-	require 'Gch.Inclu/Admin_Inclu_01c.php';
+	//require '../Gch.Inclu/error_hidden.php';
+	require '../Gch.Inclu/Admin_Inclu_01b.php';
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -20,7 +20,7 @@
 	elseif(isset($_POST['config'])){$_SESSION['inst'] = "noinst";						
 	if($form_errors = validate_form()){show_form($form_errors);} 
 	else {	process_form();
-			require 'Gch.Connet/conection.php';
+			require '../Gch.Connet/conection.php';
 			$db = @mysqli_connect($db_host,$db_user,$db_pass,$db_name);
 	
 			if (!$db){ 	global $dbconecterror;
@@ -43,7 +43,7 @@
 				 ////////////////////				  ///////////////////
 
 function inittot(){
-	@include 'Gch.Connet/conection.php';
+	@include '../Gch.Connet/conection.php';
 	$db = @mysqli_connect($db_host,$db_user,$db_pass,$db_name);
 	if (!$db){ //print ("Es imposible conectar con la bbdd ".$db_name."</br>".mysqli_connect_error());
 				$_SESSION['inst'] = "noinst";
@@ -71,7 +71,7 @@ function inittot(){
 				</tr>
 				<tr>
 					<td align='center' class='BorderInf'>
-						<a href='Gch.Config/config2.php'>
+						<a href='config2.php'>
 							CREE EL USUARIO ADMINISTRADOR
 			 			</a>
 							</br></br>
@@ -85,9 +85,9 @@ function inittot(){
 				<tr>
 			<form name='limpia' action='$_SERVER[PHP_SELF]' method='post' >
 				<td  align='center'>
-			<input type='submit' value='ELIMINE TODOS LOS DATOS DEL SISTEMA' />
-			<input type='hidden' name='limpia' value=1 />
-			</br></br>
+					<input type='submit' value='ELIMINE TODOS LOS DATOS DEL SISTEMA' />
+					<input type='hidden' name='limpia' value=1 />
+					</br></br>
 				</td>
 			</fomr>
 				</tr>";
@@ -107,12 +107,12 @@ function inittot(){
 						</th>
 					</tr>
 					<tr>
-				<form name='inscancel' action='Gch.Config/config2.php' method='post' >
-						<td align='center' class='BorderInf'>
-				<input type='submit' value='CONTINUE CON LA CONFIGURACIÓN ACTUAL' />
-				<input type='hidden' name='inscancel' value=1 />
-				</br></br>
-						</td>
+				<form name='inscancel' action='config2.php' method='post' >
+					<td align='center' class='BorderInf'>
+						<input type='submit' value='CONTINUE CON LA CONFIGURACIÓN ACTUAL' />
+						<input type='hidden' name='inscancel' value=1 />
+						</br></br>
+					</td>
 				</form>
 					</tr>
 					<tr>
@@ -149,49 +149,49 @@ function inittot(){
 function config_one(){
 
 	unset($_SESSION['showf']);
-	
+
 	$_SESSION['inst'] = "noinst";
 
-	if(file_exists('Gch.Config/year.txt')){unlink("Gch.Config/year.txt");
-					$data1 = PHP_EOL."\tUNLINK Gch.Config/year.txt";}
-			else {print("DON`T UNLINK Gch.Config/year.txt </br>");
-					$data1 = PHP_EOL."\tDON'T UNLINK Gch.Config/year.txt";}
+	if(file_exists('year.txt')){unlink("year.txt");
+					$data1 = PHP_EOL."\tUNLINK year.txt";}
+			else {print("DON`T UNLINK year.txt </br>");
+					$data1 = PHP_EOL."\tDON'T UNLINK year.txt";}
 
-	if(file_exists('Gch.Config/ayear.php')){unlink("Gch.Config/ayear.php");
-					$data2 = PHP_EOL."\tUNLINK Gch.Config/ayear.php";}
-			else {print("DON'T UNLINK Gch.Config/ayear.php </br>");
-					$data2 = PHP_EOL."\tDON'T UNLINK Gch.Config/ayear.php";}
+	if(file_exists('ayear.php')){unlink("ayear.php");
+					$data2 = PHP_EOL."\tUNLINK ayear.php";}
+			else {print("DON'T UNLINK ayear.php </br>");
+					$data2 = PHP_EOL."\tDON'T UNLINK ayear.php";}
 
-	if(!file_exists('Gch.Config/year.txt')){
-			if(file_exists('Gch.Config/year_Init_System.txt')){
-				copy("Gch.Config/year_Init_System.txt", "Gch.Config/year.txt");
-				$data3 = PHP_EOL."\tRENAME Gch.Config/year_Init_System.txt TO Gch.Config/year.txt";
-			} else {print("DON'T RENAME Gch.Config/year_Init_System.txt TO Gch.Config/year.txt </br>");
-				$data3 = PHP_EOL."\tDON'T RENAME Gch.Config/year_Init_System.txt TO Gch.Config/year.txt";}
+	if(!file_exists('year.txt')){
+			if(file_exists('year_Init_System.txt')){
+				copy("year_Init_System.txt", "year.txt");
+				$data3 = PHP_EOL."\tRENAME year_Init_System.txt TO year.txt";
+			} else {print("DON'T RENAME year_Init_System.txt TO year.txt </br>");
+				$data3 = PHP_EOL."\tDON'T RENAME year_Init_System.txt TO year.txt";}
 			}
 
-	if(!file_exists('Gch.Config/ayear.php')){
-			if(file_exists('Gch.Config/ayear_Init_System.php')){
-				copy("Gch.Config/ayear_Init_System.php", "Gch.Config/ayear.php");
-				$data4 = PHP_EOL."\tRENAME Gch.Config/ayear_Init_System.php TO Gch.Config/ayear.php";
-			} else {print("DON'T RENAME Gch.Config/ayear_Init_System.php TO Gch.Config/ayear.php </br>");
-				$data4 = PHP_EOL."\tDON'T RENAME Gch.Config/ayear_Init_System.php TO Gch.Config/ayear.php";}
+	if(!file_exists('ayear.php')){
+			if(file_exists('ayear_Init_System.php')){
+				copy("ayear_Init_System.php", "ayear.php");
+				$data4 = PHP_EOL."\tRENAME ayear_Init_System.php TO ayear.php";
+			} else {print("DON'T RENAME ayear_Init_System.php TO ayear.php </br>");
+				$data4 = PHP_EOL."\tDON'T RENAME ayear_Init_System.php TO ayear.php";}
 			}
 
-	if(!file_exists('Gch.Img.Art/untitled.png')){
-			if(file_exists('Gch.Img.Sys/untitled.png')){
-				copy("Gch.Img.Sys/untitled.png", "Gch.Img.Art/untitled.png");
-				$data5 = PHP_EOL."\tRENAME Gch.Img.Art/ayear_Init_System.php TO Gch.Img.Art/ayear.php";
-			} else {print("DON'T CCOPY Gch.Img.Art/untitled.png </br>");
-				$data5 = PHP_EOL."\tDON'T CCOPY Gch.Img.Art/untitled.png";}
+	if(!file_exists('../Gch.Img.Art/untitled.png')){
+			if(file_exists('../Gch.Img.Sys/untitled.png')){
+				copy("../Gch.Img.Sys/untitled.png", "../Gch.Img.Art/untitled.png");
+				$data5 = PHP_EOL."\tRENAME ayear_Init_System.php TO ayear.php";
+			} else {print("DON'T CCOPY ../Gch.Img.Art/untitled.png </br>");
+				$data5 = PHP_EOL."\tDON'T CCOPY ../Gch.Img.Art/untitled.png";}
 			}
 			
-	if(!file_exists('Gch.Img.User/untitled.png')){
-			if(file_exists('Gch.Img.Sys/untitled.png')){
-				copy("Gch.Img.Sys/untitled.png", "Gch.Img.User/untitled.png");
+	if(!file_exists('../Gch.Img.User/untitled.png')){
+			if(file_exists('../Gch.Img.Sys/untitled.png')){
+				copy("../Gch.Img.Sys/untitled.png", "../Gch.Img.User/untitled.png");
 				$data6 = PHP_EOL."\tRENAME ayear_Init_System.php TO ayear.php";
-			} else {print("DON'T CCOPY Gch.Img.User/untitled.png </br>");
-				$data6 = PHP_EOL."\tDON'T CCOPY Gch.Img.User/untitled.png";}
+			} else {print("DON'T CCOPY ../Gch.Img.User/untitled.png </br>");
+				$data6 = PHP_EOL."\tDON'T CCOPY ../Gch.Img.User/untitled.png";}
 			}
 			
 	global $cfone;
@@ -199,7 +199,7 @@ function config_one(){
 
 	//modif();
 	//modif2();
-	
+
 	}
 
 				   ////////////////////				   ////////////////////
@@ -208,10 +208,10 @@ function config_one(){
 
 function deldir(){
 
-	unlink("Gch.Connet/conection.php");
+	unlink("../Gch.Connet/conection.php");
 
 	// BORRA CONTENIDO DE LOS DIRECTORIOS DENTRO DEL USUARIO
-	$carpeta1 = "Gch.Img.Art";
+	$carpeta1 = "../Gch.Img.Art";
 	if(file_exists($carpeta1)){ $dir1 = $carpeta1."/";
 								$handle1 = opendir($dir1);
 					while ($file1 = readdir($handle1))
@@ -221,7 +221,7 @@ function deldir(){
 							//rmdir ($carpeta1);
 								} else {}
 											
-	$carpeta2 = "Gch.Img.User";
+	$carpeta2 = "../Gch.Img.User";
 	if(file_exists($carpeta2)){ $dir2 = $carpeta2."/";
 								$handle2 = opendir($dir2);
 					while ($file2 = readdir($handle2))
@@ -231,7 +231,6 @@ function deldir(){
 							//rmdir ($carpeta2);
 								} else {}
 
-
 } // FIN FUNCTION
 
 				   ////////////////////				   ////////////////////
@@ -240,7 +239,7 @@ function deldir(){
 
 function deltables(){
 
-	require 'Gch.Connet/conection.php';
+	require '../Gch.Connet/conection.php';
 	$db = @mysqli_connect($db_host,$db_user,$db_pass,$db_name);
 
 	/*************	BORRAMOS TODAS LAS TABLAS DE ARTICULOS 	***************/
@@ -284,7 +283,7 @@ print("<font color='#FF0000'>L.246 Se ha producido un error: </font></br>".mysql
 
 function deltablesb(){
 
-	require 'Gch.Connet/conection.php';
+	require '../Gch.Connet/conection.php';
 	$db = @mysqli_connect($db_host,$db_user,$db_pass,$db_name);
 
 	/*************	BORRAMOS LAS TABLAS DEL SISTEMA 	***************/
@@ -325,7 +324,7 @@ function rewrite(){
 	$db_name = ""; 
 	?>';
 
-	$filename = "Gch.Connet/conection.php";
+	$filename = "../Gch.Connet/conection.php";
 	$config = fopen($filename, 'w+');
 	fwrite($config, $bddata);
 	fclose($config);
@@ -437,7 +436,7 @@ function process_form(){
 				$db_name = '.$name.'; 
 				?>';
 	
-	$filename = "Gch.Connet/conection.php";
+	$filename = "../Gch.Connet/conection.php";
 	$config = fopen($filename, 'w+');
 	fwrite($config, $bddata);
 	fclose($config);
@@ -489,7 +488,7 @@ function process_form(){
 				</tr>
 				<tr>
 		   			<td colspan=2 align='center'>
-						<a href='Gch.Config/config2.php'>
+						<a href='config2.php'>
 		   					CREE EL USUARIO ADMINISTRADOR
 						</a>
 					</td>
@@ -510,12 +509,12 @@ function process_form(){
 	global $db_name;
 	global $dbconecterror;
 	
-	require 'Gch.Config/Inc_Crear_Tablas.php';
+	require 'Inc_Crear_Tablas.php';
 
-		$filename = "Gch.Config/logs/".$logdate."_CONFIG_INIT.log";
-		$log = fopen($filename, 'ab+');
-		fwrite($log, $logtext);
-		fclose($log);
+	$filename = "logs/".$logdate."_CONFIG_INIT.log";
+	$log = fopen($filename, 'ab+');
+	fwrite($log, $logtext);
+	fclose($log);
 
 	}	
 
@@ -664,7 +663,6 @@ function show_form($errors=''){
 					<td align='right' valign='middle'  class='BorderSup' colspan='2'>
 						<input type='submit' value='INIT CONFIG' />
 						<input type='hidden' name='config' value=1 />
-						
 					</td>
 				</tr>
 		</form>														
@@ -677,7 +675,7 @@ function show_form($errors=''){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-	require 'Gch.Inclu/Admin_Inclu_02.php';
+	require '../Gch.Inclu/Admin_Inclu_02.php';
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
