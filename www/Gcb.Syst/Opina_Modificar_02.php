@@ -260,7 +260,7 @@ function show_form($errors=''){
 	global $autor;
 	$autor = $_SESSION['refuser'];
 	/* CONSULTAMOS LA TABLA ADMIN = AUTORES */
-	$sqlx =  "SELECT * FROM `admin` WHERE `ref` = '$autor' ";
+	$sqlx =  "SELECT * FROM `gcb_admin` WHERE `ref` = '$autor' ";
 	$q = mysqli_query($db, $sqlx);
 	$rowautor = mysqli_fetch_assoc($q);
 	global $_sec;

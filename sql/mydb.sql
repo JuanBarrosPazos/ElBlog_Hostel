@@ -7,7 +7,7 @@ SET time_zone = "+01:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
-CREATE TABLE IF NOT EXISTS `admin` (
+CREATE TABLE IF NOT EXISTS `gcb_admin` (
   `id` int(4) NOT NULL AUTO_INCREMENT,
   `ref` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
   `Nivel` varchar(8) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'amd',
@@ -34,15 +34,11 @@ CREATE TABLE IF NOT EXISTS `admin` (
 	) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-INSERT INTO `admin` (`id`, `ref`, `Nivel`, `Nombre`, `Apellidos`, `myimg`, `doc`, `dni`, `ldni`, `Email`, `Usuario`, `Password`, `Direccion`, `Tlf1`, `Tlf2`, `lastin`, `lastout`, `visitadmin`) VALUES
-(1, 'jbp55555555k', 'admin', 'Juan', 'Barros Pazos', 'jbp55555555k.jpg', 'DNI', '55555555', 'K', 'juanbarrospazos@hotmail.es', 'JuanBarros', 'MariaPazos', 'Palma de Mallorca', '111111111', '111111112', '2020-06-26/09:47:48', '2020-06-25/19:18:41', '53'),
-(2, 'abp44444444a', 'admin', 'Ana', 'Barros Pazos', 'abp44444444a.png', 'DNI', '44444444', 'A', 'ana@ana.es', 'ana', 'ana', 'A Coruña', '222222221', '222222222', '2020-06-24/10:08:58', '2020-06-24/10:09:46', '9'),
-(3, 'mbp33333333p', 'plus', 'Maria', 'Barros Pazos', 'mbp33333333p.png', 'DNI', '33333333', 'P', 'maria@maria.es', 'maria', 'maria', 'A Coruña', '333333331', '333333332', '2020-06-24/10:07:18', '2020-06-24/10:08:33', '2'),
-(4, 'af22222222j', 'user', 'Andrea', 'Fandinho', 'af22222222j.png', 'DNI', '22222222', 'J', 'andrea@andrea.es', 'andrea', 'andrea', 'A Coruña', '444444441', '444444442', '2020-06-24/10:10:06', '2020-06-24/10:15:48', '1'),
-(5, 'mh11111111h', 'close', 'Marga', 'Huertos', 'mh11111111h.png', 'DNI', '11111111', 'H', 'marga@marga.es', 'marga', 'marga', 'Palma de Mallorca', '555555551', '555555552', '0', '0', '0');
+INSERT INTO `gcb_admin` (`id`, `ref`, `Nivel`, `Nombre`, `Apellidos`, `myimg`, `doc`, `dni`, `ldni`, `Email`, `Usuario`, `Password`, `Direccion`, `Tlf1`, `Tlf2`, `lastin`, `lastout`, `visitadmin`) VALUES
+(1, 'jbp55555555k', 'admin', 'Juan', 'Barros Pazos', 'jbp55555555k.jpg', 'DNI', '55555555', 'K', 'juanbarrospazos@hotmail.es', 'admin', 'admin', 'Palma de Mallorca', '111111111', '111111112', '2020-06-26/09:47:48', '2020-06-25/19:18:41', '53');
 
 
-CREATE TABLE `user` (
+CREATE TABLE `gcb_user` (
   `id` int(4) NOT NULL AUTO_INCREMENT,
   `ref` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
   `Nivel` varchar(8) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'user',
@@ -63,8 +59,8 @@ CREATE TABLE `user` (
 	UNIQUE KEY `Usuario` (`Usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `user` (`id`, `ref`, `Nivel`, `Nombre`, `Apellidos`, `myimg`, `Email`, `Usuario`, `Password`, `Direccion`, `Tlf1`, `lastin`, `lastout`, `visituser`) VALUES
-(1, 'jbp55555555k', 'user', 'Juan', 'Barros Pazos', 'jbp55555555k.jpg', 'juanbarrospazos@hotmail.es', 'admin', 'admin', 'Palma de Mallorca', '111111111', '2020-06-26/09:47:48', '2020-06-25/19:18:41', '1');
+INSERT INTO `gcb_user` (`id`, `ref`, `Nivel`, `Nombre`, `Apellidos`, `myimg`, `Email`, `Usuario`, `Password`, `Direccion`, `Tlf1`, `lastin`, `lastout`, `visituser`) VALUES
+(1, 'jbp55555555k', 'user', 'Juan', 'Barros Pazos', 'jbp55555555k.jpg', 'juanbarrospazos@hotmail.es', 'user', 'user', 'Palma de Mallorca', '111111111', '2020-06-26/09:47:48', '2020-06-25/19:18:41', '1');
 
 
 CREATE TABLE IF NOT EXISTS `gcb_art` (
@@ -307,7 +303,7 @@ INSERT INTO `gcb_tipologia` (`id`, `tipo`, `reftipo`) VALUES
 ('7', 'Otros', 'otrs');
 
 
-CREATE TABLE `ipcontrol` (
+CREATE TABLE `gcb_ipcontrol` (
   `id` int(4) NOT NULL AUTO_INCREMENT,
   `ref` varchar(20) COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'anonimo',
   `nivel` varchar(8) COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'anonimo',
@@ -320,7 +316,7 @@ CREATE TABLE `ipcontrol` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-CREATE TABLE `visitasadmin` (
+CREATE TABLE `gcb_visitasadmin` (
   `idv` int(2) NOT NULL,
   `visita` int(10) NOT NULL,
   `admin` int(10) NOT NULL,
@@ -329,6 +325,8 @@ CREATE TABLE `visitasadmin` (
   PRIMARY KEY (`idv`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+INSERT INTO `gcb_visitasadmin` (`idv`, `visita`, `admin`, `deneg`, `acceso`) VALUES
+	(69, 0, 0, 0, 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

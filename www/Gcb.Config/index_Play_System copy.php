@@ -1,3 +1,7 @@
+<?php
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,9 +13,9 @@
   <meta name="author" content="">
 
   <title>Juan Barros Pazos - Inicio</title>
-  
+
   <link href="Gcb.Img.Sys/favicon.png" type='image/ico' rel='shortcut icon' />
-  
+
   <link href="Gcb.Css/conta.css" rel="stylesheet" type="text/css">
 
   <!-- Bootstrap core CSS -->
@@ -22,6 +26,8 @@
   <!-- Custom styles for this template -->
   <link href="css/agency.min.css" rel="stylesheet">
 
+  <meta name="google-site-verification" content="mOfK4hpECAN7aBamd4ARwyO6Ap2UWpNwlFALRwbC9kk" />
+  
 </head>
 
 <body id="page-top">
@@ -29,31 +35,66 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">Juan Barros Pazos</a>
+
+      <a class="navbar-brand js-scroll-trigger" href="index.php?inicio=1">
+        <!-- Juan Barros Pazos -->
+        <img src="Gcb.Img.Sys/LogoBMoll.png" class="imglogo" />
+      </a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav text-uppercase ml-auto">
+        <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="index.php?inicio=1">VER TODOS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="Gcb.Www/mapas.php">MAPAS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="Gcb.Www/contact.php">CONTACTO</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="Gcb.Www/team.php">NOSOTROS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="Gcb.Www/services.php">SERVICIOS</a>
+        </li>
+
+        <?php
+            if($_SESSION['Nivel'] == 'user'){ 
+            print(" <li class=\"nav-item\">
+                      <a class=\"nav-link js-scroll-trigger\" href=\"Gcb.Users/User_Modificar_01.php\">
+                        MIS DATOS
+                      </a>
+                    </li>
+              <form name='cerrar' action='$_SERVER[PHP_SELF]' method='POST'>
+                  <input type='submit' value='CLOSE SESSION' class=\"btn btn-primary\" />
+                <input type='hidden' name='salir' value=1 />
+              </form>
+                ");
+            }
+            else { 
+              print("
+              <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\">
+                        Iniciar Sesion
+               </button>");
+                }
+          ?>
+
+
+        <!--
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="Gcb.Www/news.php">Restaurantes</a>
+            <a class="nav-link js-scroll-trigger" href="Gcb.Www/portfolio.php">PORTFOLIO</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="Gcb.Www/services.php">Services</a>
+            <a class="nav-link js-scroll-trigger" href="Gcb.Www/news.php">NOTICIAS</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="Gcb.Www/portfolio.php">Portfolio</a>
+            <a class="nav-link js-scroll-trigger" href="Gcb.Www/clients.php">CLIENTES</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="Gcb.Www/team.php">Team</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="Gcb.Www/contact.php">Contact</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="Gcb.Www/clients.php">Clients</a>
-          </li>
+        -->
         </ul>
       </div>
     </div>
@@ -67,6 +108,19 @@
         <div class="intro-lead-in">Welcome To Juan Barros Pazos</div>
         -->
         <div class="intro-heading text-uppercase">IB FOOD</div>
+    <?php
+        if(@$_SESSION['Nivel'] == 'user'){ 
+          global $h;
+          $h = date('H');
+          global $m;
+          if(($h >= 6 )&&($h <= 13 )){ $m = "BUENOS DÍAS: "; }
+          elseif(($h >= 14 )&&($h <= 21 )){ $m = "BUENAS TARDES: "; }
+          elseif(($h >= 22 )&&($h <= 5 )){ $m = "BUENAS NOCHES: "; }
+          print ("<h6 style=\"color: #cfcfcf\">
+                        ".$m.$_SESSION['Nombre']." ".$_SESSION['Apellidos']."
+                  </h6>");
+            } else { }
+      ?>
       </div>
     </div>
   </header>
@@ -75,7 +129,11 @@
   <section class="page-section" id="about">
     <div class="container">
 
-      <?php require 'Gcb.Artic/Art_Ver_index.php'; ?>
+      <?php 
+      
+        require 'Gcb.Artic/Art_Ver_index.php'; 
+
+      ?>
 
     </div> <!-- Fin container -->
   </section>
@@ -90,17 +148,17 @@
         <div class="col-md-4">
           <ul class="list-inline social-buttons">
             <li class="list-inline-item">
-              <a href="#">
+              <a href="index.php?inicio=1">
                 <i class="fab fa-twitter"></i>
               </a>
             </li>
             <li class="list-inline-item">
-              <a href="#">
+              <a href="index.php?inicio=1">
                 <i class="fab fa-facebook-f"></i>
               </a>
             </li>
             <li class="list-inline-item">
-              <a href="#">
+              <a href="index.php?inicio=1">
                 <i class="fab fa-linkedin-in"></i>
               </a>
             </li>
@@ -109,10 +167,10 @@
         <div class="col-md-4">
           <ul class="list-inline quicklinks">
             <li class="list-inline-item">
-              <a href="#">Privacy Policy</a>
+              <a href="index.php?inicio=1">Privacy Policy</a>
             </li>
             <li class="list-inline-item">
-              <a href="#">Terms of Use</a>
+              <a href="index.php?inicio=1">Terms of Use</a>
             </li>
             <li class="list-inline-item">
               <a href="Gcb.Admin/access.php" target="_blank">Admin Access</a>
@@ -122,6 +180,10 @@
       </div>
     </div>
   </footer>
+
+  <?php
+    require 'Gcb.Www/Inc_Boton_Modali.php';
+  ?>
 
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>

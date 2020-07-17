@@ -143,7 +143,7 @@ function ver_del_opiniones(){
 		$sqlb =  "SELECT * FROM `$db_name`.$vname WHERE `refart` = '$opirefart' AND `modera` = 'y'  ORDER BY `id` ASC $limit";
 	
 		/*
-		$sqlb =  "SELECT * FROM `admin` WHERE `admin`.`dni` <> '$_SESSION[mydni]' ORDER BY $orden ";
+		$sqlb =  "SELECT * FROM `gcb_admin` WHERE `gcb_admin`.`dni` <> '$_SESSION[mydni]' ORDER BY $orden ";
 		*/
 		$qb = mysqli_query($db, $sqlb);
 		if(!$qb){
@@ -713,7 +713,7 @@ function ver_todo(){
 	$sqlb =  "SELECT * FROM `$db_name`.$vname  ORDER BY `refart` ASC $limit";
 
 	/*
-	$sqlb =  "SELECT * FROM `admin` WHERE `admin`.`dni` <> '$_SESSION[mydni]' ORDER BY $orden ";
+	$sqlb =  "SELECT * FROM `gcb_admin` WHERE `gcb_admin`.`dni` <> '$_SESSION[mydni]' ORDER BY $orden ";
 	*/
 	$qb = mysqli_query($db, $sqlb);
 	if(!$qb){
@@ -914,7 +914,7 @@ function ver_modera(){
 	$sqlb =  "SELECT * FROM `$db_name`.$vname WHERE `modera` = 'n'  ORDER BY `id` ASC $limit";
 
 	/*
-	$sqlb =  "SELECT * FROM `admin` WHERE `admin`.`dni` <> '$_SESSION[mydni]' ORDER BY $orden ";
+	$sqlb =  "SELECT * FROM `gcb_admin` WHERE `gcb_admin`.`dni` <> '$_SESSION[mydni]' ORDER BY $orden ";
 	*/
 	$qb = mysqli_query($db, $sqlb);
 	if(!$qb){

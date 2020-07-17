@@ -120,7 +120,7 @@
 	/* Realizamos un condicional de validacion de campos Nombre y dni.*/
 		
 
-$sql =  "SELECT * FROM `$db_name`.`admin` WHERE `Email` = '$_POST[Email]' AND `dni` = '$_POST[dni]' AND `ldni` = '$_POST[ldni]' ";
+$sql =  "SELECT * FROM `$db_name`.`gcb_admin` WHERE `Email` = '$_POST[Email]' AND `dni` = '$_POST[dni]' AND `ldni` = '$_POST[ldni]' ";
  	
 	$q = mysqli_query($db, $sql);
 	$row = mysqli_fetch_assoc($q);
@@ -262,7 +262,7 @@ function process_form(){
 	global $db_name;
 	
 	//$eml = "%".$_POST['Email']."%";
-	$sqlc =  "SELECT * FROM `$db_name`.`admin` WHERE `Email` = '$_POST[Email]' AND `dni` = '$_POST[dni]' AND `ldni` = '$_POST[ldni]' ";
+	$sqlc =  "SELECT * FROM `$db_name`.`gcb_admin` WHERE `Email` = '$_POST[Email]' AND `dni` = '$_POST[dni]' AND `ldni` = '$_POST[ldni]' ";
 	$qc = mysqli_query($db, $sqlc);
 	
 	if(!$qc){print("Se ha producido un error: ".mysqli_error($db)."<br/><br/>");

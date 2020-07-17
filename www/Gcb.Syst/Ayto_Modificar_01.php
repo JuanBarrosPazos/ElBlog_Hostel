@@ -370,7 +370,7 @@ function process_form(){
 	$sqlb =  "SELECT * FROM `$db_name`.$vname WHERE `refisla` = '$_SESSION[isla]' AND `refayto` <> 'otrs'  ORDER BY `ayto` ASC $limit";
 
 	/*
-	$sqlb =  "SELECT * FROM `admin` WHERE `admin`.`dni` <> '$_SESSION[mydni]' ORDER BY $orden ";
+	$sqlb =  "SELECT * FROM `gcb_admin` WHERE `gcb_admin`.`dni` <> '$_SESSION[mydni]' ORDER BY $orden ";
 	*/
 	$qb = mysqli_query($db, $sqlb);
 	if(!$qb){
@@ -570,7 +570,7 @@ function ver_todo(){
 	$sqlb =  "SELECT * FROM `$db_name`.$vname WHERE `refayto` <> 'otrs'  ORDER BY `ayto` ASC $limit";
 
 	/*
-	$sqlb =  "SELECT * FROM `admin` WHERE `admin`.`dni` <> '$_SESSION[mydni]' ORDER BY $orden ";
+	$sqlb =  "SELECT * FROM `gcb_admin` WHERE `gcb_admin`.`dni` <> '$_SESSION[mydni]' ORDER BY $orden ";
 	*/
 	$qb = mysqli_query($db, $sqlb);
 	if(!$qb){

@@ -1,10 +1,8 @@
 <?php
-session_start();
 
-	//require '../Gcb.Inclu/error_hidden.php';
+  	//require '../Gcb.Inclu/error_hidden.php';
 	require '../Gcb.Inclu/Admin_Inclu_01a.php';
-	require '../Gcb.Inclu/mydni.php';
-	require 'nemp.php';
+
 	require '../Gcb.Connet/conection.php';
 	require '../Gcb.Connet/conect.php';
 
@@ -12,35 +10,69 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if ($_SESSION['Nivel'] == 'admin'){
+	if(isset($_POST['inscancel'])){	
+		config_one();
+		print("<table align='center' style=\"margin-top:12px;\">
+					<tr>
+						<td>
+							<a href='../index.php'>
+								ACCEDA AL SISTEMA
+							</a>
+						</td>
+					</tr>
+				</table>");
+				}
 
-	master_index();
-
-	if(isset($_POST['oculto'])){
+	elseif(isset($_POST['oculto'])){
 		if($form_errors = validate_form()){
 				show_form($form_errors);
-		} else { process_form(); }
+								} else {process_form();
+										config_one();
+														}
 	} else {show_form();}
 
-	} else { require '../Gcb.Inclu/table_permisos.php'; } 
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
+function config_one(){
+	
+	if(file_exists('../index.php')){
+					unlink("../index.php");
+					copy("index_Play_System.php", "../index_Play_System.php");				
+					$data1 = PHP_EOL."\t UNLINK ../index.php";
+					$data2 = PHP_EOL."\t COPY ../index_Play_System.php";
+				}
+			else { 	copy("index_Play_System.php", "../index_Play_System.php");				
+					print("DON`T UNLINK ../index.php </br>");
+					$data1 = PHP_EOL."\t DON`T UNLINK ../index.php";}
+					$data2 = PHP_EOL."\t COPY ../index_Play_System.php";
+
+	if(file_exists('../index_Play_System.php')){
+				rename("../index_Play_System.php", "../index.php");
+				$data3 = PHP_EOL."\t RENAME ../index_Play_System.php TO ../index.php";
+			} else {
+				copy("index_Play_System.php", "../index.php");				
+				print("DON`T RENAME ../index_Play_System.php TO ../index.php </br>");
+				$data3 = PHP_EOL."\t DON`T RENAME ../index_Play_System.php TO ../index.php";}
+				$data2 = PHP_EOL."\t COPY ../index_Play_System.php TO index.php";
+	
+	global $cfone;
+	$cfone = PHP_EOL."SUSTITUCION DE ARCHIVOS:".$data1.$data2.$data3;
+	
+	}
+	
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
 function validate_form(){
 	
-	/*
-		global $sqld;
-		global $qd;
-		global $rowd;
-	*/
-		
-	require '../Gcb.Inclu/validate.php';	
+	require 'validate.php';	
 		
 	return $errors;
 
-	} 
+		} 
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -56,19 +88,19 @@ function process_form(){
 if (preg_match('/^(\w{1})/',$_POST['Nombre'],$ref1)){	$rf1 = $ref1[1];
 														$rf1 = trim($rf1);
 														/*print($ref1[1]."</br>");*/
-																					}
+														}
 if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Nombre'],$ref2)){	$rf2 = $ref2[2];
 																$rf2 = trim($rf2);
-																/*print($ref2[2]."</br>");*/
-																						}
+														/*print($ref2[2]."</br>");*/
+														}
 if (preg_match('/^(\w{1})/',$_POST['Apellidos'],$ref3)){	$rf3 = $ref3[1];
 															$rf3 = trim($rf3);
-																/*print($ref3[1]."</br>");*/
-																						}
+														/*print($ref3[1]."</br>");*/
+														}
 if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[2];
 																	$rf4 = trim($rf4);
-																/*print($ref4[2]."</br>");*/
-																						}
+														/*print($ref4[2]."</br>");*/
+														}
 
 	global $rf;
 	$rf = $rf1.$rf2.$rf3.$rf4.$_POST['dni'].$_POST['ldni'];
@@ -77,18 +109,60 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 
 	$_SESSION['iniref'] = $rf;
 
-	// CREA IMAGEN DE USUARIO.
-
-	global $trf;
-	$trf = $_SESSION['iniref'];
+	/**************************************/
+	
+	global $vni;
 	global $carpetaimg;
-	$carpetaimg = "../Gcb.Img.Admin";
-	global $new_name;
-	$new_name = $trf.".png";
-	copy("../Gcb.Img.Sys/untitled.png", $carpetaimg."/".$new_name);
+	
+	$trf = $_SESSION['iniref'];
+	
+	$carpetaimg = "../Gcb.Img.User";
+
+	if($_FILES['myimg']['size'] == 0){
+			$nombre = $carpetaimg."/untitled.png";
+			global $new_name;
+			$new_name = $rf.".png";
+			$rename_filename = $carpetaimg."/".$new_name;							
+			copy("untitled.png", $rename_filename);
+												}
+												
+	else{	$safe_filename = trim(str_replace('/', '', $_FILES['myimg']['name']));
+			$safe_filename = trim(str_replace('..', '', $safe_filename));
+
+		 	$nombre = $_FILES['myimg']['name'];
+		  	$nombre_tmp = $_FILES['myimg']['tmp_name'];
+		  	$tipo = $_FILES['myimg']['type'];
+		  	$tamano = $_FILES['myimg']['size'];
+		  
+			$destination_file = $carpetaimg.'/'.$safe_filename;
+
+	 if( file_exists( $carpetaimg.'/'.$nombre) ){
+			unlink($carpetaimg."/".$nombre);
+		//	print("* El archivo ".$nombre." ya existe, seleccione otra imagen.</br>");
+												}
+			
+	elseif (move_uploaded_file($_FILES['myimg']['tmp_name'], $destination_file)){
+			
+			// Renombrar el archivo:
+			$extension = substr($_FILES['myimg']['name'],-3);
+			// print($extension);
+			// $extension = end(explode('.', $_FILES['myimg']['name']) );
+			global $new_name;
+			$new_name = $rf.".".$extension;
+			$rename_filename = $carpetaimg."/".$new_name;								
+			rename($destination_file, $rename_filename);
+
+			// print("El archivo se ha guardado en: ".$destination_file);
+	
+			}
+			
+		else {print("NO SE HA PODIDO GUARDAR EN ".$destination_file);}
+		
+		}
 
 	global $nombre;
 	global $apellido;
+
 	$nombre = $_POST['Nombre'];
 	$apellido = $_POST['Apellidos'];
 
@@ -96,21 +170,17 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 
 	$sql = "INSERT INTO `$db_name`.`gcb_admin` (`ref`, `Nivel`, `Nombre`, `Apellidos`, `myimg`, `doc`, `dni`, `ldni`, `Email`, `Usuario`, `Password`, `Direccion`, `Tlf1`, `Tlf2`) VALUES ('$rf', '$_POST[Nivel]', '$_POST[Nombre]', '$_POST[Apellidos]', '$new_name', '$_POST[doc]', '$_POST[dni]', '$_POST[ldni]', '$_POST[Email]', '$_POST[Usuario]', '$_POST[Password]', '$_POST[Direccion]', '$_POST[Tlf1]', '$_POST[Tlf2]')";
 		
-	if(mysqli_query($db, $sql)){
-		
-	/*	$fil = "%".$rf."%";
-		$pimg =  "SELECT * FROM `$db_name`.`gcb_admin` WHERE `ref` = '$rf' ";
-		$qpimg = mysqli_query($db, $pimg);
-		$rowpimg = mysqli_fetch_assoc($qpimg);
-		$_SESSION['dudas'] = $rowpimg['myimg'];
-		global $dudas;
-		$dudas = trim($_SESSION['dudas']);
-		print("** ".$rowpimg['myimg']);
-	*/
+	if(mysqli_query($db, $sql)){	// CREA EL ARCHIVO MYDNI.TXT $_SESSION['mydni'].
+									$filename = "../Gcb.Inclu/mydni.php";
+									$fw2 = fopen($filename, 'w+');
+									$mydni = '<?php $_SESSION[\'mydni\'] = '.$_POST['dni'].'; ?>';
+									fwrite($fw2, $mydni);
+									fclose($fw2);	
+
 	print( "<table align='center' style='margin-top:10px'>
 				<tr>
 					<th colspan=3 class='BorderInf'>
-						SE HA REGISTRADO CON ESTOS DATOS.
+						SE HA REGISTRADO COMO ADMINISTRADOR.
 					</th>
 				</tr>
 								
@@ -121,7 +191,7 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 					<td width=200px>"
 						.$_POST['Nombre'].
 					"</td>
-					<td rowspan='5' align='center'>
+					<td rowspan='4' align='center' width='100px'>
 				<img src='".$carpetaimg."/".$new_name."' height='120px' width='90px' />
 					</td>
 				</tr>
@@ -157,7 +227,7 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 					<td>
 						Control:
 					</td>
-					<td>"
+					<td colspan='2'>"
 						.$_POST['ldni'].
 					"</td>
 				</tr>				
@@ -208,6 +278,7 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 				</tr>
 				
 				<tr>
+				
 					<td>
 						Pais:
 					</td>
@@ -233,36 +304,34 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 						.$_POST['Tlf2'].
 					"</td>
 				</tr>
+				
 				<tr>
 					<td colspan=3 align='right' class='BorderSup'>
-						<form name='closewindow' action='Admin_Crear.php'  \">
-							<input type='submit' value='VOLVER A ADMIN CREAR' />
-							<input type='hidden' name='volver' value=1 />
-						</form>
+						<a href=\"../Gcb.Admin/access.php\">
+									ADMINISTRADOR ACCESO A INICIO DEL SISTEMA 
+						</a>
 					</td>
 				</tr>
 			</table>");
 
-	$datein = date('Y-m-d/H:i:s');
-	
-	global $dir;
-	$dir = "../Gcb.Log";
+global $cfone;
+$datein = date('Y-m-d/H:i:s');
+$logdate = date('Y_m_d');
+$logtext = $cfone."\n - CREADO USER ADMIN 1. ".$datein.". User Ref: ".$rf.".\n \t Name: ".$_POST['Nombre']." ".$_POST['Apellidos'].". \n \t User: ".$_POST['Usuario'].".\n \t Pass: ".$_POST['Password'].".\n";
+$filename = "../Gcb.Log/".$logdate."_PRIMER_ADMIN.log";
+$log = fopen($filename, 'ab+');
+fwrite($log, $logtext);
+fclose($log);
 
-	$logdocu = $_SESSION['ref'];
-	$logdate = date('Y_m_d');
-	$logtext = PHP_EOL."- CREADO NUEVO USUARIO ".$datein.PHP_EOL."\t User Ref: ".$rf.PHP_EOL."\t Name: ".$_POST['Nombre']." ".$_POST['Apellidos'].PHP_EOL."\t User: ".$_POST['Usuario'].PHP_EOL."\t Pass: ".$_POST['Password'].PHP_EOL;
-	$filename = $dir."/".$logdate."_".$logdocu.".log";
-	$log = fopen($filename, 'ab+');
-	fwrite($log, $logtext);
-	fclose($log);
-
-	} else { print("</br>
+				
+	} else {	print("</br>
 				<font color='#FF0000'>
 			* Estos datos no son validos, modifique esta entrada: </font></br> ".mysqli_error($db))."
 				</br>";
 				show_form ();
+				
 					}
-		} // FIN FUNCTION PROCESS_FORM
+		}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -274,6 +343,7 @@ function show_form($errors=''){
 		$defaults = $_POST;
 		} else {$defaults = array ( 'Nombre' => '',
 									'Apellidos' => '',
+									'myimg' => isset($_POST['myimg']),	
 									'Nivel' => '',
 									'ref' => '',
 									'doc' => '',
@@ -289,15 +359,14 @@ function show_form($errors=''){
 									'Tlf2' => '');
 								   }
 	
+	
 	if ($errors){
-		print("	<table align='center'>
+		print("<table align='center'>
+					<th style='text-align:center'>
+					<font color='#FF0000'>* SOLUCIONE ESTOS ERRORES:</font><br/>
+					</th>
 					<tr>
-						<th style='text-align:center>
-							<font color='#FF0000'>* SOLUCIONE ESTOS ERRORES:</font><br/>
-						</th>
-					</tr>
-					<tr>
-						<td style='text-align:left'>");
+					<td style='text-align:left'>");
 			
 		for($a=0; $c=count($errors), $a<$c; $a++){
 			print("<font color='#FF0000'>**</font>  ".$errors [$a]."<br/>");
@@ -305,18 +374,15 @@ function show_form($errors=''){
 		print("</td>
 				</tr>
 				</table>");
-					}
+				}
 		
-	$Nivel = array (	'' => 'NIVEL USUARIO',
-						'admin' => 'ADMINISTRADOR',
-						'plus' => 'USER PLUS',
-						'user'  => 'USER',
-						'close'  => 'CLOSE', );														
+	$Nivel = array ('' => 'NIVEL USUARIO',
+					'admin' => 'WEB MASTER',);														
 
 	$doctype = array (	'DNI' => 'DNI/NIF Espa&ntilde;oles',
 						'NIE' => 'NIE/NIF Extranjeros',
 						'NIFespecial' => 'NIF Persona F&iacute;sica Especial',
-						/*
+					  /*
 						'NIFsa' => 'NIF Sociedad An&oacute;nima',
 						'NIFsrl' => 'NIF Sociedad Responsabilidad Limitada',
 						'NIFscol' => 'NIF Sociedad Colectiva',
@@ -337,58 +403,36 @@ function show_form($errors=''){
 						*/
 										);
 	
-////////////////////				////////////////////				////////////////////
+/*******************************/
 
-	global $db;
-	global $db_name;
-	$nu =  "SELECT * FROM `$db_name`.`gcb_admin` WHERE `gcb_admin`.`dni` <> '$_SESSION[mydni]'";
-		$user = mysqli_query($db, $nu);
-		//$ruser = mysqli_fetch_assoc($user);
-		$nuser = mysqli_num_rows($user);
-	
-	if ($nuser >= $_SESSION['nuser']){ 
-		print("<table align='center' style=\"margin-top:10px;margin-bottom:170px\">
-					<tr align='center'>
-						<td>
-							<b>
-								<font color='red'>
-									ACCESO RESTRINGIDO.
-								</font>	
-							</b>
-					</br></br>
-		EMPLEADOS PERMITIDOS: ".$_SESSION['nuser'].". Nº EMPLEADOS: ".$nuser.". PARA CONTINUAR:
-					</br></br>
-		ELIMINE ALGUN EMPLEADO EN BORRAR BAJAS O DAR DE BAJA.
-						</td>
-					</tr>
-				</table>");
-			}else{
-
-		print("<table align='center' style=\"margin-top:4px\">
+	print("
+			<table align='center' style=\"margin-top:2px\">
 				<tr>
 					<th colspan=2 class='BorderInf'>
-							DATOS DEL NUEVO USUARIO
+
+					DATOS DEL WEB MASTER / PRIMER ADMIN SYS
+
 					</th>
 				</tr>
 				
 <form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'  enctype='multipart/form-data'>
 						
 				<tr>
-					<td width=130px>	
+					<td width=180px>	
 						<font color='#FF0000'>*</font>
 						Ref User:
 					</td>
-					<td width=280px>
-						SE GENERA LA CLAVE AUTO.
+					<td width=360px>
+						SE GENERA LA CLAVE AUTOMÁTICAMENTE 
 					</td>
 				</tr>
 					
 				<tr>
-					<td>	
+					<td width=130px>	
 						<font color='#FF0000'>*</font>
 						Nombre:
 					</td>
-					<td>
+					<td width=280px>
 		<input type='text' name='Nombre' size=28 maxlength=25 value='".$defaults['Nombre']."' />
 					</td>
 				</tr>
@@ -409,10 +453,17 @@ function show_form($errors=''){
 						Tipo Documento:
 					</td>
 					<td>
+
 	<select name='doc'>");
+
+						
 				foreach($doctype as $option => $label){
+					
 					print ("<option value='".$option."' ");
-					if($option == $defaults['doc']){print ("selected = 'selected'");}
+					
+					if($option == $defaults['doc']){
+															print ("selected = 'selected'");
+																								}
 													print ("> $label </option>");
 												}	
 						
@@ -420,6 +471,7 @@ function show_form($errors=''){
 					</td>
 				</tr>
 					
+
 				<tr>
 					<td>
 						<font color='#FF0000'>*</font>
@@ -456,10 +508,17 @@ function show_form($errors=''){
 						Nivel Usuario:
 					</td>
 					<td>
+	
 	<select name='Nivel'>");
+
+						
 				foreach($Nivel as $optionnv => $labelnv){
+					
 					print ("<option value='".$optionnv."' ");
-					if($optionnv == $defaults['Nivel']){ print ("selected = 'selected'"); }
+					
+					if($optionnv == $defaults['Nivel']){
+															print ("selected = 'selected'");
+																								}
 													print ("> $labelnv </option>");
 												}	
 						
@@ -476,7 +535,6 @@ function show_form($errors=''){
 		<input type='text' name='Usuario' size=12 maxlength=10 value='".$defaults['Usuario']."' />
 					</td>
 				</tr>
-
 				<tr>
 					<td>
 						<font color='#FF0000'>*</font>
@@ -507,6 +565,7 @@ function show_form($errors=''){
 					</td>
 				</tr>
 
+
 				<tr>
 					<td>
 						<font color='#FF0000'>*</font>
@@ -528,7 +587,6 @@ function show_form($errors=''){
 				</tr>
 				
 				<tr>
-					<tr>
 					<td>
 						&nbsp;&nbsp;&nbsp;Teléfono 2:
 					</td>
@@ -538,18 +596,30 @@ function show_form($errors=''){
 				</tr>
 				
 				<tr>
+					<td>
+						<font color='#FF0000'>*</font>
+						Fotografía:
+					</td>
+					<td>
+		<input type='file' name='myimg' value='".@$defaults['myimg']."' />						
+					</td>
+				</tr>
+
+				<tr>
 					<td colspan='2'  align='right' valign='middle'  class='BorderSup'>
-						<input type='submit' value='REGISTRAR CON ESTOS DATOS' />
+						<input type='submit' value='REGISTRARME CON ESTOS DATOS' />
 						<input type='hidden' name='oculto' value=1 />
 						
 					</td>
 					
 				</tr>
+				
 		</form>														
-			</table>"); 
-			} // FIN CONDICIONAL NUMERO USUARIOS
+			
+			</table>				
+					"); 
 	
-	} // FIN FUNCTION SHOW_FORM
+	}	
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -559,13 +629,13 @@ function show_form($errors=''){
 		
 				require '../Gcb.Inclu/Master_Index_Admin.php';
 		
-		} 
+				} 
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-		require '../Gcb.Inclu/Admin_Inclu_02.php';
+	require '../Gcb.Inclu/Admin_Inclu_02.php';
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

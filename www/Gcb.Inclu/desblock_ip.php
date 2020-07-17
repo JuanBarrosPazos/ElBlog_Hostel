@@ -48,7 +48,7 @@
 	global $db;
 	global $db_name;
 		
-$sql =  "SELECT * FROM `$db_name`.`admin` WHERE `Email` = '$_POST[Email]' AND `dni` = '$_POST[dni]' AND `ldni` = '$_POST[ldni]' ";
+$sql =  "SELECT * FROM `$db_name`.`gcb_admin` WHERE `Email` = '$_POST[Email]' AND `dni` = '$_POST[dni]' AND `ldni` = '$_POST[ldni]' ";
  	
 	$q = mysqli_query($db, $sql);
 	$row = mysqli_fetch_assoc($q);
@@ -247,7 +247,7 @@ function process_form(){
 
 	// print ("* ".$_POST['Email']." / ".$_POST[dni].$_POST[ldni].". ".$_SESSION['refdesb']." / ".$_SESSION['nivdesb']);
 	
-	$sqlc =  "SELECT * FROM `$db_name`.`admin` WHERE `Email` = '$_POST[Email]' AND `dni` = '$_POST[dni]' AND `ldni` = '$_POST[ldni]' ";
+	$sqlc =  "SELECT * FROM `$db_name`.`gcb_admin` WHERE `Email` = '$_POST[Email]' AND `dni` = '$_POST[dni]' AND `ldni` = '$_POST[ldni]' ";
 	$qc = mysqli_query($db, $sqlc);
 	$rowqc = mysqli_fetch_assoc($qc);
 	$_SESSION['refdesb'] = $rowqc['ref'];
@@ -317,7 +317,7 @@ function desbloqueo(){
 	*/
 	
 	// DESBLOQUEO TODAS LAS IPs IGUALES A LA MIA
-	$desb = "UPDATE `$db_name`.`ipcontrol` SET `ref` = '$_POST[refdesb]', `nivel` = '$_POST[nivdesb]', `error` = 'des', `acceso` = 'des' WHERE `ipcontrol`.`ipn` = '{$geoplugin->ip}' AND `ipcontrol`.`acceso` = 'x' OR `ipcontrol`.`acceso` = '0' ";
+	$desb = "UPDATE `$db_name`.`gcb_ipcontrol` SET `ref` = '$_POST[refdesb]', `nivel` = '$_POST[nivdesb]', `error` = 'des', `acceso` = 'des' WHERE `gcb_ipcontrol`.`ipn` = '{$geoplugin->ip}' AND `gcb_ipcontrol`.`acceso` = 'x' OR `gcb_ipcontrol`.`acceso` = '0' ";
 	if(mysqli_query($db, $desb)){ $_SESSION['showf'] = 0;
 								print("<table align='center' style=\"margin-top:2px; margin-bottom:2px\" >
 											<tr>

@@ -309,7 +309,7 @@ function ver_todo(){
 	$sqlb =  "SELECT * FROM `$db_name`.$vname WHERE `refisla` <> 'otrs'  ORDER BY `isla` ASC $limit";
 
 	/*
-	$sqlb =  "SELECT * FROM `admin` WHERE `admin`.`dni` <> '$_SESSION[mydni]' ORDER BY $orden ";
+	$sqlb =  "SELECT * FROM `gcb_admin` WHERE `gcb_admin`.`dni` <> '$_SESSION[mydni]' ORDER BY $orden ";
 	*/
 	$qb = mysqli_query($db, $sqlb);
 	if(!$qb){

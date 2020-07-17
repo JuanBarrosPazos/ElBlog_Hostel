@@ -1,33 +1,56 @@
-	<?php
+<?php
 
 error_reporting (0);
-
-$errors = array();
-
-	/* VALIDAMOS EL CAMPO my_img */
-
-	$limite = 500 * 1024;
 	
-	$ext_permitidas = array('jpg','JPG','gif','GIF','png','PNG','bmp','BMP');
-	$extension = substr($_FILES['myimg1']['name'],-3);
-	// print($extension);
-	// $extension = end(explode('.', $_FILES['myimg1']['name']) );
-	$ext_correcta = in_array($extension, $ext_permitidas);
+	$errors = array();
 
-	/* $tipo_correcto = preg_match('/^image\/(gif|png|jpg|bmp)$/', $_POST['myimg1']); */
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
-	if($_POST['modifica']){
-		if(strlen(trim ($_POST['myimg1'])) == 0){
-			$errors [] = "Ha de seleccionar un archivo.";
-			global $img;
-			$img = $_SESSION['myimgcl'];
-		}
+		
+/*	CREAR LA REFERENCIA DE USUARIO	*/
+	global $rf1;
+	global $rf2;
+	global $rf3;
+	global $rf4;
+	
+if (preg_match('/^(\w{1})/',$_POST['Nombre'],$ref1)){	$rf1 = $ref1[1];
+														$rf1 = trim($rf1);
+														/*print($ref1[1]."</br>");*/
+																				}
+if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Nombre'],$ref2)){	$rf2 = $ref2[2];
+																$rf2 = trim($rf2);
+																/*print($ref2[2]."</br>");*/
+																						}
+if (preg_match('/^(\w{1})/',$_POST['Apellidos'],$ref3)){	$rf3 = $ref3[1];
+															$rf3 = trim($rf3);
+															/*print($ref3[1]."</br>");*/
+																					}
+if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[2];
+																	$rf4 = trim($rf4);
+																	/*print($ref4[2]."</br>");*/
+																							}
 
-			}
+	global $rf;
+	$rf = $rf1.$rf2.$rf3.$rf4.$_POST['dni'].$_POST['ldni'];
+	$rf = trim($rf);
 			
-						/////////////////////////
-	/////////////////////////			/////////////////////////
-					/////////////////////////
+	/* COMPROBAMOS SI EXISTE EL ADMINISTRADOR */
+
+		global $db;
+		global $db_name;
+		
+		$admin =  "SELECT * FROM `$db_name`.`gcb_admin` WHERE `ref` = '$rf'";
+		$qadmin = mysqli_query($db, $admin);
+		$cadmin = mysqli_num_rows($qadmin);
+		
+	if($cadmin > 0){$errors [] = "YA EXISTE EL ADMINISTRADOR ".$rf;}
+	
+
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
 	/* VALIDAMOS EL CAMPO NOMBRE. */
 	
@@ -42,8 +65,8 @@ $errors = array();
 	elseif (!preg_match('/^[^0-9@´`\'áéíóú#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:\.\*]+$/',$_POST['Nombre'])){
 		$errors [] = "Nombre: <font color='#FF0000'>Solo se admite texto, sin acentos.</font>";
 		}
-
-		/* VALIDAMOS EL CAMPO APELLIDOS. */
+		
+	/* VALIDAMOS EL CAMPO APELLIDOS. */
 	
 		if(strlen(trim($_POST['Apellidos'])) == 0){
 		$errors [] = "Apellidos: <font color='#FF0000'>Este campo es obligatorio.</font>";
@@ -57,13 +80,9 @@ $errors = array();
 		$errors [] = "Apellidos: <font color='#FF0000'>Solo se admite texto, sin acentos.</font>";
 		}
 		
-						/////////////////////////
-	/////////////////////////			/////////////////////////
-					/////////////////////////
-
-						/////////////////////////
-	/////////////////////////			/////////////////////////
-					/////////////////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
 	/* VALIDAMOS EL CAMPO  NUMERO DNI/NIF */
 	global $db;
@@ -75,7 +94,7 @@ $errors = array();
 	$qdni = mysqli_query($db, $sqldni);
 	$rowdni = mysqli_fetch_assoc($qdni);
 	
-	if ($_POST['id'] == $rowdni['id']){}
+	if (isset($_POST['id']) == $rowdni['id']){}
 	elseif(mysqli_num_rows($qdni)!= 0){
 		
 		$errors [] = "N&uacute;mero DNI/NIF: <font color='#FF0000'>Ya Existe.</font>";
@@ -264,9 +283,9 @@ $errors = array();
 		
 			} /* FIN PRIMER CONDICIONAL IF DEL CAMPO NUMERO */
 	
-						/////////////////////////
-	/////////////////////////			/////////////////////////
-					/////////////////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
 	/* VALIDAMOS LA LETRA DE CONTROL DEL DNI */
 
@@ -278,7 +297,6 @@ $errors = array();
 						$letra = $letras[$indice];
 	
 			/* FIN DEL ALGORITMO DE DEFINICION DEL LA LETRA CONTROL DEL DNI */
-	
 	
 	if ($_POST['doc'] == 'DNI') {
 		
@@ -299,9 +317,9 @@ $errors = array();
 		}
 	}
 	
-						/////////////////////////
-	/////////////////////////			/////////////////////////
-					/////////////////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
 	/* VALIDAMOS LA LETRA DE CONTROL DE NIE EXTRANJEROS NORMAL Y ESPECIALES */
 	
@@ -330,13 +348,13 @@ $errors = array();
 
 			$dni3 = $_POST['dni'];
 			
-			$num1 = $dni3[1];
-			$num2 = $dni3[2];
-			$num3 = $dni3[3];
-			$num4 = $dni3[4];
-			$num5 = $dni3[5];
-			$num6 = $dni3[6];
-			$num7 = $dni3[7];
+			@$num1 = $dni3[1];
+			@$num2 = $dni3[2];
+			@$num3 = $dni3[3];
+			@$num4 = $dni3[4];
+			@$num5 = $dni3[5];
+			@$num6 = $dni3[6];
+			@$num7 = $dni3[7];
 			
 			$sumaa = $num2 + $num4 + $num6 ;
 			// print ("LA SUMA A: $num2 + $num4 + $num6 = $sumaa </br>");
@@ -379,7 +397,7 @@ $errors = array();
 			$sumatot = $sumaa + $sumab;
 			// print ("SUMA A $sumaa + SUMA B $sumab = SUMA TOTAL $sumatot </br>");
 			
-			$sumatotc ="$sumatot";
+			$sumatotc = $sumatot;
 			
 			if ($sumatotc[1] == 0) {	$sumacont = 0;
 										// print ("TOTAL SUMA CONTROL = $sumacont </br>");
@@ -401,6 +419,7 @@ $errors = array();
 
 		/* FIN DEL LA FUNCION PARA EL CALCULO DE LA LETRA CONTROL DEL NIE/NIF ESPECIAL */
 
+
 		/* CONDICIONAL PARA TODOS LOS NIE/NIF */
 		
 	if (($_POST['doc'] == 'NIE') || ($_POST['doc'] == 'NIFespecial') || ($_POST['doc'] == 'NIFsa') || ($_POST['doc'] == 'NIFsrl') || ($_POST['doc'] == 'NIFscol') || ($_POST['doc'] == 'NIFscom') || ($_POST['doc'] == 'NIFcbhy') || ($_POST['doc'] == 'NIFscoop') || ($_POST['doc'] == 'NIFasoc') || ($_POST['doc'] == 'NIFcpph') || ($_POST['doc'] == 'NIFsccspj') || ($_POST['doc'] == 'NIFee') || ($_POST['doc'] == 'NIFcl') || ($_POST['doc'] == 'NIFop') || ($_POST['doc'] == 'NIFcir') || ($_POST['doc'] == 'NIFoaeca') || ($_POST['doc'] == 'NIFute') || ($_POST['doc'] == 'NIFotnd') || ($_POST['doc'] == 'NIFepenr')) 
@@ -410,6 +429,7 @@ $errors = array();
 		$errors [] = "Letra Control NIE/NIF: <font color='#FF0000'>Campo obligatorio.</font>";
 		}
 		
+
 		/* CONDICIONAL PARA TODOS LOS NIE/NIF CON LETRA DE CONTROL */
 		
 	elseif(($_POST['doc'] == 'NIE') || ($_POST['doc'] == 'NIFespecial') || ($_POST['doc'] == 'NIFee') || ($_POST['doc'] == 'NIFcl') || ($_POST['doc'] == 'NIFop') || ($_POST['doc'] == 'NIFcir') || ($_POST['doc'] == 'NIFoaeca') || ($_POST['doc'] == 'NIFepenr'))
@@ -423,6 +443,7 @@ $errors = array();
 		$errors [] = "Letra Control NIE/NIF: <font color='#FF0000'>Solo mayusculas.</font>";
 		}
 		
+		
 		/* CONDICIONAL PARA VALIDAR LA LETRA CONTROL DEL NIE/NIF NORMAL*/
 		
 	elseif ($_POST['doc'] == 'NIE') {
@@ -432,7 +453,7 @@ $errors = array();
 		}
 
 	}
-		
+			
 		/* CONDICIONAL PARA VALIDAR LA LETRA CONTROL DEL NIF ESPECIAL Y OTROS CON LETRA */
 		
 	elseif (($_POST['doc'] == 'NIFespecial') || ($_POST['doc'] == 'NIFee') || ($_POST['doc'] == 'NIFcl') || ($_POST['doc'] == 'NIFop') || ($_POST['doc'] == 'NIFcir') || ($_POST['doc'] == 'NIFoaeca') || ($_POST['doc'] == 'NIFepenr')) {
@@ -444,6 +465,7 @@ $errors = array();
 	}
 		
 				} 		/* FIN CONDICIONAL PARA TODOS LOS NIE/NIF CON LETRA DE CONTROL */
+				
 				
 		/* CONDICIONAL PARA TODOS LOS NIF CON NUMERO DE CONTROL */
 		
@@ -467,14 +489,16 @@ $errors = array();
 			} /* FIN PRIMER IF */
 		
 	
-						/////////////////////////
-	/////////////////////////			/////////////////////////
-					/////////////////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
-						/////////////////////////
-	/////////////////////////			/////////////////////////
-					/////////////////////////
-
+	/* VALIDAMOS EL CAMPO NIVEL. */
+	
+	if(strlen(trim($_POST['Nivel'])) == 0){
+		$errors [] = "Nivel: <font color='#FF0000'>Este campo es obligatorio.</font>";
+		}
+	
 	/* Validamos el campo mail. */
 	
 	global $db;
@@ -486,7 +510,7 @@ $errors = array();
 	$qml = mysqli_query($db, $sqlml);
 	$rowml = mysqli_fetch_assoc($qml);
 
-	if ($_POST['id'] == $rowml['id']){}
+	if (isset($_POST['id']) == $rowml['id']){}
 	elseif(mysqli_num_rows($qml)!= 0){
 		$errors [] = "Mail: <font color='#FF0000'>Ya Existe.</font>";
 		}
@@ -516,17 +540,11 @@ $errors = array();
 		$errors [] = "Mail: <font color='#FF0000'>No se puede registrar con este Mail.</font>";
 		}	
 */
-						/////////////////////////
-	/////////////////////////			/////////////////////////
-					/////////////////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
-	/* VALIDAMOS EL CAMPO NIVEL. */
-	
-	if(strlen(trim($_POST['Nivel'])) == 0){
-		$errors [] = "Nivel: <font color='#FF0000'>Este campo es obligatorio.</font>";
-		}
-	
-		/* Validamos el campo usuario. */
+	/* Validamos el campo usuario. */
 	
 	global $db;
 	global $sqlus;
@@ -537,7 +555,7 @@ $errors = array();
 	$qus = mysqli_query($db, $sqlus);
 	$rowus = mysqli_fetch_assoc($qus);
 
-	if ($_POST['id'] == $rowus['id']){}
+	if (isset($_POST['id']) == $rowus['id']){}
 	elseif(mysqli_num_rows($qus)!= 0){
 		$errors [] = "Usuario: <font color='#FF0000'>Ya Existe.</font>";
 		}
@@ -568,9 +586,9 @@ $errors = array();
 		$errors [] = "Usuario: <font color='#FF0000'>No se puede registrar con este nombre de usuario.</font>";
 		}	
 */
-						/////////////////////////
-	/////////////////////////			/////////////////////////
-					/////////////////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
 	/* Validamos el campo password. */
 	
@@ -591,10 +609,6 @@ $errors = array();
 		}
 	
 
-						/////////////////////////
-	/////////////////////////			/////////////////////////
-					/////////////////////////
-
 	/* Validamos el campo Dirección. */
 	
 		if(strlen(trim($_POST['Direccion'])) == 0){
@@ -605,9 +619,9 @@ $errors = array();
 		$errors [] = "Dirección: <font color='#FF0000'>No se admiten carácteres especiales.</font>";
 		}
 		
-						/////////////////////////
-	/////////////////////////			/////////////////////////
-					/////////////////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
 	/* Validamos el campo Tlf1 */
 	
@@ -619,7 +633,7 @@ $errors = array();
 	$rowtlf1 = mysqli_fetch_assoc($qtlf1);
 	$countlf1 = mysqli_num_rows($qtlf1);
 
-	if ($_POST['id'] == $rowtlf1['id']){}
+	if (isset($_POST['id']) == $rowtlf1['id']){}
 	elseif($countlf1 != 0){
 		$errors [] = "Teléfono 1: <font color='#FF0000'>YA EXISTE.</font>";
 		}
@@ -640,9 +654,9 @@ $errors = array();
 		$errors [] = "Teléfono 1: <font color='#FF0000'>No menos de nueve números</font>";
 		}
 		
-						/////////////////////////
-	/////////////////////////			/////////////////////////
-					/////////////////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
 	/* Validamos el campo Tlf2 */
 	
@@ -653,7 +667,7 @@ $errors = array();
 			$rowtlf2 = mysqli_fetch_assoc($qtlf2);
 			$countlf2 = mysqli_num_rows($qtlf2);
 		
-			if ($_POST['id'] == $rowtlf2['id']){}
+			if (isset($_POST['id']) == $rowtlf2['id']){}
 			elseif($countlf2 > 0){
 				$errors [] = "Teléfono 2: <font color='#FF0000'>YA EXISTE.</font>";
 				}
@@ -667,7 +681,61 @@ $errors = array();
 				}
 
 		}
+
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
+
+	// VALIDAMOS LA IMAGEN DE USUARIO.
+
+	$limite = 500 * 1024;
 	
+	$ext_permitidas = array('jpg','JPG','gif','GIF','png','PNG','bmp','BMP');
+	$extension = substr($_FILES['myimg']['name'],-3);
+	// print($extension);
+	// PRESUNTAMENTE DEPRECATED
+	// $extension = end(explode('.', $_FILES['myimg']['name']) );
+	$ext_correcta = in_array($extension, $ext_permitidas);
+
+	// $tipo_correcto = preg_match('/^image\/(gif|png|jpg|bmp)$/', $_FILES['myimg']['type']);
+
+		if($_FILES['myimg']['size'] == 0){
+			$errors [] = "Ha de seleccionar una fotograf&iacute;a.";
+			global $img2;
+			$img2 = 'untitled.png';
+		}
+		 
+		elseif(!$ext_correcta){
+			$errors [] = "La extension no esta admitida: ".$_FILES['myimg']['name'];
+			global $img2;
+			$img2 = 'untitled.png';
+			}
+	/*
+		elseif(!$tipo_correcto){
+			$errors [] = "Este tipo de archivo no esta admitido: ".$_FILES['myimg']['name'];
+			global $img2;
+			$img2 = 'untitled.png';
+			}
+	*/
+		elseif ($_FILES['myimg']['size'] > $limite){
+		$tamanho = $_FILES['myimg']['size'] / 1024;
+		$errors [] = "El archivo".$_FILES['myimg']['name']." es mayor de 500 KBytes. ".$tamanho." KB";
+		global $img2;
+		$img2 = 'untitled.png';
+			}
+		
+			elseif ($_FILES['myimg']['error'] == UPLOAD_ERR_PARTIAL){
+				$errors [] = "La carga del archivo se ha interrumpido.";
+				global $img2;
+				$img2 = 'untitled.png';
+				}
+				
+				elseif ($_FILES['myimg']['error'] == UPLOAD_ERR_NO_FILE){
+					$errors [] = "Es archivo no se ha cargado.";
+					global $img2;
+					$img2 = 'untitled.png';
+					}
+
 /* La función devuelve el array errors. */
 	
 /* Creado por Juan Barros Pazos 2020 */
