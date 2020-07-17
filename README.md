@@ -68,7 +68,7 @@ docker-compose build + docker-compose pull -d
   (relativo a instalación inicial)
   Se recomienda consultar la función: function crear_tablas(){... de dicho archivo y cotejar la estructura de dicha tabla
   con la bbdd.
-	$opiniones = "CREATE TABLE IF NOT EXISTS `$db_name`.`gcb_opiniones` (
+	$opiniones = "CREATE TABLE IF NOT EXISTS `$db_name`.`gch_opiniones` (
   		...
   		`refuser` varchar(22) collate utf8_spanish2_ci NOT NULL default 'anonymous',
   		...
@@ -153,9 +153,9 @@ docker-compose build + docker-compose pull -d
 
 2020.06.17
 
-A PARTIR DE LA VERSION BETA 07 SE HA MODIFICADO LA ESTRUCTURA DE LA BBDD EN LA TABLA gcb_art AÑADIENDO CUATRO CAMPOS MÁS.
+A PARTIR DE LA VERSION BETA 07 SE HA MODIFICADO LA ESTRUCTURA DE LA BBDD EN LA TABLA gch_art AÑADIENDO CUATRO CAMPOS MÁS.
 SE PUEDE CONSULTAR EL ARCHIVO index.php de la instalación nativa o Gcb.Config/Index_Init_System.php
-EN LA CONSTRUCCIÓN DE gcb_art, PARA CONOCER LA CONFIGURACIÓN DE LOS NUEVOS CAMPOS
+EN LA CONSTRUCCIÓN DE gch_art, PARA CONOCER LA CONFIGURACIÓN DE LOS NUEVOS CAMPOS
 O PROCEDER A UNA INSTALACIÓN DESDE CERO.
 
 ----
