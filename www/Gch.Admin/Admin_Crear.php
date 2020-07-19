@@ -98,7 +98,19 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 		
 	if(mysqli_query($db, $sql)){
 		
-	/*	$fil = "%".$rf."%";
+		// SI SECREA EL WEB MASTER SE GRABA EN USERS NIVEL ADMIN
+		// SI ES ADMINISTRADOR Y CONFIRMA EL CHECK BOX
+		if (($_POST['Nivel'] == 'admin') && ($_POST['adminu'] == 'si')){					
+			$sql = "INSERT INTO `$db_name`.`gch_user` (`ref`, `Nivel`, `Nombre`, `Apellidos`, `myimg`, `Email`, `Usuario`, `Password`, `Direccion`, `Tlf1`) VALUES ('$rf', 'adminu', '$_POST[Nombre]', '$_POST[Apellidos]', '$new_name', '$_POST[Email]', '$_POST[Usuario]', '$_POST[Password]', '$_POST[Direccion]', '$_POST[Tlf1]')";
+			if(mysqli_query($db, $sql)){
+				// COPIO LA IMG DEL WEB MASTER EN IMG.USER	
+				copy("../Gch.Img.Sys/untitled.png", "../Gch.Img.User/".$new_name);
+				}else { }
+			} else { }
+			/////////
+
+	/*	
+		$fil = "%".$rf."%";
 		$pimg =  "SELECT * FROM `$db_name`.`gch_admin` WHERE `ref` = '$rf' ";
 		$qpimg = mysqli_query($db, $pimg);
 		$rowpimg = mysqli_fetch_assoc($qpimg);
@@ -107,6 +119,7 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 		$dudas = trim($_SESSION['dudas']);
 		print("** ".$rowpimg['myimg']);
 	*/
+
 	print( "<table align='center' style='margin-top:10px'>
 				<tr>
 					<th colspan=3 class='BorderInf'>
@@ -173,7 +186,7 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 				
 				<tr>
 					<td>
-						Tipo Usuario
+						Tipo Admin
 					</td>
 					<td colspan='2'>"
 						.$_POST['Nivel'].
@@ -182,7 +195,7 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 				
 				<tr>
 					<td>
-						Referencia Usuario
+						Referencia Admin
 					</td>
 					<td colspan='2'>"
 						.$rf.
@@ -275,6 +288,7 @@ function show_form($errors=''){
 		} else {$defaults = array ( 'Nombre' => '',
 									'Apellidos' => '',
 									'Nivel' => '',
+									'adminu' => '',
 									'ref' => '',
 									'doc' => '',
 									'dni' => '',
@@ -307,7 +321,7 @@ function show_form($errors=''){
 				</table>");
 					}
 		
-	$Nivel = array (	'' => 'NIVEL USUARIO',
+	$Nivel = array (	'' => 'NIVEL ADMIN',
 						'admin' => 'ADMINISTRADOR',
 						'plus' => 'USER PLUS',
 						'user'  => 'USER',
@@ -367,7 +381,7 @@ function show_form($errors=''){
 		print("<table align='center' style=\"margin-top:4px\">
 				<tr>
 					<th colspan=2 class='BorderInf'>
-							DATOS DEL NUEVO USUARIO
+							DATOS DEL NUEVO ADMINISTRADOR
 					</th>
 				</tr>
 				
@@ -453,7 +467,7 @@ function show_form($errors=''){
 				<tr>
 					<td>
 						<font color='#FF0000'>*</font>
-						Nivel Usuario:
+						Nivel Admin:
 					</td>
 					<td>
 	<select name='Nivel'>");
@@ -467,6 +481,23 @@ function show_form($errors=''){
 					</td>
 				</tr>
 					
+				<tr>
+					<td align='right'>
+			<input type='checkbox' name='adminu' value='si' ");
+				if($defaults['adminu'] == 'si') {
+								print(" checked=\"checked\"");
+								$cuest = "";}
+				else{$defaults['adminu'] = '';
+						$cuest = "¿ ?";}
+								
+			print(" />
+					</td>
+					<td>
+					<font color='#FF0000'>".strtoupper($defaults['adminu'])."</font>
+					 ".$cuest." SERÁ ADMINISTRADOR DE USUARIOS 
+					</td>
+				</tr>
+				
 				<tr>
 					<td>
 						<font color='#FF0000'>*</font>

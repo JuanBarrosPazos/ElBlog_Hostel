@@ -2,7 +2,7 @@
 
 	if(!$qb){
 			print("<font color='#FF0000'>
-					Se ha producido un error: </font>".mysqli_error($db)."</br></br>");
+					Se ha producido un error: ".mysqli_error($db)." </font></br>");
 					
 			show_form();	
 			

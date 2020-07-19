@@ -7,7 +7,7 @@ session_start();
 	require '../Gch.Connet/conect.php';
 
 /*
-$sqld =  "SELECT * FROM `gch_admin` WHERE `ref` = '$_SESSION[ref]' AND `Usuario` = '$_SESSION[Usuario]'";
+$sqld =  "SELECT * FROM `gch_admin` WHERE `ref` = '$_SESSION[uref]' AND `Usuario` = '$_SESSION[Usuario]'";
 $qd = mysqli_query($db, $sqld);
 $rowd = mysqli_fetch_assoc($qd);
 */
@@ -16,9 +16,9 @@ $rowd = mysqli_fetch_assoc($qd);
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if (($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'plus')){
+if (($_SESSION['uNivel'] == 'adminu')||($_SESSION['uNivel'] == 'useru') || ($_SESSION['uNivel'] == 'plusu')){
 
- 		//print("Hello ".$_SESSION['Nombre']." ".$_SESSION['Apellidos'].".</br>");
+ 		//print("Hello ".$_SESSION['uNombre']." ".$_SESSION['uApellidos'].".</br>");
 				
 			if (isset($_POST['oculto2'])){ show_form();
 										   info_01();
@@ -474,7 +474,7 @@ function info_02(){
 	global $text;
 	$text = PHP_EOL."- ADMIN MODIFICAR IMG MODIFICADA ".$ActionTime.PHP_EOL."\t ID:".$_POST['id'].PHP_EOL."\t Nombre: ".$nombre." ".$apellido.PHP_EOL."\t Ref: ".$rf.PHP_EOL."\t Upload Imagen: ".$destination_file.PHP_EOL."\t Rename Imagen: ".$rename_filename;
 
-	$logdocu = $_SESSION['ref'];
+	$logdocu = $_SESSION['uref'];
 	$logdate = date('Y_m_d');
 	$logtext = $text.PHP_EOL;
 	$filename = $dir."/".$logdate."_".$logdocu.".log";
@@ -506,7 +506,7 @@ function info_01(){
 	global $text;
 	$text = PHP_EOL."- ADMIN MODIFICAR IMG SELECCIONADA ".$ActionTime.PHP_EOL."\t ID:".$_POST['id'].PHP_EOL."\t Nombre: ".$nombre." ".$apellido.PHP_EOL."\t Ref: ".$rf.PHP_EOL."\t Imagen: ".$_POST['myimg'];
 
-	$logdocu = $_SESSION['ref'];
+	$logdocu = $_SESSION['uref'];
 	$logdate = date('Y_m_d');
 	$logtext = $text.PHP_EOL;
 	$filename = $dir."/".$logdate."_".$logdocu.".log";

@@ -67,6 +67,11 @@ function process_form(){
 	$nombre = $_POST['Nombre'];
 	$apellido = $_POST['Apellidos'];
 	
+	$sqlus = "SELECT * FROM $db_name.`gch_user` WHERE `ref` = '$_POST[ref]' ";
+	$qus = mysqli_query($db, $sqlus);
+	global $countus;
+	$countus = mysqli_num_rows($qus);
+
 	global $tabla;							 
 	$tabla = "<table align='center' style=\"margin-top:20px\">
 				<tr>
@@ -237,16 +242,61 @@ function process_form(){
 						global $texerror;
 						$texerror = "\n\t ".mysqli_error($db);
 							}
+
+							
+		// SI MODIFICA EL WEB MASTER SE GRABA EN USERS NIVEL ADMIN
+		// SI ES ADMINISTRADOR Y CONFIRMA EL CHECK BOX
+		if ($_POST['adminu'] == 'si') {
+			
+			global $countus;
+
+			if ($countus >= 1){
+			$sql = "UPDATE `$db_name`.`gch_admin` SET `Nivel` = '$_POST[Nivel]', `Nombre` = '$_POST[Nombre]', `Apellidos` = '$_POST[Apellidos]', `Email` = '$_POST[Email]', `Usuario` = '$_POST[Usuario]', `Password` = '$_POST[Password]', `Direccion` = '$_POST[Direccion]', `Tlf1` = '$_POST[Tlf1]' WHERE `gch_user`.`ref` = '$_POST[ref]' LIMIT 1 ";	
+			if(mysqli_query($db, $sql)){ }else { }
+			} 
+			elseif ($countus < 1){
+			$new_name = $_SESSION['myimgcl'];
+			$sql = "INSERT INTO `$db_name`.`gch_user` (`ref`, `Nivel`, `Nombre`, `Apellidos`, `myimg`, `Email`, `Usuario`, `Password`, `Direccion`, `Tlf1`) VALUES ('$rf', 'adminu', '$_POST[Nombre]', '$_POST[Apellidos]', '$new_name', '$_POST[Email]', '$_POST[Usuario]', '$_POST[Password]', '$_POST[Direccion]', '$_POST[Tlf1]')";
+				if(mysqli_query($db, $sql)){
+					// COPIO LA IMG DEL WEB MASTER EN IMG.USER	
+					copy("../Gch.Img.Admin/".$_SESSION['myimgcl'], "../Gch.Img.User/".$_SESSION['myimgcl']);
+					}
+			}	
+		// SI ES ADMIN PERO ADMINU ES NO, LO BORRAMOS
+		// FIN CHECK BOX SI
+			} else { 
+				if ($countus < 1){ } 
+				else { 
+				// BORRAMOS EL AMINISTRADOR DE LA TABLA USUARIOS SI EXISTE
+				$sqlus = "DELETE FROM `$db_name`.`gch_user` WHERE `gch_user`.`ref` = '$_POST[ref]' LIMIT 1 ";
+				// SI SE CUMPLE EL QUERY
+				if(mysqli_query($db, $sqlus)){ unlink("../Gch.Img.User/".$_SESSION['myimgcl']); } 
+				else { } // NO SE CUMPLE EL QUERY
+				}
+			}
 		
-					} // FIN CONDICIONAL ADMIN
+	} // FIN CONDICIONAL ADMIN
 	
+	// NO ES ADMIN
 	elseif (($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'plus')){
 		
-			$sqlc = "UPDATE `$db_name`.`gch_admin` SET `Nivel` = '$_POST[Nivel]', `Nombre` = '$_POST[Nombre]', `Apellidos` = '$_POST[Apellidos]', `Email` = '$_POST[Email]', `Direccion` = '$_POST[Direccion]', `Tlf1` = '$_POST[Tlf1]', `Tlf2` = '$_POST[Tlf2]' WHERE `gch_admin`.`id` = '$_POST[id]' LIMIT 1 ";
-
+		$sqlc = "UPDATE `$db_name`.`gch_admin` SET `Nivel` = '$_POST[Nivel]', `Nombre` = '$_POST[Nombre]', `Apellidos` = '$_POST[Apellidos]', `Email` = '$_POST[Email]', `Direccion` = '$_POST[Direccion]', `Tlf1` = '$_POST[Tlf1]', `Tlf2` = '$_POST[Tlf2]' WHERE `gch_admin`.`id` = '$_POST[id]' LIMIT 1 ";
+		
+	// SI SE CUMPLE EL QUERY
 	if(mysqli_query($db, $sqlc)){ global $tabla;
 								  print( $tabla );
-				} else {
+			global $countus;
+			if ($countus < 1){ } 
+			else { 
+			// BORRAMOS EL AMINISTRADOR DE LA TABLA USUARIOS SI EXISTE
+			$sqlus = "DELETE FROM `$db_name`.`gch_user` WHERE `gch_user`.`ref` = '$_POST[ref]' LIMIT 1 ";
+			// SI SE CUMPLE EL QUERY
+			if(mysqli_query($db, $sqlus)){ 
+						unlink("../Gch.Img.User/".$_SESSION['myimgcl']);
+					} else { }
+				}
+
+		} else { // NO SE CUMPLE EL QUERY
 				print("<font color='#FF0000'>
 						* MODIFIQUE LA ENTRADA 241: </font>
 						</br>
@@ -256,7 +306,7 @@ function process_form(){
 						global $texerror;
 						$texerror = "\n\t ".mysqli_error($db);
 							}
-					} // FIN CONDICIONAL USER / PLUS
+			} // FIN CONDICIONAL USER / PLUS
 	
  	} // FIN FUNCTION PROCESS_FORM
 
@@ -266,10 +316,20 @@ function process_form(){
 			
 function show_form($errors=''){
 	
+	global $db;
+	global $db_name;
+
 			require '../Gch.Inclu/mydni.php';
 
 	if($_POST['oculto2']){
 
+	$sqlus = "SELECT * FROM $db_name.`gch_user` WHERE `ref` = '$_POST[ref]' ";
+	$qus = mysqli_query($db, $sqlus);
+	$countus = mysqli_num_rows($qus);
+	global $def;
+	if ($countus < 1){ $def = "";}
+	else { $def = "si";}
+	
 				$_SESSION['refcl'] = $_POST['ref'];
 				$_SESSION['myimgcl'] = $_POST['myimg'];
 				
@@ -278,6 +338,7 @@ function show_form($errors=''){
 		
 				$defaults = array ( 'id' => $_POST['id'],
 									'ref' => $_POST['ref'],
+									'adminu' => $def,
 									'Nombre' => $_POST['Nombre'],
 									'Apellidos' => $_POST['Apellidos'],
 									'myimg' => $_SESSION['myimgcl'],
@@ -302,6 +363,7 @@ function show_form($errors=''){
 			
 			$defaults = array ( 'id' => $_POST['id'],
 								'ref' => $_SESSION['refcl'],
+								'adminu' => $_POST['adminu'],
 								'Nombre' => $_POST['Nombre'],
 								'Apellidos' => $_POST['Apellidos'],
 								'myimg' => $_SESSION['myimgcl'],
@@ -346,6 +408,7 @@ function show_form($errors=''){
 	$doctype = array (	'DNI' => 'DNI/NIF Espa&ntilde;oles',
 						'NIE' => 'NIE/NIF Extranjeros',
 						'NIFespecial' => 'NIF Persona F&iacute;sica Especial',
+						/*
 						'NIFsa' => 'NIF Sociedad An&oacute;nima',
 						'NIFsrl' => 'NIF Sociedad Responsabilidad Limitada',
 						'NIFscol' => 'NIF Sociedad Colectiva',
@@ -363,6 +426,7 @@ function show_form($errors=''){
 						'NIFute' => 'NIF Uniones Temporales de Empresas',
 						'NIFotnd' => 'NIF Otros Tipos no Definidos',
 						'NIFepenr' => 'NIF Establecimientos Permanentes Entidades no Residentes',
+						*/
 										);
 	
 	if ($_SESSION['Nivel'] == 'admin'){
@@ -470,6 +534,23 @@ function show_form($errors=''){
 					</td>
 				</tr>
 					
+				<tr>
+					<td align='right'>
+			<input type='checkbox' name='adminu' value='si' ");
+				if($defaults['adminu'] == 'si') {
+								print(" checked=\"checked\"");
+								$cuest = "";}
+				else{$defaults['adminu'] = '';
+						$cuest = "¿ ?";}
+								
+			print(" />
+					</td>
+					<td>
+					<font color='#FF0000'>".strtoupper($defaults['adminu'])."</font>
+					 ".$cuest." SERÁ ADMINISTRADOR DE USUARIOS 
+					</td>
+				</tr>
+
 				<tr>
 					<td>
 						<font color='#FF0000'>*</font>

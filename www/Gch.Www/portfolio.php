@@ -79,7 +79,7 @@ function MM_validateForm() {
 
       global $opina;
 
-      if (@$_SESSION['Nivel'] == 'user'){ }
+      if((@$_SESSION['uNivel'] == 'useru')||(@$_SESSION['uNivel'] == 'adminu')){ }
       else {
       $opina = "<br>
        <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\" style=\"margin: 0.6em 0em -3.0em -0em;\">

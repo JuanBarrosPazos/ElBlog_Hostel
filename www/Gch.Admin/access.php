@@ -23,7 +23,7 @@ session_start();
 
 	if(isset($_POST['oculto'])){
 		if($form_errors = validate_form()){
-							suma_denegado();
+						  suma_denegado();
 					if(@$_SESSION['showf'] == 69){table_desblock();}
 						else{show_form($form_errors);
 							 show_visit();}
@@ -241,11 +241,20 @@ function validate_form(){
 function process_form(){
 	
 	global $db;
+	global $db_name;
 					
 	if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'plus')){				 
 			//print("Wellcome: ".$_SESSION['Nombre']." ".$_SESSION['Apellidos'].".");
 			master_index();
 			admin_entrada();
+	
+		$sqlus = "SELECT * FROM $db_name.`gch_user` WHERE `Nivel` = 'adminu' ";
+		$qus = mysqli_query($db, $sqlus);
+		$countus = mysqli_num_rows($qus);
+		if ($countus < 1){ echo "NO EXISTE NINGUN ADMINISTRADOR EN LA TABLA USUARIOS";}
+		/* else {echo "NUMERO DE ADMINISTRADORES DE USUARIOS: ".$countus."<br>";} */
+		
+
 		}else { require '../Gch.Inclu/table_permisos.php'; }
 	
 	}	
@@ -291,16 +300,17 @@ function desbloqueo(){
 		} else {}
 	}else{} // Fin borrado de las entradas del día anterior.
 	
-	/*	
 		// SELECCIONO LAS IPs == A LA MIA, BLOQUEADAS CON "ACCESO X".
 	
 	$sqlx =  "SELECT * FROM `gch_ipcontrol` WHERE `ipn` = '{$geoplugin->ip}' AND `acceso` = 'x' ORDER BY `id` ASC ";
-	*/
+	
+	/*	
 		// SELECCIONO LAS IPs == A LA MIA, BLOQUEADAS CON "ACCESO X".
 	global $uip;
 	$uip = $_SERVER['REMOTE_ADDR'];
 
 	$sqlx =  "SELECT * FROM `gch_ipcontrol` WHERE `ipn` = '$uip' AND `acceso` = 'x' ORDER BY `id` ASC ";
+	*/
 	
 	$qx = mysqli_query($db, $sqlx);
 	$cx = mysqli_num_rows($qx);
@@ -310,15 +320,17 @@ function desbloqueo(){
 	// VERIFICO IP BLOQUEO DE LA IP
 	if(($cx >= 1)&&($rowx['error'] > $timex)){ $_SESSION['showf'] = 69;}
 	elseif((($cx >= 1)&&($rowx['error'] <= $timex))||((strlen(trim($rowx['error'] >= 3)))&&($rowx['error'] <= $timex))){ 
-	/*
+		
 		// DESBLOQUEO TODAS LAS IPs IGUALES A LA MIA
 	$desb = "UPDATE `$db_name`.`gch_ipcontrol` SET `error` = 'des', `acceso` = 'des' WHERE `gch_ipcontrol`.`ipn` = '{$geoplugin->ip}' ";
-	*/
 
+	/*
 	$desb = "UPDATE `$db_name`.`gch_ipcontrol` SET `error` = 'des', `acceso` = 'des' WHERE `gch_ipcontrol`.`ipn` = '$uip' ";
 
+	*/
+
 	$_SESSION['showf'] = 0;	
-	if(mysqli_query($db, $desb)){ } else { print("* ERROR ENTRADA 1678: ".mysqli_error($db))."."; }
+	if(mysqli_query($db, $desb)){ } else { print("* ERROR ENTRADA 316: ".mysqli_error($db))."."; }
 	} elseif($cx < 1) { $_SESSION['showf'] = 0; }	
 	
 	global $blocker;
@@ -336,6 +348,10 @@ function desbloqueo(){
 
 function bloqueo(){
 	
+	require_once('../geo_class/geoplugin.class.php');
+	$geoplugin = new geoPlugin();
+	$geoplugin->locate();
+
 	global $db;
 	global $db_name;
 	
@@ -351,10 +367,15 @@ function bloqueo(){
 	*/
 
 	// SELECCIONO LAS IPs == A LA MIA, CON MÁS DE TRES ACCESOS DENEGADOS.
+
+	$sqlip =  "SELECT * FROM `gch_ipcontrol` WHERE `ipn` = '{$geoplugin->ip}' AND `error` = '1' AND `acceso` = '0' AND `date` = '$date' ORDER BY `id` DESC ";
+
+	/*
 	global $uip;
 	$uip = $_SERVER['REMOTE_ADDR'];
-
 	$sqlip =  "SELECT * FROM `gch_ipcontrol` WHERE `ipn` = '$uip' AND `error` = '1' AND `acceso` = '0' AND `date` = '$date' ORDER BY `id` DESC ";
+	*/
+
 	$qip = mysqli_query($db, $sqlip);
 	global $cip;
 	$cip = mysqli_num_rows($qip);
@@ -529,7 +550,7 @@ function admin_entrada(){
 	global $datein;
 	$datein = date('Y-m-d/H:i:s');
 
-	$sqladin = "UPDATE `$db_name`.`gch_admin` SET `lastin` = '$datein', `gch_visitadmin` = '$total' WHERE `gch_admin`.`id` = '$userid' LIMIT 1 ";
+	$sqladin = "UPDATE `$db_name`.`gch_admin` SET `lastin` = '$datein', `visitadmin` = '$total' WHERE `gch_admin`.`id` = '$userid' LIMIT 1 ";
 		
 	if(mysqli_query($db, $sqladin)){
 			// print("* ");
@@ -770,7 +791,7 @@ function suma_visit(){
 
 	$idv = 69;
 	
-	$sqlv = "UPDATE `$db_name`.`gch_visitasadmin` SET `gch_admin` = '$sumavisit' WHERE `gch_visitasadmin`.`idv` = '$idv' LIMIT 1 ";
+	$sqlv = "UPDATE `$db_name`.`gch_visitasadmin` SET `admin` = '$sumavisit' WHERE `gch_visitasadmin`.`idv` = '$idv' LIMIT 1 ";
 
 	if(mysqli_query($db, $sqlv)){
 		/**/	print(" </br>");

@@ -829,7 +829,10 @@ function show_form($errors=''){
 									'espec1' => isset($_POST['espec1']),
 									'espec2' => isset($_POST['espec2']),									
 									'url' => isset($_POST['url']),
-									'map' => isset($_POST['url']),
+									'map' => isset($_POST['map']),
+									'mapiframe' => isset($_POST['mapiframe']),
+									'latitud' => isset($_POST['latitud']),
+									'longitud' => isset($_POST['longitud']),
 									'calle' => isset($_POST['calle']),
 									'Email' => 'Solo letras minúsculas',
 									'Tlf1' => '',
@@ -1027,7 +1030,7 @@ function show_form($errors=''){
 						PAGINA WEB
 					</td>
 					<td>
-		<input type='text' name='url' size=40 maxlength=40 value='".@$defaults['url']."' />
+		<input type='text' name='url' size=40 maxlength=40 value='".@$defaults['url']."' placeholder='WEB URL'/>
 					</td>
 				</tr>
 
@@ -1036,7 +1039,34 @@ function show_form($errors=''){
 						MAPA WEB
 					</td>
 					<td>
-		<input type='text' name='map' size=50 maxlength=49 value='".@$defaults['map']."' />
+		<input type='text' name='map' size=50 maxlength=49 value='".@$defaults['map']."' placeholder='MAP SHORT URL' />
+					</td>
+				</tr>
+
+				<tr>
+					<td align='right'>						
+						MAPA IFRAME
+					</td>
+					<td>
+		<input type='text' name='mapiframe' size=50 maxlength=340 value='".@$defaults['mapiframe']."' placeholder='MAP IFRAME URL' />
+					</td>
+				</tr>
+
+				<tr>
+					<td align='right'>						
+						LATITUD
+					</td>
+					<td>
+		<input type='text' name='latitud' size=18 maxlength=10 value='".@$defaults['latitud']."' placeholder='MAP LATITUD' />
+					</td>
+				</tr>
+
+				<tr>
+					<td align='right'>						
+						LONGITUD
+					</td>
+					<td>
+		<input type='text' name='mapiframe' size=18 maxlength=10 value='".@$defaults['longitud']."' placeholder='MAP LONGITUD' />
 					</td>
 				</tr>
 

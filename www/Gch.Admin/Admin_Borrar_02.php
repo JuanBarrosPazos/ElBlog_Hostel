@@ -233,6 +233,13 @@ function process_form(){
 	print ($table); // SE IMPRIME LA TABLA DE CONFIRMACION
 
 	unlink("../Gch.Img.Admin/".$_POST['myimg']);
+	
+	// BORRAMOS EL AMINISTRADOR DE LA TABLA USUARIOS SI EXISTE
+	$sqlus = "DELETE FROM `$db_name`.`gch_user` WHERE `gch_user`.`ref` = '$_POST[ref]' LIMIT 1 ";
+	// SI SE CUMPLE EL QUERY
+	if(mysqli_query($db, $sqlus)){ 
+		unlink("../Gch.Img.User/".$_POST['myimg']);
+	} else { }
 
 	// SE GRABAN LOS DATOS EN LOG DEL ADMIN
 	global $deletet2;

@@ -5,7 +5,7 @@
 	$admin = "CREATE TABLE IF NOT EXISTS `$db_name`.`gch_admin` (
   `id` int(4) NOT NULL auto_increment,
   `ref` varchar(20) collate utf8_spanish2_ci NOT NULL,
-  `Nivel` varchar(8) collate utf8_spanish2_ci NOT NULL default 'amd',
+  `Nivel` varchar(8) collate utf8_spanish2_ci NOT NULL default 'close',
   `Nombre` varchar(25) collate utf8_spanish2_ci NOT NULL,
   `Apellidos` varchar(25) collate utf8_spanish2_ci NOT NULL,
   `myimg` varchar(30) collate utf8_spanish2_ci NOT NULL default 'untitled.png ',
@@ -42,7 +42,7 @@
 	$user = "CREATE TABLE IF NOT EXISTS `$db_name`.`gch_user` (
   `id` int(4) NOT NULL AUTO_INCREMENT,
   `ref` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
-  `Nivel` varchar(8) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'user',
+  `Nivel` varchar(8) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'useru',
   `Nombre` varchar(25) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
   `Apellidos` varchar(25) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
   `myimg` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'untitled.png',
@@ -56,7 +56,6 @@
   `visituser` varchar(4) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT '0',
 	UNIQUE KEY `id` (`id`),
 	UNIQUE KEY `ref` (`ref`),
-	UNIQUE KEY `dni` (`dni`),
 	UNIQUE KEY `Email` (`Email`),
 	UNIQUE KEY `Usuario` (`Usuario`)
 	  ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=1 ";
@@ -95,8 +94,8 @@
   `reftipo` varchar(4) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
   `refespec1` varchar(4) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
   `refespec2` varchar(4) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
-  `iprecio` int(4) NOT NULL DEFAULT '3',
-  `ivalora` int(4) NOT NULL DEFAULT '3',
+  `iprecio` int(4) NOT NULL DEFAULT '50',
+  `ivalora` int(4) NOT NULL DEFAULT '50',
   `url` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'http://juanbarrospazos.blogspot.com.es/',
   `map` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'https://goo.gl/maps/63M96me7YdBkhJLf7',
   `mapiframe` varchar(340) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3075.5997770189756!2d2.6670561!3d39.568631!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x55bc574de040df4a!2sCIFP%20Francesc%20de%20Borja%20Moll!5e0!3m2!1ses!2ses!4v1593844861566!5m2!1ses!2ses',

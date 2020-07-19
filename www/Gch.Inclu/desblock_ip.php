@@ -267,7 +267,7 @@ function process_form(){
 		</tr>
 		<tr>
 			<td colspan=2 align='center'>
-				<img src='../Gch.Img.Admin/".$rowqc['myimg1']."' height='60px' width='45px' />
+				<img src='../Gch.Img.Admin/".$rowqc['myimg']."' height='60px' width='45px' />
 			</td>
 		</tr>
 		<tr>

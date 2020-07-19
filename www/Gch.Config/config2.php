@@ -116,7 +116,7 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 	
 	$trf = $_SESSION['iniref'];
 	
-	$carpetaimg = "../Gch.Img.User";
+	$carpetaimg = "../Gch.Img.Admin";
 
 	if($_FILES['myimg']['size'] == 0){
 			$nombre = $carpetaimg."/untitled.png";
@@ -176,7 +176,13 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 									$mydni = '<?php $_SESSION[\'mydni\'] = '.$_POST['dni'].'; ?>';
 									fwrite($fw2, $mydni);
 									fclose($fw2);	
-
+		// SI SECREA EL WEB MASTER SE GRABA EN USERS NIVEL ADMIN
+		$sql = "INSERT INTO `$db_name`.`gch_user` (`ref`, `Nivel`, `Nombre`, `Apellidos`, `myimg`, `Email`, `Usuario`, `Password`, `Direccion`, `Tlf1`) VALUES ('$rf', 'adminu', '$_POST[Nombre]', '$_POST[Apellidos]', '$new_name', '$_POST[Email]', '$_POST[Usuario]', '$_POST[Password]', '$_POST[Direccion]', '$_POST[Tlf1]')";
+		if(mysqli_query($db, $sql)){
+			// COPIO LA IMG DEL WEB MASTER EN IMG.USER	
+			copy($rename_filename, "../Gch.Img.User/".$new_name);
+			}else { }
+		/////////
 	print( "<table align='center' style='margin-top:10px'>
 				<tr>
 					<th colspan=3 class='BorderInf'>
@@ -418,11 +424,11 @@ function show_form($errors=''){
 <form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'  enctype='multipart/form-data'>
 						
 				<tr>
-					<td width=180px>	
+					<td width=140px>	
 						<font color='#FF0000'>*</font>
 						Ref User:
 					</td>
-					<td width=360px>
+					<td width=300px>
 						SE GENERA LA CLAVE AUTOMÁTICAMENTE 
 					</td>
 				</tr>

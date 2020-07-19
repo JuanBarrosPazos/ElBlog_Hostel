@@ -2,7 +2,7 @@
 <?php
 
 if((isset($_POST['Usuario'])&&(isset($_POST['Password'])))){
-	$sql =  "SELECT * FROM `user` WHERE `Usuario` = '$_POST[Usuario]' AND `Password` = '$_POST[Password]'";
+	$sql =  "SELECT * FROM `gch_user` WHERE `Usuario` = '$_POST[Usuario]' AND `Password` = '$_POST[Password]'";
 	$q = mysqli_query($db, $sql);
 	global $row;
 	$row = mysqli_fetch_assoc($q);
@@ -13,22 +13,22 @@ if((isset($_POST['Usuario'])&&(isset($_POST['Password'])))){
 
 	if($countq < 1){}
 	else{
-	$_SESSION['id'] = $row['id'];
-	$_SESSION['ref'] = $row['ref'];
-	$_SESSION['Nivel'] = $row['Nivel'];
-	$_SESSION['Nombre'] = $row['Nombre'];
-	$_SESSION['Apellidos'] = $row['Apellidos'];
-	$_SESSION['Email'] = $row['Email'];
-	$_SESSION['Usuario'] = $row['Usuario'];
-	$_SESSION['Password'] = $row['Password'];
-	$_SESSION['Direccion'] = $row['Direccion'];
-	$_SESSION['Tlf1'] = $row['Tlf1'];
-	$_SESSION['lastin'] = $row['lastin'];
-	$_SESSION['lastout'] = $row['lastout'];
-	$_SESSION['visituser'] = $row['visituser'];
+	$_SESSION['uid'] = $row['id'];
+	$_SESSION['uref'] = $row['ref'];
+	$_SESSION['uNivel'] = $row['Nivel'];
+	$_SESSION['uNombre'] = $row['Nombre'];
+	$_SESSION['uApellidos'] = $row['Apellidos'];
+	$_SESSION['uEmail'] = $row['Email'];
+	$_SESSION['uUsuario'] = $row['Usuario'];
+	$_SESSION['uPassword'] = $row['Password'];
+	$_SESSION['uDireccion'] = $row['Direccion'];
+	$_SESSION['uTlf1'] = $row['Tlf1'];
+	$_SESSION['ulastin'] = $row['lastin'];
+	$_SESSION['ulastout'] = $row['lastout'];
+	$_SESSION['uvisituser'] = $row['visituser'];
 
-	$userid = $_SESSION['id'];
-	$uservisita = $_SESSION['visituser'];
+	$userid = $_SESSION['uid'];
+	$uservisita = $_SESSION['uvisituser'];
 		}
 	}
 

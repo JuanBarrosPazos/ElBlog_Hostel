@@ -7,7 +7,7 @@ session_start();
 	require '../Gch.Connet/conect.php';
 
 /* OJO SOLO PARA VALIDATE.PHP
-$sqld =  "SELECT * FROM `gch_admin` WHERE `ref` = '$_SESSION[ref]' AND `Usuario` = '$_SESSION[Usuario]'";
+$sqld =  "SELECT * FROM `gch_admin` WHERE `ref` = '$_SESSION[uref]' AND `Usuario` = '$_SESSION[Usuario]'";
 $qd = mysqli_query($db, $sqld);
 $rowd = mysqli_fetch_assoc($qd);
 */
@@ -16,7 +16,7 @@ $rowd = mysqli_fetch_assoc($qd);
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if ($_SESSION['Nivel'] == 'user') {
+if ($_SESSION['uNivel'] == 'useru') {
 
 							if (isset($_POST['oculto2'])){
 								show_form();
@@ -202,13 +202,13 @@ function process_form(){
 				</tr>
 			</table>"; 
 
-	if ($_SESSION['Nivel'] == 'admin') {
+	if ($_SESSION['uNivel'] == 'adminu') {
 		
 	$sqlc = "UPDATE `$db_name`.`gch_admin` SET `Nivel` = '$_POST[Nivel]', `Nombre` = '$_POST[Nombre]', `Apellidos` = '$_POST[Apellidos]', `doc` = '$_POST[doc]', `dni` = '$_POST[dni]', `ldni` = '$_POST[ldni]', `Email` = '$_POST[Email]', `Usuario` = '$_POST[Usuario]', `Password` = '$_POST[Password]', `Direccion` = '$_POST[Direccion]', `Tlf1` = '$_POST[Tlf1]', `Tlf2` = '$_POST[Tlf2]' WHERE `gch_admin`.`id` = '$_POST[id]' LIMIT 1 ";
 
 	if(mysqli_query($db, $sqlc)){ 	
 		
-	if (($_SESSION['dni'] == $_SESSION['mydni']) && ($_SESSION['id'] == $_POST['id']) && ($_POST['dni'] != $_SESSION['mydni'])) { 	$_SESSION['dni'] = $_POST['dni'];
+	if (($_SESSION['dni'] == $_SESSION['mydni']) && ($_SESSION['uid'] == $_POST['id']) && ($_POST['dni'] != $_SESSION['mydni'])) { 	$_SESSION['dni'] = $_POST['dni'];
 							// CREA EL ARCHIVO MYDNI.TXT $_SESSION['mydni'].
 							$filename = "../Gch.Inclu/mydni.php";
 							$fw2 = fopen($filename, 'w+');
@@ -216,7 +216,7 @@ function process_form(){
 							fwrite($fw2, $mydni);
 							fclose($fw2);
 										}
-	elseif (($_SESSION['dni'] != $_SESSION['mydni']) && ($_SESSION['id'] == $_POST['id']) && ($_POST['dni'] != $_SESSION['dni'])) { 
+	elseif (($_SESSION['dni'] != $_SESSION['mydni']) && ($_SESSION['uid'] == $_POST['id']) && ($_POST['dni'] != $_SESSION['dni'])) { 
 							$_SESSION['dni'] = $_POST['dni'];
 					}else{ }
 								 
@@ -238,7 +238,7 @@ function process_form(){
 		
 					} // FIN CONDICIONAL ADMIN
 	
-	elseif (($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'plus')){
+	elseif (($_SESSION['uNivel'] == 'useru') || ($_SESSION['uNivel'] == 'plusu')){
 		
 			$sqlc = "UPDATE `$db_name`.`gch_admin` SET `Nivel` = '$_POST[Nivel]', `Nombre` = '$_POST[Nombre]', `Apellidos` = '$_POST[Apellidos]', `Email` = '$_POST[Email]', `Direccion` = '$_POST[Direccion]', `Tlf1` = '$_POST[Tlf1]', `Tlf2` = '$_POST[Tlf2]' WHERE `gch_admin`.`id` = '$_POST[id]' LIMIT 1 ";
 
@@ -328,7 +328,7 @@ function show_form($errors=''){
 					}
 		
 	
-	if($_SESSION['Nivel'] == 'user'){
+	if($_SESSION['uNivel'] == 'useru'){
 	
 	print("<div class=\"juancentramail\">
 
@@ -409,16 +409,16 @@ function info_02(){
 	
 	$ActionTime = date('H:i:s');
 	
-	if($_SESSION['refcl'] == $_SESSION['ref']){	global $ruta;
+	if($_SESSION['refcl'] == $_SESSION['uref']){	global $ruta;
 												$ruta = $_SESSION['refcl'];}
-	elseif($_SESSION['refcl'] != $_SESSION['ref']){	global $ruta;
-													$ruta = $_SESSION['ref'];}
+	elseif($_SESSION['refcl'] != $_SESSION['uref']){	global $ruta;
+													$ruta = $_SESSION['uref'];}
 	
 	global $dir;
 	$dir = "../Gch.Log";
 	
 	global $text;
-	$text = PHP_EOL."- USER MODIFICADO ".$ActionTime.PHP_EOL."\t ID:".$_POST['id'].PHP_EOL."\t Nombre: ".$_POST['Nombre']." ".$_POST['Apellidos'].PHP_EOL."\t Ref: ".$_SESSION['ref'].PHP_EOL."\t Nivel: ".$_POST['Nivel'].PHP_EOL."\t User: ".$_POST['Usuario'].".\n\t Pass: ".$_POST['Password'].".\n\t ".$_POST['doc'].": ".$_POST['dni'].$_POST['ldni'].".\n\t Email: ".$_POST['Email'].PHP_EOL."\t Direccion: ".$_POST['Direccion'].PHP_EOL."\t Telefono 1: ".$_POST['Tlf1'].PHP_EOL."\t Telefono 2: ".$_POST['Tlf2'].PHP_EOL."\t Imagen: ".$_POST['myimg'];
+	$text = PHP_EOL."- USER MODIFICADO ".$ActionTime.PHP_EOL."\t ID:".$_POST['id'].PHP_EOL."\t Nombre: ".$_POST['Nombre']." ".$_POST['Apellidos'].PHP_EOL."\t Ref: ".$_SESSION['uref'].PHP_EOL."\t Nivel: ".$_POST['Nivel'].PHP_EOL."\t User: ".$_POST['Usuario'].".\n\t Pass: ".$_POST['Password'].".\n\t ".$_POST['doc'].": ".$_POST['dni'].$_POST['ldni'].".\n\t Email: ".$_POST['Email'].PHP_EOL."\t Direccion: ".$_POST['Direccion'].PHP_EOL."\t Telefono 1: ".$_POST['Tlf1'].PHP_EOL."\t Telefono 2: ".$_POST['Tlf2'].PHP_EOL."\t Imagen: ".$_POST['myimg'];
 
 	$logdocu = $ruta;
 	$logdate = date('Y_m_d');
@@ -449,7 +449,7 @@ function info_01(){
 	global $text;
 	$text = PHP_EOL."- USER MODIFICAR SELECCIONADO ".$ActionTime.PHP_EOL."\t ID:".$_POST['id'].PHP_EOL."\t Nombre: ".$_POST['Nombre']." ".$_POST['Apellidos'].PHP_EOL."\t Ref: ".$_POST['ref'].PHP_EOL."\t Nivel: ".$_POST['Nivel'].PHP_EOL."\t User: ".$_POST['Usuario'].".\n\t Pass: ".$_POST['Password'].".\n\t ".$_POST['doc'].": ".$_POST['dni'].$_POST['ldni'].".\n\t Email: ".$_POST['Email'].PHP_EOL."\t Direccion: ".$_POST['Direccion'].PHP_EOL."\t Telefono 1: ".$_POST['Tlf1'].PHP_EOL."\t Telefono 2: ".$_POST['Tlf2'].PHP_EOL."\t Imagen: ".$_POST['myimg'];
 
-	$logdocu = $_SESSION['ref'];
+	$logdocu = $_SESSION['uref'];
 	$logdate = date('Y_m_d');
 	$logtext = $text.$texerror.PHP_EOL;
 	$filename = $dir."/".$logdate."_".$logdocu.".log";

@@ -51,20 +51,20 @@
       }
 
 
-  function salir() {  unset($_SESSION['id']);
-                      unset($_SESSION['Nivel']);
-                      unset($_SESSION['Nombre']);
-                      unset($_SESSION['Apellidos']);
-                      unset($_SESSION['doc']);
-                      unset($_SESSION['Email']);
-                      unset($_SESSION['Usuario']);
-                      unset($_SESSION['Password']);
-                      unset($_SESSION['Direccion']);
-                      unset($_SESSION['Tlf1']);
+  function salir() {  unset($_SESSION['uid']);
+                      unset($_SESSION['uNivel']);
+                      unset($_SESSION['uNombre']);
+                      unset($_SESSION['uApellidos']);
+                      unset($_SESSION['udoc']);
+                      unset($_SESSION['uEmail']);
+                      unset($_SESSION['uUsuario']);
+                      unset($_SESSION['uPassword']);
+                      unset($_SESSION['uDireccion']);
+                      unset($_SESSION['uTlf1']);
                     }
 
   function process_login(){
-                    if ($_SESSION['Nivel'] == 'user'){}
+                    if((@$_SESSION['uNivel'] == 'useru')||(@$_SESSION['uNivel'] == 'adminu')){}
                     else { print("Acceso no permitido");}
                   }
 
@@ -106,7 +106,7 @@
         </li>
 
         <?php
-            if(@$_SESSION['Nivel'] == 'user'){ 
+            if((@$_SESSION['uNivel'] == 'useru')||(@$_SESSION['uNivel'] == 'adminu')){ 
             print(" <li class=\"nav-item\">
               <a class=\"nav-link js-scroll-trigger\" href=\"../Gch.Users/User_Modificar_01.php\">
                         MIS DATOS
@@ -147,7 +147,7 @@
         -->
         <div class="intro-heading text-uppercase">IB FOOD</div>
         <?php
-        if(@$_SESSION['Nivel'] == 'user'){ 
+        if((@$_SESSION['uNivel'] == 'useru')||(@$_SESSION['uNivel'] == 'adminu')){ 
           global $h;
           $h = date('H');
           global $m;

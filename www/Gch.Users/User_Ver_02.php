@@ -10,7 +10,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if (($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'plus')){
+if (($_SESSION['uNivel'] == 'adminu')||($_SESSION['uNivel'] == 'useru') || ($_SESSION['uNivel'] == 'plusu')){
 				
 	global $nombre;
 	global $apellido;
@@ -229,7 +229,7 @@ function info(){
 	global $text;
 	$text = PHP_EOL."- USERS VER DETALLES ".$ActionTime.PHP_EOL."\t Nombre: ".$nombre." ".$apellido;
 
-	$logdocu = $_SESSION['ref'];
+	$logdocu = $_SESSION['uref'];
 	$logdate = date('Y_m_d');
 	$logtext = $text.PHP_EOL;
 	$filename = $dir."/".$logdate."_".$logdocu.".log";

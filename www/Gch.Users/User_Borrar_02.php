@@ -12,7 +12,7 @@ session_start();
 				 ////////////////////				  ///////////////////
 
 // NIVEL PLUS NO TIENE PERMITIDO BORRAR OTROS USUARIOS NI EL MISMO
-if /*(*/($_SESSION['Nivel'] == 'admin')/* || ($_SESSION['Nivel'] == 'plus'))*/{
+if /*(*/($_SESSION['uNivel'] == 'adminu')/* || ($_SESSION['uNivel'] == 'plusu'))*/{
 
 	master_index();
 
@@ -495,7 +495,7 @@ function info_02(){
 	global $text;
 	$text = PHP_EOL."- USER BORRARDO ".$ActionTime.PHP_EOL."\t ID: ".$_POST['id'].PHP_EOL."\t Nombre: ".$nombre." ".$apellido.PHP_EOL."\t Ref: ".$rf.". Nivel: ".$_POST['Nivel'].PHP_EOL."\t User: ".$_POST['Usuario'].". Pass: ".$_POST['Password'];
 
-	$logdocu = $_SESSION['ref'];
+	$logdocu = $_SESSION['uref'];
 	$logdate = date('Y_m_d');
 	$logtext = $text.PHP_EOL.$deletet.PHP_EOL.$ddr;
 	$filename = $dir."/".$logdate."_".$logdocu.".log";
@@ -530,7 +530,7 @@ function info_01(){
 global $text;
 $text = PHP_EOL."- USER BORRAR SELECCIONADO ".$ActionTime.PHP_EOL."\t ID:".$_POST['id'].PHP_EOL."\t Nombre: ".$nombre." ".$apellido.PHP_EOL."\t Ref: ".$rf.". Nivel: ".$_POST['Nivel'].PHP_EOL."\t User: ".$_POST['Usuario'].". Pass: ".$_POST['Password'];
 
-	$logdocu = $_SESSION['ref'];
+	$logdocu = $_SESSION['uref'];
 	$logdate = date('Y_m_d');
 	$logtext = $text.PHP_EOL;
 	$filename = $dir."/".$logdate."_".$logdocu.".log";

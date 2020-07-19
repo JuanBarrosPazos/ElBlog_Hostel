@@ -86,12 +86,12 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 
 	global $db_name;
 
-	$sql = "INSERT INTO `$db_name`.`user` (`ref`, `Nivel`, `Nombre`, `Apellidos`, `myimg`, `Email`, `Usuario`, `Password`, `Direccion`, `Tlf1`) VALUES ('$rf', '$_POST[Nivel]', '$_POST[Nombre]', '$_POST[Apellidos]', '$new_name', '$_POST[Email]', '$_POST[Usuario]', '$_POST[Password]', '$_POST[Direccion]', '$_POST[Tlf1]')";
+	$sql = "INSERT INTO `$db_name`.`gch_user` (`ref`, `Nivel`, `Nombre`, `Apellidos`, `myimg`, `Email`, `Usuario`, `Password`, `Direccion`, `Tlf1`) VALUES ('$rf', '$_POST[Nivel]', '$_POST[Nombre]', '$_POST[Apellidos]', '$new_name', '$_POST[Email]', '$_POST[Usuario]', '$_POST[Password]', '$_POST[Direccion]', '$_POST[Tlf1]')";
 		
 	if(mysqli_query($db, $sql)){
 		
 	/*	$fil = "%".$rf."%";
-		$pimg =  "SELECT * FROM `$db_name`.`user` WHERE `ref` = '$rf' ";
+		$pimg =  "SELECT * FROM `$db_name`.`gch_user` WHERE `ref` = '$rf' ";
 		$qpimg = mysqli_query($db, $pimg);
 		$rowpimg = mysqli_fetch_assoc($qpimg);
 		$_SESSION['dudas'] = $rowpimg['myimg'];
@@ -213,7 +213,7 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 	global $dir;
 	$dir = "../Gch.Log";
 
-	$logdocu = $_SESSION['ref'];
+	$logdocu = $_SESSION['uref'];
 	$logdate = date('Y_m_d');
 	$logtext = PHP_EOL."- CREADO NUEVO USUARIO ".$datein.PHP_EOL."\t User Ref: ".$rf.PHP_EOL."\t Name: ".$_POST['Nombre']." ".$_POST['Apellidos'].PHP_EOL."\t User: ".$_POST['Usuario'].PHP_EOL."\t Pass: ".$_POST['Password'].PHP_EOL;
 	$filename = $dir."/".$logdate."_".$logdocu.".log";
@@ -272,7 +272,7 @@ function show_form($errors=''){
 
 	global $db;
 	global $db_name;
-	$nu =  "SELECT * FROM `$db_name`.`user` WHERE `user`.`dni` <> '$_SESSION[mydni]'";
+	$nu =  "SELECT * FROM `$db_name`.`gch_user` WHERE `gch_user`.`dni` <> '$_SESSION[mydni]'";
 		$user = mysqli_query($db, $nu);
 		//$ruser = mysqli_fetch_assoc($user);
 		$nuser = mysqli_num_rows($user);

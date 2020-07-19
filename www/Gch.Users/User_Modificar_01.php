@@ -10,13 +10,29 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if ($_SESSION['Nivel'] == 'user'){ 
- 					
-					ver_todo();
+if ($_SESSION['uNivel'] == 'useru'){ ver_todo(); } 
 
-} else { require '../Gch.Inclu/table_permisos.php'; 
-		 require 'Inc_Footer.php';
-		 require '../Gch.Www/Inc_Jquery_Boots_Foot.php';
+	elseif ($_SESSION['uNivel'] == 'adminu'){ 
+		
+			if(isset($_POST['todo'])){  
+				show_form();							
+				ver_todo();
+				//info();
+				}
+			
+			elseif(isset($_POST['oculto'])){
+			if($form_errors = validate_form()){
+			show_form($form_errors);
+			} else {  process_form();
+			//info();
+			}
+		}
+			else { show_form(); }
+	} 
+
+else { require '../Gch.Inclu/table_permisos.php'; 
+	   require 'Inc_Footer.php';
+	   require '../Gch.Www/Inc_Jquery_Boots_Foot.php';
 			}
 
 				   ////////////////////				   ////////////////////
@@ -55,11 +71,17 @@ function process_form(){
 	//$orden = $_POST['Orden'];
 	//$doc = $_POST['doc'];
 		
-	if ($_SESSION['Nivel'] == 'user'){ 
-	$sqlb =  "SELECT * FROM `user` WHERE  `ref` = '$_SESSION[ref]' LIMIT 1  ";
+	if ($_SESSION['uNivel'] == 'useru'){ 
+	$sqlb =  "SELECT * FROM `gch_user` WHERE `ref` = '$_SESSION[uref]' LIMIT 1  ";
 	$qb = mysqli_query($db, $sqlb);
 				}
-			////////////////////		**********  		////////////////////
+
+	if ($_SESSION['uNivel'] == 'adminu') { 
+	$sqlb =  "SELECT * FROM `gch_user` WHERE `Nombre` LIKE '$nom' OR `Apellidos` LIKE '$ape'  ORDER BY `Nombre` ASC  ";
+	$qb = mysqli_query($db, $sqlb);
+				}
+
+				////////////////////		**********  		////////////////////
 
 	global $twhile;
 	$twhile = "FILTRO USUARIOS MODIFICAR";
@@ -114,20 +136,15 @@ function ver_todo(){
 	global $db;
 	global $db_name;
 
-	if (($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'plus')){ 
-				$ref = $_SESSION['ref'];
-				$sqlb =  "SELECT * FROM `user` WHERE `ref` = '$ref'";
+	if ($_SESSION['uNivel'] == 'useru'){ 
+				$ref = $_SESSION['uref'];
+				$sqlb =  "SELECT * FROM `gch_user` WHERE `ref` = '$ref'";
 				$qb = mysqli_query($db, $sqlb);
 	}
 	
-	elseif (($_SESSION['Nivel'] == 'user') && ($_SESSION['dni'] == $_SESSION['mydni'])) { 
+	elseif ($_SESSION['uNivel'] == 'adminu') { 
 				$orden = @$_POST['Orden'];
-				$sqlb =  "SELECT * FROM `user` ORDER BY $orden ";
-				$qb = mysqli_query($db, $sqlb);
-				}
-	elseif (($_SESSION['Nivel'] == 'user') && ($_SESSION['dni'] != $_SESSION['mydni'])){ 
-				$orden = $_POST['Orden'];
-				$sqlb =  "SELECT * FROM `user` WHERE `user`.`dni` <> '$_SESSION[mydni]' ORDER BY $orden ";
+				$sqlb =  "SELECT * FROM `gch_user` ORDER BY $orden ";
 				$qb = mysqli_query($db, $sqlb);
 				}
 	

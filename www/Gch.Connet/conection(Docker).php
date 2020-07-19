@@ -6,5 +6,5 @@
 				$db_host = 'db'; 
 				$db_user = 'user'; 
 				$db_pass = '1234'; 
-				$db_name = 'bmoll'; 
+				$db_name = 'blog_hostel'; 
 				?>

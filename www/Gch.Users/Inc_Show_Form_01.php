@@ -35,15 +35,9 @@ $ordenar = array (	'`id` ASC' => 'ID Ascendente',
                     '`Nombre` DESC' => 'Nombre Descendente',
                     '`Apellidos` ASC' => 'Apellidos Ascenedente',
                     '`Apellidos` DESC' => 'Apellidos Descendente',
-                    '`Email` ASC' => 'Dirección de Email Ascendente',
-                    '`Email` DESC' => 'Dirección de Email Descendente',
-                    '`Tlf1` ASC' => 'Teléfono 1 Ascendente',
-                    '`Tlf1` DESC' => 'Teléfono 1 Descendente',
-                    '`Tlf2` ASC' => 'Teléfono 2 Ascendente',
-                    '`Tlf2` DESC' => 'Teléfono 2 Descendente',
                                                             );
 
-if (($_SESSION['Nivel'] == 'admin')){ 
+if (($_SESSION['uNivel'] == 'adminu')){ 
 
 print(" <table align='center' style=\"border:0px;margin-top:4px\">
             <tr>

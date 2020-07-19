@@ -12,13 +12,13 @@ session_start();
 				 ////////////////////				  ///////////////////
 
 // NIVEL PLUS / USER NO TIENE PERMITIDO BORRAR OTROS USUARIOS NI EL MISMO
-/*if (($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'plus')){ 
+/*if (($_SESSION['uNivel'] == 'useru') || ($_SESSION['uNivel'] == 'plusu')){ 
 					master_index();
 					ver_todo();
 					info();
 								}
 
-else*/if ($_SESSION['Nivel'] == 'admin'){
+else*/if ($_SESSION['uNivel'] == 'adminu'){
 
 	master_index();
 
@@ -56,7 +56,7 @@ function process_form(){
 	
 	show_form();
 		
-	if (($_SESSION['Nivel'] == 'admin') && ($_SESSION['dni'] == $_SESSION['mydni'])) { 
+	if (($_SESSION['uNivel'] == 'adminu') && ($_SESSION['dni'] == $_SESSION['mydni'])) { 
 	/*
 	// PARA PODER BORRARME A MI MISMO
 	$sqlc =  "SELECT * FROM `gch_admin` WHERE `Nombre` LIKE '%$nombre%' OR `Apellidos` LIKE '%$apellido%'  ORDER BY `Nombre` ASC  ";
@@ -65,7 +65,7 @@ function process_form(){
 	$sqlb =  "SELECT * FROM `gch_admin` WHERE  `dni` <> '$_SESSION[mydni]' AND  `Nombre` LIKE '%$nombre%' OR `dni` <> '$_SESSION[mydni]' AND `Apellidos` LIKE '%$apellido%' ORDER BY `Nombre` ASC  ";
 	$qb = mysqli_query($db, $sqlb);
 				}
-	elseif (($_SESSION['Nivel'] == 'admin') && ($_SESSION['dni'] != $_SESSION['mydni'])){ 
+	elseif (($_SESSION['uNivel'] == 'adminu') && ($_SESSION['dni'] != $_SESSION['mydni'])){ 
 	// PARA QUE OTROS USER NO ME PUEDAN BORRAR
 	$sqlb =  "SELECT * FROM `gch_admin` WHERE  `dni` <> '$_SESSION[mydni]' AND  `Nombre` LIKE '%$nombre%' OR `dni` <> '$_SESSION[mydni]' AND `Apellidos` LIKE '%$apellido%' ORDER BY `Nombre` ASC  ";
 	$qb = mysqli_query($db, $sqlb);
@@ -135,13 +135,13 @@ function ver_todo(){
 	global $db_name;
 
 	/*
-	if (($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'plus')){ 
-	$ref = $_SESSION['ref'];
+	if (($_SESSION['uNivel'] == 'useru') || ($_SESSION['uNivel'] == 'plusu')){ 
+	$ref = $_SESSION['uref'];
 	$sqlb =  "SELECT * FROM `gch_admin` WHERE `ref` = '$ref'";
 	$qb = mysqli_query($db, $sqlb);
 	}
 	
-	else*/if (($_SESSION['Nivel'] == 'admin') && ($_SESSION['dni'] == $_SESSION['mydni'])) { 
+	else*/if (($_SESSION['uNivel'] == 'adminu') && ($_SESSION['dni'] == $_SESSION['mydni'])) { 
 				$orden = $_POST['Orden'];
 				/*
 				// PARA PODER BORRARME A MI MISMO
@@ -151,7 +151,7 @@ function ver_todo(){
 				$sqlb =  "SELECT * FROM `gch_admin` WHERE `gch_admin`.`dni` <> '$_SESSION[mydni]' ORDER BY $orden ";
 				$qb = mysqli_query($db, $sqlb);
 				}
-	elseif (($_SESSION['Nivel'] == 'admin') && ($_SESSION['dni'] != $_SESSION['mydni'])){ 
+	elseif (($_SESSION['uNivel'] == 'adminu') && ($_SESSION['dni'] != $_SESSION['mydni'])){ 
 				$orden = $_POST['Orden'];
 				// PARA QUE OTROS USER NO ME PUEDAN BORRAR
 				$sqlb =  "SELECT * FROM `gch_admin` WHERE `gch_admin`.`dni` <> '$_SESSION[mydni]' ORDER BY $orden ";
@@ -212,9 +212,9 @@ function info(){
 
 	$rf = isset($_POST['ref']);
 	/*
-	if (($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'plus')){	
-										$nombre = $_SESSION['Nombre'];
-										$apellido = $_SESSION['Apellidos'];}
+	if (($_SESSION['uNivel'] == 'useru') || ($_SESSION['uNivel'] == 'plusu')){	
+										$nombre = $_SESSION['uNombre'];
+										$apellido = $_SESSION['uApellidos'];}
 	*/	
 	$ActionTime = date('H:i:s');
 
@@ -224,7 +224,7 @@ function info(){
 	global $text;
 	$text = PHP_EOL."- USER BORRAR BUSCAR ".$ActionTime.PHP_EOL."\t Filtro => ".$nombre." ".$apellido;
 
-	$logdocu = $_SESSION['ref'];
+	$logdocu = $_SESSION['uref'];
 	$logdate = date('Y_m_d');
 	$logtext = $text.PHP_EOL;
 	$filename = $dir."/".$logdate."_".$logdocu.".log";

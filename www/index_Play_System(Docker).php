@@ -63,7 +63,7 @@
         </li>
 
         <?php
-            if($_SESSION['Nivel'] == 'user'){ 
+            if((@$_SESSION['uNivel'] == 'useru')||(@$_SESSION['uNivel'] == 'adminu')){ 
             print(" <li class=\"nav-item\">
                       <a class=\"nav-link js-scroll-trigger\" href=\"Gch.Users/User_Modificar_01.php\">
                         MIS DATOS
@@ -109,7 +109,7 @@
         -->
         <div class="intro-heading text-uppercase">IB FOOD</div>
     <?php
-        if(@$_SESSION['Nivel'] == 'user'){ 
+        if((@$_SESSION['uNivel'] == 'useru')||(@$_SESSION['uNivel'] == 'adminu')){ 
           global $h;
           $h = date('H');
           global $m;

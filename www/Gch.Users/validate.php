@@ -69,7 +69,7 @@ $errors = array();
 	global $qml;
 	global $db_name;
 
-	$sqlml =  "SELECT * FROM `$db_name`.`user` WHERE `user`.`Email` = '$_POST[Email]'";
+	$sqlml =  "SELECT * FROM `$db_name`.`gch_user` WHERE `gch_user`.`Email` = '$_POST[Email]'";
 	$qml = mysqli_query($db, $sqlml);
 	$rowml = mysqli_fetch_assoc($qml);
 
@@ -120,7 +120,7 @@ $errors = array();
 	global $qus;
 	global $db_name;
 
-	$sqlus =  "SELECT * FROM `$db_name`.`user` WHERE `user`.`Usuario` = '$_POST[Usuario]'";
+	$sqlus =  "SELECT * FROM `$db_name`.`gch_user` WHERE `gch_user`.`Usuario` = '$_POST[Usuario]'";
 	$qus = mysqli_query($db, $sqlus);
 	$rowus = mysqli_fetch_assoc($qus);
 
@@ -201,7 +201,7 @@ $errors = array();
 	global $db;
 	global $db_name;
 
-	$sqltlf1 =  "SELECT * FROM `$db_name`.`user` WHERE `user`.`Tlf1` = '$_POST[Tlf1]' ";
+	$sqltlf1 =  "SELECT * FROM `$db_name`.`gch_user` WHERE `gch_user`.`Tlf1` = '$_POST[Tlf1]' ";
 	$qtlf1 = mysqli_query($db, $sqltlf1);
 	$rowtlf1 = mysqli_fetch_assoc($qtlf1);
 	$countlf1 = mysqli_num_rows($qtlf1);
