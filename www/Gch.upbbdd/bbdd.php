@@ -14,18 +14,18 @@ if ($_SESSION['Nivel'] == 'admin'){
 
 		master_index();
 
-		if(isset($_POST['delete'])){	delete();
-								show_form();
-							  	listfiles();
-							}
+		if(isset($_POST['delete'])){ delete();
+									 show_form();
+								 	 listfiles();
+										}
 	
-		elseif(isset($_POST['oculto2'])){	show_form();
-								  	ver_todo();
-							  		listfiles();
+		elseif(isset($_POST['oculto2'])){ show_form();
+								  		  ver_todo();
+							  			  listfiles();
 
-				} else {	show_form();
-							listfiles();
-						}
+				} else {  show_form();
+						  listfiles();
+							}
 								
 			} else { require '../Gch.Inclu/table_permisos.php'; }
 
@@ -38,7 +38,7 @@ function show_form(){
 	global $db;
 	global $db_name;
 	
-	if((isset($_POST['oculto1']))||(isset($_POST['oculto2']))||(isset($_POST['delete']))){
+	if((isset($_POST['oculto2']))||(isset($_POST['delete']))){
 					$_SESSION['tablas'] = strtolower($_POST['tablas']);
 					$defaults = array ('Orden' => isset($ordenar),
 								   	   'tablas' => strtolower($_POST['tablas']),
@@ -47,62 +47,7 @@ function show_form(){
 										}
 	else{unset($_SESSION['tablas']);}
 	
-	$tablas = array (	'' => 'TABLAS',
-						'admin' => 'ADMIN SYST',
-						'gch_' => 'GCH SYST',);														
-		
-
-	if($_SESSION['Nivel'] == 'admin'){
-		
-	print("<table align='center' style='border:1; margin-top:2px' width='auto'>
-				
-		<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
-			
-			<input type='hidden' name='Orden' value='".@$defaults['Orden']."' />
-				<tr>
-					<td align='center'>
-							EXPORTE TABLAS BBDD.
-					</td>
-				</tr>		
-				<tr>
-					<td>
-					<div style='float:left; margin-right:6px''>
-						<input type='submit' value='SELECCIONE TIPO TABLAS' />
-						<input type='hidden' name='oculto1' value=1 />
-					</div>
-					<div style='float:left'>
-
-			<select name='tablas'>");
-				foreach($tablas as $option => $label){
-							print ("<option value='".$option."' ");
-							if($option == @$defaults['tablas']){print ("selected = 'selected'");}
-															print ("> $label </option>");
-														}	
-		print ("</select>
-					</div>
-				</td>
-			</tr>
-		</form>	
-			</table>"); 
-	}
-	
 			////////////////////		**********  		////////////////////
-
-	if ((isset($_POST['oculto1'])) || (isset($_POST['todo'])) ) {
-			
-	if ($_SESSION['tablas'] == '') { 
-			print("<table align='center' style=\"margin-top:20px;margin-bottom:20px\">
-						<tr align='center'>
-							<td>
-								<font color='red'>
-							SELECCIONE UNA TABLA O NOMBRE DE USUARIO
-								</font>
-							</td>
-						</tr>
-					</table>");
-				}	
-					
-	if ($_SESSION['tablas'] != '') {
 
 	global $nom;
 	$nom = strtolower($_SESSION['tablas']);
@@ -121,12 +66,14 @@ function show_form(){
 	} else {print( "<table align='center'>
 						<tr>
 							<th colspan=2 class='BorderInf'>
-								NUMERO DE TABLAS ".mysqli_num_rows($respuesta).".
+								NUMERO DE TABLAS ".(mysqli_num_rows($respuesta)-2).".
 							</th>
 						</tr>");
+
 			while ($fila = mysqli_fetch_row($respuesta)) {
-				if($fila[0]){
-				print(	"<tr>
+
+				if(($fila[0] != "gch_visitasadmin")&&($fila[0] != "gch_ipcontrol")){
+					print(	"<tr>
 							<td class='BorderInfDch'>
 											".$fila[0]."
 							</td>
@@ -140,11 +87,10 @@ function show_form(){
 							</td>
 						<tr>");
 				}
-					}
+					}	// FIN WHILE
+
 			print("</table>");		
 				}
-			}
-		}
 	
 	}	
 

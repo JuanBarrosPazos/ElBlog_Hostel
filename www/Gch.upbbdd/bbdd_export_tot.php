@@ -32,7 +32,7 @@
             while ($fila = $db_data_table->fetch_row()) {
                 //La primera y cada 100 veces
                 if ($contador % 100 == 0 || $contador == 0) {
-                    $contenido .= "\nINSERT INTO " . $db_name_table . " VALUES";
+                    $contenido .= "\nINSERT INTO '".$db_name_table."' VALUES";
                 }
                 $contenido .= "\n(";
                 for ($j = 0; $j < $numero_campos; $j++) {

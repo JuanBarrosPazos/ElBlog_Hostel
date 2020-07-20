@@ -69,7 +69,7 @@
 						  
 						  }
 	  
-		  /************** CREAMOS LA TABLA ARTICULOS ***************/
+		  /************** CREAMOS LA TABLA RESTAURANTES ***************/
 
 	$art = "gch_art";
 	$art = "`".$art."`";
@@ -119,29 +119,7 @@
 					$table2 = "\t* NO OK TABLA ".$art.". ".mysqli_error($db)."\n";
 				}
 
-	/************* CREAMOS LA TABLA IP CONTROL****************/
-
-	$ipcontrol = "CREATE TABLE IF NOT EXISTS `$db_name`.`gch_ipcontrol` (
-  `id` int(4) NOT NULL auto_increment,
-  `ref` varchar(20) collate utf8_spanish2_ci NOT NULL default 'anonimo',
-  `nivel` varchar(8) collate utf8_spanish2_ci NOT NULL default 'anonimo',
-  `ipn` varchar(22) collate utf8_spanish2_ci NOT NULL default 'lost',
-  `error` varchar(4) collate utf8_spanish2_ci NOT NULL default '1',
-  `acceso` varchar(4) collate utf8_spanish2_ci NOT NULL default '0',
-  `date` varchar(12) collate utf8_spanish2_ci NOT NULL default '0000/00/00',
-  `time` varchar(10) collate utf8_spanish2_ci NOT NULL default '00:00:00',
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=1 ";
-		
-	if(mysqli_query($db, $ipcontrol)){
-					global $table3;
-					$table3 = "\t* OK TABLA IP CONTROL. \n";
-				} else {
-					global $table3;
-					$table3 = "\t* NO OK TABLA IP CONTROL. ".mysqli_error($db)." \n";
-					}
-					
-	/************* CREAMOS LA TABLA ISLAS ****************/
+	/************* CREAMOS LA TABLA ISLAS / PROVINCIAS ****************/
 
 	$islas = "CREATE TABLE IF NOT EXISTS `$db_name`.`gch_islas` (
   `id` int(3) NOT NULL auto_increment,
@@ -403,6 +381,28 @@
 			$table14 = "\t* NO OK INIT VALUES EN VISITAS ADMIN. ".mysqli_error($db).PHP_EOL;
 			}
 
+	/************* CREAMOS LA TABLA IP CONTROL****************/
+
+	$ipcontrol = "CREATE TABLE IF NOT EXISTS `$db_name`.`gch_ipcontrol` (
+		`id` int(4) NOT NULL auto_increment,
+		`ref` varchar(20) collate utf8_spanish2_ci NOT NULL default 'anonimo',
+		`nivel` varchar(8) collate utf8_spanish2_ci NOT NULL default 'anonimo',
+		`ipn` varchar(22) collate utf8_spanish2_ci NOT NULL default 'lost',
+		`error` varchar(4) collate utf8_spanish2_ci NOT NULL default '1',
+		`acceso` varchar(4) collate utf8_spanish2_ci NOT NULL default '0',
+		`date` varchar(12) collate utf8_spanish2_ci NOT NULL default '0000/00/00',
+		`time` varchar(10) collate utf8_spanish2_ci NOT NULL default '00:00:00',
+		UNIQUE KEY `id` (`id`)
+	  ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=1 ";
+			  
+		  if(mysqli_query($db, $ipcontrol)){
+						  global $table3;
+						  $table3 = "\t* OK TABLA IP CONTROL. \n";
+					  } else {
+						  global $table3;
+						  $table3 = "\t* NO OK TABLA IP CONTROL. ".mysqli_error($db)." \n";
+						  }
+	  
 	/************	PASAMOS LOS PARAMETROS A .LOG	*****************/
 	
 		global $data0;

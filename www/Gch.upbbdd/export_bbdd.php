@@ -73,7 +73,42 @@ $c3 = "\n\t`id` int(4) NOT NULL auto_increment,
 $c4 = "\n ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=".$numr;
 		 		}	
 				
-				
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
+
+// EXPORTA LA TABLA USUARIOS REGISTRADOS //
+
+if (trim($_POST['tabla']) == "gch_user" ){
+	$campo = 'id,ref,Nivel,Nombre,Apellidos,myimg,Email,Usuario,Password,Direccion,Tlf1,lastin,lastout,visitadmin';
+	$texc = '`id`, `ref`, `Nivel`, `Nombre`, `Apellidos`, `myimg`, `Email`, `Usuario`, `Password`, `Direccion`, `Tlf1`, `lastin`, `lastout`, `visitadmin`';
+	$id = "`id`";
+	$c3 = "\n\t`id` int(4) NOT NULL auto_increment,
+	\t`ref` varchar(20) collate utf8_spanish2_ci NOT NULL,
+	\t`Nivel` varchar(8) collate utf8_spanish2_ci NOT NULL default 'amd',
+	\t`Nombre` varchar(25) collate utf8_spanish2_ci NOT NULL,
+	\t`Apellidos` varchar(25) collate utf8_spanish2_ci NOT NULL,
+	\t`myimg` varchar(30) collate utf8_spanish2_ci NOT NULL default 'untitled.png ',
+	\t`Email` varchar(50) collate utf8_spanish2_ci NOT NULL,
+	\t`Usuario` varchar(10) collate utf8_spanish2_ci NOT NULL,
+	\t`Password` varchar(10) collate utf8_spanish2_ci NOT NULL,
+	\t`Direccion` varchar(60) collate utf8_spanish2_ci NOT NULL,
+	\t`Tlf1`varchar(9) NOT NULL default '0',
+	\t`lastin` varchar(20) collate utf8_spanish2_ci NOT NULL default '0',
+	\t`lastout` varchar(20) collate utf8_spanish2_ci NOT NULL default '0',
+	\t`visitadmin` varchar(4) collate utf8_spanish2_ci NOT NULL default '0',
+	\tUNIQUE KEY `id` (`id`),
+	\tUNIQUE KEY `ref` (`ref`),
+	\tUNIQUE KEY `Email` (`Email`),
+	\tUNIQUE KEY `Usuario` (`Usuario`)";
+	
+		$sqlc =  "SELECT * FROM $valort ORDER BY $id ASC";
+		$qc = mysqli_query($db, $sqlc);
+		$numr = mysqli_num_rows($qc);
+	
+	$c4 = "\n ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=".$numr;
+					 }	
+
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
@@ -81,30 +116,39 @@ $c4 = "\n ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCR
 // EXPORTA LA TABLA RESTAURANTES //
 
 if (trim($_POST['tabla']) == "gch_art" ){
-$campo = 'id,refuser,refart,tit,titsub,datein,timein,datemod,timemod,conte,myimg,refayto,refisla,reftipo,refespec1,refespec2,url,calle,Email,Tlf1,Tlf2';
-$texc = '`id`, `refuser`, `refart`, `tit`, `titsub`, `datein`, `timein`, `datemod`, `timemod`, `conte`, `myimg`, `refayto`, `refisla`, `reftipo`, `refespec1`, `refespec2`, `url`, `calle`, `Email`, `Tlf1`, `Tlf2`';
+$campo = 'id,refuser,refart,tit,titsub,datein,timein,datemod,timemod,conte,myimg1,myimg2,myimg3,myimg4,refayto,refisla,reftipo,refespec1,refespec2,iprecio,ivalora,url,map,mapiframe,latitud,longitud,calle,Email,Tlf1,Tlf2';
+$texc = '`id`, `refuser`, `refart`, `tit`, `titsub`, `datein`, `timein`, `datemod`, `timemod`, `conte`, `myimg1`, `myimg2`, `myimg3`, `myimg4`, `refayto`, `refisla`, `reftipo`, `refespec1`, `refespec2`, `iprecio`, `ivalora`, `url`, `map`, `mapiframe`, `latitud`, `longitud`, `calle`, `Email`, `Tlf1`, `Tlf2`';
 		$id = "`id`";
 $c3 = "\n\t`id` int(6) NOT NULL auto_increment,
-\t`refuser` varchar(22) collate utf8_spanish2_ci NOT NULL,
-\t`refart` varchar(22) collate utf8_spanish2_ci NOT NULL,
-\t`tit` varchar(22) collate utf8_spanish2_ci NOT NULL,
-\t`titsub` varchar(22) collate utf8_spanish2_ci NOT NULL,
-\t`datein` varchar(20) collate utf8_spanish2_ci NOT NULL default '0',
-\t`timein` varchar(20) collate utf8_spanish2_ci NOT NULL default '0',
-\t`datemod` varchar(20) collate utf8_spanish2_ci NOT NULL default '0',
-\t`timemod` varchar(20) collate utf8_spanish2_ci NOT NULL default '0',
-\t`conte` text(402) collate utf8_spanish2_ci NOT NULL,
-\t`myimg` varchar(30) collate utf8_spanish2_ci NOT NULL default 'untitled.png',
-\t`refayto` varchar(4) collate utf8_spanish2_ci NOT NULL,
-\t`refisla` varchar(4) collate utf8_spanish2_ci NOT NULL,
-\t`reftipo` varchar(4) collate utf8_spanish2_ci NOT NULL,
-\t`refespec1` varchar(4) collate utf8_spanish2_ci NOT NULL,
-\t`refespec2` varchar(4) collate utf8_spanish2_ci NOT NULL,
-\t`url` varchar(40) collate utf8_spanish2_ci NOT NULL,
-\t`calle` varchar(40) collate utf8_spanish2_ci NOT NULL,
-\t`Email` varchar(50) collate utf8_spanish2_ci NOT NULL,
-\t`Tlf1`varchar(9) NOT NULL default '0',
-\t`Tlf2`varchar(9) NOT NULL default '0',
+\t`refuser` varchar(22) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+\t`refart` varchar(22) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+\t`tit` varchar(22) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+\t`titsub` varchar(22) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+\t`datein` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT '0',
+\t`timein` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT '0',
+\t`datemod` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT '0',
+\t`timemod` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT '0',
+\t`conte` text CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+\t`myimg1` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'untitled.png',
+\t`myimg2` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'untitled.png',
+\t`myimg3` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'untitled.png',
+\t`myimg4` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'untitled.png',
+\t`refayto` varchar(4) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+\t`refisla` varchar(4) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+\t`reftipo` varchar(4) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+\t`refespec1` varchar(4) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+\t`refespec2` varchar(4) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+\t`iprecio` int(4) NOT NULL DEFAULT '50',
+\t`ivalora` int(4) NOT NULL DEFAULT '50',
+\t`url` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'http://juanbarrospazos.blogspot.com.es/',
+\t`map` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'https://goo.gl/maps/63M96me7YdBkhJLf7',
+\t`mapiframe` varchar(340) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3075.5997770189756!2d2.6670561!3d39.568631!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x55bc574de040df4a!2sCIFP%20Francesc%20de%20Borja%20Moll!5e0!3m2!1ses!2ses!4v1593844861566!5m2!1ses!2ses',
+\t`latitud` float(10,6) NOT NULL DEFAULT 39.569065,
+\t`longitud` float(10,6) NOT NULL DEFAULT 2.667335,
+\t`calle` varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+\t`Email` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+\t`Tlf1` varchar(9) NOT NULL DEFAULT '0',
+\t`Tlf2` varchar(9) NOT NULL DEFAULT '0',
 \tPRIMARY KEY  (`id`),
 \tUNIQUE KEY `id` (`id`),
 \tUNIQUE KEY `refart` (`refart`)";
@@ -218,19 +262,20 @@ if (trim($_POST['tabla']) == "gch_especialidad" ){
 // EXPORTA LA TABLA OPINIONES //
 
 if (trim($_POST['tabla']) == "gch_opiniones" ){
-	$campo = 'id,refart,refuser,refayto,refisla,opina,valora,datein,datemod,modera';
-	$texc = '`id`, `refart`, `refuser`, `refayto`, `refisla`, `opina`, `valora`, `datein`, `datemod`, `modera`';
+	$campo = 'id,refart,refuser,refayto,refisla,opina,valora,precio,datein,datemod,modera';
+	$texc = '`id`, `refart`, `refuser`, `refayto`, `refisla`, `opina`, `valora`, `precio`, `datein`, `datemod`, `modera`';
 			$id = "`id`";
-	$c3 = "\n\t`id` int(3) NOT NULL auto_increment,
-	\t`refart` varchar(22) collate utf8_spanish2_ci NOT NULL,
-	\t`refuser` varchar(22) collate utf8_spanish2_ci NOT NULL default 'anonymous',
-	\t`refayto` varchar(4) collate utf8_spanish2_ci NOT NULL,
-	\t`refisla` varchar(4) collate utf8_spanish2_ci NOT NULL,
-	\t`opina` text(202) collate utf8_spanish2_ci NOT NULL,
-	\t`valora` varchar(12) collate utf8_spanish2_ci NOT NULL,
-	\t`datein` varchar(20) collate utf8_spanish2_ci NOT NULL default '00-00-00',
-	\t`datemod` varchar(20) collate utf8_spanish2_ci NOT NULL default '00-00-00',
-	\t`modera` varchar(1) collate utf8_spanish2_ci NOT NULL default 'n',
+	$c3 = "\n\t`id` int(4) NOT NULL auto_increment,
+	\t`refart` varchar(22) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+	\t`refuser` varchar(22) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'anonymous',
+	\t`refayto` varchar(4) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+	\t`refisla` varchar(4) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+	\t`opina` text CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+	\t`valora` int(4) NOT NULL,
+	\t`precio` int(4) NOT NULL,
+	\t`datein` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT '00-00-00',
+	\t`datemod` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT '00-00-00',
+	\t`modera` varchar(1) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'n',
 	\tPRIMARY KEY  (`id`),
 	\tUNIQUE KEY `id` (`id`)";
 		$sqlc =  "SELECT * FROM $valort ORDER BY $id ASC";
