@@ -128,10 +128,10 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 				</tr>
 								
 				<tr>
-					<td width=150px>
-						Nombre:
+					<td width=120px>
+						NOMBRE
 					</td>
-					<td width=200px>"
+					<td width=140px>"
 						.$_POST['Nombre'].
 					"</td>
 					<td rowspan='5' align='center'>
@@ -141,7 +141,7 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 				
 				<tr>
 					<td>
-						Apellidos:
+						APELLIDOS
 					</td>
 					<td>"
 						.$_POST['Apellidos'].
@@ -150,7 +150,7 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 				
 				<tr>
 					<td>
-						Tipo Documento:
+						DOCUMENTO
 					</td>
 					<td>"
 						.$_POST['doc'].
@@ -159,7 +159,7 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 				
 				<tr>
 					<td>
-						N&uacute;mero:
+						NUMERO
 					</td>
 					<td>"
 						.$_POST['dni'].
@@ -168,7 +168,7 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 				
 				<tr>
 					<td>
-						Control:
+						CONTROL
 					</td>
 					<td>"
 						.$_POST['ldni'].
@@ -177,7 +177,7 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 				
 				<tr>
 					<td>
-						Mail:
+						MAIL
 					</td>
 					<td colspan='2'>"
 						.$_POST['Email'].
@@ -186,7 +186,7 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 				
 				<tr>
 					<td>
-						Tipo Admin
+						NIVEL
 					</td>
 					<td colspan='2'>"
 						.$_POST['Nivel'].
@@ -195,7 +195,7 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 				
 				<tr>
 					<td>
-						Referencia Admin
+						REFERENCIA
 					</td>
 					<td colspan='2'>"
 						.$rf.
@@ -204,7 +204,7 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 				
 				<tr>
 					<td>
-						Usuario:
+						USER
 					</td>
 					<td colspan='2'>"
 						.$_POST['Usuario'].
@@ -213,7 +213,7 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 				
 				<tr>
 					<td>
-						Password:
+						PASSW
 					</td>
 					<td colspan='2'>"
 						.$_POST['Password'].
@@ -222,7 +222,7 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 				
 				<tr>
 					<td>
-						Pais:
+						DIRECCIÓN
 					</td>
 					<td colspan='2'>"
 						.$_POST['Direccion'].
@@ -231,7 +231,7 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 				
 				<tr>
 					<td>
-						Teléfono 1:
+						TLF 1
 					</td>
 					<td colspan='2'>"
 						.$_POST['Tlf1'].
@@ -240,7 +240,7 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 				
 				<tr>
 					<td>
-						Teléfono 2:
+						TLF 2
 					</td>
 					<td colspan='2'>"
 						.$_POST['Tlf2'].
@@ -494,7 +494,7 @@ function show_form($errors=''){
 					</td>
 					<td>
 					<font color='#FF0000'>".strtoupper($defaults['adminu'])."</font>
-					 ".$cuest." SERÁ ADMINISTRADOR DE USUARIOS 
+					 ".$cuest." ADMINISTRADOR DE USUARIOS 
 					</td>
 				</tr>
 				

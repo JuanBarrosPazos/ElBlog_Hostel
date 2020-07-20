@@ -17,12 +17,11 @@ $errors = array();
 	/* $tipo_correcto = preg_match('/^image\/(gif|png|jpg|bmp)$/', $_POST['myimg1']); */
 
 	if($_POST['modifica']){
-		if(strlen(trim ($_POST['myimg1'])) == 0){
+		if(strlen(trim ($_POST['myimg'])) == 0){
 			$errors [] = "Ha de seleccionar un archivo.";
 			global $img;
 			$img = $_SESSION['myimgcl'];
 		}
-
 			}
 			
 						/////////////////////////

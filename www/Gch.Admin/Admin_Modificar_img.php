@@ -149,136 +149,91 @@ function process_form(){
 	$sqlc = "UPDATE `$db_name`.`gch_admin` SET `myimg` = '$new_name' WHERE `gch_admin`.`id` = '$_POST[id]' LIMIT 1 ";
 
 	if(mysqli_query($db, $sqlc)){
-			print( "<table align='center' style=\"margin-top:20px\">
-				<tr>
-					<th colspan=3  class='BorderInf'>
-						Estos son los nuevos datos de registro.
-					</th>
-				</tr>
+
+		///
+		$sqlus = "SELECT * FROM $db_name.`gch_user` WHERE `ref` = '$_POST[ref]' ";
+		$qus = mysqli_query($db, $sqlus);
+		global $countus;
+		$countus = mysqli_num_rows($qus);
+		if ($countus >= 1){
+			$sqlimgus = "UPDATE `$db_name`.`gch_user` SET `myimg` = '$new_name' WHERE `gch_user`.`ref` = '$_POST[ref]' LIMIT 1 ";
+			if (mysqli_query($db, $sqlimgus)){
+				if( file_exists( '../Gch.Img.User/'.$_SESSION['smyimg'])){
+					unlink('../Gch.Img.User/'.$_SESSION['smyimg']);
+					}else{}
+				copy($rename_filename, "../Gch.Img.User/".$new_name);
+			} else { }
+		} else { }
+		///
+
+		print( "<table align='center' style=\"margin-top:20px\">
+			<tr>
+				<th colspan=3  class='BorderInf'>
+					SUS NUEVOS DATOS DE REGISTRO
+				</th>
+			</tr>
 				
-				<tr>
-					<td width=150px>
-						Nombre:
-					</td>
-					<td width=200px>"
-						.$_POST['Nombre'].
-					"</td>
-					<td rowspan='5' align='center'>
+			<tr>
+				<td width=150px>
+					Nombre:
+				</td>
+				<td width=200px>"
+					.$_POST['Nombre'].
+				"</td>
+				<td rowspan='5' align='center'>
 	<img src='../Gch.Img.Admin/".$_SESSION['new_name']."' height='120px' width='90px' />
-					</td>
-				</tr>
+				</td>
+			</tr>
 				
-				<tr>
-					<td>
-						Apellidos:
-					</td>
-					<td>"
-						.$_POST['Apellidos'].
-					"</td>
-				</tr>				
+			<tr>
+				<td>
+					Apellidos:
+				</td>
+				<td>"
+					.$_POST['Apellidos'].
+				"</td>
+			</tr>				
 				
-				<tr>
-					<td>
-						Tipo Documento:
-					</td>
-					<td>"
-						.$_POST['doc'].
-					"</td>
-				</tr>				
+			<tr>
+				<td>
+					Tipo Usuario
+				</td>
+				<td>"
+					.$_POST['Nivel'].
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>
-						N&uacute;mero:
-					</td>
-					<td>"
-						.$_POST['dni'].
-					"</td>
-				</tr>				
+			<tr>
+				<td>
+					Usuario:
+				</td>
+				<td>"
+					.$_POST['Usuario'].
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>
-						Control:
-					</td>
-					<td>"
-						.$_POST['ldni'].
-					"</td>
-				</tr>				
+			<tr>
+				<td>
+					Password:
+				</td>
+				<td>"
+					.$_POST['Password'].
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>
-						Mail:
-					</td>
-					<td colspan=2>"
-						.$_POST['Email'].
-					"</td>
-				</tr>
-				
-				<tr>
-					<td>
-						Tipo Usuario
-					</td>
-					<td colspan=2>"
-						.$_POST['Nivel'].
-					"</td>
-				</tr>
-				
-				<tr>
-					<td>
-						Usuario:
-					</td>
-					<td colspan=2>"
-						.$_POST['Usuario'].
-					"</td>
-				</tr>
-				
-				<tr>
-					<td>
-						Password:
-					</td>
-					<td colspan=2>"
-						.$_POST['Password'].
-					"</td>
-				</tr>
-				
-				<tr>
-					<td>
-						Dirección:
-					</td>
-					<td colspan=2>"
-						.$_POST['Direccion'].
-					"</td>
-				</tr>
-				
-				<tr>
-					<td>
-						Teléfono 1:
-					</td>
-					<td colspan=2>"
-						.$_POST['Tlf1'].
-					"</td>
-				</tr>
-				
-				<tr>
-					<td>
-						Teléfono 2:
-					</td>
-					<td colspan=2>"
-						.$_POST['Tlf2'].
-					"</td>
-				</tr>
-												
-				<tr>
-					<td colspan=3 align='right' class='BorderSup'>
+			<tr>
+				<td colspan=3 align='right' class='BorderSup'>
 		<form name='closewindow' action='$_SERVER[PHP_SELF]'  onsubmit=\"window.close()\">
-						<input type='submit' value='CERRAR VENTANA' />
-						<input type='hidden' name='oculto2' value=1 />
+					<input type='submit' value='CERRAR VENTANA' />
+					<input type='hidden' name='oculto2' value=1 />
 		</form>
-					</td>
-				</tr>
-			</table>" );
+				</td>
+			</tr>
+		</table>" );
+
 				} else {
 				print("<font color='#FF0000'>
-						* ESTOS DATOS NO SON VALIDOS, MODIFIQUE ESTA ENTRADA: </font>
+						* MODIFIQUE ESTA ENTRADA L.149: </font>
 						</br>
 						&nbsp;&nbsp;&nbsp;".mysqli_error($db))."
 						</br>";

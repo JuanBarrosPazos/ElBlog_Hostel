@@ -89,7 +89,7 @@ function process_form(){
 		
 	global $formulariohi;
 	$formulariohi = "<td colspan=2 align='center' class='BorderInf'>
-	<form name='modifica_img' action='Admin_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=540px,height=470px')\">";
+	<form name='modifica_img' action='Admin_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=540px,height=370px')\">";
 
 	global $formulariofi;
 	$formulariofi = "<input type='submit' value='MODIFICAR IMAGEN' />
@@ -160,7 +160,7 @@ function ver_todo(){
 
 	global $formulariohi;
 	$formulariohi = "<td colspan=2 align='center' class='BorderInf'>
-	<form name='modifica_img' action='Admin_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=540px,height=470px')\">";
+	<form name='modifica_img' action='Admin_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=540px,height=370px')\">";
 
 	global $formulariofi;
 	$formulariofi = "<input type='submit' value='MODIFICAR IMAGEN' />

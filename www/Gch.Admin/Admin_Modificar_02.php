@@ -71,7 +71,7 @@ function process_form(){
 	$qus = mysqli_query($db, $sqlus);
 	global $countus;
 	$countus = mysqli_num_rows($qus);
-
+	
 	global $tabla;							 
 	$tabla = "<table align='center' style=\"margin-top:20px\">
 				<tr>
@@ -81,10 +81,10 @@ function process_form(){
 				</tr>
 				
 				<tr>
-					<td width=150px>
-						Nombre:
+					<td width=130px>
+						NOMBRE
 					</td>
-					<td width=200px>"
+					<td width=160px>"
 						.$_POST['Nombre'].
 					"</td>
 					<td rowspan='5' align='center'>
@@ -94,7 +94,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						Apellidos:
+						APELLIDOS
 					</td>
 					<td>"
 						.$_POST['Apellidos'].
@@ -103,7 +103,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						Tipo Documento:
+						DOCUMENTO
 					</td>
 					<td>"
 						.$_POST['doc'].
@@ -112,7 +112,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						N&uacute;mero:
+						NUMERO
 					</td>
 					<td>"
 						.$_POST['dni'].
@@ -121,7 +121,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						Control:
+						CONTROL
 					</td>
 					<td>"
 						.$_POST['ldni'].
@@ -130,7 +130,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						Mail:
+						MAIL
 					</td>
 					<td colspan=2>"
 						.$_POST['Email'].
@@ -139,7 +139,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						Tipo Usuario
+						NIVEL
 					</td>
 					<td colspan=2>"
 						.$_POST['Nivel'].
@@ -148,7 +148,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						Referencia Usuario
+						REFERENCIA
 					</td>
 					<td colspan=2>"
 						.$_SESSION['refcl'].
@@ -157,7 +157,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						Usuario:
+						USUARIO
 					</td>
 					<td colspan=2>"
 						.$_POST['Usuario'].
@@ -166,7 +166,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						Password:
+						PASSWORD
 					</td>
 					<td colspan=2>"
 						.$_POST['Password'].
@@ -175,7 +175,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						Dirección:
+						DIRECCIÓN
 					</td>
 					<td colspan=2>"
 						.$_POST['Direccion'].
@@ -184,7 +184,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						Teléfono 1:
+						TLF 1
 					</td>
 					<td colspan=2>"
 						.$_POST['Tlf1'].
@@ -193,7 +193,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						Teléfono 2:
+						TLF 2
 					</td>
 					<td colspan=2>"
 						.$_POST['Tlf2']./*" / ".$_SESSION['dni']." / ".$_SESSION['mydni'].*/
@@ -243,20 +243,18 @@ function process_form(){
 						$texerror = "\n\t ".mysqli_error($db);
 							}
 
-							
 		// SI MODIFICA EL WEB MASTER SE GRABA EN USERS NIVEL ADMIN
 		// SI ES ADMINISTRADOR Y CONFIRMA EL CHECK BOX
-		if ($_POST['adminu'] == 'si') {
-			
+		if (($_POST['Nivel'] == 'admin') && ($_POST['adminu'] == 'si')){					
 			global $countus;
 
 			if ($countus >= 1){
-			$sql = "UPDATE `$db_name`.`gch_admin` SET `Nivel` = '$_POST[Nivel]', `Nombre` = '$_POST[Nombre]', `Apellidos` = '$_POST[Apellidos]', `Email` = '$_POST[Email]', `Usuario` = '$_POST[Usuario]', `Password` = '$_POST[Password]', `Direccion` = '$_POST[Direccion]', `Tlf1` = '$_POST[Tlf1]' WHERE `gch_user`.`ref` = '$_POST[ref]' LIMIT 1 ";	
+			$sql = "UPDATE `$db_name`.`gch_user` SET `Nivel` = 'adminu', `Nombre` = '$_POST[Nombre]', `Apellidos` = '$_POST[Apellidos]', `Email` = '$_POST[Email]', `Usuario` = '$_POST[Usuario]', `Password` = '$_POST[Password]', `Direccion` = '$_POST[Direccion]', `Tlf1` = '$_POST[Tlf1]' WHERE `gch_user`.`ref` = '$_SESSION[refcl]' LIMIT 1 ";	
 			if(mysqli_query($db, $sql)){ }else { }
 			} 
 			elseif ($countus < 1){
 			$new_name = $_SESSION['myimgcl'];
-			$sql = "INSERT INTO `$db_name`.`gch_user` (`ref`, `Nivel`, `Nombre`, `Apellidos`, `myimg`, `Email`, `Usuario`, `Password`, `Direccion`, `Tlf1`) VALUES ('$rf', 'adminu', '$_POST[Nombre]', '$_POST[Apellidos]', '$new_name', '$_POST[Email]', '$_POST[Usuario]', '$_POST[Password]', '$_POST[Direccion]', '$_POST[Tlf1]')";
+			$sql = "INSERT INTO `$db_name`.`gch_user` (`ref`, `Nivel`, `Nombre`, `Apellidos`, `myimg`, `Email`, `Usuario`, `Password`, `Direccion`, `Tlf1`) VALUES ('$_SESSION[refcl]', 'adminu', '$_POST[Nombre]', '$_POST[Apellidos]', '$new_name', '$_POST[Email]', '$_POST[Usuario]', '$_POST[Password]', '$_POST[Direccion]', '$_POST[Tlf1]')";
 				if(mysqli_query($db, $sql)){
 					// COPIO LA IMG DEL WEB MASTER EN IMG.USER	
 					copy("../Gch.Img.Admin/".$_SESSION['myimgcl'], "../Gch.Img.User/".$_SESSION['myimgcl']);
@@ -275,7 +273,7 @@ function process_form(){
 				}
 			}
 		
-	} // FIN CONDICIONAL ADMIN
+	} // FIN CONDICIONAL SESSION ADMIN
 	
 	// NO ES ADMIN
 	elseif (($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'plus')){
@@ -285,16 +283,18 @@ function process_form(){
 	// SI SE CUMPLE EL QUERY
 	if(mysqli_query($db, $sqlc)){ global $tabla;
 								  print( $tabla );
-			global $countus;
-			if ($countus < 1){ } 
-			else { 
-			// BORRAMOS EL AMINISTRADOR DE LA TABLA USUARIOS SI EXISTE
-			$sqlus = "DELETE FROM `$db_name`.`gch_user` WHERE `gch_user`.`ref` = '$_POST[ref]' LIMIT 1 ";
-			// SI SE CUMPLE EL QUERY
-			if(mysqli_query($db, $sqlus)){ 
-						unlink("../Gch.Img.User/".$_SESSION['myimgcl']);
-					} else { }
-				}
+		/*
+		global $countus;
+		if ($countus < 1){ } 
+		else { 
+		// BORRAMOS EL AMINISTRADOR DE LA TABLA USUARIOS SI EXISTE
+		$sqlus = "DELETE FROM `$db_name`.`gch_user` WHERE `gch_user`.`ref` = '$_POST[ref]' LIMIT 1 ";
+		// SI SE CUMPLE EL QUERY
+		if(mysqli_query($db, $sqlus)){ 
+				unlink("../Gch.Img.User/".$_SESSION['myimgcl']);
+				} else { }
+			}
+		*/
 
 		} else { // NO SE CUMPLE EL QUERY
 				print("<font color='#FF0000'>
@@ -435,14 +435,14 @@ function show_form($errors=''){
 				<tr>
 					<th colspan=2 class='BorderInf'>
 			<img src='../Gch.Img.Admin/".$_POST['myimg']."' height='44px' width='33px' />
-						</br>INTRODUZCA LOS NUEVOS DATOS EN EL FORMULARIO.
+						</br>INTRODUZCA LOS NUEVOS DATOS.
 					</th>
 				</tr>
 				
 		<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'>
 			
 		<input name='id' type='hidden' value='".$defaults['id']."' />					
-		<input name='myimg' type='hidden' value='".$_POST['myimg']."' />					
+		<input name='myimg' type='hidden' value='".$_SESSION['myimgcl']."' />					
 				<tr>
 					<td>	
 						<font color='#FF0000'>*</font>
@@ -547,7 +547,7 @@ function show_form($errors=''){
 					</td>
 					<td>
 					<font color='#FF0000'>".strtoupper($defaults['adminu'])."</font>
-					 ".$cuest." SERÁ ADMINISTRADOR DE USUARIOS 
+					 ".$cuest." ADMINISTRADOR DE USUARIOS 
 					</td>
 				</tr>
 
@@ -639,14 +639,14 @@ function show_form($errors=''){
 				<tr>
 					<th colspan=2 class='BorderInf'>
 <img src='../Gch.Img.Admin/".$_POST['myimg']."' height='44px' width='33px' />
-						INTRODUZCA LOS NUEVOS DATOS EN EL FORMULARIO.
+						INTRODUZCA LOS NUEVOS DATOS.
 					</th>
 				</tr>
 				
 		<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'>
 			
 		<input name='id' type='hidden' value='".$defaults['id']."' />					
-		<input name='myimg' type='hidden' value='".$_POST['myimg']."' />					
+		<input name='myimg' type='hidden' value='".$_SESSION['myimgcl']."' />					
 				<tr>
 					<td>	
 						<font color='#FF0000'>*</font>

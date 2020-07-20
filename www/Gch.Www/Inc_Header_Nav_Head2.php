@@ -155,7 +155,7 @@
           elseif(($h >= 14 )&&($h <= 21 )){ $m = "BUENAS TARDES: "; }
           elseif(($h >= 22 )&&($h <= 5 )){ $m = "BUENAS NOCHES: "; }
           print ("<h6 style=\"color: #cfcfcf\">
-                        ".$m.$_SESSION['Nombre']." ".$_SESSION['Apellidos']."
+                        ".$m.$_SESSION['uNombre']." ".$_SESSION['uApellidos']."
                   </h6>");
             } else { }
       ?>

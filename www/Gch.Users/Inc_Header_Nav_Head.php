@@ -33,7 +33,7 @@
       require 'Only.index.user.php';
 
       if (isset($_POST['salir'])) { 
-                      session_destroy();
+                      //session_destroy();
                       salir();
                       /**/
                       global $redir;
