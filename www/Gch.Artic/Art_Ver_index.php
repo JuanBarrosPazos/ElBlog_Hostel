@@ -7,7 +7,7 @@
 
 	require 'Gch.Users/Only.index.user.php';
 
-	if (isset($_POST['salir'])) { session_destroy();
+	if (isset($_POST['salir'])) { //session_destroy();
 								  salir();
 								  /* */
 								  global $redir;

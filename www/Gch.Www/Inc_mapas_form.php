@@ -5,7 +5,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-	if (isset($_POST['salir'])) { session_destroy();
+	if (isset($_POST['salir'])) { //session_destroy();
 								  salir();
 							}
 

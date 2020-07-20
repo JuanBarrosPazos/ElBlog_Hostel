@@ -25,7 +25,7 @@
 //echo $_SESSION['a'];
 
     if (isset($_POST['salir'])) { 
-                    session_destroy();
+                    //session_destroy();
                     salir();
                     global $redir;
                     $redir = "<script type='text/javascript'>
