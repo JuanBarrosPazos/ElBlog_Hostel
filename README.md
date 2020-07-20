@@ -2,6 +2,15 @@
 
 ----
 
+## EN EL DIRECTORIO Gch.Tutorial SE ENCUENTRA UNA GUÍA GENERAL DE LA APP.
+
+----
+
+### 2020.07.20
+
+* Se ha integrado los admin del sistema en admin user
+
+* Se ha modificado la exportación de bbdd y tablas.
 
 ----
 
