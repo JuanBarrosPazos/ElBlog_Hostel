@@ -129,8 +129,68 @@ function validate_form(){
 		$errors [] = "URL PAGINA WEB <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
 		}
 
+	elseif (strlen(trim($_POST['url'])) < 10){
+		$errors [] = "URL PAGINA WEB  <font color='#FF0000'>Más de 10 carácteres.</font>";
+		}
+		
+	elseif (!preg_match('/^[^@#$<>´"·,\[\]\{\}\*]+$/',$_POST['url'])){
+		$errors [] = "URL PAGINA WEB <font color='#FF0000'>Caracteres no válidos.</font>";
+		}
+		
 	if(strlen(trim($_POST['map'])) == 0){
 		$errors [] = "URL MAPA WEB <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
+		}
+
+	elseif (strlen(trim($_POST['map'])) < 10){
+		$errors [] = "URL MAPA WEB  <font color='#FF0000'>Más de 10 carácteres.</font>";
+		}
+		
+	elseif (!preg_match('/^[^@#$<>´"·,\[\]\{\}\*]+$/',$_POST['map'])){
+		$errors [] = "URL MAPA WEB <font color='#FF0000'>Caracteres no válidos.</font>";
+		}
+		
+	if(strlen(trim($_POST['mapiframe'])) == 0){
+		$errors [] = "URL MAPIFRAME <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
+		}
+
+	elseif (strlen(trim($_POST['mapiframe'])) < 10){
+		$errors [] = "URL MAPIFRAME  <font color='#FF0000'>Más de 10 carácteres.</font>";
+		}
+		
+	elseif (!preg_match('/^[^@#$<>´"·,\[\]\{\}\*]+$/',$_POST['mapiframe'])){
+		$errors [] = "URL MAPIFRAME <font color='#FF0000'>Caracteres no válidos.</font>";
+		}
+		
+	if(strlen(trim($_POST['latitud'])) == 0){
+		$errors [] = "LATITUD <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
+		}
+
+	elseif (strlen(trim($_POST['latitud'])) < 6){
+		$errors [] = "LATITUD  <font color='#FF0000'>Más de 5 carácteres.</font>";
+		}
+		
+	elseif (!preg_match('/^[^@#$&%<>:´"·\(\)=¿?!¡\[\]\{\};:\*\']+$/',$_POST['latitud'])){
+		$errors [] = "LATITUD <font color='#FF0000'>Caracteres no válidos.</font>";
+		}
+		
+	elseif (!preg_match('/^[.0-9]+$/',$_POST['latitud'])){
+		$errors [] = "LATITUD  <font color='#FF0000'>Sólo números o ,</font>";
+		}
+
+	if(strlen(trim($_POST['longitud'])) == 0){
+		$errors [] = "LONGITUD <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
+		}
+
+	elseif (strlen(trim($_POST['longitud'])) < 6){
+		$errors [] = "LONGITUD  <font color='#FF0000'>Más de 5 carácteres.</font>";
+		}
+		
+	elseif (!preg_match('/^[^@#$&%<>:´"·\(\)=¿?!¡\[\]\{\};:\*\']+$/',$_POST['longitud'])){
+		$errors [] = "LONGITUD <font color='#FF0000'>Caracteres no válidos.</font>";
+		}
+		
+	elseif (!preg_match('/^[.0-9]+$/',$_POST['longitud'])){
+		$errors [] = "LONGITUD  <font color='#FF0000'>Sólo números o ,</font>";
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////
@@ -143,7 +203,7 @@ function validate_form(){
 		$errors [] = "CALLE <font color='#FF0000'>Más de 5 carácteres.</font>";
 		}
 			
-	elseif (!preg_match('/^[^@#$&%<>:´"·\(\)=¿?!¡\[\]\{\};\*\']+$/',$_POST['calle'])){
+	elseif (!preg_match('/^[^@#$&%<>"·\(\)=¿?!¡\[\]\{\};\*]+$/',$_POST['calle'])){
 		$errors [] = "CALLE <font color='#FF0000'>Caracteres no válidos.</font>";
 		}
 
@@ -284,9 +344,9 @@ function validate_form(){
 	
 	else{
 			
-	$limite = 500 * 1024;
+	$limite = 600 * 1024;
 	
-	$ext_permitidas = array('.jpg','JPG','.gif','.GIF','.png','.PNG');
+	$ext_permitidas = array('jpg','JPG','gif','GIF','png','PNG');
 	$extension = substr($_FILES['myimg1']['name'],-3);
 	// print($extension);
 	$ext_correcta = in_array($extension, $ext_permitidas);
@@ -304,7 +364,7 @@ function validate_form(){
 	*/
 		elseif ($_FILES['myimg1']['size'] > $limite){
 		$tamanho = $_FILES['myimg1']['size'] / 1024;
-		$errors [] = "El archivo".$_FILES['myimg1']['name']." MAYOR 500 KBytes. ".$tamanho." KB";
+		$errors [] = "El archivo ".$_FILES['myimg1']['name']." MAYOR 500 KBytes. ".$tamanho." KB";
 			}
 		
 			elseif ($_FILES['myimg1']['error'] == UPLOAD_ERR_PARTIAL){
@@ -323,9 +383,9 @@ function validate_form(){
 	
 	else{
 			
-	$limite = 500 * 1024;
+	$limite = 600 * 1024;
 	
-	$ext_permitidas = array('.jpg','JPG','.gif','.GIF','.png','.PNG');
+	$ext_permitidas = array('jpg','JPG','gif','.GIF','png','PNG');
 	$extension = substr($_FILES['myimg2']['name'],-3);
 	// print($extension);
 	$ext_correcta = in_array($extension, $ext_permitidas);
@@ -343,7 +403,7 @@ function validate_form(){
 	*/
 		elseif ($_FILES['myimg2']['size'] > $limite){
 		$tamanho = $_FILES['myimg2']['size'] / 1024;
-		$errors [] = "El archivo".$_FILES['myimg2']['name']." MAYOR 500 KBytes. ".$tamanho." KB";
+		$errors [] = "El archivo ".$_FILES['myimg2']['name']." MAYOR 500 KBytes. ".$tamanho." KB";
 			}
 		
 			elseif ($_FILES['myimg2']['error'] == UPLOAD_ERR_PARTIAL){
@@ -362,9 +422,9 @@ function validate_form(){
 	
 	else{
 			
-	$limite = 500 * 1024;
+	$limite = 600 * 1024;
 	
-	$ext_permitidas = array('.jpg','JPG','.gif','.GIF','.png','.PNG');
+	$ext_permitidas = array('jpg','JPG','gif','GIF','png','PNG');
 	$extension = substr($_FILES['myimg3']['name'],-3);
 	// print($extension);
 	$ext_correcta = in_array($extension, $ext_permitidas);
@@ -382,7 +442,7 @@ function validate_form(){
 	*/
 		elseif ($_FILES['myimg3']['size'] > $limite){
 		$tamanho = $_FILES['myimg3']['size'] / 1024;
-		$errors [] = "El archivo".$_FILES['myimg3']['name']." MAYOR 500 KBytes. ".$tamanho." KB";
+		$errors [] = "El archivo ".$_FILES['myimg3']['name']." MAYOR 500 KBytes. ".$tamanho." KB";
 			}
 		
 			elseif ($_FILES['myimg3']['error'] == UPLOAD_ERR_PARTIAL){
@@ -401,9 +461,9 @@ function validate_form(){
 	
 	else{
 			
-	$limite = 500 * 1024;
+	$limite = 600 * 1024;
 	
-	$ext_permitidas = array('.jpg','JPG','.gif','.GIF','.png','.PNG');
+	$ext_permitidas = array('jpg','JPG','gif','GIF','png','PNG');
 	$extension = substr($_FILES['myimg4']['name'],-3);
 	// print($extension);
 	$ext_correcta = in_array($extension, $ext_permitidas);
@@ -421,7 +481,7 @@ function validate_form(){
 	*/
 		elseif ($_FILES['myimg4']['size'] > $limite){
 		$tamanho = $_FILES['myimg4']['size'] / 1024;
-		$errors [] = "El archivo".$_FILES['myimg4']['name']." MAYOR 500 KBytes. ".$tamanho." KB";
+		$errors [] = "El archivo ".$_FILES['myimg4']['name']." MAYOR 500 KBytes. ".$tamanho." KB";
 			}
 		
 			elseif ($_FILES['myimg4']['error'] == UPLOAD_ERR_PARTIAL){
@@ -509,174 +569,175 @@ function process_form(){
 		global $subtitul;
 		$subtitul = strtoupper($_POST['subtitul']);
 
-	$sqla = "INSERT INTO `$db_name`.$tablename (`refuser`, `refart`,`tit`,`titsub`,`datein`,`timein`,`datemod`,`timemod`,`conte`,`myimg1`,`myimg2`,`myimg3`,`myimg4`,`refayto`,`refisla`,`reftipo`,`refespec1`,`refespec2`,`url`,`calle`,`Email`,`Tlf1`,`Tlf2`) VALUES ('$_POST[autor]', '$_POST[refart]', '$titulo', '$subtitul', '$_POST[datein]', '$_POST[timein]', '0000-00-00', '00:00:00', '$_POST[coment]', '$new_name1', '$new_name2', '$new_name3', '$new_name4', '$_POST[ayto]', '$_POST[isla]', '$_POST[tipo]', '$_POST[espec1]', '$_POST[espec2]', '$_POST[url]', '$_POST[calle]', '$_POST[Email]', '$_POST[Tlf1]', '$_POST[Tlf2]')";
+	// iprecio ivalora ENTRA DEFAULT 50
+	$sqla = "INSERT INTO `$db_name`.$tablename (`refuser`, `refart`,`tit`,`titsub`,`datein`,`timein`,`datemod`,`timemod`,`conte`,`myimg1`,`myimg2`,`myimg3`,`myimg4`,`refayto`,`refisla`,`reftipo`,`refespec1`,`refespec2`,`url`, `map`, `mapiframe`, `latitud`, `longitud`,`calle`,`Email`,`Tlf1`,`Tlf2`) VALUES ('$_POST[autor]', '$_POST[refart]', '$titulo', '$subtitul', '$_POST[datein]', '$_POST[timein]', '0000-00-00', '00:00:00', '$_POST[coment]', '$new_name1', '$new_name2', '$new_name3', '$new_name4', '$_POST[ayto]', '$_POST[isla]', '$_POST[tipo]', '$_POST[espec1]', '$_POST[espec2]', '$_POST[url]', '$_POST[map]', '$_POST[mapiframe]', '$_POST[latitud]', '$_POST[longitud]', '$_POST[calle]', '$_POST[Email]', '$_POST[Tlf1]', '$_POST[Tlf2]')";
 
 	if(mysqli_query($db, $sqla)){
 
-			global $carpetaimg;
-			global $new_name;
+		global $carpetaimg;
+		global $new_name1;
 
-			print("<table align='center' style='margin-top:10px'>
-				<tr>
-					<th colspan=3 class='BorderInf'>
-						CREADO POR ".strtoupper($_sec)."
-					</th>
-				</tr>
+		print("<table align='center' style='margin-top:10px'>
+			<tr>
+				<th colspan=3 class='BorderInf'>
+					CREADO POR ".strtoupper($_sec)."
+				</th>
+			</tr>
 												
-				<tr>
-					<td width=120px>
-						REFERENCIA
-					</td>
-					<td width=100px>"
-						.$_POST['refart'].
-					"</td>
-					<td rowspan='5' align='center' width='120px'>
-				<img src='".$carpetaimg."/".$new_name1."' height='120px' width='90px' />
-					</td>
-				</tr>
+			<tr>
+				<td width=120px>
+					REFERENCIA
+				</td>
+				<td width=100px>"
+					.$_POST['refart'].
+				"</td>
+				<td rowspan='5' align='center' width='120px'>
+			<img src='".$carpetaimg."/".$new_name1."' height='120px' width='90px' />
+				</td>
+			</tr>
 				
-				<tr>
-					<td>
-						TITULO
-					</td>
-					<td>"
-						.$_POST['titulo'].
-					"</td>
-				</tr>				
+			<tr>
+				<td>
+					TITULO
+				</td>
+				<td>"
+					.$_POST['titulo'].
+				"</td>
+			</tr>				
 				
-				<tr>
-					<td>	
-						SUBTITULO
-					</td>
-					<td>"
-						.$_POST['subtitul'].
-					"</td>
-				</tr>
+			<tr>
+				<td>	
+					SUBTITULO
+				</td>
+				<td>"
+					.$_POST['subtitul'].
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>	
-						DATE IN
-					</td>
-					<td>"
-						.$_POST['datein'].
-					"</td>
-				</tr>
+			<tr>
+				<td>	
+					DATE IN
+				</td>
+				<td>"
+					.$_POST['datein'].
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>	
-						TIME IN
-					</td>
-					<td>"
-						.$_POST['timein'].
-					"</td>
-				</tr>
+			<tr>
+				<td>	
+					TIME IN
+				</td>
+				<td>"
+					.$_POST['timein'].
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>	
-						ISLA
-					</td>
-					<td colspan=2>"
-						.$_POST['isla']." / ".$islaname.
-					"</td>
-				</tr>
+			<tr>
+				<td>	
+					ISLA
+				</td>
+				<td colspan=2>"
+					.$_POST['isla']." / ".$islaname.
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>	
-						AYUNTAMIENTO
-					</td>
-					<td colspan=2>"
-						.$_POST['ayto']." / ".$aytoname.
-					"</td>
-				</tr>
+			<tr>
+				<td>	
+					AYUNTAMIENTO
+				</td>
+				<td colspan=2>"
+					.$_POST['ayto']." / ".$aytoname.
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>	
-						TIPO
-					</td>
-					<td colspan=2>"
-						.$_POST['tipo']." / ".$tipname.
-					"</td>
-				</tr>
+			<tr>
+				<td>	
+					TIPO
+				</td>
+				<td colspan=2>"
+					.$_POST['tipo']." / ".$tipname.
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>	
-						ESPECIALIDAD 1
-					</td>
-					<td colspan=2>"
-						.$_POST['espec1']." / ".$espec1name.
-					"</td>
-				</tr>
+			<tr>
+				<td>	
+					ESPECIALIDAD 1
+				</td>
+				<td colspan=2>"
+					.$_POST['espec1']." / ".$espec1name.
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>	
-						ESPECIALIDAD 2
-					</td>
-					<td colspan=2>"
-						.$_POST['espec2']." / ".$espec1name.
-					"</td>
-				</tr>
+			<tr>
+				<td>	
+					ESPECIALIDAD 2
+				</td>
+				<td colspan=2>"
+					.$_POST['espec2']." / ".$espec1name.
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>	
-						URL WEB
-					</td>
-					<td colspan=2>"
-						.$_POST['url'].
-					"</td>
-				</tr>
+			<tr>
+				<td>	
+					URL WEB
+				</td>
+				<td colspan=2>"
+					.$_POST['url'].
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>	
-						CALLE
-					</td>
-					<td colspan=2>"
-						.$_POST['calle'].
-					"</td>
-				</tr>
+			<tr>
+				<td>	
+					CALLE
+				</td>
+				<td colspan=2>"
+					.$_POST['calle'].
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>	
-						EMAIL
-					</td>
-					<td colspan=2>"
-						.$_POST['Email'].
-					"</td>
-				</tr>
+			<tr>
+				<td>	
+					EMAIL
+				</td>
+				<td colspan=2>"
+					.$_POST['Email'].
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>	
-						TELEFONO 1
-					</td>
-					<td colspan=2>"
-						.$_POST['Tlf1'].
-					"</td>
-				</tr>
+			<tr>
+				<td>	
+					TELEFONO 1
+				</td>
+				<td colspan=2>"
+					.$_POST['Tlf1'].
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>	
-						TELEFONO 2
-					</td>
-					<td colspan=2>"
-						.$_POST['Tlf2'].
-					"</td>
-				</tr>
+			<tr>
+				<td>	
+					TELEFONO 2
+				</td>
+				<td colspan=2>"
+					.$_POST['Tlf2'].
+				"</td>
+			</tr>
 				
-				<tr>
-					<td colspan=3  align='center'>
-						DESCRIPCION
-					</td>
-				</tr>
-				<tr>
-					<td colspan=3>"
-						.$_POST['coment'].
-					"</td>
-				</tr>
-				<tr>
-					<th colspan=3 class='BorderSup'>
-						<a href=Art_Crear.php>CREAR UN NUEVO RESTAURANTE</a>
-					</th>
-				</tr>
-			</table>");
+			<tr>
+				<td colspan=3  align='center'>
+					DESCRIPCION
+				</td>
+			</tr>
+			<tr>
+				<td colspan=3>"
+					.$_POST['coment'].
+				"</td>
+			</tr>
+			<tr>
+				<th colspan=3 class='BorderSup'>
+					<a href=Art_Crear.php>CREAR UN NUEVO RESTAURANTE</a>
+				</th>
+			</tr>
+		</table>");
 			
 		/************* CREAMOS LAS IMAGENES DEL RESTAURANTE EN EL DIRECTORIO Gch.Img.Art ***************/
 
@@ -904,18 +965,15 @@ function show_form($errors=''){
 	} else {
 					
 		while($rows = mysqli_fetch_assoc($qb)){
-					
-					print ("<option value='".$rows['refisla']."' ");
-					
+				print ("<option value='".$rows['refisla']."' ");
 					if($rows['refisla'] == $defaults['isla']){
-															print ("selected = 'selected'");
-																								}
-									print ("> ".$rows['isla']."</option>");
+											print ("selected = 'selected'");
+																			}
+							print ("> ".$rows['isla']."</option>");
 				}
-		
 			}  
 
-	print ("	</select>
+	print ("</select>
 					</td>
 			</tr>
 		</form>	
@@ -1066,7 +1124,7 @@ function show_form($errors=''){
 						LONGITUD
 					</td>
 					<td>
-		<input type='text' name='mapiframe' size=18 maxlength=10 value='".@$defaults['longitud']."' placeholder='MAP LONGITUD' />
+		<input type='text' name='longitud' size=18 maxlength=10 value='".@$defaults['longitud']."' placeholder='MAP LONGITUD' />
 					</td>
 				</tr>
 

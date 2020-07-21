@@ -6,6 +6,12 @@
 
 ----
 
+### 2020.07.21
+
+* Se ha actualizado la zona de administración, creación de restaurantes y cálculo de valoraciones.
+
+----
+
 ### 2020.07.20
 
 * Se ha integrado los admin del sistema en admin user

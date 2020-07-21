@@ -260,7 +260,7 @@ function process_form(){
 					copy("../Gch.Img.Admin/".$_SESSION['myimgcl'], "../Gch.Img.User/".$_SESSION['myimgcl']);
 					}
 			}	
-		// SI ES ADMIN PERO ADMINU ES NO, LO BORRAMOS
+		// SI ES ADMIN PERO POST NIVEL !0 ADMIN Y ADMINU ES NO, LO BORRAMOS
 		// FIN CHECK BOX SI
 			} else { 
 				if ($countus < 1){ } 
@@ -283,18 +283,6 @@ function process_form(){
 	// SI SE CUMPLE EL QUERY
 	if(mysqli_query($db, $sqlc)){ global $tabla;
 								  print( $tabla );
-		/*
-		global $countus;
-		if ($countus < 1){ } 
-		else { 
-		// BORRAMOS EL AMINISTRADOR DE LA TABLA USUARIOS SI EXISTE
-		$sqlus = "DELETE FROM `$db_name`.`gch_user` WHERE `gch_user`.`ref` = '$_POST[ref]' LIMIT 1 ";
-		// SI SE CUMPLE EL QUERY
-		if(mysqli_query($db, $sqlus)){ 
-				unlink("../Gch.Img.User/".$_SESSION['myimgcl']);
-				} else { }
-			}
-		*/
 
 		} else { // NO SE CUMPLE EL QUERY
 				print("<font color='#FF0000'>
