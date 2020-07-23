@@ -315,6 +315,14 @@ function validate_form(){
 					$errors [] = "ESPECIALIDADES <font color='#FF0000'>SON IGUALES</font>";
 		}
 	
+	if(strlen(trim($_POST['precio'])) == 0){
+		$errors [] = "PRECIOS <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
+		}
+
+	if(strlen(trim($_POST['valora'])) == 0){
+		$errors [] = "SERVICIOS <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
+		}
+
 		///////////////////////////////////////////////////////////////////////////////////
 
 	if(strlen(trim($_POST['coment'])) == 0){
@@ -569,8 +577,7 @@ function process_form(){
 		global $subtitul;
 		$subtitul = strtoupper($_POST['subtitul']);
 
-	// iprecio ivalora ENTRA DEFAULT 50
-	$sqla = "INSERT INTO `$db_name`.$tablename (`refuser`, `refart`,`tit`,`titsub`,`datein`,`timein`,`datemod`,`timemod`,`conte`,`myimg1`,`myimg2`,`myimg3`,`myimg4`,`refayto`,`refisla`,`reftipo`,`refespec1`,`refespec2`,`url`, `map`, `mapiframe`, `latitud`, `longitud`,`calle`,`Email`,`Tlf1`,`Tlf2`) VALUES ('$_POST[autor]', '$_POST[refart]', '$titulo', '$subtitul', '$_POST[datein]', '$_POST[timein]', '0000-00-00', '00:00:00', '$_POST[coment]', '$new_name1', '$new_name2', '$new_name3', '$new_name4', '$_POST[ayto]', '$_POST[isla]', '$_POST[tipo]', '$_POST[espec1]', '$_POST[espec2]', '$_POST[url]', '$_POST[map]', '$_POST[mapiframe]', '$_POST[latitud]', '$_POST[longitud]', '$_POST[calle]', '$_POST[Email]', '$_POST[Tlf1]', '$_POST[Tlf2]')";
+	$sqla = "INSERT INTO `$db_name`.$tablename (`refuser`, `refart`, `tit`, `titsub`, `datein`, `timein`,`datemod`, `timemod`, `conte`, `myimg1`, `myimg2`, `myimg3`, `myimg4`, `refayto`, `refisla`, `reftipo`,`refespec1`, `refespec2`, `iprecio`, `ivalora`, `url`, `map`, `mapiframe`, `latitud`, `longitud`, `calle`, `Email`, `Tlf1`, `Tlf2`) VALUES ('$_POST[autor]', '$_POST[refart]', '$titulo', '$subtitul', '$_POST[datein]', '$_POST[timein]', '0000-00-00', '00:00:00', '$_POST[coment]', '$new_name1', '$new_name2', '$new_name3', '$new_name4', '$_POST[ayto]', '$_POST[isla]', '$_POST[tipo]', '$_POST[espec1]', '$_POST[espec2]', '$_POST[precio]', '$_POST[valora]', '$_POST[url]', '$_POST[map]', '$_POST[mapiframe]', '$_POST[latitud]', '$_POST[longitud]', '$_POST[calle]', '$_POST[Email]', '$_POST[Tlf1]', '$_POST[Tlf2]')";
 
 	if(mysqli_query($db, $sqla)){
 
@@ -880,10 +887,12 @@ function show_form($errors=''){
 									'subtitul' => '', // Sub Titulo
 								   	//'refart' => @$_SESSION['refart'],  Referencia articulo
 								   	'coment' => '',
-									'myimg1' => '',
-									'myimg2' => '',
-									'myimg3' => '',
-									'myimg4' => '',
+									'valora' => isset($_POST['valora']),
+									'precio' => isset($_POST['precio']),
+									'myimg1' => isset($_POST['myimg1']),
+									'myimg2' => isset($_POST['myimg2']),
+									'myimg3' => isset($_POST['myimg3']),
+									'myimg4' => isset($_POST['myimg4']),
 									'isla' => isset($_POST['isla']),  // refisla
 									'ayto' => isset($_POST['ayto']),  // refayto
 									'tipo' => isset($_POST['tipo']),
@@ -899,6 +908,19 @@ function show_form($errors=''){
 									'Tlf1' => '',
 									'Tlf2' => '');
 								   					}
+		$precio = array ('' => 'RELACIÓN EUROS / SERVICIO',
+						 '1' => '1 de 5 MUY MALOS',
+						 '25' => '2 de 5 MALOS',
+						 '50' => '3 de 5 NORMALES',
+						 '76' => '4 de 5 BUENOS',
+						 '100' => '5 de 5 MUY BUENOS');														
+
+		$valora = array ('' => 'RELACIÓN ATENCIÓN / LOCAL',
+						'1' => '1 de 5 MUY MALOS',
+						'25' => '2 de 5 MALOS',
+						'50' => '3 de 5 NORMALES',
+						'75' => '4 de 5 BUENOS',
+						'100' => '5 de 5 MUY BUENOS');														
 	
 	if ($errors){
 		print("	<table align='center'>
@@ -1263,40 +1285,77 @@ function show_form($errors=''){
 		
 			}  
 
-	print ("	</select>
+	print ("</select>
 					</td>
 			</tr>
 
-				<tr>
-					<td align='right'>						
-						REFERENCIA
+			<tr>
+				<td align='right'>
+					PRECIOS
+				</td>
+				<td>
+	
+			<select name='precio'>");
+				foreach($precio as $optionp => $labelp){
+					print ("<option value='".$optionp."' ");
+					if($optionp == @$defaults['precio']){
+							print ("selected = 'selected'");
+												}
+							print ("> $labelp </option>");
+									}	
+	print ("</select>
 					</td>
-					<td>
+				</tr>
+			<tr>
+
+			<tr>
+				<td align='right'>
+					SERVICIOS
+				</td>
+				<td>
+	
+			<select name='valora'>");
+				foreach($valora as $optionv => $labelv){
+					print ("<option value='".$optionv."' ");
+					if($optionv == @$defaults['valora']){
+							print ("selected = 'selected'");
+												}
+							print ("> $labelv </option>");
+									}	
+	print ("</select>
+				</td>
+			</tr>
+				
+			<tr>
+				<td align='right'>						
+					REFERENCIA
+				</td>
+				<td>
 		<input type='hidden' name='refart' value='".$_SESSION['refart']."' />".$_SESSION['refart']."
-					</td>
-				</tr>
-				<tr>
-					<td align='right'>						
-						DATE IN
-					</td>
-					<td>
+				</td>
+			</tr>
+			<tr>
+				<td align='right'>						
+					DATE IN
+				</td>
+				<td>
 		<input type='hidden' name='datein' value='".$_SESSION['datein']."' />".$_SESSION['datein']."
-					</td>
-				</tr>
-				<tr>
-					<td align='right'>						
-						TIME IN
-					</td>
-					<td>
+				</td>
+			</tr>
+			<tr>
+				<td align='right'>						
+					TIME IN
+				</td>
+				<td>
 		<input type='hidden' name='timein' value='".$_SESSION['timein']."' />".$_SESSION['timein']."
-					</td>
-				</tr>
+				</td>
+			</tr>
 					
-				<tr>
-					<td align='right'>
-						AUTOR
-					</td>
-					<td align='left'>
+			<tr>
+				<td align='right'>
+					AUTOR
+				</td>
+				<td align='left'>
 
 			<select name='autor'>
 			<option value=''>POSIBLES AUTORES</option>");
@@ -1326,13 +1385,13 @@ function show_form($errors=''){
 					</td>
 			</tr>
 
-				<tr>
-					<td colspan=2 align='center'>
-						DESCRIPCION DEL RESTAURANTE
-					</td>
-				</tr>
-				<tr>
-					<td colspan=2 align='center'>
+			<tr>
+				<td colspan=2 align='center'>
+					DESCRIPCION DEL RESTAURANTE
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2 align='center'>
 	<textarea cols='41' rows='9' onkeypress='return limitac(event, 400);' onkeyup='actualizaInfoc(400)' name='coment' id='coment'>".@$defaults['coment']."</textarea>
 	
 			</br>
@@ -1340,59 +1399,56 @@ function show_form($errors=''){
         					Maximum 400 characters            
 				</div>
 
-					</td>
-				</tr>
+				</td>
+			</tr>
 								
-				<tr>
-					<td>
-						FOTOGRAFÍA 1
-					</td>
-					<td>
+			<tr>
+				<td>
+					FOTOGRAFÍA 1
+				</td>
+				<td>
 		<input type='file' name='myimg1' value='".@$defaults['myimg1']."' />						
-					</td>
-				</tr>
+				</td>
+			</tr>
 
-				<tr>
-					<td>
-						FOTOGRAFÍA 2
-					</td>
-					<td>
+			<tr>
+				<td>
+					FOTOGRAFÍA 2
+				</td>
+				<td>
 		<input type='file' name='myimg2' value='".@$defaults['myimg2']."' />						
-					</td>
-				</tr>
+				</td>
+			</tr>
 
-				<tr>
-					<td>
-						FOTOGRAFÍA 3
-					</td>
-					<td>
+			<tr>
+				<td>
+					FOTOGRAFÍA 3
+				</td>
+				<td>
 		<input type='file' name='myimg3' value='".@$defaults['myimg3']."' />						
-					</td>
-				</tr>
-				<tr>
-					<td>
-						FOTOGRAFÍA 4
-					</td>
-					<td>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					FOTOGRAFÍA 4
+				</td>
+				<td>
 		<input type='file' name='myimg4' value='".@$defaults['myimg4']."' />						
-					</td>
-				</tr>
+				</td>
+			</tr>
 
-				<tr>
-					<td colspan='2' align='right' valign='middle'  class='BorderSup'>
-						<input type='submit' value='CREAR RESTAURANTE' />
-						<input type='hidden' name='oculto' value=1 />
-					</td>
-				</tr>
-
-
+			<tr>
+				<td colspan='2' align='right' valign='middle'  class='BorderSup'>
+					<input type='submit' value='CREAR RESTAURANTE' />
+					<input type='hidden' name='oculto' value=1 />
+				</td>
+			</tr>
 		</form>														
-			</table>				
-						"); 
-											}
-												}
+			</table>"); 
+						}
+							}
 	
-			}	
+	}	
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 /*

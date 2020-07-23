@@ -62,6 +62,20 @@ function validate_form(){
 	elseif (!preg_match('/^[a-z A-Z,0-9\s]+$/',$_POST['titulo'])){
 		$errors [] = "RESTAURANTE  <font color='#FF0000'>Solo mayusculas o números sin acentos.</font>";
 		}
+	
+	elseif((strlen(trim($_POST['titulo'])) != 0)||(strlen(trim($_POST['refart'])) != 0)){	
+		$secc1 = "gch_art";
+		$secc1 = "`".$secc1."`";
+	$sqlc =  "SELECT * FROM `$db_name`.$secc1 WHERE `tit` = '$_POST[titulo]' OR `refart` = '$_POST[refart]'";
+		$qc = mysqli_query($db, $sqlc);
+		$rowres = mysqli_fetch_assoc($qc);
+		global $conutc;
+		$countc = mysqli_num_rows($qc);
+	if($countc > 0){
+		if (@$_SESSION['modid'] == $rowres['id']){}
+		else{$errors [] = "YA EXISTE ESTE RESTAURANTE";}
+				}
+		}
 
 		///////////////////////////////////////////////////////////////////////////////////
 
@@ -80,6 +94,18 @@ function validate_form(){
 	elseif (!preg_match('/^[a-z A-Z,0-9\s]+$/',$_POST['subtitul'])){
 		$errors [] = "SUBTITULO  <font color='#FF0000'>Solo mayusculas o números sin acentos.</font>";
 		}
+	
+	elseif(strlen(trim($_POST['subtitul'])) != 0){	
+			$secc1 = "gch_art";
+			$secc1 = "`".$secc1."`";
+			$sqlc =  "SELECT * FROM `$db_name`.$secc1 WHERE `titsub` = '$_POST[subtitul]'";
+			$qc = mysqli_query($db, $sqlc);
+			global $conutc;
+			$countc = mysqli_num_rows($qc);
+			if($countc > 0){
+			$errors [] = "YA EXISTE ESTE SUBTITULO";
+				}
+		}
 
 		///////////////////////////////////////////////////////////////////////////////////
 
@@ -93,19 +119,83 @@ function validate_form(){
 		$errors [] = "URL PAGINA WEB <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
 		}
 
+	elseif (strlen(trim($_POST['url'])) < 10){
+		$errors [] = "URL PAGINA WEB  <font color='#FF0000'>Más de 10 carácteres.</font>";
+		}
+		
+	elseif (!preg_match('/^[^@#$<>´"·,\[\]\{\}\*]+$/',$_POST['url'])){
+		$errors [] = "URL PAGINA WEB <font color='#FF0000'>Caracteres no válidos.</font>";
+		}
+		
+	if(strlen(trim($_POST['map'])) == 0){
+		$errors [] = "URL MAPA WEB <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
+		}
+
+	elseif (strlen(trim($_POST['map'])) < 10){
+		$errors [] = "URL MAPA WEB  <font color='#FF0000'>Más de 10 carácteres.</font>";
+		}
+		
+	elseif (!preg_match('/^[^@#$<>´"·,\[\]\{\}\*]+$/',$_POST['map'])){
+		$errors [] = "URL MAPA WEB <font color='#FF0000'>Caracteres no válidos.</font>";
+		}
+		
+	if(strlen(trim($_POST['mapiframe'])) == 0){
+		$errors [] = "URL MAPIFRAME <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
+		}
+
+	elseif (strlen(trim($_POST['mapiframe'])) < 10){
+		$errors [] = "URL MAPIFRAME  <font color='#FF0000'>Más de 10 carácteres.</font>";
+		}
+		
+	elseif (!preg_match('/^[^@#$<>´"·,\[\]\{\}\*]+$/',$_POST['mapiframe'])){
+		$errors [] = "URL MAPIFRAME <font color='#FF0000'>Caracteres no válidos.</font>";
+		}
+		
+	if(strlen(trim($_POST['latitud'])) == 0){
+		$errors [] = "LATITUD <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
+		}
+
+	elseif (strlen(trim($_POST['latitud'])) < 6){
+		$errors [] = "LATITUD  <font color='#FF0000'>Más de 5 carácteres.</font>";
+		}
+		
+	elseif (!preg_match('/^[^@#$&%<>:´"·\(\)=¿?!¡\[\]\{\};:\*\']+$/',$_POST['latitud'])){
+		$errors [] = "LATITUD <font color='#FF0000'>Caracteres no válidos.</font>";
+		}
+		
+	elseif (!preg_match('/^[.0-9]+$/',$_POST['latitud'])){
+		$errors [] = "LATITUD  <font color='#FF0000'>Sólo números o ,</font>";
+		}
+
+	if(strlen(trim($_POST['longitud'])) == 0){
+		$errors [] = "LONGITUD <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
+		}
+
+	elseif (strlen(trim($_POST['longitud'])) < 6){
+		$errors [] = "LONGITUD  <font color='#FF0000'>Más de 5 carácteres.</font>";
+		}
+		
+	elseif (!preg_match('/^[^@#$&%<>:´"·\(\)=¿?!¡\[\]\{\};:\*\']+$/',$_POST['longitud'])){
+		$errors [] = "LONGITUD <font color='#FF0000'>Caracteres no válidos.</font>";
+		}
+		
+	elseif (!preg_match('/^[.0-9]+$/',$_POST['longitud'])){
+		$errors [] = "LONGITUD  <font color='#FF0000'>Sólo números o ,</font>";
+		}
+
 		///////////////////////////////////////////////////////////////////////////////////
 
-		if(strlen(trim($_POST['calle'])) == 0){
-			$errors [] = "CALLE <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
-			}
+	if(strlen(trim($_POST['calle'])) == 0){
+		$errors [] = "CALLE <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
+		}
 		
-		elseif (strlen(trim($_POST['calle'])) < 6){
-			$errors [] = "CALLE <font color='#FF0000'>Más de 5 carácteres.</font>";
-			}
+	elseif (strlen(trim($_POST['calle'])) < 6){
+		$errors [] = "CALLE <font color='#FF0000'>Más de 5 carácteres.</font>";
+		}
 			
-		elseif (!preg_match('/^[^@#$&%<>:´"·\(\)=¿?!¡\[\]\{\};\*\']+$/',$_POST['calle'])){
-			$errors [] = "CALLE <font color='#FF0000'>Caracteres no válidos.</font>";
-			}
+	elseif (!preg_match('/^[^@#$&%<>"·\(\)=¿?!¡\[\]\{\};\*]+$/',$_POST['calle'])){
+		$errors [] = "CALLE <font color='#FF0000'>Caracteres no válidos.</font>";
+		}
 
 		///////////////////////////////////////////////////////////////////////////////////
 
@@ -138,7 +228,7 @@ function validate_form(){
 	elseif (!preg_match('/^[^@´`\'áéíóú#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:*\s]+@([-a-z0-9]+\.)+[a-z]{2,}$/',$_POST['Email'])){
 		$errors [] = "Mail: <font color='#FF0000'>Esta dirección no es válida.</font>";
 		}
-		
+
 		///////////////////////////////////////////////////////////////////////////////////
 
 	/* Validamos el campo Tlf1 */
@@ -204,6 +294,14 @@ function validate_form(){
 					$errors [] = "ESPECIALIDADES <font color='#FF0000'>SON IGUALES</font>";
 		}
 	
+	if(strlen(trim($_POST['precio'])) == 0){
+		$errors [] = "PRECIOS <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
+		}
+
+	if(strlen(trim($_POST['valora'])) == 0){
+		$errors [] = "SERVICIOS <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
+		}
+
 		///////////////////////////////////////////////////////////////////////////////////
 
 	if(strlen(trim($_POST['coment'])) == 0){
@@ -223,7 +321,6 @@ function validate_form(){
 		$errors [] = "DESCRIPCION <font color='#FF0000'>No Permitidos #$&<>()[]{}</font>";
 		}
 		
-
 	return $errors;
 
 		} 
@@ -249,6 +346,8 @@ function process_form(){
 
 	require 'Inclu_Name_Ref_to_Name.php';
 
+	require 'Inclu_Valora_Calculos.php';
+
 	/* GRABAMOS LOS DATOS EN LA TABLA DE RESTAURANTES */
 
 	global $dyt1;
@@ -257,7 +356,7 @@ function process_form(){
 	$tablename = "gch_art";
 	$tablename = "`".$tablename."`";
 
-	$sqla = "UPDATE `$db_name`.$tablename SET `refuser` = '$_POST[autor]', `tit` = '$_POST[titulo]', `titsub` = '$_POST[subtitul]', `datemod` = '$_POST[datemod]', `timemod` = '$_POST[timemod]', `conte` = '$_POST[coment]', `refayto` = '$_POST[ayto]', `refisla` = '$_POST[isla]', `reftipo` = '$_POST[tipo]', `refespec1` = '$_POST[espec1]', `refespec2` = '$_POST[espec2]', `url` = '$_POST[url]', `calle` = '$_POST[calle]', `Email` = '$_POST[Email]', `Tlf1` = '$_POST[Tlf1]', `Tlf2` = '$_POST[Tlf2]' WHERE $tablename.`refart` = '$_SESSION[refart]' LIMIT 1 ";
+	$sqla = "UPDATE `$db_name`.$tablename SET `refuser` = '$_POST[autor]', `tit` = '$_POST[titulo]', `titsub` = '$_POST[subtitul]', `datemod` = '$_POST[datemod]', `timemod` = '$_POST[timemod]', `conte` = '$_POST[coment]', `refayto` = '$_POST[ayto]', `refisla` = '$_POST[isla]', `reftipo` = '$_POST[tipo]', `refespec1` = '$_POST[espec1]', `refespec2` = '$_POST[espec2]', `ivalora` = '$valmartx100', `iprecio` = '$valmart2x100', `url` = '$_POST[url]', `map` = '$_POST[map]', `mapiframe` = '$_POST[mapiframe]', `latitud` = '$_POST[latitud]', `longitud` = '$_POST[longitud]', `calle` = '$_POST[calle]', `Email` = '$_POST[Email]', `Tlf1` = '$_POST[Tlf1]', `Tlf2` = '$_POST[Tlf2]' WHERE $tablename.`refart` = '$_SESSION[refart]' LIMIT 1 ";
 
 	if(mysqli_query($db, $sqla)){
 
@@ -455,12 +554,18 @@ function show_form($errors=''){
 		$_SESSION['ayto'] = $_POST['ayto'];
 
 		$_SESSION['conte'] = $_POST['conte'];
-		$_SESSION['myimg'] = $_POST['myimg'];
+		$_SESSION['myimg'] = $_POST['myimg1'];
 
 		$_SESSION['tipo'] = $_POST['tipo'];
 		$_SESSION['espec1'] = $_POST['espec1'];
 		$_SESSION['espec2'] = $_POST['espec2'];
+		$_SESSION['valora'] = $_POST['valora'];
+		$_SESSION['precio'] = $_POST['precio'];
 		$_SESSION['url'] = $_POST['url'];
+		$_SESSION['map'] = $_POST['map'];
+		$_SESSION['mapiframe'] = $_POST['mapiframe'];
+		$_SESSION['latitud'] = $_POST['latitud'];
+		$_SESSION['longitud'] = $_POST['longitud'];
 		$_SESSION['calle'] = $_POST['calle'];
 		$_SESSION['Email'] = $_POST['Email'];
 		$_SESSION['Tlf1'] = $_POST['Tlf1'];
@@ -482,7 +587,13 @@ function show_form($errors=''){
 							'tipo' => $_SESSION['tipo'],
 							'espec1' => $_SESSION['espec1'],
 							'espec2' => $_SESSION['espec2'],									
+							'valora' => $_SESSION['valora'],
+							'precio' => $_SESSION['precio'],
 							'url' => $_SESSION['url'],
+							'map' => $_SESSION['map'],
+							'mapiframe' => $_SESSION['mapiframe'],
+							'latitud' => $_SESSION['latitud'],
+							'longitud' => $_SESSION['longitud'],
 							'calle' => $_SESSION['calle'],
 							'Email' => $_SESSION['Email'],
 							'Tlf1' => $_SESSION['Tlf1'],
@@ -494,9 +605,9 @@ function show_form($errors=''){
 				$_SESSION['datemod'] = date('Y-m-d');
 				$_SESSION['timemod'] = date('H:i:s');
 				$defaults = array ( 'autor' => $_SESSION['refuser'],  // ref autor
-									'refart' => $_SESSION['refart'], // Referencia articulo
 									'titulo' => $_SESSION['tit'], // Titulo
 									'subtitul' => $_SESSION['titsub'], // Sub Titulo
+									'refart' => $_SESSION['refart'], // Referencia articulo
 									'datein' => $_SESSION['datein'], // Sub Titulo
 									'timein' => $_SESSION['timein'], // Sub Titulo
 									'datemod' => $_SESSION['datemod'], // Sub Titulo
@@ -508,7 +619,13 @@ function show_form($errors=''){
 									'tipo' => $_SESSION['tipo'],
 									'espec1' => $_SESSION['espec1'],
 									'espec2' => $_SESSION['espec2'],									
+									'valora' => $_SESSION['valora'],
+									'precio' => $_SESSION['precio'],
 									'url' => $_SESSION['url'],
+									'map' => $_SESSION['map'],
+									'mapiframe' => $_SESSION['mapiframe'],
+									'latitud' => $_SESSION['latitud'],
+									'longitud' => $_SESSION['longitud'],
 									'calle' => $_SESSION['calle'],
 									'Email' => $_SESSION['Email'],
 									'Tlf1' => $_SESSION['Tlf1'],
@@ -526,11 +643,24 @@ function show_form($errors=''){
 									'myimg' => '',	
 												);
 								   					}
+
+		$precio = array ('' => 'RELACIÓN EUROS / SERVICIO',
+						 '1' => '1 de 5 MUY MALOS',
+						 '25' => '2 de 5 MALOS',
+						 '50' => '3 de 5 NORMALES',
+						 '76' => '4 de 5 BUENOS',
+						 '100' => '5 de 5 MUY BUENOS');														
+
+		$valora = array ('' => 'RELACIÓN ATENCIÓN / LOCAL',
+						'1' => '1 de 5 MUY MALOS',
+						'25' => '2 de 5 MALOS',
+						'50' => '3 de 5 NORMALES',
+						'75' => '4 de 5 BUENOS',
+						'100' => '5 de 5 MUY BUENOS');														
 	
 	if ($errors){
-		print("	<div  class='errors'>
-					<table align='left' style='border:none'>
-					<th style='text-align:left'>
+		print("	<table align='center'>
+					<th style='text-align:center'>
 					<font color='#FF0000'>* SOLUCIONE ESTOS ERRORES:</font><br/>
 					</th>
 					<tr>
@@ -541,9 +671,7 @@ function show_form($errors=''){
 			}
 		print("</td>
 				</tr>
-				</table>
-				</div>
-				<div style='clear:both'></div>");
+				</table>");
 		}
 		
 	global $db;
@@ -709,6 +837,42 @@ print ("	</select>
 				</td>
 			</tr>
 
+				<tr>
+					<td align='right'>						
+						MAPA WEB
+					</td>
+					<td>
+		<input type='text' name='map' size=50 maxlength=49 value='".@$defaults['map']."' placeholder='MAP SHORT URL' />
+					</td>
+				</tr>
+
+				<tr>
+					<td align='right'>						
+						MAPA IFRAME
+					</td>
+					<td>
+		<input type='text' name='mapiframe' size=50 maxlength=340 value='".@$defaults['mapiframe']."' placeholder='MAP IFRAME URL' />
+					</td>
+				</tr>
+
+				<tr>
+					<td align='right'>						
+						LATITUD
+					</td>
+					<td>
+		<input type='text' name='latitud' size=18 maxlength=10 value='".@$defaults['latitud']."' placeholder='MAP LATITUD' />
+					</td>
+				</tr>
+
+				<tr>
+					<td align='right'>						
+						LONGITUD
+					</td>
+					<td>
+		<input type='text' name='longitud' size=18 maxlength=10 value='".@$defaults['longitud']."' placeholder='MAP LONGITUD' />
+					</td>
+				</tr>
+
 			<tr>
 				<td align='right'>						
 					CALLE
@@ -847,6 +1011,43 @@ if(!$qespec2){
 print ("	</select>
 				</td>
 		</tr>
+
+			<tr>
+				<td align='right'>
+					PRECIOS
+				</td>
+				<td>
+	
+			<select name='precio'>");
+				foreach($precio as $optionp => $labelp){
+					print ("<option value='".$optionp."' ");
+					if($optionp == @$defaults['precio']){
+							print ("selected = 'selected'");
+												}
+							print ("> $labelp </option>");
+									}	
+	print ("</select>
+					</td>
+				</tr>
+			<tr>
+
+			<tr>
+				<td align='right'>
+					SERVICIOS
+				</td>
+				<td>
+	
+			<select name='valora'>");
+				foreach($valora as $optionv => $labelv){
+					print ("<option value='".$optionv."' ");
+					if($optionv == @$defaults['valora']){
+							print ("selected = 'selected'");
+												}
+							print ("> $labelv </option>");
+									}	
+	print ("</select>
+				</td>
+			</tr>
 
                 <tr>
 					<td align='right'>						

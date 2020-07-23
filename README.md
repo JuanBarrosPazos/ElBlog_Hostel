@@ -6,9 +6,21 @@
 
 ----
 
+### 2020.07.22
+
+* Se ha modificado la creación, modificación y validación de restaurantes, así como el calculo de valoraciones y precios.
+
+* Se recomienda sobreescribir el directorio Gch.Artic/
+
+----
+
 ### 2020.07.21
 
 * Se ha actualizado la zona de administración, creación de restaurantes y cálculo de valoraciones.
+
+* Se recomienda sobreescribir los directorios: Gch.Artic, Gch.Syst, Gch.Users, Gch.Wwww, Gch.Config.
+
+* Copiar index_Play_System(Docker).php y renombrar a index.php
 
 ----
 
@@ -17,6 +29,8 @@
 * Se ha integrado los admin del sistema en admin user
 
 * Se ha modificado la exportación de bbdd y tablas.
+
+* Se recomienda sobre escribir Gch.upbbdd/
 
 ----
 

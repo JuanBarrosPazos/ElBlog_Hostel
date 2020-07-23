@@ -245,7 +245,7 @@ function show_form($errors=''){
 									'ayto' => $_SESSION['ayto'],  // refayto
 									'coment' => $_POST['coment'],
 									'valora' => $_POST['valora'],
-									'precio' => isset($_POST['precio']),
+									'precio' => $_POST['precio'],
 											);	
 
 		} 

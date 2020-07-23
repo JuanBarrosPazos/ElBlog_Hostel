@@ -241,14 +241,20 @@ function process_form(){
 						</td>
 
 						<td class='BorderInf' width='50px'>
-	<input name='myimg' type='hidden' value='".$rowb['myimg']."' />
-	<img src='../Gch.Img.Art/".$rowb['myimg']."'  width='99%' height='auto' />
+	<input name='myimg1' type='hidden' value='".$rowb['myimg1']."' />
+	<img src='../Gch.Img.Art/".$rowb['myimg1']."'  width='99%' height='auto' />
 						</td>
 	
 	<input name='tipo' type='hidden' value='".$rowb['reftipo']."' />
 	<input name='espec1' type='hidden' value='".$rowb['refespec1']."' />
 	<input name='espec2' type='hidden' value='".$rowb['refespec2']."' />
+	<input name='valora' type='hidden' value='".$rowb['ivalora']."' />
+	<input name='precio' type='hidden' value='".$rowb['iprecio']."' />
 	<input name='url' type='hidden' value='".$rowb['url']."' />
+	<input name='map' type='hidden' value='".$rowb['map']."' />
+	<input name='mapiframe' type='hidden' value='".$rowb['mapiframe']."' />
+	<input name='latitud' type='hidden' value='".$rowb['latitud']."' />
+	<input name='longitud' type='hidden' value='".$rowb['longitud']."' />
 	<input name='calle' type='hidden' value='".$rowb['calle']."' />
 	<input name='Email' type='hidden' value='".$rowb['Email']."' />
 	<input name='Tlf1' type='hidden' value='".$rowb['Tlf1']."' />
@@ -478,19 +484,24 @@ function ver_todo(){
 						</td>
 
 						<td class='BorderInf' width='50px'>
-	<input name='myimg' type='hidden' value='".$rowb['myimg']."' />
-	<img src='../Gch.Img.Art/".$rowb['myimg']."'  width='60%' height='auto' />
+	<input name='myimg1' type='hidden' value='".$rowb['myimg1']."' />
+	<img src='../Gch.Img.Art/".$rowb['myimg1']."'  width='60%' height='auto' />
 						</td>
 	
 	<input name='tipo' type='hidden' value='".$rowb['reftipo']."' />
 	<input name='espec1' type='hidden' value='".$rowb['refespec1']."' />
 	<input name='espec2' type='hidden' value='".$rowb['refespec2']."' />
+	<input name='valora' type='hidden' value='".$rowb['ivalora']."' />
+	<input name='precio' type='hidden' value='".$rowb['iprecio']."' />
 	<input name='url' type='hidden' value='".$rowb['url']."' />
+	<input name='map' type='hidden' value='".$rowb['map']."' />
+	<input name='mapiframe' type='hidden' value='".$rowb['mapiframe']."' />
+	<input name='latitud' type='hidden' value='".$rowb['latitud']."' />
+	<input name='longitud' type='hidden' value='".$rowb['longitud']."' />
 	<input name='calle' type='hidden' value='".$rowb['calle']."' />
 	<input name='Email' type='hidden' value='".$rowb['Email']."' />
 	<input name='Tlf1' type='hidden' value='".$rowb['Tlf1']."' />
 	<input name='Tlf2' type='hidden' value='".$rowb['Tlf2']."' />
-
 		</tr>
 						
 		<tr>
