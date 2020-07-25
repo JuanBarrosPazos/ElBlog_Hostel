@@ -17,7 +17,7 @@
 
 ----
 
-### 2020.07.22
+### 2020.07.23
 
 * Se ha modificado la creación, modificación y validación de restaurantes, así como el calculo de valoraciones y precios.
 
