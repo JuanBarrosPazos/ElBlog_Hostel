@@ -9,7 +9,7 @@ session_start();
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-if ($_SESSION['Nivel'] == 'user'){ 
+if (($_SESSION['Nivel'] == 'user')||($_SESSION['Nivel'] == 'admin')){ 
 
 	master_index();
 
@@ -92,9 +92,6 @@ function process_form(){
 	$sqla = "INSERT INTO `$db_name`.$tablename (`refart`,`refuser`,`refayto`,`refisla`,`opina`,`valora`,`precio`,`datein`,`datemod`,`modera`) VALUES ('$_SESSION[refart]', '$_SESSION[ref]', '$_SESSION[ayto]', '$_SESSION[isla]', '$_POST[coment]', '$_POST[valora]', '$_POST[precio]', '$ActionTime', '00-00-00', 'y')";
 
 	if(mysqli_query($db, $sqla)){
-
-			global $carpetaimg;
-			global $new_name;
 
 			print("<table align='center' style='margin-top:10px'>
 												
@@ -189,16 +186,9 @@ function process_form(){
 			</table>");
 
 	require '..\Gch.Artic\Inclu_Valora_Calculos.php';
-	global $tablename;
-	$tablename = "gch_art";
-	$tablename = "`".$tablename."`";
 
-	$sqlpv = "UPDATE `$db_name`.$tablename SET `iprecio` = '$val2x100', `ivalora` = '$valx100' WHERE $tablename.`refart` = '$_SESSION[refart]' ";
-		if(mysqli_query($db, $sqlpv)){	} 
-		else {print("* MODIFIQUE LA ENTRADA L.196: ".mysqli_error($db));
-			show_form ();
-			}
-
+	require 'Inclu_Valora_Cal_Upd.php';
+	
 			global $redir;
 			$redir = "<script type='text/javascript'>
 							function redir(){
@@ -279,19 +269,19 @@ function show_form($errors=''){
 				</table>");
 		}
 
-		$precio = array ('' => 'EUROS',
-						 '1' => '1 de 5',
-						 '2' => '2 de 5',
-						 '3' => '3 de 5',
-						 '4' => '4 de 5',
-						 '5' => '5 de 5');														
+		$precio = array ('' => 'RELACIÓN EUROS / SERVICIO',
+						 '1' => '1 de 5 MUY MALOS',
+						 '2' => '2 de 5 MALOS',
+						 '3' => '3 de 5 NORMALES',
+						 '4' => '4 de 5 BUENOS',
+						 '5' => '5 de 5 MUY BUENOS');														
 
-		$valora = array ('' => 'PUNTOS',
-						'1' => '1 de 5',
-						'2' => '2 de 5',
-						'3' => '3 de 5',
-						'4' => '4 de 5',
-						'5' => '5 de 5');														
+		$valora = array ('' => 'RELACIÓN ATENCIÓN / LOCAL',
+						'1' => '1 de 5 MUY MALOS',
+						'2' => '2 de 5 MALOS',
+						'3' => '3 de 5 NORMALES',
+						'4' => '4 de 5 BUENOS',
+						'5' => '5 de 5 MUY BUENOS');														
 
 	global $db;
 	global $db_name;
@@ -377,12 +367,11 @@ function show_form($errors=''){
 				</tr>
 			<tr>
 
-				<tr>
-					<td align='right'>
-						VALORACION
-					</td>
-					<td>
-	
+			<tr>
+				<td align='right'>
+						SERVICIOS
+				</td>
+				<td>
 			<select name='valora'>");
 				foreach($valora as $optionv => $labelv){
 					print ("<option value='".$optionv."' ");
@@ -392,8 +381,9 @@ function show_form($errors=''){
 							print ("> $labelv </option>");
 									}	
 	print ("</select>
-					</td>
-				</tr>
+				</td>
+			</tr>
+
 			<tr>
 				<td colspan=2 align='center'>
 					TU OPINION PERSONAL
@@ -408,7 +398,6 @@ function show_form($errors=''){
 			<div id='infoc' align='center' style='color:#0080C0;'>
 						Maximum 200 characters            
 			</div>
-
 				</td>
 			</tr>
 							
@@ -421,7 +410,7 @@ function show_form($errors=''){
 	</form>														
 
 			<tr>
-			<td colspan=3 align='right' class='BorderSup'>
+				<td colspan=3 align='right' class='BorderSup'>
 					<form name='fvolver' action='Opina_Modificar_01.php'  \">
 						<input type='submit' value='CANCELAR Y VOLVER INICIO OPINIONES' />
 						<input type='hidden' name='volver' value=1 />

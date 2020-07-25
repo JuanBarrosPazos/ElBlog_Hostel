@@ -2,7 +2,7 @@
 session_start();
 
 	//require '../Gch.Inclu/error_hidden.php';
-	require '../Gch.Inclu/Admin_Inclu_popup.php';
+	require 'Art_Inclu_popup_img.php';
 
 	require '../Gch.Connet/conection.php';
 	require '../Gch.Connet/conect.php';
@@ -24,7 +24,7 @@ if (($_SESSION['Nivel'] == 'admin')|| ($_SESSION['Nivel'] == 'plus')){
 			elseif($_POST['imagenmodif']){
 									process_form();
 								} 
-			elseif($_POST['cero']){
+			elseif(($_POST['cero'])||($_GET['cero'])){
 									process_form();
 								} 
 
@@ -34,32 +34,10 @@ if (($_SESSION['Nivel'] == 'admin')|| ($_SESSION['Nivel'] == 'plus')){
 
 function validate_form(){
 	
-	global $sqld;
-	global $qd;
-	global $rowd;
-
-////////////////////
-
-	$sesionref = $_SESSION['miseccion'];
-
-	    if( file_exists("../cbj_Docs/docgastos_pendientes/untitled.png") ){
-				print("** El archivo untitled.png. Existe en su directorio.</br>");
-			//	$errors [] ="El archivo untitled.png. Existe en su directorio.";
+	    if( file_exists("../Gch.Img.Art/untitled.png") ){
 			}
-		else{	$rename_filename1 = "../cbj_Docs/docgastos_pendientes/untitled.png";								
-				print("** El archivo untitled.png. NO existe y se ha generado en auto.</br>");
-			//	$errors [] ="El archivo untitled.png. NO existe y se ha generado en auto.";
-				copy("../cbj_Docs/untitled.png", $rename_filename1);
-			}
-
-	    if( file_exists("../cbj_Docs/docgastos_pendientes/pdf.png") ){
-				print("** El archivo pdf.png. Existe en su directorio.</br>");
-			//	$errors [] ="El archivo pdf.png. Existe en su directorio.";
-			}
-		else{	$rename_filename2 = "../cbj_Docs/docgastos_pendientes/pdf.png";								
-				print("** El archivo pdf.png. NO existe y se ha generado en auto.</br>");
-			//	$errors [] ="El archivo pdf.png. NO existe y se ha generado en auto.";
-				copy("../cbj_Docs/pdf.png", $rename_filename2);
+		else{	$rename_filename1 = "../Gch.Img.Art/untitled.png";								
+				copy("../Gch.Img.Sys/untitled.png", $rename_filename1);
 			}
 
 ////////////////////
@@ -68,11 +46,10 @@ function validate_form(){
 
 	$limite = 500 * 1024;
 	
-	$ext_permitidas = array('jpg','JPG','gif','GIF','png','PNG','pdf','PDF','bmp','BMP');
+	$ext_permitidas = array('jpg','JPG','gif','GIF','png','PNG');
 	
 	$extension = substr($_FILES['myimg']['name'],-3);
 	// print($extension);
-	// $extension = end(explode('.', $_FILES['myimg']['name']) );
 	$ext_correcta = in_array($extension, $ext_permitidas);
 
 	// $tipo_correcto = preg_match('/^image\/(gif|png|jpg|bmp)$/', $_FILES['myimg']['type']);
@@ -151,35 +128,46 @@ function modifica_form(){
 		date('Y_m_d');
 		$dt = date('is');
 		global $new_name;
-		$new_name = $_SESSION['mivalor']."_".$dt.".".$extension;
+		$new_name = $_SESSION['refart']."_".$dt.".".$extension;
 		$rename_filename = $ruta.$new_name;								
 		rename($destination_file, $rename_filename);
 		
 		global $db;
 		global $db_name;
 
-		global $mivalor;
+		global $refart;
 		$imgcamp = $_SESSION['imgcamp'];
 		$imgcamp = "`".$imgcamp."`";
-		$mivalor = $_SESSION['mivalor'];
+		$refart = $_SESSION['refart'];
 		
 	global $vname;
 	$vname = "gch_art";
 	$vname = "`".$vname."`";
 		
-$sqla = "UPDATE `$db_name`.$vname SET $imgcamp = '$new_name'  WHERE $vname.`factnum` = '$mivalor' LIMIT 1 ";
+$sqla = "UPDATE `$db_name`.$vname SET $imgcamp = '$new_name'  WHERE $vname.`refart` = '$refart' LIMIT 1 ";
 		
-		if(mysqli_query($db, $sqla)){}
-		
-					 else {
-							print("* ERROR ".mysqli_error($db));
-									show_form ();
-									global $texerror;
-									$texerror = "\n\t ".mysqli_error($db);
-																			}
+		if(mysqli_query($db, $sqla)){
+
+			$_SESSION['myimg'] = $new_name;
+			global $redir;
+			$redir = "<script type='text/javascript'>
+							function redir(){
+							window.location.href='Art_Modificar_img.php?cero=1';
 						}
+						setTimeout('redir()',10);
+						</script>";
+			print ($redir);
+
+		}
+		
+		else { print("* ERROR ".mysqli_error($db));
+				show_form ();
+				global $texerror;
+				$texerror = "\n\t ".mysqli_error($db);
+					}
+		}
 						
-		else {print("NO SE HA PODIDO GUARDAR EN ../imgpro/imgpro".$_SESSION['miseccion']."/");}
+		else {print("NO SE HA PODIDO GUARDAR EN: ".$ruta.$new_name);}
 
 	} 
 	
@@ -198,81 +186,34 @@ function process_form(){
 				unset($_SESSION['myimg2']);
 				unset($_SESSION['myimg3']);
 				unset($_SESSION['myimg4']);	
-				unset($_SESSION['miseccion']);	
 				unset($_SESSION['miid']);	
-				unset($_SESSION['mivalor']);	
-				unset($_SESSION['minombre']);	
-				unset($_SESSION['miref']);	
-				unset($_SESSION['midyt1']);	
+				unset($_SESSION['refart']);	
 */
 				
 	$_SESSION['miid'] = $_POST['id'];
-	$_SESSION['mivalor'] = $_POST['refart'];
+	$_SESSION['refart'] = $_POST['refart'];
 
-	$_SESSION['miseccion'] = $_SESSION['ref'];
-	$_SESSION['minombre'] = $_POST['factnom'];
-	$_SESSION['miref'] = $_POST['refprovee'];
-	$_SESSION['midyt1'] = $_POST['dyt1'];
-	
-	global $ruta;
-	$ruta = "../Gch.Img.Art/";
-	$_SESSION['ruta'] = $ruta;
+		global $ruta;
+		$ruta = "../Gch.Img.Art/";
+		$_SESSION['ruta'] = $ruta;
 		
-	global $vname;
-	$vname = "gch_art";
-	$vname = "`".$vname."`";
+		global $myimg1;
+		$myimg1 = $_POST['myimg1'];
+		$_SESSION['myimg1'] = $myimg1;
 
-		$sqlc =  "SELECT * FROM `$db_name`.$vname WHERE `refart` = '$_POST[refart]'";
-		$qc = mysqli_query($db, $sqlc);
-		$rowsc = mysqli_fetch_assoc($qc);
-	
-		$ext_permitidas = array('pdf','PDF');
-		
-		$extension1 = substr($rowsc['myimg1'],-3);
-		$ext_correcta1 = in_array($extension1, $ext_permitidas);
-		if(!$ext_correcta1){ 	global $myimg1;
-								$myimg1 = $rowsc['myimg1'];
-								$_SESSION['myimg1'] = $myimg1;
-							}
-		else{	global $myimg1;
-				$myimg1 = 'pdf.png';
-				$_SESSION['myimg1'] = $myimg1;
-			}
+		global $myimg2;
+		$myimg2 = $_POST['myimg2'];
+		$_SESSION['myimg2'] = $myimg2;
 
-		$extension2 = substr($rowsc['myimg2'],-3);
-		$ext_correcta2 = in_array($extension2, $ext_permitidas);
-		if(!$ext_correcta2){ 	global $myimg2;
-								$myimg2 = $rowsc['myimg2'];
-								$_SESSION['myimg2'] = $myimg2;
-							}
-		else{	global $myimg2;
-				$myimg2 = 'pdf.png';
-				$_SESSION['myimg2'] = $myimg2;
-			}
+		global $myimg3;
+		$myimg3 = $_POST['myimg3'];
+		$_SESSION['myimg3'] = $myimg3;
 
-		$extension3 = substr($rowsc['myimg3'],-3);
-		$ext_correcta3 = in_array($extension3, $ext_permitidas);
-		if(!$ext_correcta3){ 	global $myimg3;
-								$myimg3 = $rowsc['myimg3'];
-								$_SESSION['myimg3'] = $myimg3;
-							}
-		else{	global $myimg3;
-				$myimg3 = 'pdf.png';
-				$_SESSION['myimg3'] = $myimg3;
-			}
+		global $myimg4;
+		$myimg4 = $_POST['myimg4'];
+		$_SESSION['myimg4'] = $myimg4;
 
-		$extension4 = substr($rowsc['myimg4'],-3);
-		$ext_correcta4 = in_array($extension4, $ext_permitidas);
-		if(!$ext_correcta4){ 	global $myimg4;
-								$myimg4 = $rowsc['myimg4'];
-								$_SESSION['myimg4'] = $myimg4;
-							}
-		else{	global $myimg4;
-				$myimg4 = 'pdf.png';
-				$_SESSION['myimg4'] = $myimg4;
-			}
-
-	
+	// FIN OCULTO 2
 	} else {		
 	
 		global $ruta;
@@ -280,67 +221,34 @@ function process_form(){
 		$_SESSION['ruta'] = $ruta;
 
 		global $vname;
-		$vname = "cbj_gastos_pendientes";
+		$vname = "gch_art";
 		$vname = "`".$vname."`";
-
-		$sqlc =  "SELECT * FROM `$db_name`.$vname WHERE `factnum` = '$_SESSION[mivalor]'";
+		$sqlc =  "SELECT * FROM `$db_name`.$vname WHERE `refart` = '$_SESSION[refart]'";
 		$qc = mysqli_query($db, $sqlc);
 		$rowsc = mysqli_fetch_assoc($qc);
 									
-		$ext_permitidas = array('pdf','PDF');
-		
-		$extension1 = substr($rowsc['myimg1'],-3);
-		$ext_correcta1 = in_array($extension1, $ext_permitidas);
-		if(!$ext_correcta1){ 	global $myimg1;
-								$myimg1 = $rowsc['myimg1'];
-								$_SESSION['myimg1'] = $myimg1;
-							}
-		else{	global $myimg1;
-				$myimg1 = 'pdf.png';
-				$_SESSION['myimg1'] = $rowsc['myimg1'];
-			}
+		global $myimg1;
+		$myimg1 = $rowsc['myimg1'];
+		$_SESSION['myimg1'] = $myimg1;
 
-		$extension2 = substr($rowsc['myimg2'],-3);
-		$ext_correcta2 = in_array($extension2, $ext_permitidas);
-		if(!$ext_correcta2){ 	global $myimg2;
-								$myimg2 = $rowsc['myimg2'];
-								$_SESSION['myimg2'] = $myimg2;
-							}
-		else{	global $myimg2;
-				$myimg2 = 'pdf.png';
-				$_SESSION['myimg2'] = $rowsc['myimg2'];
-			}
+		global $myimg2;
+		$myimg2 = $rowsc['myimg2'];
+		$_SESSION['myimg2'] = $myimg2;
 
-		$extension3 = substr($rowsc['myimg3'],-3);
-		$ext_correcta3 = in_array($extension3, $ext_permitidas);
-		if(!$ext_correcta3){ 	global $myimg3;
-								$myimg3 = $rowsc['myimg3'];
-								$_SESSION['myimg3'] = $myimg3;
-							}
-		else{	global $myimg3;
-				$myimg3 = 'pdf.png';
-				$_SESSION['myimg3'] = $rowsc['myimg3'];
-			}
+		global $myimg3;
+		$myimg3 = $rowsc['myimg3'];
+		$_SESSION['myimg3'] = $myimg3;
 
-		$extension4 = substr($rowsc['myimg4'],-3);
-		$ext_correcta4 = in_array($extension4, $ext_permitidas);
-		if(!$ext_correcta4){ 	global $myimg4;
-								$myimg4 = $rowsc['myimg4'];
-								$_SESSION['myimg4'] = $myimg4;
-							}
-		else{	global $myimg4;
-				$myimg4 = 'pdf.png';
-				$_SESSION['myimg4'] = $rowsc['myimg4'];
-			}
+		global $myimg4;
+		$myimg4 = $rowsc['myimg4'];
+		$_SESSION['myimg4'] = $myimg4;
 
 		}
 
 		print(" <table class='detalle' align='center'>
 				<tr>
 					<th colspan=4 class='BorderInf'>
-		SECCION: ".strtoupper("cbj_gastos_".$_SESSION['midyt1']).".
-							</br> 
-FACTURA Nº: ".$_SESSION['mivalor'].". R. Social: ".$_SESSION['minombre'].". ID: ".$_SESSION['miid']."
+		ARTICULO REF: ".$_SESSION['refart'].". ID: ".$_SESSION['miid']."
 					</th>
 				</tr>
 				
@@ -399,30 +307,20 @@ $printimg =	"<div id='foto1A' class='img2'>
 			</div>";
 			
 	if(($_POST['mimg1'])||($_POST['mimg2'])||($_POST['mimg3'])||($_POST['mimg4'])){
-					global $style;
-					$style = 'margin-top:60px';
 					show_form();
 	} elseif($_POST['imagenmodif']){
 					if($form_errors = validate_form()){
-										global $style;
-										$style = 'margin-top:60px';
 										show_form($form_errors);
 											} else {modifica_form();
 													show_form();
 													info();
 																				}
 	}
-	elseif($_POST['cero']){	global $style;
-							$style = 'margin-top:408px';
-							print($printimg);
+	elseif($_POST['cero']){	print($printimg);
 							
-	} 
-	else {	global $style;
-			$style = 'margin-top:408px';
-			print($printimg);
-								}
-	print("	
-			<tr>
+	} else { print($printimg); }
+
+	print("	<tr>
 				<div>
 					<td colspan=4 align='center' class='BorderSup'>
 	<form name='closewindow' action='$_SERVER[PHP_SELF]'  onsubmit=\"window.close()\">
@@ -430,18 +328,16 @@ $printimg =	"<div id='foto1A' class='img2'>
 						<input type='hidden' name='oculto2' value=1 />
 	</form>
 				</div>
-					</td>
-			</tr>
-	</table>
-	
+
 	<div style='clear:both'></div>
 	
 	<!-- Inicio footer -->
-	<div id='footer' style=".$style.">&copy; Juan Barr&oacute;s Pazos 2020.</div>
+	<div id='footer' >&copy; Juan Barr&oacute;s Pazos 2020.</div>
 	<!-- Fin footer -->
 	</div>
-
-		");	 
+					</td>
+			</tr>
+	</table>");	 
 
 			}
 
@@ -466,38 +362,30 @@ function show_form($errors=''){
 						$_SESSION['imgcamp'] = "myimg4";}
 
 	if($_POST['oculto2']){
-				$defaults = array ( 'seccion' => '',
-									'id' => '',
+				$defaults = array ( 'id' => '',
 									'valor' => '',
 									'nombre' => '',
-									'ref' => '',																														
+									'ref' => '',										
 									'myimg' => '',
-													);
-								   						}
+											);
+								   		}
 								   
 	elseif(($_POST['mimg1'])||($_POST['mimg2'])||($_POST['mimg3'])||($_POST['mimg4'])){
-				$defaults = array ( 'seccion' => $_SESSION['miseccion'],
-									'id' => $_SESSION['miid'],
-									'valor' => $_SESSION['mivalor'],
-									'nombre' => $_SESSION['minombre'],
-									'ref' => $_SESSION['miref'],																														
+				$defaults = array ( 'id' => $_SESSION['miid'],
+									'valor' => $_SESSION['refart'],
 									'myimg' => $_SESSION['myimg'],
 													);
 														}
 
 	elseif($_POST['imagenmodif']){
-				$defaults = array ( 'seccion' => $_SESSION['miseccion'],
-									'id' => $_SESSION['miid'],
-									'valor' => $_SESSION['mivalor'],
-									'nombre' => $_SESSION['minombre'],
-									'ref' => $_SESSION['miref'],																														
+				$defaults = array ( 'id' => $_SESSION['miid'],
+									'valor' => $_SESSION['refart'],
 									'myimg' => $_SESSION['myimg'],
 													);
 														}
 
 	if ($errors){
-		print("	<div width='90%' style='float:left'>
-					<table align='left' style='border:none'>
+		print("	<table align='center'>
 					<th style='text-align:left'>
 					<font color='#FF0000'>* SOLUCIONE ESTOS ERRORES:</font><br/>
 					</th>
@@ -509,41 +397,31 @@ function show_form($errors=''){
 			}
 		print("</td>
 				</tr>
-				</table>
-				</div>
-				<div style='clear:both'></div>");
-		}
+				</table>");
+			} else { }
 	
-		$ext_permitidas = array('pdf','PDF');
-		
-		$extension = substr($defaults['myimg'],-3);
-		$ext_correcta = in_array($extension, $ext_permitidas);
-		if(!$ext_correcta){ 	global $myimg1;
-								$myimg = $defaults['myimg'];
-							}
-		else{	global $myimg;
-				$myimg = 'pdf.png';
-			}
+	global $myimg;
+	$myimg = $defaults['myimg'];
 
-	print(" <tr>
-					<th colspan=4 class='BorderInf' style='padding-top:60px'>
+	print(" <table align='center'><tr>
+					<th colspan=4 class='BorderInf' style='padding-top:10px'>
 						SELECCIONE UNA NUEVA IMAGEN.
 					</th>
 			</tr>
 				
 			<tr>
 					<th colspan=3 class='BorderInf'>
-LA IMAGEN ACTUAL </br>".strtoupper($defaults['seccion'])." / ".strtoupper($defaults['nombre'])." / ".strtoupper($_SESSION['myimg']).".
-</br></br>
-<form name='cero' method='post' action='$_SERVER[PHP_SELF]'>
+				LA IMAGEN ACTUAL ".strtoupper($_SESSION['myimg']).".
+	</br></br>
+		<form name='cero' method='post' action='$_SERVER[PHP_SELF]'>
 						<input type='submit' value='ACTUALIZAR VISTAS IMAGEN' />
 						<input type='hidden' name='cero' value=1 />
-</form>														
+		</form>														
 
 					</th>
 			
 					<th class='BorderInf'>
-<img src='".$ruta.$myimg."' height='120px' width='90px' />
+<img src='".$ruta.$_SESSION['myimg']."' height='120px' width='90px' />
 					</th>
 			</tr>
 			
@@ -557,13 +435,12 @@ LA IMAGEN ACTUAL </br>".strtoupper($defaults['seccion'])." / ".strtoupper($defau
 					</td>
 				</tr>
 
-			
 				<tr align='center'>
 					<td colspan=4 align='right'>
 				
 						<input type='submit' value='MODIFICAR IMAGEN' />
 						<input type='hidden' name='imagenmodif' value=1 />
-</form>														
+			</form>														
 						
 					</td>
 					
@@ -574,6 +451,7 @@ LA IMAGEN ACTUAL </br>".strtoupper($defaults['seccion'])." / ".strtoupper($defau
 					</td>
 				</tr>
 
+				</table>
 				");
 	
 		}	
@@ -582,7 +460,7 @@ LA IMAGEN ACTUAL </br>".strtoupper($defaults['seccion'])." / ".strtoupper($defau
 	
 	function master_index(){
 		
-				require '../Gch.Inclu/Master_Index_Admin.php';
+				//require '../Gch.Inclu/Master_Index_Admin.php';
 		
 				} 
 
@@ -654,7 +532,7 @@ $text = PHP_EOL."- ADMIN MODIFICAR IMG SELECCIONADA ".$ActionTime.PHP_EOL."\t ID
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
-	require '../Gch.Inclu/Admin_Inclu_02.php';
+	//require '../Gch.Inclu/Admin_Inclu_02.php';
 		
 /* Creado por Juan Barros Pazos 2019 */
 ?>

@@ -41,6 +41,10 @@ function validate_form(){
 		$errors [] = "VALORACIÓN <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
 		}
 
+	if(strlen(trim($_POST['precio'])) == 0){
+		$errors [] = "PRECIOS <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
+		}
+
 		///////////////////////////////////////////////////////////////////////////////////
 
 	if(strlen(trim($_POST['coment'])) == 0){
@@ -70,7 +74,6 @@ function process_form(){
 	
 	global $db;
 	global $db_name;	
-	global $secc;
 	
 	require 'Inclu_Name_Ref_to_Name.php';
 
@@ -85,11 +88,20 @@ function process_form(){
 		
 		$ActionTime = date('Y-m-d');
 
-	$sqla = "UPDATE `$db_name`.$tablename SET `opina` = '$_POST[coment]', `valora` = '$_POST[valora]', `datemod` = '$ActionTime' WHERE $tablename.`id` = '$_SESSION[modid]' LIMIT 1 ";
+	$sqla = "UPDATE `$db_name`.$tablename SET `opina` = '$_POST[coment]', `valora` = '$_POST[valora]', `precio` = '$_POST[precio]', `datemod` = '$ActionTime' WHERE $tablename.`id` = '$_SESSION[modid]' LIMIT 1 ";
 
 	if(mysqli_query($db, $sqla)){
 
+		require '../Gch.Artic/Inclu_Valora_Calculos.php';
+		
+		require 'Inclu_Valora_Cal_Upd.php';
+
 			print("<table align='center' style='margin-top:10px'>
+				<tr>
+					<td colspan=2 align='center'>
+						DATOS MODIFICADOS
+					</td>
+				</tr>
 				<tr>
 					<td width=120px>
 						REFERENCIA
@@ -146,7 +158,16 @@ function process_form(){
 				
 				<tr>
 					<td>	
-						PUNTUACIÓN
+						PRECIOS
+					</td>
+					<td colspan=2>"
+						.$_POST['precio'].
+					"</td>
+				</tr>
+				
+				<tr>
+					<td>	
+						SERVICIOS
 					</td>
 					<td colspan=2>"
 						.$_POST['valora'].
@@ -212,6 +233,8 @@ function show_form($errors=''){
 		$_SESSION['refart'] = $_POST['refart'];
 		$_SESSION['isla'] = $_POST['isla'];
 		$_SESSION['ayto'] = $_POST['ayto'];
+		$_SESSION['valora'] = $_POST['valora'];
+		$_SESSION['precio'] = $_POST['precio'];
 
 		$defaults = array ( 'refart' => $_SESSION['refart'], // Referencia articulo
 							'titulo' => $_SESSION['tit'], // Titulo
@@ -219,8 +242,9 @@ function show_form($errors=''){
 							'isla' => $_SESSION['isla'],  // refisla
 							'ayto' => $_SESSION['ayto'],
 							'coment' => $_POST['opina'],
-							'valora' => $_POST['valora']);
-
+							'valora' => $_POST['valora'],
+							'precio' => $_POST['precio'],
+								);
 		} 
 	elseif(isset($_POST['oculto'])){
 					$defaults = $_POST;
@@ -231,7 +255,9 @@ function show_form($errors=''){
 									'isla' => $_SESSION['isla'],  // refisla
 									'ayto' => $_SESSION['ayto'],  // refayto
 									'coment' => isset($_POST['coment']),
-									'valora' => isset($_POST['valora']));	
+									'valora' => isset($_POST['valora']),
+									'precio' => isset($_POST['precio']),
+										);	
 						}
 	
 	if ($errors){
@@ -250,12 +276,19 @@ function show_form($errors=''){
 				</table>");
 		}
 
-		$valora = array ('' => 'PUNTOS',
-						'1' => '1 de 5',
-						'2' => '2 de 5',
-						'3' => '3 de 5',
-						'4' => '4 de 5',
-						'5' => '5 de 5');														
+		$precio = array ('' => 'RELACIÓN EUROS / SERVICIO',
+						 '1' => '1 de 5 MUY MALOS',
+						 '2' => '2 de 5 MALOS',
+						 '3' => '3 de 5 NORMALES',
+						 '4' => '4 de 5 BUENOS',
+						 '5' => '5 de 5 MUY BUENOS');														
+
+		$valora = array ('' => 'RELACIÓN ATENCIÓN / LOCAL',
+						'1' => '1 de 5 MUY MALOS',
+						'2' => '2 de 5 MALOS',
+						'3' => '3 de 5 NORMALES',
+						'4' => '4 de 5 BUENOS',
+						'5' => '5 de 5 MUY BUENOS');														
 
 	global $autor;
 	$autor = $_SESSION['refuser'];
@@ -266,9 +299,7 @@ function show_form($errors=''){
 	global $_sec;
 	$_sec = $rowautor['Nombre']." ".$rowautor['Apellidos'];
 
-
-	print("
-		<table align='center' style=\"margin-top:10px\">
+	print("<table align='center' style=\"margin-top:10px\">
 			<tr>
 				<th colspan=2 class='BorderInf'>
 
@@ -281,60 +312,74 @@ function show_form($errors=''){
 <form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
 					
 		<tr>								
-					<td align='right' width=100px>
+			<td align='right' width=100px>
 						REF ISLA
-					</td>
-					<td>
+			</td>
+			<td>
 	<input name='isla' type='hidden' value='".$defaults['isla']."' />".$_SESSION['isla']." / ".$islaname."
-					</td>
+			</td>
 		</tr>
 
-			<tr>
-				<td align='right'>
+		<tr>
+			<td align='right'>
 					AYUNTAMIENTO
-				</td>
-				<td align='left'>
+			</td>
+			<td align='left'>
 	<input name='ayto' type='hidden' value='".@$defaults['ayto']."' />".$_SESSION['ayto']." / ".$aytoname."
 
-				</td>
+			</td>
 		</tr>
-			<tr>
-
-				<td align='right'>
+		<tr>
+			<td align='right'>
 					RESTAURANTE
-				</td>
-				<td>
-
+			</td>
+			<td>
 	<input name='titulo' type='hidden' value='".@$defaults['titulo']."' />".$_SESSION['tit']."
-
-				</td>
-			</tr>
+			</td>
+		</tr>
 								
-			<tr>
-				<td align='right'>						
+		<tr>
+			<td align='right'>						
 					SUBTITULO
-				</td>
-				<td>
+			</td>
+			<td>
 	<input  name='subtitul' type='hidden' value='".@$defaults['subtitul']."' />".$_SESSION['titsub']."
-				</td>
-			</tr>
+			</td>
+		</tr>
 								
-
-            <tr>
-					<td align='right'>						
+        <tr>
+			<td align='right'>						
 						REFERENCIA
-					</td>
-					<td>
+			</td>
+			<td>
 		<input name='refart' type='hidden' value='".$_SESSION['refart']."' />".$_SESSION['refart']."
-					</td>
-			</tr>
+			</td>
+		</tr>
 
 				<tr>
 					<td align='right'>
-						VALORACION
+						PRECIOS
 					</td>
 					<td>
 	
+			<select name='precio'>");
+				foreach($precio as $optionp => $labelp){
+					print ("<option value='".$optionp."' ");
+					if($optionp == @$defaults['precio']){
+							print ("selected = 'selected'");
+												}
+							print ("> $labelp </option>");
+									}	
+	print ("</select>
+					</td>
+				</tr>
+			<tr>
+
+			<tr>
+				<td align='right'>
+						SERVICIOS
+				</td>
+				<td>
 			<select name='valora'>");
 				foreach($valora as $optionv => $labelv){
 					print ("<option value='".$optionv."' ");
@@ -344,8 +389,9 @@ function show_form($errors=''){
 							print ("> $labelv </option>");
 									}	
 	print ("</select>
-					</td>
-				</tr>
+				</td>
+			</tr>
+
 			<tr>
 				<td colspan=2 align='center'>
 					TU OPINION PERSONAL

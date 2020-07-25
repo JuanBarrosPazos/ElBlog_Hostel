@@ -5,6 +5,17 @@
 ## EN EL DIRECTORIO Gch.Tutorial SE ENCUENTRA UNA GUÍA GENERAL DE LA APP.
 
 ----
+### 2020.07.25
+
+* Se han creado nuevos archivos para la actualización de la valoraciones y se ha modificado todo lo relacionado con las valoraciones.
+
+* Se ha actualizado la modificación de las 4 imágenes de los restaurantes.
+
+* Se recomienda sobreescribir los directorios: Gch.Artic, Gch.Syst, Gch.Inclu, Gch.Admin, Gch.Css.
+
+* 
+
+----
 
 ### 2020.07.22
 

@@ -48,7 +48,6 @@ if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){
 								 setTimeout('redir()',4000);
 								</script>";
 					print ($redir);
-
 										}	
 
 	elseif((isset($_POST['veropinaborra']))||(isset($_GET['pagedel']))){ 
@@ -163,17 +162,17 @@ function ver_del_opiniones(){
 										
 					} else { 	print ("<table align='center'>
 									<tr>
-										<th colspan=6 class='BorderInf'>
+										<th colspan=7 class='BorderInf'>
 							OPINIONES MODERADAS: ".$nres." de ".$num_total_rows."
 										</th>
 									</tr>
 									<tr>
-										<th colspan=6 class='BorderInf'>
+										<th colspan=7 class='BorderInf'>
 							RESTAURANTE: ".$_SESSION['titopina']."
 										</th>
 									</tr>
 									<tr>
-										<th colspan=6 class='BorderInf'>
+										<th colspan=7 class='BorderInf'>
 							".$_SESSION['islaopina']." :: ".$_SESSION['aytoopina']."
 										</th>
 									</tr>
@@ -184,11 +183,15 @@ function ver_del_opiniones(){
 										</th>
 										
 										<th class='BorderInfDch'>
-											VALOR
+											FECHA
 										</th>
 																				
 										<th class='BorderInfDch'>
-											PUNTOS
+											SERVICIO
+										</th>
+																				
+										<th class='BorderInfDch'>
+											PRECIOS
 										</th>
 																				
 										<th width=260px  class='BorderInfDch'>
@@ -215,6 +218,10 @@ function ver_del_opiniones(){
 									".$rowb['valora']." de 5
 							</td>
 	
+							<td class='BorderInfDch'>
+									".$rowb['precio']." de 5
+							</td>
+	
 							<td class='BorderInfDch' align='left'>
 									".$rowb['opina']."
 							</td>
@@ -222,6 +229,7 @@ function ver_del_opiniones(){
 							<td class='BorderInfDch' align='center'>
 								<form name='fopinaborra2' action='$_SERVER[PHP_SELF]' method='POST'>
 									<input type='hidden' name='id' value='".$rowb['id']."' />
+									<input type='hidden' name='refart' value='".$rowb['refart']."' />
 									<input type='submit' value='BORRAR' />
 									<input type='hidden' name='opinaborra2' value=1 />
 								</form>
@@ -235,6 +243,7 @@ function ver_del_opiniones(){
 						<input name='isla' type='hidden' value='".$rowb['refisla']."' />
 						<input name='ayto' type='hidden' value='".$rowb['refayto']."' />
 						<input name='valora' type='hidden' value='".$rowb['valora']."' />
+						<input name='precio' type='hidden' value='".$rowb['precio']."' />
 						<input name='opina' type='hidden' value='".$rowb['opina']."' />
 
 						<input type='submit' value='MODIFICAR' />
@@ -293,8 +302,6 @@ function opina_modera(){
 	$tablename = "gch_opiniones";
 	$tablename = "`".$tablename."`";
 
-	//$sqld = "DELETE FROM `$db_name`.$tablename WHERE $tablename.`id` = '$refmodera' LIMIT 1 ";
-
 	$sqld = "UPDATE `$db_name`.$tablename SET `modera` = 'y' WHERE $tablename.`id` = '$refmodera' LIMIT 1 ";
 
 	if(mysqli_query($db, $sqld)){
@@ -342,10 +349,14 @@ function opina_borra(){
 						HA BORRADO LA OPINION ID ".strtoupper($refdel)."
 			</th>
 		</tr>");
+
+		require '../Gch.Artic/Inclu_Valora_Calculos.php';
+
+		require 'Inclu_Valora_Cal_Upd.php';
+	
 	} else {print("* MODIFIQUE LA ENTRADA L.116: ".mysqli_error($db));
 		show_form ();
 		}
-
 }
 
 function cancel_volver(){
@@ -510,10 +521,10 @@ function process_form(){
 								</tr>
 							</table>");
 									
-		} else { 	print ("<table align='center'>
+		} else { print ("<table align='center'>
 									<tr>
 										<th colspan=5 class='BorderInf'>
-					Restaurantes Filtro: ".$nres." de ".$num_total_rows."
+					* Restaurantes Filtro: ".$nres." de ".$num_total_rows."
 										</th>
 									</tr>
 									
@@ -548,56 +559,53 @@ function process_form(){
 				
 	print (	"<tr align='center'>
 									
+				<td class='BorderInfDch'>
+						".$rowb['tit']."
+				</td>
 
-						<td class='BorderInfDch'>
-	<input name='tit' type='hidden' value='".$rowb['tit']."' />".$rowb['tit']."
-						</td>
+				<td class='BorderInfDch'>
+						".$rowb['refisla']." / ".$islaname."
+				</td>
 
-						<td class='BorderInfDch'>
-	<input name='isla' type='hidden' value='".$rowb['refisla']."' />".$rowb['refisla']." / ".$islaname."
-						</td>
+				<td class='BorderInfDch'>
+						".$rowb['refayto']." / ".$aytoname."
+				</td>
 
-						<td class='BorderInfDch'>
-	<input name='ayto' type='hidden' value='".$rowb['refayto']."' />".$rowb['refayto']." / ".$aytoname."
-						</td>
+				<td class='BorderInfDch'>
+						".$rowb['reftipo']." / ".$tipname."
+				</td>
 
-						<td class='BorderInfDch' align='left'>
-	<input name='conte' type='hidden' value='".$rowb['reftipo']."' />".$rowb['reftipo']." / ".$tipname."
-						</td>
+				<td class='BorderInf' width='50px'>
+						<img src='../Gch.Img.Art/".$rowb['myimg1']."' width='60%' height='auto' />
+				</td>
+			</tr>
 
-						<td class='BorderInf' width='50px'>
-	<input name='myimg' type='hidden' value='".$rowb['myimg']."' />
-	<img src='../Gch.Img.Art/".$rowb['myimg']."'  width='60%' height='auto' />
-						</td>
-		</tr>
+			<tr>
+				<td colspan=3 align='right' class='BorderInfDch'>
+					<form name='creaopina' action='Opina_Crear.php' method='POST'>
+						<input name='id' type='hidden' value='".$rowb['id']."' />
+						<input name='refart' type='hidden' value='".$rowb['refart']."' />
+						<input name='tit' type='hidden' value='".$rowb['tit']."' />
+						<input name='titsub' type='hidden' value='".$rowb['titsub']."' />
+						<input name='isla' type='hidden' value='".$rowb['refisla']."' />
+						<input name='ayto' type='hidden' value='".$rowb['refayto']."' />
+						<input name='myimg1' type='hidden' value='".$rowb['myimg1']."' />
+						<input type='submit' value='CREAR OPINION' />
+						<input type='hidden' name='oculto2' value=1 />
+					</form>
+				</td>
 
-		<tr>
-			<td colspan=3 align='right' class='BorderInfDch'>
-				<form name='creaopina' action='Opina_Crear.php' method='POST'>
-					<input name='id' type='hidden' value='".$rowb['id']."' />
-					<input name='refart' type='hidden' value='".$rowb['refart']."' />
-					<input name='tit' type='hidden' value='".$rowb['tit']."' />
-					<input name='titsub' type='hidden' value='".$rowb['titsub']."' />
-					<input name='isla' type='hidden' value='".$rowb['refisla']."' />
-					<input name='ayto' type='hidden' value='".$rowb['refayto']."' />
-					<input name='myimg' type='hidden' value='".$rowb['myimg']."' />
-					<input type='submit' value='CREAR OPINION' />
-					<input type='hidden' name='oculto2' value=1 />
-				</form>
-			</td>
-
-			<td colspan=2 align='center' class='BorderInf'>
-						
-				<form name='fveropinaborra' action='$_SERVER[PHP_SELF]' method='POST'>
-					<input name='refart' type='hidden' value='".$rowb['refart']."' />
-					<input name='tit' type='hidden' value='".$rowb['tit']."' />
-					<input name='isla' type='hidden' value='".$rowb['refisla']." / ".$islaname."' />
-					<input name='ayto' type='hidden' value='".$rowb['refayto']." / ".$aytoname."' />
-					<input type='submit' value='BORRAR MODIFICAR OPINIONES' />
-					<input type='hidden' name='veropinaborra' value=1 />
-				</form>
-			</td>	
-		</tr>");
+				<td colspan=2 align='center' class='BorderInf'>
+					<form name='fveropinaborra' action='$_SERVER[PHP_SELF]' method='POST'>
+						<input name='refart' type='hidden' value='".$rowb['refart']."' />
+						<input name='tit' type='hidden' value='".$rowb['tit']."' />
+						<input name='isla' type='hidden' value='".$rowb['refisla']." / ".$islaname."' />
+						<input name='ayto' type='hidden' value='".$rowb['refayto']." / ".$aytoname."' />
+						<input type='submit' value='BORRAR MODIFICAR OPINIONES' />
+						<input type='hidden' name='veropinaborra' value=1 />
+					</form>
+				</td>	
+			</tr>");
 					}
 
 		print("	<tr>
@@ -772,24 +780,23 @@ function ver_todo(){
 									
 
 						<td class='BorderInfDch'>
-	<input name='tit' type='hidden' value='".$rowb['tit']."' />".$rowb['tit']."
+								".$rowb['tit']."
 						</td>
 
 						<td class='BorderInfDch'>
-	<input name='isla' type='hidden' value='".$rowb['refisla']."' />".$rowb['refisla']." / ".$islaname."
+								".$rowb['refisla']." / ".$islaname."
 						</td>
 
 						<td class='BorderInfDch'>
-	<input name='ayto' type='hidden' value='".$rowb['refayto']."' />".$rowb['refayto']." / ".$aytoname."
+								".$rowb['refayto']." / ".$aytoname."
 						</td>
 
-						<td class='BorderInfDch' align='left'>
-	<input name='conte' type='hidden' value='".$rowb['reftipo']."' />".$rowb['reftipo']." / ".$tipname."
+						<td class='BorderInfDch'>
+								".$rowb['reftipo']." / ".$tipname."
 						</td>
 
 						<td class='BorderInf' width='50px'>
-	<input name='myimg' type='hidden' value='".$rowb['myimg']."' />
-	<img src='../Gch.Img.Art/".$rowb['myimg']."'  width='60%' height='auto' />
+							<img src='../Gch.Img.Art/".$rowb['myimg1']."'  width='60%' height='auto' />
 						</td>
 		</tr>
 
@@ -802,7 +809,7 @@ function ver_todo(){
 					<input name='titsub' type='hidden' value='".$rowb['titsub']."' />
 					<input name='isla' type='hidden' value='".$rowb['refisla']."' />
 					<input name='ayto' type='hidden' value='".$rowb['refayto']."' />
-					<input name='myimg' type='hidden' value='".$rowb['myimg']."' />
+					<input name='myimg1' type='hidden' value='".$rowb['myimg1']."' />
 					<input type='submit' value='CREAR OPINION' />
 					<input type='hidden' name='oculto2' value=1 />
 				</form>
@@ -934,7 +941,7 @@ function ver_modera(){
 									
 				} else { 	print ("<table align='center'>
 									<tr>
-										<th colspan=7 class='BorderInf'>
+										<th colspan=8 class='BorderInf'>
 							OPINIONES SIN MODERAR: ".$nres." de ".$num_total_rows."
 										</th>
 									</tr>
@@ -949,7 +956,11 @@ function ver_modera(){
 										</th>
 										
 										<th class='BorderInfDch'>
-											VALOR
+											SERVICIO
+										</th>
+																				
+										<th class='BorderInfDch'>
+											PRECIO
 										</th>
 																				
 										<th width=260px  class='BorderInfDch'>
@@ -978,6 +989,10 @@ function ver_modera(){
 								".$rowb['valora']." de 5
 						</td>
 
+						<td class='BorderInfDch'>
+								".$rowb['precio']." de 5
+						</td>
+
 						<td class='BorderInfDch' align='left'>
 								".$rowb['opina']."
 						</td>
@@ -993,6 +1008,7 @@ function ver_modera(){
 						<td class='BorderInf' align='center'>
 							<form name='fopinaborra' action='$_SERVER[PHP_SELF]' method='POST'>
 								<input type='hidden' name='id' value='".$rowb['id']."' />
+								<input name='refart' type='hidden' value='".$rowb['refart']."' />
 								<input type='submit' value='BORRAR' />
 								<input type='hidden' name='opinaborra' value=1 />
 							</form>

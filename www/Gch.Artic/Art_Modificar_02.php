@@ -350,8 +350,6 @@ function process_form(){
 
 	/* GRABAMOS LOS DATOS EN LA TABLA DE RESTAURANTES */
 
-	global $dyt1;
-	$dyt1 = trim($_SESSION['dyt1']);
 	global $tablename;
 	$tablename = "gch_art";
 	$tablename = "`".$tablename."`";

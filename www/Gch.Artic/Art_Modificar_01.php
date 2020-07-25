@@ -272,7 +272,7 @@ function process_form(){
 
 				<td align='center' class='BorderInf'>
 						
-		<form name='modifica_img' action='Art_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=550px, height=500px')\">
+		<form name='modifica_img' action='Art_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=550px, height=524px')\">
 
 			<input name='id' type='hidden' value='".$rowb['id']."' />
 			<input name='refuser' type='hidden' value='".$rowb['refuser']."' />
@@ -516,7 +516,7 @@ function ver_todo(){
 
 				<td align='center' class='BorderInf'>
 						
-		<form name='modifica_img' action='Art_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=550px, height=500px')\">
+		<form name='modifica_img' action='Art_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=550px,height=524px')\">
 
 		<input name='id' type='hidden' value='".$rowb['id']."' />
 		<input name='refuser' type='hidden' value='".$rowb['refuser']."' />

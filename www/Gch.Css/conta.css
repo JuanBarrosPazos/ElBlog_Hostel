@@ -434,4 +434,63 @@ a:hover  img {
 	height: 61vh;
 }
 
+/*	LAS IMAGENES MODIFICADAS */
+
+.img1 {
+	text-align: center;
+	vertical-align: middle;
+	height: auto;
+	width: auto; 
+}
+.img1 img {
+	height: 90px;
+	width: 90px;
+	text-decoration: none;
+	cursor:hand;
+	cursor:pointer;
+}
+.img2 {
+	text-align: center;
+	width: auto;
+	margin: 0px;
+	padding: 0px;
+}
+.img2 img {
+	height: 400px;
+	width: 400px;
+	margin: 0px;
+	cursor: auto;
+}
+
+#foto1A {
+	visibility: hidden;
+	z-index: 40;
+	position: absolute;
+	text-align: left;
+	margin: 0px;
+	left: 50px;
+	top: 235px;
+}
+#foto2A {
+	visibility: hidden;
+	z-index: 30;
+	position: absolute;
+	left: 50px;
+	top: 235px;
+}
+#foto3A {
+	visibility: hidden;
+	z-index: 20;
+	position: absolute;
+	left: 50px;
+	top: 235px;
+}
+#foto4A {
+	visibility: hidden;
+	z-index: 10;
+	position: absolute;
+	left: 50px;
+	top: 235px;
+}
+
 /* Creado por Juan Barros Pazos 2020 */
