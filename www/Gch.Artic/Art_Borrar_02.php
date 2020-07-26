@@ -11,19 +11,18 @@ session_start();
 
 if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){ 
 
-					master_index();
+		master_index();
 
-							if (isset($_POST['oculto2'])){
-										show_form();
-										//accion_Log();
-									}
-							elseif(isset($_POST['oculto'])){
-											process_form();
-											accion_Log();
-											deleteimg();
-							} else {
-										show_form();
-								}
+		if (isset($_POST['oculto2'])){
+					show_form();
+					//accion_Log();
+				}
+		elseif(isset($_POST['oculto'])){
+						process_form();
+						accion_Log();
+						deleteimg();
+			} else { show_form(); }
+			
 } else {  require '../Gch.Inclu/table_permisos.php'; } 
 
 //////////////////////////////////////////////////////////////////////////////////////////////

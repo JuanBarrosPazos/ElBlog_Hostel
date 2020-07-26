@@ -370,7 +370,7 @@ function show_form($errors=''){
 								</font>	
 							</b>
 					</br></br>
-		EMPLEADOS PERMITIDOS: ".$_SESSION['nuser'].". Nº EMPLEADOS: ".$nuser.". PARA CONTINUAR:
+		ADMIN SYS PERMITIDOS: ".$_SESSION['nuser'].". Nº ADMIN SYS: ".$nuser.". PARA CONTINUAR:
 					</br></br>
 		ELIMINE ALGUN EMPLEADO EN BORRAR BAJAS O DAR DE BAJA.
 						</td>

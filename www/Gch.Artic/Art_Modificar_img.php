@@ -13,38 +13,31 @@ session_start();
 
 if (($_SESSION['Nivel'] == 'admin')|| ($_SESSION['Nivel'] == 'plus')){
 
-			if($_POST['oculto2']){
-									process_form();
-								} 
+		if($_POST['oculto2']){ process_form(); } 
 								
-			elseif(($_POST['mimg1'])||($_POST['mimg2'])||($_POST['mimg3'])||($_POST['mimg4'])){
+		elseif(($_POST['mimg1'])||($_POST['mimg2'])||($_POST['mimg3'])||($_POST['mimg4'])){
 									process_form();
 								} 
 
-			elseif($_POST['imagenmodif']){
-									process_form();
-								} 
-			elseif(($_POST['cero'])||($_GET['cero'])){
-									process_form();
-								} 
+		elseif($_POST['imagenmodif']){ process_form(); } 
+		elseif(($_POST['cero'])||($_GET['cero'])){ process_form(); } 
 
-		} else { require '../Gch.Inclu/table_permisos.php'; }
+	} else { require '../Gch.Inclu/table_permisos.php'; }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 function validate_form(){
 	
-	    if( file_exists("../Gch.Img.Art/untitled.png") ){
-			}
-		else{	$rename_filename1 = "../Gch.Img.Art/untitled.png";								
-				copy("../Gch.Img.Sys/untitled.png", $rename_filename1);
+	if( file_exists("../Gch.Img.Art/untitled.png") ){ }
+	else{ $rename_filename1 = "../Gch.Img.Art/untitled.png";								
+		  copy("../Gch.Img.Sys/untitled.png", $rename_filename1);
 			}
 
 ////////////////////
 
 	$errors = array();
 
-	$limite = 500 * 1024;
+	$limite = 600 * 1024;
 	
 	$ext_permitidas = array('jpg','JPG','gif','GIF','png','PNG');
 	
@@ -90,7 +83,6 @@ function modifica_form(){
 	
 		global $db;
 		global $db_name;
-		global $img;
 		global $imgcamp;
 
 		global $ruta;
@@ -101,9 +93,6 @@ function modifica_form(){
 		$safe_filename = trim(str_replace('..', '', $safe_filename));
 
 		$nombre = $_FILES['myimg']['name'];
-		$nombre_tmp = $_FILES['myimg']['tmp_name'];
-		$tipo = $_FILES['myimg']['type'];
-		$tamano = $_FILES['myimg']['size'];
 
 		global $destination_file;
 		$destination_file = $ruta.$safe_filename;
@@ -121,9 +110,6 @@ function modifica_form(){
 		// Renombrar el archivo:
 		$extension = substr($_FILES['myimg']['name'],-3);
 		// print($extension);
-		// $extension = end(explode('.', $_FILES['myimg']['name']) );
-		//global $new_name;
-		//	$new_name = $_SESSION['myimg'];
 		date('H:i:s');
 		date('Y_m_d');
 		$dt = date('is');
@@ -154,7 +140,7 @@ $sqla = "UPDATE `$db_name`.$vname SET $imgcamp = '$new_name'  WHERE $vname.`refa
 							function redir(){
 							window.location.href='Art_Modificar_img.php?cero=1';
 						}
-						setTimeout('redir()',10);
+						setTimeout('redir()',1000);
 						</script>";
 			print ($redir);
 
@@ -229,23 +215,24 @@ function process_form(){
 									
 		global $myimg1;
 		$myimg1 = $rowsc['myimg1'];
-		$_SESSION['myimg1'] = $myimg1;
+		$_SESSION['myimg1'] = $rowsc['myimg1'];
 
 		global $myimg2;
 		$myimg2 = $rowsc['myimg2'];
-		$_SESSION['myimg2'] = $myimg2;
+		$_SESSION['myimg2'] = $rowsc['myimg2'];
 
 		global $myimg3;
 		$myimg3 = $rowsc['myimg3'];
-		$_SESSION['myimg3'] = $myimg3;
+		$_SESSION['myimg3'] = $rowsc['myimg3'];
 
 		global $myimg4;
 		$myimg4 = $rowsc['myimg4'];
-		$_SESSION['myimg4'] = $myimg4;
+		$_SESSION['myimg4'] = $rowsc['myimg4'];
 
 		}
-
-		print(" <table class='detalle' align='center'>
+	
+	global $imagenes;
+	$imagenes = " <table class='detalle' align='center'>
 				<tr>
 					<th colspan=4 class='BorderInf'>
 		ARTICULO REF: ".$_SESSION['refart'].". ID: ".$_SESSION['miid']."
@@ -288,7 +275,7 @@ function process_form(){
 			<input type='hidden' name='mimg4' value=1 />
 </form>		  
 		  </td>
-       </tr>");
+       </tr>";
        
 $printimg =	"<div id='foto1A' class='img2'> 
 				<img src='".$ruta.$myimg1."' /> 
@@ -309,35 +296,37 @@ $printimg =	"<div id='foto1A' class='img2'>
 	if(($_POST['mimg1'])||($_POST['mimg2'])||($_POST['mimg3'])||($_POST['mimg4'])){
 					show_form();
 	} elseif($_POST['imagenmodif']){
-					if($form_errors = validate_form()){
-										show_form($form_errors);
-											} else {modifica_form();
-													show_form();
-													info();
-																				}
-	}
-	elseif($_POST['cero']){	print($printimg);
-							
-	} else { print($printimg); }
+		if($form_errors = validate_form()){
+						show_form($form_errors);
+							} else { modifica_form();
+									 show_form();
+									 info();
+										}
+									}
+	//elseif($_POST['cero']){ print($printimg); } 
+	else { //echo $printimg; 
+		   echo $imagenes; }
 
 	print("	<tr>
 				<div>
 					<td colspan=4 align='center' class='BorderSup'>
 	<form name='closewindow' action='$_SERVER[PHP_SELF]'  onsubmit=\"window.close()\">
 						<input type='submit' value='CERRAR VENTANA' />
-						<input type='hidden' name='oculto2' value=1 />
+						<input type='hidden' name='closewin' value=1 />
 	</form>
 				</div>
 
+					</td>
+			</tr>
+	</table>
 	<div style='clear:both'></div>
 	
 	<!-- Inicio footer -->
 	<div id='footer' >&copy; Juan Barr&oacute;s Pazos 2020.</div>
 	<!-- Fin footer -->
 	</div>
-					</td>
-			</tr>
-	</table>");	 
+	
+	");	 
 
 			}
 
@@ -421,7 +410,7 @@ function show_form($errors=''){
 					</th>
 			
 					<th class='BorderInf'>
-<img src='".$ruta.$_SESSION['myimg']."' height='120px' width='90px' />
+<img src='".$ruta.$_SESSION['myimg']."' style=\"width:14em; height:auto\" />
 					</th>
 			</tr>
 			

@@ -70,9 +70,9 @@ function process_form(){
 	$sqlb =  "SELECT * FROM `gch_admin` WHERE  `dni` <> '$_SESSION[mydni]' AND  `Nombre` LIKE '%$nombre%' OR `dni` <> '$_SESSION[mydni]' AND `Apellidos` LIKE '%$apellido%' ORDER BY `Nombre` ASC  ";
 	$qb = mysqli_query($db, $sqlb);
 				}
-// DEPRECATED
-//$sqlc =  "SELECT * FROM `gch_admin` WHERE `Nombre` LIKE '%$nombre%' OR `Apellidos` LIKE '%$apellido%' ORDER BY `Nombre` ASC ";
-//	$qc = mysqli_query($db, $sqlc);
+	// DEPRECATED
+	//$sqlc =  "SELECT * FROM `gch_admin` WHERE `Nombre` LIKE '%$nombre%' OR `Apellidos` LIKE '%$apellido%' ORDER BY `Nombre` ASC ";
+	//	$qc = mysqli_query($db, $sqlc);
 	
 			////////////////////		**********  		////////////////////
 

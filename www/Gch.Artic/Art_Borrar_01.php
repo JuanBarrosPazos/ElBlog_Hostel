@@ -265,7 +265,7 @@ function process_form(){
 					&nbsp;
 			</td>
 			<td colspan=2 align='right' class='BorderInf'>
-					<input type='submit' value='VER DETALLES' />
+					<input type='submit' value='BORRAR DATOS' />
 					<input type='hidden' name='oculto2' value=1 />
 			</td>
 	</form>
@@ -463,6 +463,9 @@ function ver_todo(){
 	<input name='myimg1' type='hidden' value='".$rowb['myimg1']."' />
 	<img src='../Gch.Img.Art/".$rowb['myimg1']."'  width='99%' height='auto' />
 						</td>
+	<input name='myimg2' type='hidden' value='".$rowb['myimg2']."' />
+	<input name='myimg3' type='hidden' value='".$rowb['myimg3']."' />
+	<input name='myimg4' type='hidden' value='".$rowb['myimg4']."' />
 	
 	<input name='tipo' type='hidden' value='".$rowb['reftipo']." / ".$tipname."' />
 	<input name='espec1' type='hidden' value='".$rowb['refespec1']."' />

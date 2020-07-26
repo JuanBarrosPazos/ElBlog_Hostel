@@ -100,9 +100,11 @@ function validate_form(){
 			$secc1 = "`".$secc1."`";
 			$sqlc =  "SELECT * FROM `$db_name`.$secc1 WHERE `titsub` = '$_POST[subtitul]'";
 			$qc = mysqli_query($db, $sqlc);
+			$rowsqc = mysqli_fetch_assoc($qc);
 			global $conutc;
 			$countc = mysqli_num_rows($qc);
-			if($countc > 0){
+			if (@$_SESSION['modid'] == $rowsqc['id']){}
+			elseif($countc > 0){
 			$errors [] = "YA EXISTE ESTE SUBTITULO";
 				}
 		}
@@ -349,179 +351,176 @@ function process_form(){
 	require 'Inclu_Valora_Calculos.php';
 
 	/* GRABAMOS LOS DATOS EN LA TABLA DE RESTAURANTES */
-
 	global $tablename;
 	$tablename = "gch_art";
 	$tablename = "`".$tablename."`";
-
 	$sqla = "UPDATE `$db_name`.$tablename SET `refuser` = '$_POST[autor]', `tit` = '$_POST[titulo]', `titsub` = '$_POST[subtitul]', `datemod` = '$_POST[datemod]', `timemod` = '$_POST[timemod]', `conte` = '$_POST[coment]', `refayto` = '$_POST[ayto]', `refisla` = '$_POST[isla]', `reftipo` = '$_POST[tipo]', `refespec1` = '$_POST[espec1]', `refespec2` = '$_POST[espec2]', `ivalora` = '$valmartx100', `iprecio` = '$valmart2x100', `url` = '$_POST[url]', `map` = '$_POST[map]', `mapiframe` = '$_POST[mapiframe]', `latitud` = '$_POST[latitud]', `longitud` = '$_POST[longitud]', `calle` = '$_POST[calle]', `Email` = '$_POST[Email]', `Tlf1` = '$_POST[Tlf1]', `Tlf2` = '$_POST[Tlf2]' WHERE $tablename.`refart` = '$_SESSION[refart]' LIMIT 1 ";
-
 	if(mysqli_query($db, $sqla)){
 
-			global $carpetaimg;
-			global $new_name;
+		global $carpetaimg;
+		global $new_name;
 
-			print("<table align='center' style='margin-top:10px'>
-				<tr>
-					<th colspan=3 class='BorderInf'>
-						CREADO POR ".strtoupper($_sec)."
-					</th>
-				</tr>
+		print("<table align='center' style='margin-top:10px'>
+			<tr>
+				<th colspan=3 class='BorderInf'>
+					CREADO POR ".strtoupper($_sec)."
+				</th>
+			</tr>
 												
-				<tr>
-					<td width=120px>
-						REFERENCIA
-					</td>
-					<td width=100px>"
-						.$_POST['refart'].
-					"</td>
-					<td rowspan='5' align='center' width='120px'>
-				<img src='".$carpetaimg."/".$_SESSION['myimg']."' width='98% height='auto' />
-					</td>
-				</tr>
+			<tr>
+				<td width=120px>
+					REFERENCIA
+				</td>
+				<td width=100px>"
+					.$_POST['refart'].
+				"</td>
+				<td rowspan='5' align='center' width='120px'>
+			<img src='".$carpetaimg."/".$_SESSION['myimg']."' width='98% height='auto' />
+				</td>
+			</tr>
 				
-				<tr>
-					<td>
-						TITULO
-					</td>
-					<td>"
-						.$_POST['titulo'].
-					"</td>
-				</tr>				
+			<tr>
+				<td>
+					TITULO
+				</td>
+				<td>"
+					.$_POST['titulo'].
+				"</td>
+			</tr>				
 				
-				<tr>
-					<td>	
-						SUBTITULO
-					</td>
-					<td>"
-						.$_POST['subtitul'].
-					"</td>
-				</tr>
+			<tr>
+				<td>	
+					SUBTITULO
+				</td>
+				<td>"
+					.$_POST['subtitul'].
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>	
-						DATE IN
-					</td>
-					<td>"
-						.$_POST['datein'].
-					"</td>
-				</tr>
+			<tr>
+				<td>	
+					DATE IN
+				</td>
+				<td>"
+					.$_POST['datein'].
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>	
-						TIME IN
-					</td>
-					<td>"
-						.$_POST['timein'].
-					"</td>
-				</tr>
+			<tr>
+				<td>	
+					TIME IN
+				</td>
+				<td>"
+					.$_POST['timein'].
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>	
-						ISLA
-					</td>
-					<td colspan=2>"
-						.$_POST['isla']." / ".$islaname.
-					"</td>
-				</tr>
+			<tr>
+				<td>	
+					ISLA
+				</td>
+				<td colspan=2>"
+					.$_POST['isla']." / ".$islaname.
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>	
-						AYUNTAMIENTO
-					</td>
-					<td colspan=2>"
-						.$_POST['ayto']." / ".$aytoname.
-					"</td>
-				</tr>
+			<tr>
+				<td>	
+					AYUNTAMIENTO
+				</td>
+				<td colspan=2>"
+					.$_POST['ayto']." / ".$aytoname.
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>	
-						TIPO
-					</td>
-					<td colspan=2>"
-						.$_POST['tipo']." / ".$tipname.
-					"</td>
-				</tr>
+			<tr>
+				<td>	
+					TIPO
+				</td>
+				<td colspan=2>"
+					.$_POST['tipo']." / ".$tipname.
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>	
-						ESPECIALIDAD 1
-					</td>
-					<td colspan=2>"
-						.$_POST['espec1']." / ".$espec1name.
-					"</td>
-				</tr>
+			<tr>
+				<td>	
+					ESPECIALIDAD 1
+				</td>
+				<td colspan=2>"
+					.$_POST['espec1']." / ".$espec1name.
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>	
-						ESPECIALIDAD 2
-					</td>
-					<td colspan=2>"
-						.$_POST['espec2']." / ".$espec1name.
-					"</td>
-				</tr>
+			<tr>
+				<td>	
+					ESPECIALIDAD 2
+				</td>
+				<td colspan=2>"
+					.$_POST['espec2']." / ".$espec1name.
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>	
-						URL WEB
-					</td>
-					<td colspan=2>"
-						.$_POST['url'].
-					"</td>
-				</tr>
+			<tr>
+				<td>	
+					URL WEB
+				</td>
+				<td colspan=2>"
+					.$_POST['url'].
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>	
-						CALLE
-					</td>
-					<td colspan=2>"
-						.$_POST['calle'].
-					"</td>
-				</tr>
+			<tr>
+				<td>	
+					CALLE
+				</td>
+				<td colspan=2>"
+					.$_POST['calle'].
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>	
-						EMAIL
-					</td>
-					<td colspan=2>"
-						.$_POST['Email'].
-					"</td>
-				</tr>
+			<tr>
+				<td>	
+					EMAIL
+				</td>
+				<td colspan=2>"
+					.$_POST['Email'].
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>	
-						TELEFONO 1
-					</td>
-					<td colspan=2>"
-						.$_POST['Tlf1'].
-					"</td>
-				</tr>
+			<tr>
+				<td>	
+					TELEFONO 1
+				</td>
+				<td colspan=2>"
+					.$_POST['Tlf1'].
+				"</td>
+			</tr>
 				
-				<tr>
-					<td>	
-						TELEFONO 2
-					</td>
-					<td colspan=2>"
-						.$_POST['Tlf2'].
-					"</td>
-				</tr>
+			<tr>
+				<td>	
+					TELEFONO 2
+				</td>
+				<td colspan=2>"
+					.$_POST['Tlf2'].
+				"</td>
+			</tr>
 				
-				<tr>
-					<td colspan=3  align='center'>
-						DESCRIPCION
-					</td>
-				</tr>
-				<tr>
-					<td colspan=3>"
-						.$_POST['coment'].
-					"</td>
-				</tr>
-				<tr>
-					<th colspan=3 class='BorderSup'>
-						<a href=Art_Modificar_01.php>MODIFICAR UN NUEVO RESTAURANTE</a>
-					</th>
-				</tr>
-			</table>");
+			<tr>
+				<td colspan=3  align='center'>
+					DESCRIPCION
+				</td>
+			</tr>
+			<tr>
+				<td colspan=3>"
+					.$_POST['coment'].
+				"</td>
+			</tr>
+			<tr>
+				<th colspan=3 class='BorderSup'>
+					<a href=Art_Modificar_01.php>MODIFICAR UN NUEVO RESTAURANTE</a>
+				</th>
+			</tr>
+		</table>");
 			
 	} 	else {print("* MODIFIQUE LA ENTRADA L.152: ".mysqli_error($db));
 						show_form ();

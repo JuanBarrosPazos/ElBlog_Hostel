@@ -539,7 +539,7 @@ function process_form(){
 	else{
 	$extension2 = substr($_FILES['myimg2']['name'],-3);
 	global $new_name2;
-	$new_name2 = $_POST['refart']."_01.".$extension2;
+	$new_name2 = $_POST['refart']."_02.".$extension2;
 	}
 
 	if($_FILES['myimg3']['size'] == 0){
@@ -753,27 +753,21 @@ function process_form(){
 				global $carpetaimg;
 				global $new_name1;
 				copy("../Gch.Img.Sys/untitled.png", $carpetaimg."/".$new_name1);
-		} 	
-		else{	$safe_filename = trim(str_replace('/', '', $_FILES['myimg1']['name']));
-				$safe_filename = trim(str_replace('..', '', $safe_filename));
-
-				$nombre = $_FILES['myimg1']['name'];
-				$destination_file = $carpetaimg.'/'.$safe_filename;
-
-	 if( file_exists( $carpetaimg.'/'.$nombre) ){
-			unlink($carpetaimg."/".$nombre);
-		//	print("* El archivo ".$nombre." ya existe, seleccione otra imagen.</br>");
-												}
-			
-	elseif (move_uploaded_file($_FILES['myimg1']['tmp_name'], $destination_file)){
-			
-			global $carpetaimg;
-			global $new_name1;
-			$rename_filename = $carpetaimg."/".$new_name1;								
-			rename($destination_file, $rename_filename);
-			// print("El archivo se ha guardado en: ".$destination_file);
-			}
-		else {print("NO SE HA PODIDO GUARDAR EN ".$destination_file);}
+	} else{	$safe_filename = trim(str_replace('/', '', $_FILES['myimg1']['name']));
+			$safe_filename = trim(str_replace('..', '', $safe_filename));
+			$nombre = $_FILES['myimg1']['name'];
+			$destination_file = $carpetaimg.'/'.$safe_filename;
+			if( file_exists( $carpetaimg.'/'.$nombre) ){
+					unlink($carpetaimg."/".$nombre);
+				//	print("* El archivo ".$nombre." ya existe, seleccione otra imagen.</br>");
+			} elseif (move_uploaded_file($_FILES['myimg1']['tmp_name'], $destination_file)){
+					global $carpetaimg;
+					global $new_name1;
+					$rename_filename = $carpetaimg."/".$new_name1;								
+					rename($destination_file, $rename_filename);
+					// print("El archivo se ha guardado en: ".$destination_file);
+					}
+			else {print("NO SE HA PODIDO GUARDAR EN ".$destination_file);}
 		}
 
 	/* GRABAMOS LA IMAGEN 2 */
@@ -781,27 +775,20 @@ function process_form(){
 				global $carpetaimg;
 				global $new_name2;
 				copy("../Gch.Img.Sys/untitled.png", $carpetaimg."/".$new_name2);
-		} 	
-		else{	$safe_filename = trim(str_replace('/', '', $_FILES['myimg2']['name']));
+	} else {	$safe_filename = trim(str_replace('/', '', $_FILES['myimg2']['name']));
 				$safe_filename = trim(str_replace('..', '', $safe_filename));
-
 				$nombre = $_FILES['myimg2']['name'];
 				$destination_file = $carpetaimg.'/'.$safe_filename;
-
-	 if( file_exists( $carpetaimg.'/'.$nombre) ){
-			unlink($carpetaimg."/".$nombre);
-		//	print("* El archivo ".$nombre." ya existe, seleccione otra imagen.</br>");
-												}
-			
-	elseif (move_uploaded_file($_FILES['myimg2']['tmp_name'], $destination_file)){
-			
-			global $carpetaimg;
-			global $new_name2;
-			$rename_filename = $carpetaimg."/".$new_name2;								
-			rename($destination_file, $rename_filename);
-			// print("El archivo se ha guardado en: ".$destination_file);
-			}
-		else {print("NO SE HA PODIDO GUARDAR EN ".$destination_file);}
+			if( file_exists( $carpetaimg.'/'.$nombre) ){
+					unlink($carpetaimg."/".$nombre);
+				//	print("* El archivo ".$nombre." ya existe, seleccione otra imagen.</br>");
+			} elseif (move_uploaded_file($_FILES['myimg2']['tmp_name'], $destination_file)){
+					global $carpetaimg;
+					global $new_name2;
+					$rename_filename = $carpetaimg."/".$new_name2;								
+					rename($destination_file, $rename_filename);
+					// print("El archivo se ha guardado en: ".$destination_file);
+			} else {print("NO SE HA PODIDO GUARDAR EN ".$destination_file);}
 		}
 
 	/* GRABAMOS LA IMAGEN 3 */
@@ -809,27 +796,20 @@ function process_form(){
 				global $carpetaimg;
 				global $new_name3;
 				copy("../Gch.Img.Sys/untitled.png", $carpetaimg."/".$new_name3);
-		} 	
-		else{	$safe_filename = trim(str_replace('/', '', $_FILES['myimg3']['name']));
-				$safe_filename = trim(str_replace('..', '', $safe_filename));
-
-				$nombre = $_FILES['myimg3']['name'];
-				$destination_file = $carpetaimg.'/'.$safe_filename;
-
-	 if( file_exists( $carpetaimg.'/'.$nombre) ){
-			unlink($carpetaimg."/".$nombre);
-		//	print("* El archivo ".$nombre." ya existe, seleccione otra imagen.</br>");
-												}
-			
-	elseif (move_uploaded_file($_FILES['myimg3']['tmp_name'], $destination_file)){
-			
-			global $carpetaimg;
-			global $new_name3;
-			$rename_filename = $carpetaimg."/".$new_name3;								
-			rename($destination_file, $rename_filename);
-			// print("El archivo se ha guardado en: ".$destination_file);
-			}
-		else {print("NO SE HA PODIDO GUARDAR EN ".$destination_file);}
+	} else {$safe_filename = trim(str_replace('/', '', $_FILES['myimg3']['name']));
+			$safe_filename = trim(str_replace('..', '', $safe_filename));
+			$nombre = $_FILES['myimg3']['name'];
+			$destination_file = $carpetaimg.'/'.$safe_filename;
+			if( file_exists( $carpetaimg.'/'.$nombre) ){
+					unlink($carpetaimg."/".$nombre);
+				//	print("* El archivo ".$nombre." ya existe, seleccione otra imagen.</br>");
+			} elseif (move_uploaded_file($_FILES['myimg3']['tmp_name'], $destination_file)){
+					global $carpetaimg;
+					global $new_name3;
+					$rename_filename = $carpetaimg."/".$new_name3;								
+					rename($destination_file, $rename_filename);
+					// print("El archivo se ha guardado en: ".$destination_file);
+			} else {print("NO SE HA PODIDO GUARDAR EN ".$destination_file);}
 		}
 
 	/* GRABAMOS LA IMAGEN 4 */
@@ -837,27 +817,21 @@ function process_form(){
 				global $carpetaimg;
 				global $new_name4;
 				copy("../Gch.Img.Sys/untitled.png", $carpetaimg."/".$new_name4);
-		} 	
-		else{	$safe_filename = trim(str_replace('/', '', $_FILES['myimg4']['name']));
+	} else {	$safe_filename = trim(str_replace('/', '', $_FILES['myimg4']['name']));
 				$safe_filename = trim(str_replace('..', '', $safe_filename));
-
 				$nombre = $_FILES['myimg4']['name'];
 				$destination_file = $carpetaimg.'/'.$safe_filename;
-
-	 if( file_exists( $carpetaimg.'/'.$nombre) ){
-			unlink($carpetaimg."/".$nombre);
-		//	print("* El archivo ".$nombre." ya existe, seleccione otra imagen.</br>");
-												}
-			
-	elseif (move_uploaded_file($_FILES['myimg4']['tmp_name'], $destination_file)){
-			
-			global $carpetaimg;
-			global $new_name4;
-			$rename_filename = $carpetaimg."/".$new_name4;								
-			rename($destination_file, $rename_filename);
-			// print("El archivo se ha guardado en: ".$destination_file);
-			}
-		else {print("NO SE HA PODIDO GUARDAR EN ".$destination_file);}
+			if( file_exists( $carpetaimg.'/'.$nombre) ){
+					unlink($carpetaimg."/".$nombre);
+				//	print("* El archivo ".$nombre." ya existe, seleccione otra imagen.</br>");
+			} elseif (move_uploaded_file($_FILES['myimg4']['tmp_name'], $destination_file)){
+					
+					global $carpetaimg;
+					global $new_name4;
+					$rename_filename = $carpetaimg."/".$new_name4;								
+					rename($destination_file, $rename_filename);
+					// print("El archivo se ha guardado en: ".$destination_file);
+			} else {print("NO SE HA PODIDO GUARDAR EN ".$destination_file);}
 		}
 
 	} 	// NO SE CUMPLE EL QUERY

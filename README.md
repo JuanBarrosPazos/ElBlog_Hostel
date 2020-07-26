@@ -5,6 +5,24 @@
 ## EN EL DIRECTORIO Gch.Tutorial SE ENCUENTRA UNA GUÍA GENERAL DE LA APP.
 
 ----
+
+### 2020.07.26
+
+* SE HA ACTUALIZADO:
+1. La modificación de las 4 imágenes de los restaurantes y su interface de usuario.
+2. El borrado de restaurantes y sus imágenes correspondientes de forma automática.
+3. Al borrar un restaurante se eliminan todos los comentarios relacionados.
+4. La creación de restaurantes y creación de sus 4 imágenes, con una imágen por defecto para las img2, 3 o 4, que no son obligatorias.
+5. La validación en la modificación de datos de restaurantes.
+6. Modificado index_Play_System(Docker).php (y otros relacionados) sobreescribir y renombrar a index.php.
+7. Al borrar un administrador se modifica su referencia en la tabla restaurantes y opiniones por admindel.
+8. Se ha modificado el formulario de número de administradores permitidos y su validación.
+
+* Se recomienda sobreescribir los directorios: Gch.Artic, Gch.Www, Gch.Config, Gch.Users, Gck.Admin.
+* O borrarlos y cargarlos de nuevo.
+
+----
+
 ### 2020.07.25
 
 * Se han creado nuevos archivos para la actualización de la valoraciones y se ha modificado todo lo relacionado con las valoraciones.

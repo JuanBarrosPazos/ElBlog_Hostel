@@ -217,7 +217,24 @@ function process_form(){
 	$sql = "DELETE FROM `$db_name`.`gch_admin` WHERE `gch_admin`.`id` = '$_POST[id]' LIMIT 1 ";
 	// SI SE CUMPLE EL QUERY
 	if(mysqli_query($db, $sql)){
-	
+
+	/* CAMBIAMOS LA REFERENCIA DEL USUARIO BORRADO EN LA TABLA RESTAURANTES POR ADMINDEL */
+	global $tablenamea;
+	$tablenamea = "gch_art";
+	$tablenamea = "`".$tablenamea."`";
+	$sqla = "UPDATE `$db_name`.$tablenamea SET `refuser` = 'admindel' WHERE $tablenamea.`refart` = '$_SESSION[delrefart]' LIMIT 1 ";
+	if(mysqli_query($db, $sqla)){ 
+		print("<font color='#FF0000'>L225: </font></br>&nbsp;&nbsp;".mysqli_error($db))."</br>";
+	} else { }
+	/* CAMBIAMOS LA REFERENCIA DEL USUARIO BORRADO EN LA TABLA OPINIONES POR ADMINDEL */
+	global $tablenameb;
+	$tablenameb = "gch_opiniones";
+	$tablenameb = "`".$tablenameb."`";
+	$sqlab = "UPDATE `$db_name`.$tablenameb SET `refuser` = 'admindel' WHERE $tablenameb.`refart` = '$_SESSION[delrefart]' LIMIT 1 ";
+	if(mysqli_query($db, $sqlab)){ 
+		print("<font color='#FF0000'>L233: </font></br>&nbsp;&nbsp;".mysqli_error($db))."</br>";
+	} else { }
+
 	global $ctemp;
 	$ctemp = "../Gch.Temp";
 	global $imgorg;
@@ -248,9 +265,8 @@ function process_form(){
 
 	} // FIN PRIMER IF SI SE BORRA EL USER DE LA BBDD
 	  // => ELSE BORRADO NO OK PRIMER QUERY
-		else {print("<font color='#FF0000'>SE HA PRODUCIDO UN ERROR: </font>
-					</br>&nbsp;&nbsp;".mysqli_error($db))."</br>";
-					show_form ();
+		else { print("<font color='#FF0000'>L217: </font></br>&nbsp;&nbsp;".mysqli_error($db))."</br>";
+				show_form ();
 						}
 	
 	} // FIN FUNCTION
@@ -262,45 +278,46 @@ function process_form(){
 function show_form(){
 
 	if($_POST['oculto2']){
-				$defaults = array ( 'id' => $_POST['id'],
-									'ref' => $_POST['ref'],
-									'Nivel' => $_POST['Nivel'],
-									'Nombre' => $_POST['Nombre'],
-									'Apellidos' => $_POST['Apellidos'],
-									'myimg' => $_POST['myimg'],
-									'doc' => $_POST['doc'],
-									'dni' => $_POST['dni'],
-									'ldni' => $_POST['ldni'],
-									'Email' => $_POST['Email'],
-									'Usuario' => $_POST['Usuario'],
-									'Password' => $_POST['Password'],
-									'Direccion' => $_POST['Direccion'],
-									'Tlf1' => $_POST['Tlf1'],
-									'Tlf2' => $_POST['Tlf2'],
-									'lastin' => $_POST['lastin'],
-									'lastout' => $_POST['lastout'],
-									'visitadmin' => $_POST['visitadmin']);
-								   		}
+			$_SESSION['delrefart'] = $_POST['ref'];
+			$defaults = array ( 'id' => $_POST['id'],
+								'ref' => $_POST['ref'],
+								'Nivel' => $_POST['Nivel'],
+								'Nombre' => $_POST['Nombre'],
+								'Apellidos' => $_POST['Apellidos'],
+								'myimg' => $_POST['myimg'],
+								'doc' => $_POST['doc'],
+								'dni' => $_POST['dni'],
+								'ldni' => $_POST['ldni'],
+								'Email' => $_POST['Email'],
+								'Usuario' => $_POST['Usuario'],
+								'Password' => $_POST['Password'],
+								'Direccion' => $_POST['Direccion'],
+								'Tlf1' => $_POST['Tlf1'],
+								'Tlf2' => $_POST['Tlf2'],
+								'lastin' => $_POST['lastin'],
+								'lastout' => $_POST['lastout'],
+								'visitadmin' => $_POST['visitadmin']);
+							   		}
 	if(isset($_POST['borrar'])){
-				$defaults = array ( 'id' => $_POST['id'],
-									'ref' => $_POST['ref'],
-									'Nivel' => $_POST['Nivel'],
-									'Nombre' => $_POST['Nombre'],
-									'Apellidos' => $_POST['Apellidos'],
-									'myimg' => $_POST['myimg'],
-									'doc' => $_POST['doc'],
-									'dni' => $_POST['dni'],
-									'ldni' => $_POST['ldni'],
-									'Email' => $_POST['Email'],
-									'Usuario' => $_POST['Usuario'],
-									'Password' => $_POST['Password'],
-									'Direccion' => $_POST['Direccion'],
-									'Tlf1' => $_POST['Tlf1'],
-									'Tlf2' => $_POST['Tlf2'],
-									'lastin' => $_POST['lastin'],
-									'lastout' => $_POST['lastout'],
-									'visitadmin' => $_POST['visitadmin']);
-								   		}
+			$defaults = array ( 'id' => $_POST['id'],
+								'ref' => $_POST['ref'],
+								'Nivel' => $_POST['Nivel'],
+								'Nombre' => $_POST['Nombre'],
+								'Apellidos' => $_POST['Apellidos'],
+								'myimg' => $_POST['myimg'],
+								'doc' => $_POST['doc'],
+								'dni' => $_POST['dni'],
+								'ldni' => $_POST['ldni'],
+								'Email' => $_POST['Email'],
+								'Usuario' => $_POST['Usuario'],
+								'Password' => $_POST['Password'],
+								'Direccion' => $_POST['Direccion'],
+								'Tlf1' => $_POST['Tlf1'],
+								'Tlf2' => $_POST['Tlf2'],
+								'lastin' => $_POST['lastin'],
+								'lastout' => $_POST['lastout'],
+								'visitadmin' => $_POST['visitadmin']);
+							   		}
 								   
 	print("<table align='center' style=\"margin-top:10px\">
 				<tr>
@@ -324,7 +341,6 @@ function show_form(){
 				</tr>
 				
 	<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'>
-			
 				<input name='id' type='hidden' value='".$defaults['id']."' />					
 				<input name='ref' type='hidden' value='".$defaults['ref']."' />					
 				<input name='lastin' type='hidden' value='".$defaults['lastin']."' />					
@@ -332,7 +348,7 @@ function show_form(){
 				<input name='visitadmin' type='hidden' value='".$defaults['visitadmin']."' />
 		<tr>
 			<td width=120px>	
-						Nivel:
+					Nivel:
 			</td>
 			<td width=100px>
 				".$defaults['Nivel']."
@@ -341,7 +357,7 @@ function show_form(){
 			
 			<td rowspan='5' align='center' width='94px'>
 <img src='../Gch.Img.Admin/".$_POST['myimg']."' height='120px' width='90px' />
-						<input name='myimg' type='hidden' value='".$_POST['myimg']."' />
+					<input name='myimg' type='hidden' value='".$_POST['myimg']."' />
 
 			</td>
 		</tr>
@@ -466,7 +482,6 @@ function show_form(){
 		</table>"); 
 	
 	}	
-
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

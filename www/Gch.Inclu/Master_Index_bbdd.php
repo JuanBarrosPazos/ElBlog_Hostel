@@ -70,11 +70,11 @@ print("<li>
 print("
 	
 	<li>
-		<a href='#'><i class='ic ico13'></i> <span>ADMIN</span></a>
+		<a href='#'><i class='ic ico13'></i> <span>ADMIN SYSTM</span></a>
 			<ul class='nav-flyout'>
 				<li>
 					<a href='#' style='background-color: #343434; padding-top: 31px'>
-						<i class='ic ico19b'></i>USERS SYST
+						<i class='ic ico19b'></i>ADMIN SYST
 					</a>
 				</li>
 				<li>

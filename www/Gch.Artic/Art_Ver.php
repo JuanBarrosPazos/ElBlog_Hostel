@@ -211,7 +211,7 @@ function process_form(){
 				
 	print (	"<tr align='center'>
 									
-	<form name='ver' action='Art_Ver_02.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=520px,height=auto')\">
+	<form name='ver' action='Art_Ver_02.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=520px,height=640px')\">
 
 	<input name='id' type='hidden' value='".$rowb['id']."' />
 	<input name='refuser' type='hidden' value='".$rowb['refuser']."' />
@@ -427,7 +427,7 @@ function ver_todo(){
 				
 	print (	"<tr align='center'>
 									
-	<form name='ver' action='../Gch.Artic/Art_Ver_02.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=520px,height=auto')\">
+	<form name='ver' action='../Gch.Artic/Art_Ver_02.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=520px,height=640px')\">
 
 	<input name='id' type='hidden' value='".$rowb['id']."' />
 	<input name='refuser' type='hidden' value='".$rowb['refuser']."' />

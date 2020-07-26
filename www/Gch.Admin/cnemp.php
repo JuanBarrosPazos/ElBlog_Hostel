@@ -33,12 +33,20 @@ function validate_form(){
 	
 	$errors = array();
 	
-	/* VALIDAMOS EL CAMPO NIVEL. */
-	
+	/* VALIDAMOS EL CAMPO NUMERO DE ADMIN SYS. */
+	global $db;
+
+	$sqlb =  "SELECT * FROM `gch_admin` ";
+	$qb = mysqli_query($db, $sqlb);
+	$cqb = mysqli_num_rows($qb);
+
 	if(strlen(trim($_POST['nemp'])) == 0){
 		$errors [] = "<font color='#FF0000'>SELECCIONE NUMERO EMPLEADOS</font>";
 		}
-	
+	elseif($cqb > $_POST['nemp']){
+		$errors [] = "<font color='#FF0000'>EXISTEN MÁS ADMIN SYS EN LA BBDD .".$cqb."</font>";
+	}
+
 	return $errors;
 
 		} 
@@ -66,7 +74,7 @@ function process_form(){
 								
 				<tr>
 					<td  align='center'>
-						Nº EMPLEADOS PERMITIDOS: "
+						Nº ADMIN SYS PERMITIDOS: "
 						.$_POST['nemp'].
 					"</td>
 				</tr>
@@ -100,14 +108,14 @@ function show_form($errors=''){
 				</table>");
 		}
 		
-	$nemp = array (	'' => 'EMPLEADOS PERMITIDOS',
-					'1' => '<= 1 EMPLEADOS',
-					'3' => '<= 3 EMPLEADOS',
-					'5' => '<= 5 EMPLEADOS',
-					'10' => '<= 10 EMPLEADOS',
-					'20' => '<= 20 EMPLEADOS',
-					'50' => '<= 50 EMPLEADOS',
-					'100' => '<= 100 EMPLEADOS',
+	$nemp = array (	'' => 'ADMIN SYS PERMITIDOS',
+					'1' => '<= 1 ADMIN SYS',
+					'3' => '<= 3 ADMIN SYS',
+					'5' => '<= 5 ADMIN SYS',
+					'10' => '<= 10 ADMIN SYS',
+					'20' => '<= 20 ADMIN SYS',
+					'50' => '<= 50 ADMIN SYS',
+					'100' => '<= 100 ADMIN SYS',
 											);														
 
 /*******************************/
@@ -115,7 +123,7 @@ function show_form($errors=''){
 		print("<table align='center' style=\"margin-top:4px\">
 				<tr>
 					<th colspan=2 class='BorderInf'>
-							Nº EMPLEADOS PERMITIDO: ".$_SESSION['nuser']."
+							Nº ADMIN SYS PERMITIDOS: ".$_SESSION['nuser']."
 					</th>
 				</tr>
 				
@@ -144,7 +152,7 @@ function show_form($errors=''){
 				
 				<tr>
 					<td colspan='2'  align='right' valign='middle'  class='BorderSup'>
-						<input type='submit' value='GRABAR Nº EMPLEADOS PERMITIDO' />
+						<input type='submit' value='GRABAR Nº ADMIN SYS PERMITIDOS' />
 						<input type='hidden' name='oculto' value=1 />
 						
 					</td>
