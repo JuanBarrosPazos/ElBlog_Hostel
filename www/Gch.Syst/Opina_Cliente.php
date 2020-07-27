@@ -40,7 +40,18 @@ if(@$_SESSION['Nivel'] == 'user'){
 								}
 	else {show_form();}
 
-	} else { require '../Gch.Inclu/table_permisos.php'; }
+	} else { require '../Gch.Inclu/table_permisos.php'; 
+				global $redir;
+				// 600000 microsegundos 10 minutos
+				// 60000 microsegundos 1 minuto
+				$redir = "<script type='text/javascript'>
+							function redir(){
+								window.close();
+									}
+							setTimeout('redir()',6000);
+						</script>";
+				print ($redir);
+	}
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 

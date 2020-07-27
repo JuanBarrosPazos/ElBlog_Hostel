@@ -2,8 +2,7 @@
 session_start();
 
   	//require '../Gch.Inclu/error_hidden.php';
-	require '../Gch.Inclu/Admin_Inclu_01b.php';
-	require '../Gch.Inclu/mydni.php';
+	require 'Inc_Header_Nav_Heado.php';
 
 	require '../Gch.Connet/conection.php';
 	require '../Gch.Connet/conect.php';
@@ -108,7 +107,17 @@ function ver_todo(){
 			if(mysqli_num_rows($qb)== 0){
 				print ("<table align='center'>
 							<tr>
-								<td>
+								<td colspan=3 class='BorderInf' align='center'>
+							RESTAURANTE: ".$_SESSION['titopina']."
+								</td>
+							</tr>
+							<tr>
+								<td colspan=3 class='BorderInf' align='center'>
+							".$_SESSION['islaopina']." :: ".$_SESSION['aytoopina']."
+								</td>
+							</tr>
+							<tr>
+								<td align='center'>
 									<font color='#FF0000'>
 										NO HAY DATOS
 									</font>
@@ -116,10 +125,10 @@ function ver_todo(){
 							</tr>
 							<tr>
 						<form name='closewindow' action='$_SERVER[PHP_SELF]' onsubmit=\"window.close()\">
-								<th colspan=3 class='BorderSup' valign='middle' align='right'>
+								<td colspan=3 class='BorderSup' valign='middle' align='center'>
 							<input type='submit' value='CERRAR VENTANA' />
 							<input type='hidden' name='closew' value=1 />
-								</th>
+								</td>
 						</form>
 							</tr>
 					</table>");
@@ -133,37 +142,35 @@ function ver_todo(){
 								setTimeout('redir()',6000);
 							</script>";
 					print ($redir);
-							
 									
 				} else { 	print ("<table align='center'>
 									<tr>
-										<th colspan=3 class='BorderInf'>
+										<td colspan=3 class='BorderInf' align='center'>
 							OPINIONES MODERADAS: ".$nres." de ".$num_total_rows."
-										</th>
+										</td>
 									</tr>
 									<tr>
-										<th colspan=3 class='BorderInf'>
+										<td colspan=3 class='BorderInf' align='center'>
 							RESTAURANTE: ".$_SESSION['titopina']."
-										</th>
+										</td>
 									</tr>
 									<tr>
-										<th colspan=3 class='BorderInf'>
+										<td colspan=3 class='BorderInf' align='center'>
 							".$_SESSION['islaopina']." :: ".$_SESSION['aytoopina']."
-										</th>
+										</td>
 									</tr>
-
 									<tr>
-										<th class='BorderInfDch'>
+										<td class='BorderInfDch' align='center'>
 											FECHA
-										</th>
+										</td>
 										
-										<th class='BorderInfDch'>
+										<td class='BorderInfDch' align='center'>
 											VALOR
-										</th>
+										</td>
 																				
-										<th class='BorderInf'>
+										<td class='BorderInf' align='center'>
 											OPINIÓN
-										</th>
+										</td>
 									</tr>");
 			
 			
@@ -225,7 +232,8 @@ function ver_todo(){
 					<input type='submit' value='CERRAR VENTANA' />
 					<input type='hidden' name='closew' value=1 />
 				</form>
-			</div>");
+			</div>
+			<div style='clear:both'></div>");
 			global $redir;
 			$redir = "<script type='text/javascript'>
 						function redir(){
@@ -240,6 +248,8 @@ function ver_todo(){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
-	require '../Gch.Inclu/Admin_Inclu_02.php';
+require '../Gch.Users/Inc_Footer.php';
+
+require '../Gch.Www/Inc_Jquery_Boots_Foot.php';
 		
 /* Creado por Juan Barros Pazos 2019 */

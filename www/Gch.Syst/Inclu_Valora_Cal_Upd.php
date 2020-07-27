@@ -1,6 +1,7 @@
 
 <?php
 
+	global $refartval;
 	global $tablename;
 	$tablename = "gch_art";
 	$tablename = "`".$tablename."`";

@@ -90,7 +90,7 @@ function MM_validateForm() {
 <body id="page-top">
 
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color:transparent !important;" >
     <div class="container">
 
       <a class="navbar-brand js-scroll-trigger" href="../index.php">
@@ -101,9 +101,9 @@ function MM_validateForm() {
   </nav>
 
   <!-- Header -->
-  <header class="masthead">
+  <header class="masthead" >
     <div class="container">
-      <div class="intro-text">
+      <div class="intro-text" style="padding-top: 12px !important;">
         <!--
         <div class="intro-lead-in">Welcome To Juan Barros Pazos</div>
         -->

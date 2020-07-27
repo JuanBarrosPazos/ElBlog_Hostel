@@ -9,6 +9,18 @@
 ### 2020.07.26
 
 * SE HA ACTUALIZADO:
+
+1. El calculo de la valoración de restaurantes.
+
+2. Visualización de opiniones del frontend.
+
+* Se recomienda sobreescribir los directorios: Gch.Artic, Gch.Syst, Gch.User, Gch.Inclu.
+
+----
+
+### 2020.07.26
+
+* SE HA ACTUALIZADO:
 1. La modificación de las 4 imágenes de los restaurantes y su interface de usuario.
 2. El borrado de restaurantes y sus imágenes correspondientes de forma automática.
 3. Al borrar un restaurante se eliminan todos los comentarios relacionados.
