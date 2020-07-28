@@ -69,7 +69,7 @@ if(!$qa){ print("* ".mysqli_error($db)."</br>");
             // DEFINO LAS IMAGENES
             global $img1;
             $img1 = "<div class='protfolioimg'>
-                        <img class='img-fluid' src='../Gch.Img.Art/".$rowb['myimg1']."' alt=''>
+                        <img class='img-fluid'  src='../Gch.Img.Art/".$rowb['myimg1']."' alt=''>
                     </div>";
             global $img1b;
             $img1b = "<img class='img-fluid d-block mx-auto' src='../Gch.Img.Art/".$rowb['myimg1']."' alt=''>";

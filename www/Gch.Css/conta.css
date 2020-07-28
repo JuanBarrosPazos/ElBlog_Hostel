@@ -376,10 +376,10 @@ a:hover  img {
 }
 
 .protfolioimg {
+	display: block;
 	width: auto;
-	height: 200px;
-	max-height: 200px;
-	overflow: hidden !important;
+	height: 140px;
+	overflow: hidden;
 	}
 
 .juancentra {

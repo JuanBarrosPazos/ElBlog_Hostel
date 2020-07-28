@@ -76,7 +76,7 @@
     global $contep;
 	$contep = $rowb['conte'];
 	$contep = /*$autor.*/$calle.$url.$email.$tlf.$contep."
-	<img src='".$rut."Gch.Img.Art/".@$_POST['myimg1']."' style=\" width:98%; max-width:700px; height:auto\" />
+	<img src='".$rut."Gch.Img.Art/".@$_POST['myimg1']."' style=\"width:98%; max-width:700px; height:auto; max-height:260px;\" />
 	".$veropina.$opina."<form style=\"display: inline-block;\" name='ver' name='ver' action=\"index.php#".$rowb['refart']."\" method='post' >
 				<input type='hidden' name='id' value='".$rowb['id']."' />
 				<input type='hidden' name='refart' value='".$rowb['refart']."' />
