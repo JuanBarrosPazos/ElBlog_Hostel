@@ -4,7 +4,7 @@ session_start();
 	//require '../Gch.Inclu/error_hidden.php';
 	require '../Gch.Connet/conection.php';
 	require '../Gch.Connet/conect.php';
-	require 'Inc_Header_Nav_Headu.php';
+	require 'Inc_Header_Nav_Head.php';
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -27,7 +27,9 @@ if ($_SESSION['uNivel'] == 'useru'){ ver_todo(); }
 			//info();
 			}
 		}
-			else { show_form(); }
+			else { show_form();
+				   ver_todo();
+				}
 	} 
 
 else { require '../Gch.Inclu/table_permisos.php'; 
@@ -77,14 +79,14 @@ function process_form(){
 				}
 
 	if ($_SESSION['uNivel'] == 'adminu') { 
-	$sqlb =  "SELECT * FROM `gch_user` WHERE `Nombre` LIKE '$nom' OR `Apellidos` LIKE '$ape'  ORDER BY `Nombre` ASC  ";
+	$sqlb =  "SELECT * FROM `gch_user` WHERE `Nivel` = 'useru' AND (`Nombre` LIKE '$nom' OR `Apellidos` LIKE '$ape')  ORDER BY `Nombre` ASC  ";
 	$qb = mysqli_query($db, $sqlb);
 				}
 
 				////////////////////		**********  		////////////////////
 
 	global $twhile;
-	$twhile = "FILTRO USUARIOS MODIFICAR";
+	$twhile = "FILTRO USUARIOS";
 	
 	global $formularioh;
 	$formularioh = "<form name='modifica' action='User_Modificar_02.php' method='POST'>";
@@ -109,9 +111,6 @@ function process_form(){
 
 	require 'Inc_While_Total.php';
 	
-	
-			////////////////////		**********  		////////////////////
-				
 	}
 
 				   ////////////////////				   ////////////////////
@@ -143,15 +142,17 @@ function ver_todo(){
 	}
 	
 	elseif ($_SESSION['uNivel'] == 'adminu') { 
-				$orden = @$_POST['Orden'];
-				$sqlb =  "SELECT * FROM `gch_user` ORDER BY $orden ";
+				global $orden;
+				if($_POST['Orden'] == ''){ $orden = '`id` ASC'; }
+				else {$orden = @$_POST['Orden'];}
+				$sqlb =  "SELECT * FROM `gch_user` WHERE `Nivel` = 'useru' ORDER BY $orden ";
 				$qb = mysqli_query($db, $sqlb);
-				}
+			}
 	
 			////////////////////		**********  		////////////////////
 	
 	global $twhile;
-	$twhile = "TODOS USUARIOS MODIFICAR";
+	$twhile = "TODOS USUARIOS";
 	
 	global $formularioh;
 	$formularioh = "<form name='modifica' action='User_Modificar_02.php' method='POST'>";

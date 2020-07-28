@@ -430,7 +430,8 @@ function show_form($errors=''){
 		<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'>
 			
 		<input name='id' type='hidden' value='".$defaults['id']."' />					
-		<input name='myimg' type='hidden' value='".$_SESSION['myimgcl']."' />					
+		<input name='myimg' type='hidden' value='".$_SESSION['myimgcl']."' />	
+						
 				<tr>
 					<td>	
 						<font color='#FF0000'>*</font>

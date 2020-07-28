@@ -39,11 +39,11 @@ $ordenar = array (	'`id` ASC' => 'ID Ascendente',
 
 if (($_SESSION['uNivel'] == 'adminu')){ 
 
-print(" <table align='center' style=\"border:0px;margin-top:4px\">
+print(" <table align='center' style=\"border:0px;margin-top:24px\">
             <tr>
-                <th colspan=3 width=100%>
+                <td colspan=3 align='center'>
                         ".$titulo."
-                </th>
+                </td>
             </tr>
             
     <form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>

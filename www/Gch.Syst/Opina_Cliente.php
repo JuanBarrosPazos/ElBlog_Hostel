@@ -26,8 +26,8 @@ session_start();
 	*/
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
-
-if(@$_SESSION['Nivel'] == 'user'){ 
+echo "**** ".$_SESSION['uNivel'];
+if((@$_SESSION['uNivel'] == 'user')||(@$_SESSION['uNivel'] == 'adminu')){ 
 
 	if (isset($_POST['oculto2'])){ show_form(); }
 	elseif(isset($_POST['oculto'])){

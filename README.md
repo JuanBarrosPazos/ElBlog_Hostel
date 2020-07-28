@@ -6,6 +6,14 @@
 
 ----
 
+### 2020.07.28
+
+* SE RECOMIENDA SOBREESCRIBIR:
+
+- Gch.Artic, Gch.Syst, Gch.Users, Gch.Inclu, css, Gch.Css, vendor, Gch.Www.
+
+----
+
 ### 2020.07.26
 
 * SE HA ACTUALIZADO:
@@ -14,7 +22,7 @@
 
 2. Visualización de opiniones del frontend.
 
-* Se recomienda sobreescribir los directorios: Gch.Artic, Gch.Syst, Gch.User, Gch.Inclu.
+* Se recomienda sobreescribir los directorios: Gch.Artic, Gch.Syst, Gch.Users, Gch.Inclu.
 
 ----
 

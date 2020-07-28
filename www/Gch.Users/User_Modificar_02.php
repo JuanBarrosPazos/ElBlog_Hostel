@@ -16,8 +16,7 @@ $rowd = mysqli_fetch_assoc($qd);
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if ($_SESSION['uNivel'] == 'useru') {
-
+if((@$_SESSION['uNivel'] == 'user')||(@$_SESSION['uNivel'] == 'adminu')){ 
 							if (isset($_POST['oculto2'])){
 								show_form();
 								info_01();
@@ -86,112 +85,60 @@ function process_form(){
 				</tr>
 				
 				<tr>
-					<td>
-						Apellidos:
-					</td>
-					<td>"
-						.$_POST['Apellidos'].
-					"</td>
+					<td>Apellidos:</td>
+					<td>".$_POST['Apellidos']."</td>
 				</tr>				
 				
 				<tr>
-					<td>
-						Tipo Documento:
-					</td>
-					<td>"
-						.$_POST['doc'].
-					"</td>
+					<td>Tipo Documento:</td>
+					<td>".$_POST['doc']."</td>
 				</tr>				
 				
 				<tr>
-					<td>
-						N&uacute;mero:
-					</td>
-					<td>"
-						.$_POST['dni'].
-					"</td>
+					<td>N&uacute;mero:</td>
+					<td>".$_POST['dni']."</td>
 				</tr>				
 				
 				<tr>
-					<td>
-						Control:
-					</td>
-					<td>"
-						.$_POST['ldni'].
-					"</td>
+					<td>Control:</td>
+					<td>".$_POST['ldni']."</td>
 				</tr>				
 				
 				<tr>
-					<td>
-						Mail:
-					</td>
-					<td colspan=2>"
-						.$_POST['Email'].
-					"</td>
+					<td>Mail:</td>
+					<td colspan=2>".$_POST['Email']."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						Tipo Usuario
-					</td>
-					<td colspan=2>"
-						.$_POST['Nivel'].
-					"</td>
+					<td>Tipo Usuario</td>
+					<td colspan=2>".$_POST['Nivel']."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						Referencia Usuario
-					</td>
-					<td colspan=2>"
-						.$_SESSION['refcl'].
-					"</td>
+					<td>Referencia Usuario</td>
+					<td colspan=2>".$_SESSION['refcl']."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						Usuario:
-					</td>
-					<td colspan=2>"
-						.$_POST['Usuario'].
-					"</td>
+					<td>Usuario:</td>
+					<td colspan=2>".$_POST['Usuario']."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						Password:
-					</td>
-					<td colspan=2>"
-						.$_POST['Password'].
-					"</td>
+					<td>Password:</td>
+					<td colspan=2>".$_POST['Password']."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						Dirección:
-					</td>
-					<td colspan=2>"
-						.$_POST['Direccion'].
-					"</td>
+					<td>Dirección:</td>
+					<td colspan=2>".$_POST['Direccion']."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						Teléfono 1:
-					</td>
-					<td colspan=2>"
-						.$_POST['Tlf1'].
-					"</td>
+					<td>Teléfono 1:</td>
+					<td colspan=2>".$_POST['Tlf1']."</td>
 				</tr>
 				
-				<tr>
-					<td>
-						Teléfono 2:
-					</td>
-					<td colspan=2>"
-						.$_POST['Tlf2']./*" / ".$_SESSION['dni']." / ".$_SESSION['mydni'].*/
-					"</td>
-				</tr>
 				<tr>
 					<td colspan=3 align='right' class='BorderSup'>
 						<form name='closewindow' action='User_Modificar_01.php'  \">
@@ -227,7 +174,7 @@ function process_form(){
 
 				} else {
 				print("<font color='#FF0000'>
-						* MODIFIQUE LA ENTRADA 220: </font>
+						* MODIFIQUE LA ENTRADA 206: </font>
 						</br>
 						&nbsp;&nbsp;&nbsp;".mysqli_error($db))."
 						</br>";
@@ -291,9 +238,6 @@ function show_form($errors=''){
 								   
 		elseif($_POST['modifica']){
 			
-			global $dt;
-			$dt = $_POST['doc'];
-			
 			$defaults = array ( 'id' => $_POST['id'],
 								'ref' => $_SESSION['refcl'],
 								'Nombre' => $_POST['Nombre'],
@@ -327,75 +271,169 @@ function show_form($errors=''){
 				</table>");
 					}
 		
+	if($_SESSION['uNivel'] == 'adminu'){
 	
-	if($_SESSION['uNivel'] == 'useru'){
-	
-	print("<div class=\"juancentramail\">
+	print("<table align='center' border=0>
 
-			<div style=\"display:inline-block; width: 100%; text-align:center;\">
-		<img src='../Gch.Img.User/".$_POST['myimg']."' height='44px' width='33px' />
-						INTRODUZCA LOS NUEVOS DATOS.
-			</div>
+		<tr>
+			<td colspan=2 class='BorderInf' align='center'>
+				<img src='../Gch.Img.User/".$_POST['myimg']."' height='44px' width='33px' />
+								INTRODUZCA LOS NUEVOS DATOS.
+			</td>
+		</tr>
 				
 		<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'>
 			
 		<input name='id' type='hidden' value='".$defaults['id']."' />					
 		<input name='myimg' type='hidden' value='".$_POST['myimg']."' />	
 
-		<div>
-				REFERENCIA ".$defaults['ref']."			
-		</div>			
+		<tr>
+			<td> REFERENCIA </td>
+			<td>".$defaults['ref']."</td>			
+		</tr>			
 
-		<div>
-				NOMBRE
+		<tr>
+			<td>NOMBRE</td>
+			<td>
 		<input type='text' name='Nombre' size=30 maxlength=25 value='".$defaults['Nombre']."' />
-		</div>
+			</td>	
+		</tr>
 		
-		<div>
-				APELLIDOS
+		<tr>
+			<td>APELLIDOS</td>
+			<td>	
 		<input type='text' name='Apellidos' size=30 maxlength=25 value='".$defaults['Apellidos']."' />
-		</div>
+			</td>
+		</tr>
 
-		<div style=\"display:inline-block; width:50px;\">
-				EMAIL
-		</div>
-		<div style=\"display:inline-block;\">
+		<tr>
+			<td>EMAIL</td>
+			<td>
 			<input type='text' name='Email' size=30 maxlength=50 value='".$defaults['Email']."' />
-		</div>
+			</td>
+		</tr>
 				
-		<div>
-				NIVEL ".$defaults['Nivel']."
-		</div>
+		<tr>
+			<td>NIVEL </td>
+			<td>".$defaults['Nivel']."</td>
+		</tr>
 					
-		<div>
-				USUARIO  ".$defaults['Usuario']."
-		</div>
+		<tr>
+			<td>USUARIO  </td>
+			<td>".$defaults['Usuario']."</td>	
+		</tr>
 				
-		<div>
-				PASSWORD ".$defaults['Password']."
-		</div>
+		<tr>
+			<td>PASSWORD </td>
+			<td>".$defaults['Password']."</td>
+		</tr>
 
-		<div>
-				DIRECCIÓN
-		</div>
-		<div>
+		<tr>
+			<td>DIRECCIÓN</td>
+			<td>
 	<input type='text' name='Direccion' size=30 maxlength=60 value='".$defaults['Direccion']."' />
-		</div>
+			</td>
+		</tr>
 				
-		<div>
-			TELEFONO
+		<tr>
+			<td>TELEFONO</td>
+			<td>
 	<input type='text' name='Tlf1' size=12 maxlength=9 value='".$defaults['Tlf1']."' />
-		</div>
+			</td>
+		</tr>
 
-		<div style:\"display:block; whith:40px;>
-						<input type='submit' value='MODIFICAR DATOS' />
-						<input type='hidden' name='modifica' value=1 />
-		</div>
-		
+		<tr>
+			<td colspan=2 align='right'>
+				<input type='submit' value='MODIFICAR DATOS' />
+				<input type='hidden' name='modifica' value=1 />
+			</td>
+		</tr>
 			</form>														
-		</div>");
+		</table>");
 
 			} // FIN ELSE IF USER / PLUS
+	
+	elseif($_SESSION['uNivel'] == 'useru'){
+	
+		print("<table align='center' border=0>
+
+		<tr>
+			<td colspan=2 class='BorderInf' align='center'>
+				<img src='../Gch.Img.User/".$_POST['myimg']."' height='44px' width='33px' />
+								INTRODUZCA LOS NUEVOS DATOS.
+			</td>
+		</tr>
+				
+		<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'>
+			
+		<input name='id' type='hidden' value='".$defaults['id']."' />					
+		<input name='myimg' type='hidden' value='".$_POST['myimg']."' />	
+
+		<tr>
+			<td> REFERENCIA </td>
+			<td>".$defaults['ref']."</td>			
+		</tr>			
+
+		<tr>
+			<td>NOMBRE</td>
+			<td>
+		<input type='text' name='Nombre' size=30 maxlength=25 value='".$defaults['Nombre']."' />
+			</td>	
+		</tr>
+		
+		<tr>
+			<td>APELLIDOS</td>
+			<td>	
+		<input type='text' name='Apellidos' size=30 maxlength=25 value='".$defaults['Apellidos']."' />
+			</td>
+		</tr>
+
+		<tr>
+			<td>EMAIL</td>
+			<td>
+			<input type='text' name='Email' size=30 maxlength=50 value='".$defaults['Email']."' />
+			</td>
+		</tr>
+				
+		<tr>
+			<td>NIVEL </td>
+			<td>".$defaults['Nivel']."</td>
+		</tr>
+					
+		<tr>
+			<td>USUARIO  </td>
+			<td>".$defaults['Usuario']."</td>	
+		</tr>
+				
+		<tr>
+			<td>PASSWORD </td>
+			<td>".$defaults['Password']."</td>
+		</tr>
+
+		<tr>
+			<td>DIRECCIÓN</td>
+			<td>
+	<input type='text' name='Direccion' size=30 maxlength=60 value='".$defaults['Direccion']."' />
+			</td>
+		</tr>
+				
+		<tr>
+			<td>TELEFONO</td>
+			<td>
+	<input type='text' name='Tlf1' size=12 maxlength=9 value='".$defaults['Tlf1']."' />
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan=2 align='right'>
+				<input type='submit' value='MODIFICAR DATOS' />
+				<input type='hidden' name='modifica' value=1 />
+			</td>
+		</tr>
+			</form>														
+		</table>");
+
+			} // FIN ELSE IF USERU
 	
 	} // FIN FUNCTION SHOW_FOMR
 

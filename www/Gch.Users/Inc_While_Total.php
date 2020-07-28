@@ -3,59 +3,56 @@
 	if(!$qb){
 			print("<font color='#FF0000'>
 					Se ha producido un error: ".mysqli_error($db)." </font></br>");
-					
-			show_form();	
-			
+			//show_form();	
 		} else {
 			
 			if(mysqli_num_rows($qb)== 0){
-							print ("<table align='center' style=\"border:0px\">
-										<tr>
-											<td align='center'>
-												<font color='#FF0000'>
-													NO HAY DATOS
-												</font>
-											</td>
-										</tr>
-									</table>");
+					print ("<table align='center' style=\"border:0px\">
+								<tr>
+									<td align='center'>
+										<font color='#FF0000'>
+											NO HAY DATOS
+										</font>
+									</td>
+								</tr>
+							</table>");
 
-				} else { 	print ("<table align='center'>
-									<tr>
-										<th colspan=7 class='BorderInf'>
+				} else {
+					print ("<table align='center'>
+								<tr>
+									<td colspan=7 class='BorderInf' align='center'>
 					".$twhile.": ".mysqli_num_rows($qb).".
-										</th>
-									</tr>
+									</td>
+								</tr>
 									
-									<tr>
-										<th class='BorderInfDch'>
-											Nivel
-										</th>
+								<tr>
+									<td class='BorderInfDch' align='center'>
+										Nivel
+									</td>
 										
-										<th class='BorderInfDch'>
-											Referencia
-										</th>
+									<td class='BorderInfDch' align='center'>
+										Referencia
+									</td>
 										
-										<th class='BorderInfDch'>
-											Nombre
-										</th>
+									<td class='BorderInfDch' align='center'>
+										Nombre
+									</td>
 										
-										<th class='BorderInfDch'>
-											Apellidos
-										</th>
+									<td class='BorderInfDch' align='center'>
+										Apellidos
+									</td>
 										
-										<th class='BorderInfDch'>
-											
-										</th>
+									<td class='BorderInfDch' align='center'>
+									</td>
 										
-										<th class='BorderInfDch'>
-											Usuario
-										</th>
+									<td class='BorderInfDch' align='center'>
+										Usuario
+									</td>
 										
-										<th class='BorderInfDch'>
-											Password
-										</th>
-										
-                                    </tr>");
+									<td class='BorderInfDch' align='center'>
+										Password
+									</td>
+                                </tr>");
                                     
 	while($rowb = mysqli_fetch_assoc($qb)){
     
@@ -91,9 +88,6 @@
 	<img src='../Gch.Img.User/".$rowb['myimg']."' height='40px' width='30px' />
 				</td>
 												
-	<input name='doc' type='hidden' value='".$rowb['doc']."' />
-	<input name='dni' type='hidden' value='".$rowb['dni']."' />
-	<input name='ldni' type='hidden' value='".$rowb['ldni']."' />
 	<input name='Email' type='hidden' value='".$rowb['Email']."' />
 													
 				<td class='BorderInfDch'>
@@ -106,10 +100,9 @@
 						
 	<input name='Direccion' type='hidden' value='".$rowb['Direccion']."' />
 	<input name='Tlf1' type='hidden' value='".$rowb['Tlf1']."' />
-	<input name='Tlf2' type='hidden' value='".$rowb['Tlf2']."' />
 	<input name='lastin' type='hidden' value='".$rowb['lastin']."' />
 	<input name='lastout' type='hidden' value='".$rowb['lastout']."' />
-	<input name='visitadmin' type='hidden' value='".$rowb['visitadmin']."' />
+	<input name='visituser' type='hidden' value='".$rowb['visituser']."' />
 			</tr>
 					
             <tr>".$formulariof.$formulariohi."
@@ -122,18 +115,14 @@
 	<input name='Nombre' type='hidden' value='".$rowb['Nombre']."' />
 	<input name='Apellidos' type='hidden' value='".$rowb['Apellidos']."' />
 	<input name='myimg' type='hidden' value='".$rowb['myimg']."' />
-	<input name='doc' type='hidden' value='".$rowb['doc']."' />
-	<input name='dni' type='hidden' value='".$rowb['dni']."' />
-	<input name='ldni' type='hidden' value='".$rowb['ldni']."' />
 	<input name='Email' type='hidden' value='".$rowb['Email']."' />
 	<input name='Usuario' type='hidden' value='".$rowb['Usuario']."' />
 	<input name='Password' type='hidden' value='".$rowb['Password']."' />						
 	<input name='Direccion' type='hidden' value='".$rowb['Direccion']."' />
 	<input name='Tlf1' type='hidden' value='".$rowb['Tlf1']."' />
-	<input name='Tlf2' type='hidden' value='".$rowb['Tlf2']."' />
 	<input name='lastin' type='hidden' value='".$rowb['lastin']."' />
 	<input name='lastout' type='hidden' value='".$rowb['lastout']."' />
-	<input name='visitadmin' type='hidden' value='".$rowb['visitadmin']."' />
+	<input name='visitauser' type='hidden' value='".$rowb['visitauser']."' />
                                      
         ".$formulariofi."</tr>");
                     
