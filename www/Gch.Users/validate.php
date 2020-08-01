@@ -16,7 +16,7 @@ $errors = array();
 
 	/* $tipo_correcto = preg_match('/^image\/(gif|png|jpg|bmp)$/', $_POST['myimg1']); */
 
-	if($_POST['modifica']){
+	if($_POST['modificaimg']){
 		if(strlen(trim ($_POST['myimg1'])) == 0){
 			$errors [] = "Ha de seleccionar un archivo.";
 			global $img;
@@ -110,7 +110,7 @@ $errors = array();
 	/* VALIDAMOS EL CAMPO NIVEL. */
 	
 	if(strlen(trim($_POST['Nivel'])) == 0){
-		$errors [] = "nIVEL: <font color='#FF0000'>Este campo es obligatorio.</font>";
+		$errors [] = "NIVEL: <font color='#FF0000'>Este campo es obligatorio.</font>";
 		}
 	
 		/* Validamos el campo usuario. */
@@ -124,7 +124,9 @@ $errors = array();
 	$qus = mysqli_query($db, $sqlus);
 	$rowus = mysqli_fetch_assoc($qus);
 
-	if ($_POST['id'] == $rowus['id']){}
+	if ($_POST['id'] == $rowus['id']){
+
+	}
 	elseif(mysqli_num_rows($qus)!= 0){
 		$errors [] = "USUARIO: <font color='#FF0000'>Ya Existe.</font>";
 		}
@@ -212,7 +214,7 @@ $errors = array();
 		}
 
 	if(strlen(trim($_POST['Tlf1'])) == 0){
-		$errors [] = "TELEFONO:: <font color='#FF0000'>Este campo es obligatorio.</font>";
+		$errors [] = "TELEFONO: <font color='#FF0000'>Este campo es obligatorio.</font>";
 		}
 	
 	elseif (!preg_match('/^[\d]+$/',$_POST['Tlf1'])){

@@ -2,57 +2,71 @@
 
 	if(!$qb){
 			print("<font color='#FF0000'>
-					Se ha producido un error: ".mysqli_error($db)." </font></br>");
+				Se ha producido un error: ".mysqli_error($db)." </font></br>");
 			//show_form();	
-		} else {
+	} else {
 			
-			if(mysqli_num_rows($qb)== 0){
-					print ("<table align='center' style=\"border:0px\">
-								<tr>
-									<td align='center'>
-										<font color='#FF0000'>
-											NO HAY DATOS
-										</font>
-									</td>
-								</tr>
-							</table>");
+		if(mysqli_num_rows($qb)== 0){
+			if($_SESSION['uNivel'] == 'adminu'){
+				print ("<table align='center' style=\"border:0px\">
+				<tr>
+					<td align='center'>
+						<font color='#FF0000'>
+							SUS DATOS SE GESTIONAN DESDE LA ZONA ADMIN
+							<br>
+							SOLO PUEDE CONSULTAR USUARIOS BÁSICOS
+						</font>
+					</td>
+				</tr>
+			</table>");}
+			else{
+				print ("<table align='center' style=\"border:0px\">
+						<tr>
+							<td align='center'>
+								<font color='#FF0000'>
+									NO HAY DATOS
+								</font>
+							</td>
+						</tr>
+					</table>");
+				}
 
-				} else {
-					print ("<table align='center'>
-								<tr>
-									<td colspan=7 class='BorderInf' align='center'>
-					".$twhile.": ".mysqli_num_rows($qb).".
-									</td>
-								</tr>
+		} else {
+			print ("<table align='center'>
+						<tr>
+							<td colspan=7 class='BorderInf' align='center'>
+			".$twhile.": ".mysqli_num_rows($qb).".
+							</td>
+						</tr>
 									
-								<tr>
-									<td class='BorderInfDch' align='center'>
-										Nivel
-									</td>
+						<tr>
+							<td class='BorderInfDch' align='center'>
+								Nivel
+							</td>
+								
+							<td class='BorderInfDch' align='center'>
+								Referencia
+							</td>
 										
-									<td class='BorderInfDch' align='center'>
-										Referencia
-									</td>
+							<td class='BorderInfDch' align='center'>
+								Nombre
+							</td>
+								
+							<td class='BorderInfDch' align='center'>
+								Apellidos
+							</td>
 										
-									<td class='BorderInfDch' align='center'>
-										Nombre
-									</td>
+							<td class='BorderInfDch' align='center'>
+							</td>
 										
-									<td class='BorderInfDch' align='center'>
-										Apellidos
-									</td>
+							<td class='BorderInfDch' align='center'>
+								Usuario
+							</td>
 										
-									<td class='BorderInfDch' align='center'>
-									</td>
-										
-									<td class='BorderInfDch' align='center'>
-										Usuario
-									</td>
-										
-									<td class='BorderInfDch' align='center'>
-										Password
-									</td>
-                                </tr>");
+							<td class='BorderInfDch' align='center'>
+								Password
+							</td>
+                        </tr>");
                                     
 	while($rowb = mysqli_fetch_assoc($qb)){
     
@@ -124,7 +138,29 @@
 	<input name='lastout' type='hidden' value='".$rowb['lastout']."' />
 	<input name='visitauser' type='hidden' value='".$rowb['visitauser']."' />
                                      
-        ".$formulariofi."</tr>");
+		".$formulariofi.$formulariod."
+
+                <!-- AQUÍ VA LA BOTONERA -->
+
+	<input name='id' type='hidden' value='".$rowb['id']."' />
+	<input name='ref' type='hidden' value='".$rowb['ref']."' />
+	<input name='Nivel' type='hidden' value='".$rowb['Nivel']."' />
+	<input name='Nombre' type='hidden' value='".$rowb['Nombre']."' />
+	<input name='Apellidos' type='hidden' value='".$rowb['Apellidos']."' />
+	<input name='myimg' type='hidden' value='".$rowb['myimg']."' />
+	<input name='Email' type='hidden' value='".$rowb['Email']."' />
+	<input name='Usuario' type='hidden' value='".$rowb['Usuario']."' />
+	<input name='Password' type='hidden' value='".$rowb['Password']."' />						
+	<input name='Direccion' type='hidden' value='".$rowb['Direccion']."' />
+	<input name='Tlf1' type='hidden' value='".$rowb['Tlf1']."' />
+	<input name='lastin' type='hidden' value='".$rowb['lastin']."' />
+	<input name='lastout' type='hidden' value='".$rowb['lastout']."' />
+	<input name='visitauser' type='hidden' value='".$rowb['visitauser']."' />
+                                     
+		".$formulariofd."</tr>
+
+		
+		");
                     
 	 }  // FIN DEL WHILE
 

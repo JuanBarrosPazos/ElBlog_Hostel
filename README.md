@@ -6,6 +6,15 @@
 
 ----
 
+### 2020.08.01
+
+* SE RECOMIENDA BORRAR Y RECARGAR:
+
+- Gch.Syst y Gch.Users
+
+* Se ha modificado la gestión de usuarios generales del frontpage y su backend asociado, y adaptado a sus derechos legales ARCO.
+----
+
 ### 2020.07.28
 
 * SE RECOMIENDA SOBREESCRIBIR:

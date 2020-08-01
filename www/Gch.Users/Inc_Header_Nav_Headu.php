@@ -33,19 +33,18 @@
       require 'Only.index.user.php';
 
       if (isset($_POST['salir'])) { 
-                      //session_destroy();
-                      salir();
-                      /**/
-                      global $redir;
-                      $redir = "<script type='text/javascript'>
-                          function redir(){
-                          window.location.href='../index.php';
-                        }
-                        setTimeout('redir()',1);
-                        </script>";
-                      print ($redir);
-                      
-                  }
+            //session_destroy();
+            salir();
+            /**/
+            global $redir;
+            $redir = "<script type='text/javascript'>
+                        function redir(){
+                        window.location.href='../index.php';
+                    }
+                 setTimeout('redir()',1);
+                    </script>";
+              print ($redir);
+          }
 
       if(isset($_POST['login'])){
               //process_login();

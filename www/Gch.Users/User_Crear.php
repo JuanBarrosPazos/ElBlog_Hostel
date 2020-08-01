@@ -13,7 +13,16 @@
 	if(isset($_POST['oculto'])){
 		if($form_errors = validate_form()){
 				show_form($form_errors);
-		} else { process_form(); }
+		} else { process_form(); 
+					global $redir;
+					$redir = "<script type='text/javascript'>
+								function redir(){
+									window.close();
+										}
+								setTimeout('redir()',6000);
+							</script>";
+					print ($redir);
+					}
 	} else {show_form();}
 
 				   ////////////////////				   ////////////////////
@@ -22,12 +31,6 @@
 
 function validate_form(){
 	
-	/*
-		global $sqld;
-		global $qd;
-		global $rowd;
-	*/
-		
 	require 'validate.php';	
 		
 	return $errors;
@@ -239,7 +242,7 @@ function show_form($errors=''){
 		$defaults = $_POST;
 		} else {$defaults = array ( 'Nombre' => '',
 									'Apellidos' => '',
-									'Nivel' => 'user',
+									'Nivel' => 'useru',
 									'ref' => '',
 									'Email' => 'Solo letras minúsculas',
 									'Usuario' => '',

@@ -6,17 +6,11 @@ session_start();
 	require '../Gch.Connet/conection.php';
 	require '../Gch.Connet/conect.php';
 
-/*
-$sqld =  "SELECT * FROM `gch_admin` WHERE `ref` = '$_SESSION[uref]' AND `Usuario` = '$_SESSION[Usuario]'";
-$qd = mysqli_query($db, $sqld);
-$rowd = mysqli_fetch_assoc($qd);
-*/
-
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if (($_SESSION['uNivel'] == 'adminu')||($_SESSION['uNivel'] == 'useru') || ($_SESSION['uNivel'] == 'plusu')){
+if (($_SESSION['uNivel'] == 'adminu')||($_SESSION['uNivel'] == 'useru')){
 
  		//print("Hello ".$_SESSION['uNombre']." ".$_SESSION['uApellidos'].".</br>");
 				
@@ -42,13 +36,9 @@ function validate_form(){
 
 	$limite = 500 * 1024;
 	
-	$ext_permitidas = array('jpg','JPG','gif','GIF','png','PNG','bmp','BMP');
+	$ext_permitidas = array('jpg','JPG','gif','GIF','png','PNG');
 	$extension = substr($_FILES['myimg']['name'],-3);
-	// print($extension);
-	// $extension = end(explode('.', $_FILES['myimg']['name']) );
 	$ext_correcta = in_array($extension, $ext_permitidas);
-
-	// $tipo_correcto = preg_match('/^image\/(gif|png|jpg|bmp)$/', $_FILES['myimg']['type']);
 
 		if($_FILES['myimg']['size'] == 0){
 			$errors [] = "Ha de seleccionar una fotograf&iacute;a.";
@@ -104,9 +94,6 @@ function process_form(){
 	$safe_filename = trim(str_replace('..', '', $safe_filename));
 
 	$nombre = $_FILES['myimg']['name'];
-	//$nombre_tmp = $_FILES['myimg']['tmp_name'];
-	//$tipo = $_FILES['myimg']['type'];
-	//$tamano = $_FILES['myimg']['size'];
 		  
 	global $destination_file;
 	$destination_file = '../Gch.Img.User/'.$safe_filename;
@@ -146,21 +133,21 @@ function process_form(){
 	$nombre = $_POST['Nombre'];
 	$apellido = $_POST['Apellidos'];
 	
-	$sqlc = "UPDATE `$db_name`.`gch_admin` SET `myimg` = '$new_name' WHERE `gch_admin`.`id` = '$_POST[id]' LIMIT 1 ";
+	$sqlc = "UPDATE `$db_name`.`gch_user` SET `myimg` = '$new_name' WHERE `gch_user`.`id` = '$_POST[id]' LIMIT 1 ";
 
 	if(mysqli_query($db, $sqlc)){
 			print( "<table align='center' style=\"margin-top:20px\">
 				<tr>
 					<th colspan=3  class='BorderInf'>
-						Estos son los nuevos datos de registro.
+						NUEVOS DATOS
 					</th>
 				</tr>
 				
 				<tr>
-					<td width=150px>
-						Nombre:
+					<td width=120px>
+						NOMBRE
 					</td>
-					<td width=200px>"
+					<td width=160px>"
 						.$_POST['Nombre'].
 					"</td>
 					<td rowspan='5' align='center'>
@@ -170,7 +157,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						Apellidos:
+						APELLIDOS
 					</td>
 					<td>"
 						.$_POST['Apellidos'].
@@ -179,45 +166,9 @@ function process_form(){
 				
 				<tr>
 					<td>
-						Tipo Documento:
-					</td>
-					<td>"
-						.$_POST['doc'].
-					"</td>
-				</tr>				
-				
-				<tr>
-					<td>
-						N&uacute;mero:
-					</td>
-					<td>"
-						.$_POST['dni'].
-					"</td>
-				</tr>				
-				
-				<tr>
-					<td>
-						Control:
-					</td>
-					<td>"
-						.$_POST['ldni'].
-					"</td>
-				</tr>				
-				
-				<tr>
-					<td>
-						Mail:
-					</td>
-					<td colspan=2>"
-						.$_POST['Email'].
-					"</td>
-				</tr>
-				
-				<tr>
-					<td>
 						Tipo Usuario
 					</td>
-					<td colspan=2>"
+					<td>"
 						.$_POST['Nivel'].
 					"</td>
 				</tr>
@@ -226,26 +177,8 @@ function process_form(){
 					<td>
 						Usuario:
 					</td>
-					<td colspan=2>"
+					<td>"
 						.$_POST['Usuario'].
-					"</td>
-				</tr>
-				
-				<tr>
-					<td>
-						Password:
-					</td>
-					<td colspan=2>"
-						.$_POST['Password'].
-					"</td>
-				</tr>
-				
-				<tr>
-					<td>
-						Dirección:
-					</td>
-					<td colspan=2>"
-						.$_POST['Direccion'].
 					"</td>
 				</tr>
 				
@@ -253,20 +186,11 @@ function process_form(){
 					<td>
 						Teléfono 1:
 					</td>
-					<td colspan=2>"
+					<td>"
 						.$_POST['Tlf1'].
 					"</td>
 				</tr>
 				
-				<tr>
-					<td>
-						Teléfono 2:
-					</td>
-					<td colspan=2>"
-						.$_POST['Tlf2'].
-					"</td>
-				</tr>
-												
 				<tr>
 					<td colspan=3 align='right' class='BorderSup'>
 		<form name='closewindow' action='$_SERVER[PHP_SELF]'  onsubmit=\"window.close()\">

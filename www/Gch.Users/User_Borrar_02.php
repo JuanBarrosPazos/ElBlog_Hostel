@@ -2,29 +2,63 @@
 session_start();
 
 	//require '../Gch.Inclu/error_hidden.php';
-	require '../Gch.Inclu/Admin_Inclu_01b.php';
-	require '../Gch.Inclu/mydni.php';
 	require '../Gch.Connet/conection.php';
 	require '../Gch.Connet/conect.php';
+	require 'Inc_Header_Nav_Head.php';
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
 // NIVEL PLUS NO TIENE PERMITIDO BORRAR OTROS USUARIOS NI EL MISMO
-if /*(*/($_SESSION['uNivel'] == 'adminu')/* || ($_SESSION['uNivel'] == 'plusu'))*/{
-
-	master_index();
+if (($_SESSION['uNivel'] == 'adminu') || ($_SESSION['uNivel'] == 'useru')){
 
 	if (isset($_POST['oculto2'])){	show_form();
 									info_01();
-									}
+				$ctemp = "../Gch.Temp";
+				if(file_exists($ctemp)){$dir1 = $ctemp."/";
+										$handle1 = opendir($dir1);
+											while ($file1 = readdir($handle1))
+												{if (is_file($dir1.$file1))
+													{unlink($dir1.$file1);}
+													}	
+											//rmdir ($ctemp);
+									} else {}
+							}
 	elseif($_POST['borrar']){ process_form();
 							  global $refnorm;
 							  $refnorm = $_SESSION['iniref'];
 							  info_02();
+							  if($_SESSION['uNivel'] == 'useru'){fsalir();} else { }
+							  global $redir;
+							  $redir = "<script type='text/javascript'>
+										  function redir(){
+										  window.location.href='../index.php';
+								  }
+								  setTimeout('redir()',6000);
+								  </script>";
+							  print ($redir);
+
 	} else { show_form(); }
-		} else { require '../Gch.Inclu/table_permisos.php'; }
+		} else { require '../Gch.Inclu/table_permisos.php'; 
+				 require 'Inc_Footer.php';
+				 require '../Gch.Www/Inc_Jquery_Boots_Foot.php';
+					}
+
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
+
+function fsalir() {	unset($_SESSION['uid']);
+					unset($_SESSION['uNivel']);
+					unset($_SESSION['uNombre']);
+					unset($_SESSION['uApellidos']);
+					unset($_SESSION['uEmail']);
+					unset($_SESSION['uUsuario']);
+					unset($_SESSION['uPassword']);
+					unset($_SESSION['uDireccion']);
+					unset($_SESSION['uTlf1']);
+				}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -35,9 +69,9 @@ function process_form(){
 	global $table;
 	$table = "<table align='center'>
 				<tr>
-					<th colspan=3  class='BorderInf'>
+					<td colspan=3  class='BorderInf'>
 						SE HA BORRADO ESTE USUARIO.
-					</th>
+					</td>
 				</tr>
 				
 				<tr>
@@ -55,7 +89,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						Referencia:
+						USER REF
 					</td>
 					<td>"
 						.$_POST['ref'].
@@ -64,7 +98,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						Nivel:
+						NIVEL
 					</td>
 					<td>"
 						.$_POST['Nivel'].
@@ -73,7 +107,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						Nombre:
+						NOMBRE
 					</td>
 					<td>"
 						.$_POST['Nombre'].
@@ -82,37 +116,10 @@ function process_form(){
 
 				<tr>
 					<td>
-						Apellidos:
+						APELLIDO
 					</td>
 					<td>"
 						.$_POST['Apellidos'].
-					"</td>
-				</tr>				
-				
-				<tr>
-					<td >
-						Tipo Documento:
-					</td>
-					<td colspan=2>"
-						.$_POST['doc'].
-					"</td>
-				</tr>				
-				
-				<tr>
-					<td>
-						N&uacute;mero:
-					</td>
-					<td colspan=2>"
-						.$_POST['dni'].
-					"</td>
-				</tr>				
-				
-				<tr>
-					<td>
-						Control:
-					</td>
-					<td colspan=2>"
-						.$_POST['ldni'].
 					"</td>
 				</tr>				
 				
@@ -154,7 +161,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						Tel&eacute;fono 1:
+						TELEFONO 1:
 					</td>
 					<td colspan=2>"
 						.$_POST['Tlf1'].
@@ -162,44 +169,9 @@ function process_form(){
 				</tr>
 				
 				<tr>
-					<td>
-						Tel&eacute;fono 2:
-					</td>
-					<td colspan=2>"
-						.$_POST['Tlf2'].
-					"</td>
-				</tr>
-				
-				<tr>
-					<td>
-						Last In:
-					</td>
-					<td colspan=2>"
-						.$_POST['lastin'].
-					"</td>
-				</tr>
-				
-				<tr>
-					<td>
-						Last Out:
-					</td>
-					<td colspan=2>"
-						.$_POST['lastout'].
-					"</td>
-				</tr>
-				
-				<tr>
-					<td>
-						Nº Visitas:
-					</td>
-					<td colspan=2>"
-						.$_POST['visitadmin'].
-					"</td>
-				</tr>
-				<tr>
 					<td colspan=3 align='right' class='BorderSup'>
-						<form name='closewindow' action='User_Borrar_01.php'  \">
-							<input type='submit' value='VOLVER A ADMIN BORRAR' />
+						<form name='closewindow' action='User_Modificar_01.php'  \">
+							<input type='submit' value='VOLVER' />
 							<input type='hidden' name='volver' value=1 />
 						</form>
 					</td>
@@ -214,7 +186,7 @@ function process_form(){
 	$nombre = $_POST['Nombre'];
 	$apellido = $_POST['Apellidos'];
 	// BORRAMOS EL USUARIO
-	$sql = "DELETE FROM `$db_name`.`gch_admin` WHERE `gch_admin`.`id` = '$_POST[id]' LIMIT 1 ";
+	$sql = "DELETE FROM `$db_name`.`gch_user` WHERE `gch_user`.`id` = '$_POST[id]' LIMIT 1 ";
 	// SI SE CUMPLE EL QUERY
 	if(mysqli_query($db, $sql)){
 	
@@ -261,18 +233,11 @@ function show_form(){
 									'Nombre' => $_POST['Nombre'],
 									'Apellidos' => $_POST['Apellidos'],
 									'myimg' => $_POST['myimg'],
-									'doc' => $_POST['doc'],
-									'dni' => $_POST['dni'],
-									'ldni' => $_POST['ldni'],
 									'Email' => $_POST['Email'],
 									'Usuario' => $_POST['Usuario'],
 									'Password' => $_POST['Password'],
 									'Direccion' => $_POST['Direccion'],
-									'Tlf1' => $_POST['Tlf1'],
-									'Tlf2' => $_POST['Tlf2'],
-									'lastin' => $_POST['lastin'],
-									'lastout' => $_POST['lastout'],
-									'visitadmin' => $_POST['visitadmin']);
+									'Tlf1' => $_POST['Tlf1'],);
 								   		}
 	if(isset($_POST['borrar'])){
 				$defaults = array ( 'id' => $_POST['id'],
@@ -281,18 +246,11 @@ function show_form(){
 									'Nombre' => $_POST['Nombre'],
 									'Apellidos' => $_POST['Apellidos'],
 									'myimg' => $_POST['myimg'],
-									'doc' => $_POST['doc'],
-									'dni' => $_POST['dni'],
-									'ldni' => $_POST['ldni'],
 									'Email' => $_POST['Email'],
 									'Usuario' => $_POST['Usuario'],
 									'Password' => $_POST['Password'],
 									'Direccion' => $_POST['Direccion'],
-									'Tlf1' => $_POST['Tlf1'],
-									'Tlf2' => $_POST['Tlf2'],
-									'lastin' => $_POST['lastin'],
-									'lastout' => $_POST['lastout'],
-									'visitadmin' => $_POST['visitadmin']);
+									'Tlf1' => $_POST['Tlf1'],);
 								   		}
 								   
 	print("<table align='center' style=\"margin-top:10px\">
@@ -309,7 +267,7 @@ function show_form(){
 				</tr>
 				<tr>
 					<td colspan=3 class='BorderInf' style=\"text-align:right\">
-							<a href='User_Borrar_01.php' >
+							<a href='User_Modificar_01.php' >
 													CANCELAR
 							</a>
 						</font>
@@ -320,12 +278,9 @@ function show_form(){
 			
 				<input name='id' type='hidden' value='".$defaults['id']."' />					
 				<input name='ref' type='hidden' value='".$defaults['ref']."' />					
-				<input name='lastin' type='hidden' value='".$defaults['lastin']."' />					
-				<input name='lastout' type='hidden' value='".$defaults['lastout']."' />					
-				<input name='visitadmin' type='hidden' value='".$defaults['visitadmin']."' />
 		<tr>
 			<td width=120px>	
-						Nivel:
+						NIVEL
 			</td>
 			<td width=100px>
 				".$defaults['Nivel']."
@@ -341,7 +296,7 @@ function show_form(){
 					
 		<tr>
 			<td>	
-				NOMBRE:
+				NOMBRE
 			</td>
 			<td>
 				".$defaults['Nombre']."
@@ -351,7 +306,7 @@ function show_form(){
 					
 		<tr>
 			<td>
-				APELLIDOS:
+				APELLIDOS
 			</td>
 			<td>
 				".$defaults['Apellidos']."
@@ -361,39 +316,9 @@ function show_form(){
 				
 		<tr>
 			<td>
-				DOCUMENTO:
+				MAIL
 			</td>
 			<td>
-				".$defaults['doc']."
-				<input type='hidden' name='doc' value='".$defaults['doc']."' />
-			</td>
-		</tr>
-				
-		<tr>
-			<td>
-				N&Uacute;MERO:
-			</td>
-			<td>
-				".$defaults['dni']."
-				<input type='hidden' name='dni' value='".$defaults['dni']."' />
-			</td>
-		</tr>
-				
-		<tr>
-			<td>
-				CONTROL:
-			</td>
-			<td colspan='2'>
-				".$defaults['ldni']."
-				<input type='hidden' name='ldni' value='".$defaults['ldni']."' />
-			</td>
-		</tr>
-				
-		<tr>
-			<td>
-				MAIL:
-			</td>
-			<td colspan='2'>
 				".$defaults['Email']."
 				<input type='hidden'' name='Email' value='".$defaults['Email']."' />
 			</td>
@@ -401,9 +326,9 @@ function show_form(){
 				
 		<tr>
 			<td>
-				USUARIO:
+				USUARIO
 			</td>
-			<td colspan='2'>
+			<td>
 				".$defaults['Usuario']."
 				<input type='hidden' name='Usuario' value='".$defaults['Usuario']."' />
 			</td>
@@ -411,7 +336,7 @@ function show_form(){
 							
 		<tr>
 			<td>
-				PASSWORD:
+				PASSWORD
 			</td>
 			<td colspan='2'>
 				".$defaults['Password']."
@@ -421,7 +346,7 @@ function show_form(){
 
 		<tr>
 			<td>
-				DIRECCION:
+				DIRECCION
 			</td>
 			<td colspan='2'>
 				".$defaults['Direccion']."
@@ -431,21 +356,11 @@ function show_form(){
 				
 		<tr>
 			<td>
-				TELEFONO 1:
+				TELEFONO
 			</td>
 			<td colspan='2'>
 				".$defaults['Tlf1']."
 				<input type='hidden' name='Tlf1' value='".$defaults['Tlf1']."' />
-			</td>
-		</tr>
-				
-		<tr>
-			<td class='BorderInf'>
-				TELEFONO 2:
-			</td>
-			<td class='BorderInf' colspan='2'>
-				".$defaults['Tlf2']."
-				<input type='hidden' name='Tlf2' value='".$defaults['Tlf2']."' />
 			</td>
 		</tr>
 				
@@ -459,17 +374,6 @@ function show_form(){
 		</table>"); 
 	
 	}	
-
-
-				   ////////////////////				   ////////////////////
-////////////////////				////////////////////				////////////////////
-				 ////////////////////				  ///////////////////
-	
-	function master_index(){
-		
-		require '../Gch.Inclu/Master_Index_Admin.php';
-		
-	} 
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -544,7 +448,9 @@ $text = PHP_EOL."- USER BORRAR SELECCIONADO ".$ActionTime.PHP_EOL."\t ID:".$_POS
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 	
-	require '../Gch.Inclu/Admin_Inclu_02.php';
+	require 'Inc_Footer.php';
+
+	require '../Gch.Www/Inc_Jquery_Boots_Foot.php';
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

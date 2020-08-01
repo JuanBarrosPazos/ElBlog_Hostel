@@ -6,17 +6,11 @@ session_start();
 	require '../Gch.Connet/conection.php';
 	require '../Gch.Connet/conect.php';
 
-/* OJO SOLO PARA VALIDATE.PHP
-$sqld =  "SELECT * FROM `gch_admin` WHERE `ref` = '$_SESSION[uref]' AND `Usuario` = '$_SESSION[Usuario]'";
-$qd = mysqli_query($db, $sqld);
-$rowd = mysqli_fetch_assoc($qd);
-*/
-
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if((@$_SESSION['uNivel'] == 'user')||(@$_SESSION['uNivel'] == 'adminu')){ 
+if((@$_SESSION['uNivel'] == 'useru')||(@$_SESSION['uNivel'] == 'adminu')){ 
 							if (isset($_POST['oculto2'])){
 								show_form();
 								info_01();
@@ -38,13 +32,7 @@ if((@$_SESSION['uNivel'] == 'user')||(@$_SESSION['uNivel'] == 'adminu')){
 
 function validate_form(){
 	
-		/*
-		global $sqld;
-		global $qd;
-		global $rowd;
-		*/
-	
-		require '../Gch.Inclu/validate.php';	
+		require 'validate.php';	
 		
 		return $errors;
 
@@ -67,82 +55,67 @@ function process_form(){
 	global $tabla;							 
 	$tabla = "<table align='center' style=\"margin-top:20px\">
 				<tr>
-					<th colspan=3  class='BorderInf'>
+					<td colspan=3  class='BorderInf'>
 						NUEVOS DATOS DEL USUARIO.
-					</th>
+					</td>
 				</tr>
 				
 				<tr>
-					<td width=150px>
-						Nombre:
+					<td width=120px>
+						NOMBRE
 					</td>
-					<td width=200px>"
+					<td width=160px>"
 						.$_POST['Nombre'].
 					"</td>
-					<td rowspan='5' align='center'>
+					<td rowspan='4' align='center'>
 		<img src='../Gch.Img.User/".$_SESSION['myimgcl']."' height='120px' width='90px' />
 					</td>
 				</tr>
 				
 				<tr>
-					<td>Apellidos:</td>
+					<td>APELLIDOS</td>
 					<td>".$_POST['Apellidos']."</td>
 				</tr>				
 				
 				<tr>
-					<td>Tipo Documento:</td>
-					<td>".$_POST['doc']."</td>
-				</tr>				
-				
-				<tr>
-					<td>N&uacute;mero:</td>
-					<td>".$_POST['dni']."</td>
-				</tr>				
-				
-				<tr>
-					<td>Control:</td>
-					<td>".$_POST['ldni']."</td>
-				</tr>				
-				
-				<tr>
-					<td>Mail:</td>
-					<td colspan=2>".$_POST['Email']."</td>
+					<td>MAIL</td>
+					<td>".$_POST['Email']."</td>
 				</tr>
 				
 				<tr>
-					<td>Tipo Usuario</td>
-					<td colspan=2>".$_POST['Nivel']."</td>
+					<td>NIVEL</td>
+					<td>".$_POST['Nivel']."</td>
 				</tr>
 				
 				<tr>
-					<td>Referencia Usuario</td>
+					<td>USER REF</td>
 					<td colspan=2>".$_SESSION['refcl']."</td>
 				</tr>
 				
 				<tr>
-					<td>Usuario:</td>
+					<td>USER</td>
 					<td colspan=2>".$_POST['Usuario']."</td>
 				</tr>
 				
 				<tr>
-					<td>Password:</td>
+					<td>PASSWORD</td>
 					<td colspan=2>".$_POST['Password']."</td>
 				</tr>
 				
 				<tr>
-					<td>Dirección:</td>
+					<td>DIRECCION</td>
 					<td colspan=2>".$_POST['Direccion']."</td>
 				</tr>
 				
 				<tr>
-					<td>Teléfono 1:</td>
+					<td>TELEFONO</td>
 					<td colspan=2>".$_POST['Tlf1']."</td>
 				</tr>
 				
 				<tr>
 					<td colspan=3 align='right' class='BorderSup'>
 						<form name='closewindow' action='User_Modificar_01.php'  \">
-							<input type='submit' value='VOLVER A ADMIN MODIFICAR' />
+							<input type='submit' value='VOLVER' />
 							<input type='hidden' name='volver' value=1 />
 						</form>
 					</td>
@@ -151,24 +124,10 @@ function process_form(){
 
 	if ($_SESSION['uNivel'] == 'adminu') {
 		
-	$sqlc = "UPDATE `$db_name`.`gch_admin` SET `Nivel` = '$_POST[Nivel]', `Nombre` = '$_POST[Nombre]', `Apellidos` = '$_POST[Apellidos]', `doc` = '$_POST[doc]', `dni` = '$_POST[dni]', `ldni` = '$_POST[ldni]', `Email` = '$_POST[Email]', `Usuario` = '$_POST[Usuario]', `Password` = '$_POST[Password]', `Direccion` = '$_POST[Direccion]', `Tlf1` = '$_POST[Tlf1]', `Tlf2` = '$_POST[Tlf2]' WHERE `gch_admin`.`id` = '$_POST[id]' LIMIT 1 ";
+	$sqlc = "UPDATE `$db_name`.`gch_user` SET `Nombre` = '$_POST[Nombre]', `Apellidos` = '$_POST[Apellidos]', `Email` = '$_POST[Email]', `Usuario` = '$_POST[Usuario]', `Password` = '$_POST[Password]', `Direccion` = '$_POST[Direccion]', `Tlf1` = '$_POST[Tlf1]' WHERE `gch_user`.`id` = '$_POST[id]' LIMIT 1 ";
 
 	if(mysqli_query($db, $sqlc)){ 	
 		
-	if (($_SESSION['dni'] == $_SESSION['mydni']) && ($_SESSION['uid'] == $_POST['id']) && ($_POST['dni'] != $_SESSION['mydni'])) { 	$_SESSION['dni'] = $_POST['dni'];
-							// CREA EL ARCHIVO MYDNI.TXT $_SESSION['mydni'].
-							$filename = "../Gch.Inclu/mydni.php";
-							$fw2 = fopen($filename, 'w+');
-							$mydni = '<?php $_SESSION[\'mydni\'] = '.$_POST['dni'].'; ?>';
-							fwrite($fw2, $mydni);
-							fclose($fw2);
-										}
-	elseif (($_SESSION['dni'] != $_SESSION['mydni']) && ($_SESSION['uid'] == $_POST['id']) && ($_POST['dni'] != $_SESSION['dni'])) { 
-							$_SESSION['dni'] = $_POST['dni'];
-					}else{ }
-								 
-					require '../Gch.Inclu/mydni.php';
-
 				global $tabla;
 				print( $tabla );
 
@@ -185,9 +144,9 @@ function process_form(){
 		
 					} // FIN CONDICIONAL ADMIN
 	
-	elseif (($_SESSION['uNivel'] == 'useru') || ($_SESSION['uNivel'] == 'plusu')){
+	elseif ($_SESSION['uNivel'] == 'useru'){
 		
-			$sqlc = "UPDATE `$db_name`.`gch_admin` SET `Nivel` = '$_POST[Nivel]', `Nombre` = '$_POST[Nombre]', `Apellidos` = '$_POST[Apellidos]', `Email` = '$_POST[Email]', `Direccion` = '$_POST[Direccion]', `Tlf1` = '$_POST[Tlf1]', `Tlf2` = '$_POST[Tlf2]' WHERE `gch_admin`.`id` = '$_POST[id]' LIMIT 1 ";
+	$sqlc = "UPDATE `$db_name`.`gch_user` SET `Nombre` = '$_POST[Nombre]', `Apellidos` = '$_POST[Apellidos]', `Email` = '$_POST[Email]', `Direccion` = '$_POST[Direccion]', `Tlf1` = '$_POST[Tlf1]' WHERE `gch_user`.`id` = '$_POST[id]' LIMIT 1 ";
 
 	if(mysqli_query($db, $sqlc)){ global $tabla;
 								  print( $tabla );
@@ -211,8 +170,6 @@ function process_form(){
 			
 function show_form($errors=''){
 	
-			require '../Gch.Inclu/mydni.php';
-
 	if($_POST['oculto2']){
 
 				$_SESSION['refcl'] = $_POST['ref'];
@@ -229,9 +186,7 @@ function show_form($errors=''){
 									'Nivel' => $_POST['Nivel'],			
 									'Email' => $_POST['Email'],
 									'Usuario' => $_POST['Usuario'],
-									'Usuario2' => $_POST['Usuario'],
 									'Password' => $_POST['Password'],
-									'Password2' => $_POST['Password'],
 									'Direccion' => $_POST['Direccion'],
 									'Tlf1' => $_POST['Tlf1']);
 												}
@@ -246,9 +201,7 @@ function show_form($errors=''){
 								'Nivel' => $_POST['Nivel'],						
 								'Email' => $_POST['Email'],
 								'Usuario' => $_POST['Usuario'],
-								'Usuario2' => $_POST['Usuario2'],
 								'Password' => $_POST['Password'],
-								'Password2' => $_POST['Password2'],
 								'Direccion' => $_POST['Direccion'],
 								'Tlf1' => $_POST['Tlf1']);
 												}
@@ -289,6 +242,7 @@ function show_form($errors=''){
 
 		<tr>
 			<td> REFERENCIA </td>
+			<input name='ref' type='hidden' value='".$defaults['ref']."' />
 			<td>".$defaults['ref']."</td>			
 		</tr>			
 
@@ -315,16 +269,21 @@ function show_form($errors=''){
 				
 		<tr>
 			<td>NIVEL </td>
+			<input name='Nivel' type='hidden' value='".$defaults['Nivel']."' />
 			<td>".$defaults['Nivel']."</td>
 		</tr>
 					
 		<tr>
 			<td>USUARIO  </td>
+			<input name='Usuario' type='hidden' value='".$defaults['Usuario']."' />
+			<input name='Usuario2' type='hidden' value='".$defaults['Usuario']."' />
 			<td>".$defaults['Usuario']."</td>	
 		</tr>
 				
 		<tr>
 			<td>PASSWORD </td>
+			<input name='Password' type='hidden' value='".$defaults['Password']."' />
+			<input name='Password2' type='hidden' value='".$defaults['Password']."' />
 			<td>".$defaults['Password']."</td>
 		</tr>
 
@@ -371,6 +330,7 @@ function show_form($errors=''){
 
 		<tr>
 			<td> REFERENCIA </td>
+			<input name='ref' type='hidden' value='".$defaults['ref']."' />
 			<td>".$defaults['ref']."</td>			
 		</tr>			
 
@@ -397,16 +357,21 @@ function show_form($errors=''){
 				
 		<tr>
 			<td>NIVEL </td>
+			<input name='Nivel' type='hidden' value='".$defaults['Nivel']."' />
 			<td>".$defaults['Nivel']."</td>
 		</tr>
 					
 		<tr>
 			<td>USUARIO  </td>
+			<input name='Usuario' type='hidden' value='".$defaults['Usuario']."' />
+			<input name='Usuario2' type='hidden' value='".$defaults['Usuario']."' />
 			<td>".$defaults['Usuario']."</td>	
 		</tr>
 				
 		<tr>
 			<td>PASSWORD </td>
+			<input name='Password' type='hidden' value='".$defaults['Password']."' />
+			<input name='Password2' type='hidden' value='".$defaults['Password']."' />
 			<td>".$defaults['Password']."</td>
 		</tr>
 
