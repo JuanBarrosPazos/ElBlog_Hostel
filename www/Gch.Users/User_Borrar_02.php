@@ -2,9 +2,9 @@
 session_start();
 
 	//require '../Gch.Inclu/error_hidden.php';
+	require 'Inc_Header_Nav_Head.php';
 	require '../Gch.Connet/conection.php';
 	require '../Gch.Connet/conect.php';
-	require 'Inc_Header_Nav_Head.php';
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -69,7 +69,7 @@ function process_form(){
 	global $table;
 	$table = "<table align='center'>
 				<tr>
-					<td colspan=3  class='BorderInf'>
+					<td colspan=3 class='BorderInf' align='center'>
 						SE HA BORRADO ESTE USUARIO.
 					</td>
 				</tr>

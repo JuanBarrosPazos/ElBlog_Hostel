@@ -11,20 +11,31 @@ session_start();
 				 ////////////////////				  ///////////////////
 
 if((@$_SESSION['uNivel'] == 'useru')||(@$_SESSION['uNivel'] == 'adminu')){ 
-							if (isset($_POST['oculto2'])){
-								show_form();
-								info_01();
+		if (isset($_POST['oculto2'])){
+			show_form();
+			info_01();
+			}
+		elseif($_POST['modifica']){
+				if($form_errors = validate_form()){
+					show_form($form_errors);
+							} else {
+							process_form();
+							info_02();
+							unset($_SESSION['refcl']);
+							global $redir;
+							$redir = "<script type='text/javascript'>
+										function redir(){
+										window.location.href='User_Modificar_01.php';
 								}
-							elseif($_POST['modifica']){
-									if($form_errors = validate_form()){
-										show_form($form_errors);
-											} else {
-												process_form();
-												info_02();
-												unset($_SESSION['refcl']);
-												}
-								} else { show_form(); }
-				} else { require '../Gch.Inclu/table_permisos.php'; }
+								setTimeout('redir()',6000);
+								</script>";
+							print ($redir);
+							}
+			} else { show_form(); }
+	} else { require '../Gch.Inclu/table_permisos.php';
+			 require 'Inc_Footer.php';
+			 require '../Gch.Www/Inc_Jquery_Boots_Foot.php';
+			 }
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -55,7 +66,7 @@ function process_form(){
 	global $tabla;							 
 	$tabla = "<table align='center' style=\"margin-top:20px\">
 				<tr>
-					<td colspan=3  class='BorderInf'>
+					<td colspan=3  class='BorderInf' align='center'>
 						NUEVOS DATOS DEL USUARIO.
 					</td>
 				</tr>
@@ -172,23 +183,25 @@ function show_form($errors=''){
 	
 	if($_POST['oculto2']){
 
-				$_SESSION['refcl'] = $_POST['ref'];
-				$_SESSION['myimgcl'] = $_POST['myimg'];
-				
-				global $dt;
-				$dt = $_POST['doc'];
+		$_SESSION['refcl'] = $_POST['ref'];
+		$_SESSION['myimgcl'] = $_POST['myimg'];
+			
+		global $dt;
+		$dt = $_POST['doc'];
 		
-				$defaults = array ( 'id' => $_POST['id'],
-									'ref' => $_POST['ref'],
-									'Nombre' => $_POST['Nombre'],
-									'Apellidos' => $_POST['Apellidos'],
-									'myimg' => $_SESSION['myimgcl'],
-									'Nivel' => $_POST['Nivel'],			
-									'Email' => $_POST['Email'],
-									'Usuario' => $_POST['Usuario'],
-									'Password' => $_POST['Password'],
-									'Direccion' => $_POST['Direccion'],
-									'Tlf1' => $_POST['Tlf1']);
+		$defaults = array ( 'id' => $_POST['id'],
+							'ref' => $_POST['ref'],
+							'Nombre' => $_POST['Nombre'],
+							'Apellidos' => $_POST['Apellidos'],
+							'myimg' => $_SESSION['myimgcl'],
+							'Nivel' => $_POST['Nivel'],			
+							'Email' => $_POST['Email'],
+							'Usuario' => $_POST['Usuario'],
+							'Usuario2' => $_POST['Usuario'],
+							'Password' => $_POST['Password'],
+							'Password2' => $_POST['Password'],
+							'Direccion' => $_POST['Direccion'],
+							'Tlf1' => $_POST['Tlf1']);
 												}
 								   
 		elseif($_POST['modifica']){
@@ -201,7 +214,9 @@ function show_form($errors=''){
 								'Nivel' => $_POST['Nivel'],						
 								'Email' => $_POST['Email'],
 								'Usuario' => $_POST['Usuario'],
+								'Usuario2' => $_POST['Usuario2'],
 								'Password' => $_POST['Password'],
+								'Password2' => $_POST['Password2'],
 								'Direccion' => $_POST['Direccion'],
 								'Tlf1' => $_POST['Tlf1']);
 												}
@@ -273,19 +288,45 @@ function show_form($errors=''){
 			<td>".$defaults['Nivel']."</td>
 		</tr>
 					
-		<tr>
-			<td>USUARIO  </td>
-			<input name='Usuario' type='hidden' value='".$defaults['Usuario']."' />
-			<input name='Usuario2' type='hidden' value='".$defaults['Usuario']."' />
-			<td>".$defaults['Usuario']."</td>	
-		</tr>
+				<tr>
+					<td>
+						<font color='#FF0000'>*</font>
+						Nombre de Usuario:
+					</td>
+					<td>
+		<input type='text' name='Usuario' size=12 maxlength=10 value='".$defaults['Usuario']."' />
+					</td>
+				</tr>
 				
-		<tr>
-			<td>PASSWORD </td>
-			<input name='Password' type='hidden' value='".$defaults['Password']."' />
-			<input name='Password2' type='hidden' value='".$defaults['Password']."' />
-			<td>".$defaults['Password']."</td>
-		</tr>
+				<tr>
+					<td>
+						<font color='#FF0000'>*</font>
+						Confirme el Usuario:
+					</td>
+					<td>
+		<input type='text' name='Usuario2' size=12 maxlength=10 value='".$defaults['Usuario2']."' />
+					</td>
+				</tr>
+							
+				<tr>
+					<td>
+						<font color='#FF0000'>*</font>
+						Password:
+					</td>
+					<td>
+		<input type='text' name='Password' size=12 maxlength=10 value='".$defaults['Password']."' />
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<font color='#FF0000'>*</font>
+						Confirme el Password:
+					</td>
+					<td>
+	<input type='text' name='Password2' size=12 maxlength=10 value='".$defaults['Password2']."' />
+					</td>
+				</tr>
 
 		<tr>
 			<td>DIRECCIÓN</td>
@@ -308,7 +349,16 @@ function show_form($errors=''){
 			</td>
 		</tr>
 			</form>														
-		</table>");
+		
+		<tr>
+			<td colspan=3 align='right' class='BorderSup'>
+				<form name='closewindow' action='User_Modificar_01.php'  \">
+					<input type='submit' value='CANCELAR Y VOLVER' />
+					<input type='hidden' name='volver' value=1 />
+				</form>
+			</td>
+		</tr>
+	</table>");
 
 			} // FIN ELSE IF USER / PLUS
 	
@@ -395,8 +445,17 @@ function show_form($errors=''){
 				<input type='hidden' name='modifica' value=1 />
 			</td>
 		</tr>
-			</form>														
-		</table>");
+			</form>	
+		
+		<tr>
+			<td colspan=3 align='right' class='BorderSup'>
+				<form name='closewindow' action='User_Modificar_01.php'  \">
+					<input type='submit' value='CANCELAR Y VOLVER' />
+					<input type='hidden' name='volver' value=1 />
+				</form>
+			</td>
+		</tr>
+	</table>");
 
 			} // FIN ELSE IF USERU
 	

@@ -2,7 +2,7 @@
 session_start();
 
 	//require '../Gch.Inclu/error_hidden.php';
-	require '../Gch.Inclu/Admin_Inclu_popup.php';
+	require 'Inc_Header_Nav_Headu.php';
 	require '../Gch.Connet/conection.php';
 	require '../Gch.Connet/conect.php';
 
@@ -12,19 +12,29 @@ session_start();
 
 if (($_SESSION['uNivel'] == 'adminu')||($_SESSION['uNivel'] == 'useru')){
 
- 		//print("Hello ".$_SESSION['uNombre']." ".$_SESSION['uApellidos'].".</br>");
-				
-			if (isset($_POST['oculto2'])){ show_form();
-										   info_01();
-									}
-							elseif($_POST['imagenmodif']){
-									if($form_errors = validate_form()){
-										show_form($form_errors);
-											} else { process_form();
-													 info_02();
-														}
-								} else { show_form(); }
-			} else { require '../Gch.Inclu/table_permisos.php'; }
+	if (isset($_POST['oculto2'])){ show_form();
+								   info_01();
+							}
+	elseif($_POST['imagenmodif']){
+			if($form_errors = validate_form()){
+				show_form($form_errors);
+					} else { process_form();
+							 info_02();
+							 global $redir;
+							 $redir = "<script type='text/javascript'>
+										 function redir(){
+											 window.close();
+												 }
+										 setTimeout('redir()',6000);
+									 </script>";
+							 print ($redir);
+		 
+								}
+		} else { show_form(); }
+	} else { require '../Gch.Inclu/table_permisos.php'; 
+			 require 'Inc_Footer.php';
+			 require '../Gch.Www/Inc_Jquery_Boots_Foot.php';
+				}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -51,13 +61,7 @@ function validate_form(){
 			global $img2;
 			$img2 = 'untitled.png';
 			}
-	/*
-		elseif(!$tipo_correcto){
-			$errors [] = "Este tipo de archivo no esta admitido: ".$_FILES['myimg']['name'];
-			global $img2;
-			$img2 = 'untitled.png';
-			}
-	*/
+
 		elseif ($_FILES['myimg']['size'] > $limite){
 		$tamanho = $_FILES['myimg']['size'] / 1024;
 		$errors [] = "El archivo".$_FILES['myimg']['name']." es mayor de 500 KBytes. ".$tamanho." KB";
@@ -109,11 +113,7 @@ function process_form(){
 			unlink('../Gch.Img.User/'.$_SESSION['smyimg']);
 		}else{}
 
-		// Renombrar el archivo:
 		$extension = substr($_FILES['myimg']['name'],-3);
-		// print($extension);
-		// Presuntamente deprecated
-		// $extension = end(explode('.', $_FILES['myimg']['name']) );
 		date('H:i:s');
 		date('Y_m_d');
 		$dt = date('is');
@@ -138,9 +138,9 @@ function process_form(){
 	if(mysqli_query($db, $sqlc)){
 			print( "<table align='center' style=\"margin-top:20px\">
 				<tr>
-					<th colspan=3  class='BorderInf'>
+					<td colspan=3  class='BorderInf' align='center'>
 						NUEVOS DATOS
-					</th>
+					</td>
 				</tr>
 				
 				<tr>
@@ -234,52 +234,42 @@ function show_form($errors=''){
 	$_SESSION['sid'] = $_POST['id'];
 	$_SESSION['sdni'] = $_POST['dni'];
 	
-				$defaults = array ( 'id' => $_POST['id'],
-									'Nombre' => $_POST['Nombre'],
-									'Apellidos' => $_POST['Apellidos'],
-									'myimg' => $img,
-									'ref' =>  $_SESSION['sref'],
-									'Nivel' => $_POST['Nivel'],
-								    'doc' => $_POST['doc'],
-									'dni' => $_POST['dni'],
-									'ldni' => $_POST['ldni'],
-									'Email' => $_POST['Email'],
-									'Usuario' => $_POST['Usuario'],
-									'Usuario2' => $_POST['Usuario'],
-									'Password' => $_POST['Password'],
-									'Password2' => $_POST['Password'],
-									'Direccion' => $_POST['Direccion'],
-									'Tlf1' => $_POST['Tlf1'],
-									'Tlf2' => $_POST['Tlf2']);
+		$defaults = array ( 'id' => $_POST['id'],
+							'Nombre' => $_POST['Nombre'],
+							'Apellidos' => $_POST['Apellidos'],
+							'myimg' => $img,
+							'ref' =>  $_SESSION['sref'],
+							'Nivel' => $_POST['Nivel'],
+							'Email' => $_POST['Email'],
+							'Usuario' => $_POST['Usuario'],
+							'Password' => $_POST['Password'],
+							'Direccion' => $_POST['Direccion'],
+							'Tlf1' => $_POST['Tlf1'],
+						);
 								   		}
 								   
-		elseif($_POST['imagenmodif']){
+	elseif($_POST['imagenmodif']){
 
-				$defaults = array ( 'id' => $_POST['id'],
-									'Nombre' => $_POST['Nombre'],
-									'Apellidos' => $_POST['Apellidos'],
-									'ref' => $_SESSION['sref'],
-									'myimg' => isset($_POST['myimg']),
-									'Nivel' => $_POST['Nivel'],
-								    'doc' => $_POST['doc'],
-									'dni' => $_POST['dni'],
-									'ldni' => $_POST['ldni'],
-									'Email' => $_POST['Email'],
-									'Usuario' => $_POST['Usuario'],
-									'Usuario2' => $_POST['Usuario'],
-									'Password' => $_POST['Password'],
-									'Password2' => $_POST['Password'],
-									'Direccion' => $_POST['Direccion'],
-									'Tlf1' => $_POST['Tlf1'],
-									'Tlf2' => $_POST['Tlf2']);
-										}
+		$defaults = array ( 'id' => $_POST['id'],
+							'Nombre' => $_POST['Nombre'],
+							'Apellidos' => $_POST['Apellidos'],
+							'ref' => $_SESSION['sref'],
+							'myimg' => isset($_POST['myimg']),
+							'Nivel' => $_POST['Nivel'],
+							'Email' => $_POST['Email'],
+							'Usuario' => $_POST['Usuario'],
+							'Password' => $_POST['Password'],
+							'Direccion' => $_POST['Direccion'],
+							'Tlf1' => $_POST['Tlf1'],
+						);
+								}
 	
 	if ($errors){
 		print("	<table align='center'>
 					<tr>
-						<th style='text-align:center'>
+						<td style='text-align:center'>
 							<font color='#FF0000'>* SOLUCIONE ESTOS ERRORES:</font><br/>
-						</th>
+						</td>
 					</tr>
 					<tr>
 						<td style='text-align:left'>");
@@ -295,18 +285,16 @@ function show_form($errors=''){
 		
 	print("<table align='center'  border=0 style='margin-top:20px; width:95.5%'>
 				<tr>
-					<th colspan=2 class='BorderInf'>
-						SELECCIONE UNA NUEVA IMAGEN.
-					</th>
+					<td colspan=2 class='BorderInf' align='center'>
+				SELECCIONE UNA NUEVA IMAGEN.<br>
+				LA IMAGEN ACTUAL DE : </br>".$defaults['Nombre']." ".$defaults['Apellidos'].".
+					</td>
 				</tr>
 				
 				<tr>
-					<th class='BorderInf'>
-				LA IMAGEN ACTUAL DE : </br>".$defaults['Nombre']." ".$defaults['Apellidos'].".
-					</th>
-					<th class='BorderInf'>
-<img src='../Gch.Img.User/".$_SESSION['smyimg']."' height='120px' width='90px' />
-					</th>
+					<td colspan=2 class='BorderInf' align='center'>
+		<img src='../Gch.Img.User/".$_SESSION['smyimg']."' width='240px' height='auto' />
+					</td>
 				</tr>
 				
 				<tr>
@@ -314,8 +302,8 @@ function show_form($errors=''){
 							Seleccione una Fotografía:	
 					</td>
 					<td>
-					<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'  enctype='multipart/form-data'>
-						<input type='file' name='myimg' value='".$defaults['myimg']."' />						
+	<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'  enctype='multipart/form-data'>
+				<input type='file' name='myimg' value='".$defaults['myimg']."' />						
 					</td>
 				</tr>
 
@@ -327,18 +315,12 @@ function show_form($errors=''){
 						<input type='hidden' name='ref' value='".$_SESSION['sref']."' />					
 						<input type='hidden' name='Nombre' value='".$defaults['Nombre']."' />
 						<input type='hidden' name='Apellidos' value='".$defaults['Apellidos']."' />
-						<input type='hidden' name='doc' value='".$defaults['doc']."' />
-						<input type='hidden' name='dni' value='".$defaults['dni']."' />
-						<input type='hidden' name='ldni' value='".$defaults['ldni']."' />
 						<input type='hidden' name='Email' value='".$defaults['Email']."' />
 						<input type='hidden' name='Nivel' value='".$defaults['Nivel']."' />
 						<input type='hidden' name='Usuario' value='".$defaults['Usuario']."' />
-						<input type='hidden' name='Usuario2' value='".$defaults['Usuario2']."' />
 						<input type='hidden' name='Password' value='".$defaults['Password']."' />
-						<input type='hidden' name='Password2' value='".$defaults['Password2']."' />
 						<input type='hidden' name='Direccion' value='".$defaults['Direccion']."' />
 						<input type='hidden' name='Tlf1' value='".$defaults['Tlf1']."' />
-						<input type='hidden' name='Tlf2' value='".$defaults['Tlf2']."' />
 
 						<input type='submit' value='MODIFICAR IMAGEN' />
 						<input type='hidden' name='imagenmodif' value=1 />
@@ -364,18 +346,7 @@ function show_form($errors=''){
 					</td>
 				</tr>
 			</table>");
-
-	}
-
-				   ////////////////////				   ////////////////////
-////////////////////				////////////////////				////////////////////
-				 ////////////////////				  ///////////////////
-	
-	function master_index(){
-		
-				require '../Gch.Inclu/Master_Index_Admin.php';
-		
-				} 
+		}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -444,7 +415,9 @@ function info_01(){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-		require '../Gch.Inclu/Admin_Inclu_02.php';
+	require 'Inc_Footer.php';
+
+	require '../Gch.Www/Inc_Jquery_Boots_Foot.php';
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

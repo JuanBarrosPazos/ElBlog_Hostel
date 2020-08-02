@@ -2,9 +2,9 @@
 //session_start();
 
 	//require '../Gch.Inclu/error_hidden.php';
+	require 'Inc_Header_Nav_Headu.php';
 	require '../Gch.Connet/conection.php';
 	require '../Gch.Connet/conect.php';
-	require 'Inc_Header_Nav_Headu.php';
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

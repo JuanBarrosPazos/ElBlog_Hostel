@@ -2,9 +2,9 @@
 session_start();
 
 	//require '../Gch.Inclu/error_hidden.php';
+	require 'Inc_Header_Nav_Head.php';
 	require '../Gch.Connet/conection.php';
 	require '../Gch.Connet/conect.php';
-	require 'Inc_Header_Nav_Head.php';
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -32,35 +32,10 @@ if ($_SESSION['uNivel'] == 'useru'){ ver_todo(); }
 				}
 	} 
 
-else { if (isset($_POST['salir'])) {fsalir();
-                      				global $redir;
-									$redir = "<script type='text/javascript'>
-												function redir(){
-												window.location.href='../index.php';
-										}
-										setTimeout('redir()',1);
-										</script>";
-									print ($redir);
-										}
-  		require '../Gch.Inclu/table_permisos.php'; 
+else { 	require '../Gch.Inclu/table_permisos.php'; 
 	   	require 'Inc_Footer.php';
 	   	require '../Gch.Www/Inc_Jquery_Boots_Foot.php';
 			}
-
-				   ////////////////////				   ////////////////////
-////////////////////				////////////////////				////////////////////
-				 ////////////////////				  ///////////////////
-
-    function fsalir() {	unset($_SESSION['uid']);
-                        unset($_SESSION['uNivel']);
-                        unset($_SESSION['uNombre']);
-                        unset($_SESSION['uApellidos']);
-                        unset($_SESSION['uEmail']);
-                        unset($_SESSION['uUsuario']);
-                        unset($_SESSION['uPassword']);
-                        unset($_SESSION['uDireccion']);
-                        unset($_SESSION['uTlf1']);
-                    }
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -123,7 +98,7 @@ function process_form(){
 		
 	global $formulariohi;
 	$formulariohi = "<td colspan=2 align='center' class='BorderInf'>
-	<form name='modifica_img' action='User_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=540px,height=370px')\">";
+	<form name='modifica_img' action='User_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=540px,height=680px')\">";
 
 	global $formulariofi;
 	$formulariofi = "<input type='submit' value='MODIFICAR IMAGEN' />
@@ -184,12 +159,12 @@ function ver_todo(){
 					<td colspan=2 align='center' class='BorderInfDch'>
 						<input type='submit' value='MODIFICAR ESTOS DATOS' />
 						<input type='hidden' name='oculto2' value=1 />
-				</form>
-					</td>";
+					</form>
+						</td>";
 
 	global $formulariohi;
 	$formulariohi = "<td colspan=2 align='center' class='BorderInfDch'>
-	<form name='modifica_img' action='User_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=540px,height=370px')\">";
+	<form name='modifica_img' action='User_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=540px,height=680px')\">";
 
 	global $formulariofi;
 	$formulariofi = "<input type='submit' value='MODIFICAR IMAGEN' />
@@ -204,8 +179,8 @@ function ver_todo(){
 	$formulariofd = "<td colspan=2 align='center' class='BorderInf'>
 						<input type='submit' value='BORRAR DATOS' />
 						<input type='hidden' name='oculto2' value=1 />
-				</form>
-					</td>";
+					</form>
+						</td>";
 
 
 	require 'Inc_While_Total.php';

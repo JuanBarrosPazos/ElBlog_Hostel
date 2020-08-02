@@ -1,5 +1,16 @@
 <?php
 
+global $text;
+$text = "<tr>
+			<td align='center'>
+				<font color='#FF0000'>
+					SUS DATOS SE GESTIONAN DESDE LA ZONA ADMIN
+					<br>
+					SOLO PUEDE CONSULTAR USUARIOS BÁSICOS
+				</font>
+			</td>
+		</tr>";
+
 	if(!$qb){
 			print("<font color='#FF0000'>
 				Se ha producido un error: ".mysqli_error($db)." </font></br>");
@@ -7,19 +18,11 @@
 	} else {
 			
 		if(mysqli_num_rows($qb)== 0){
-			if($_SESSION['uNivel'] == 'adminu'){
-				print ("<table align='center' style=\"border:0px\">
-				<tr>
-					<td align='center'>
-						<font color='#FF0000'>
-							SUS DATOS SE GESTIONAN DESDE LA ZONA ADMIN
-							<br>
-							SOLO PUEDE CONSULTAR USUARIOS BÁSICOS
-						</font>
-					</td>
-				</tr>
-			</table>");}
-			else{
+			if($_SESSION['uNivel'] == 'adminu'){ echo "<table align='center'>";
+												 global $text;
+												 echo $text;
+												 echo "</table>";		
+			} else {
 				print ("<table align='center' style=\"border:0px\">
 						<tr>
 							<td align='center'>
@@ -32,41 +35,46 @@
 				}
 
 		} else {
-			print ("<table align='center'>
-						<tr>
-							<td colspan=7 class='BorderInf' align='center'>
-			".$twhile.": ".mysqli_num_rows($qb).".
-							</td>
-						</tr>
-									
-						<tr>
-							<td class='BorderInfDch' align='center'>
-								Nivel
-							</td>
+			if($_SESSION['uNivel'] == 'adminu'){ echo "<table align='center'>";
+												 global $text;
+												 echo $text;
+												 echo "</table>
+									<table align='center'>
+										<tr>
+									<td colspan=7 class='BorderInf' align='center'>
+						".$twhile.": ".mysqli_num_rows($qb).".
+									</td>
+										</tr>";												 		
+												}	
+					else { print ("<table align='center'>"); }	
+			print ("<tr>
+						<td class='BorderInfDch' align='center'>
+							Nivel
+						</td>
 								
-							<td class='BorderInfDch' align='center'>
-								Referencia
-							</td>
+						<td class='BorderInfDch' align='center'>
+							Referencia
+						</td>
 										
-							<td class='BorderInfDch' align='center'>
-								Nombre
-							</td>
+						<td class='BorderInfDch' align='center'>
+							Nombre
+						</td>
 								
-							<td class='BorderInfDch' align='center'>
-								Apellidos
-							</td>
+						<td class='BorderInfDch' align='center'>
+							Apellidos
+						</td>
 										
-							<td class='BorderInfDch' align='center'>
-							</td>
+						<td class='BorderInfDch' align='center'>
+						</td>
 										
-							<td class='BorderInfDch' align='center'>
-								Usuario
-							</td>
+						<td class='BorderInfDch' align='center'>
+							Usuario
+						</td>
 										
-							<td class='BorderInfDch' align='center'>
-								Password
-							</td>
-                        </tr>");
+						<td class='BorderInfDch' align='center'>
+							Password
+						</td>
+                    </tr>");
                                     
 	while($rowb = mysqli_fetch_assoc($qb)){
     
@@ -157,10 +165,7 @@
 	<input name='lastout' type='hidden' value='".$rowb['lastout']."' />
 	<input name='visitauser' type='hidden' value='".$rowb['visitauser']."' />
                                      
-		".$formulariofd."</tr>
-
-		
-		");
+		".$formulariofd."</tr>");
                     
 	 }  // FIN DEL WHILE
 

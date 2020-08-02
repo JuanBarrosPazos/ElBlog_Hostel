@@ -34,7 +34,7 @@
 
       if (isset($_POST['salir'])) { 
                       //session_destroy();
-                      salir();
+                      salirf();
                       /**/
                       global $redir;
                       $redir = "<script type='text/javascript'>
@@ -44,7 +44,6 @@
                         setTimeout('redir()',1);
                         </script>";
                       print ($redir);
-                      
                   }
 
       if(isset($_POST['login'])){
@@ -63,7 +62,7 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 
-    function salir() {	unset($_SESSION['uid']);
+    function salirf() {	unset($_SESSION['uid']);
                         unset($_SESSION['uNivel']);
                         unset($_SESSION['uNombre']);
                         unset($_SESSION['uApellidos']);

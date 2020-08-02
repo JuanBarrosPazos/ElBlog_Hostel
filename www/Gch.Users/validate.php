@@ -4,27 +4,6 @@ error_reporting (0);
 
 $errors = array();
 
-	/* VALIDAMOS EL CAMPO my_img */
-
-	$limite = 500 * 1024;
-	
-	$ext_permitidas = array('jpg','JPG','gif','GIF','png','PNG','bmp','BMP');
-	$extension = substr($_FILES['myimg1']['name'],-3);
-	// print($extension);
-	// $extension = end(explode('.', $_FILES['myimg1']['name']) );
-	$ext_correcta = in_array($extension, $ext_permitidas);
-
-	/* $tipo_correcto = preg_match('/^image\/(gif|png|jpg|bmp)$/', $_POST['myimg1']); */
-
-	if($_POST['modificaimg']){
-		if(strlen(trim ($_POST['myimg1'])) == 0){
-			$errors [] = "Ha de seleccionar un archivo.";
-			global $img;
-			$img = $_SESSION['myimgcl'];
-		}
-
-			}
-			
 						/////////////////////////
 	/////////////////////////			/////////////////////////
 					/////////////////////////

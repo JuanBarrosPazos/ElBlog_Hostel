@@ -8,7 +8,7 @@
 	require 'Gch.Users/Only.index.user.php';
 
 	if (isset($_POST['salir'])) { //session_destroy();
-								  salir();
+								  fsalir();
 								  /* */
 								  global $redir;
 								  $redir = "<script type='text/javascript'>
@@ -61,17 +61,16 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 
-	function salir() {	unset($_SESSION['id']);
-						unset($_SESSION['Nivel']);
-						unset($_SESSION['Nombre']);
-						unset($_SESSION['Apellidos']);
-						unset($_SESSION['doc']);
-						unset($_SESSION['Email']);
-						unset($_SESSION['Usuario']);
-						unset($_SESSION['Password']);
-						unset($_SESSION['Direccion']);
-						unset($_SESSION['Tlf1']);
-	}
+	function fsalir() {	unset($_SESSION['uid']);
+                        unset($_SESSION['uNivel']);
+                        unset($_SESSION['uNombre']);
+                        unset($_SESSION['uApellidos']);
+                        unset($_SESSION['uEmail']);
+                        unset($_SESSION['uUsuario']);
+                        unset($_SESSION['uPassword']);
+                        unset($_SESSION['uDireccion']);
+                        unset($_SESSION['uTlf1']);
+					}
 
 function process_login(){
 		if ($_SESSION['Nivel'] == 'user'){}

@@ -6,6 +6,12 @@
 
 ----
 
+### 2020.08.02
+
+* SE RECOMIENDA SOBREESCRIBIR: Gch.Users y Gch.Artic.
+
+----
+
 ### 2020.08.01
 
 * SE RECOMIENDA BORRAR Y RECARGAR:
