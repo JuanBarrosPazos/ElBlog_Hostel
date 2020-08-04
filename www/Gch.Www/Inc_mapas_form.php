@@ -6,7 +6,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 	if (isset($_POST['salir'])) { //session_destroy();
-								  salir();
+								  //salirf();
 							}
 
 	if(isset($_POST['login'])){ 
@@ -33,7 +33,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////
 
     /*
-	function salir() {	unset($_SESSION['id']);
+	function salirf() {	unset($_SESSION['id']);
 						unset($_SESSION['Nivel']);
 						unset($_SESSION['Nombre']);
 						unset($_SESSION['Apellidos']);

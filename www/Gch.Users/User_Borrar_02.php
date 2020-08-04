@@ -29,7 +29,7 @@ if (($_SESSION['uNivel'] == 'adminu') || ($_SESSION['uNivel'] == 'useru')){
 							  global $refnorm;
 							  $refnorm = $_SESSION['iniref'];
 							  info_02();
-							  if($_SESSION['uNivel'] == 'useru'){fsalir();} else { }
+							  if($_SESSION['uNivel'] == 'useru'){salirf();} else { }
 							  global $redir;
 							  $redir = "<script type='text/javascript'>
 										  function redir(){
@@ -49,7 +49,7 @@ if (($_SESSION['uNivel'] == 'adminu') || ($_SESSION['uNivel'] == 'useru')){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-function fsalir() {	unset($_SESSION['uid']);
+function salirf() {	unset($_SESSION['uid']);
 					unset($_SESSION['uNivel']);
 					unset($_SESSION['uNombre']);
 					unset($_SESSION['uApellidos']);

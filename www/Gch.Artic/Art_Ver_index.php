@@ -7,19 +7,22 @@
 
 	require 'Gch.Users/Only.index.user.php';
 
-	if (isset($_POST['salir'])) { //session_destroy();
-								  fsalir();
-								  /* */
-								  global $redir;
-								  $redir = "<script type='text/javascript'>
-										  function redir(){
-										  window.location.href='index.php';
-										}
-										setTimeout('redir()',1);
-										</script>";
-								  print ($redir);
-								 
-							}
+	if (isset($_POST['salir'])) { 
+                    require 'Gch.Connet/conection.php';
+                    require 'Gch.Connet/conect.php';
+                    sale_usuario();
+					//session_destroy();
+					//salirf();
+					/* */
+					global $redir;
+					$redir = "<script type='text/javascript'>
+								function redir(){
+								 window.location.href='index.php';
+								}
+								setTimeout('redir()',1);
+								</script>";
+							print ($redir);
+					}
 
 	if(isset($_POST['login'])){
 				//process_login();
@@ -61,16 +64,16 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 
-	function fsalir() {	unset($_SESSION['uid']);
-                        unset($_SESSION['uNivel']);
-                        unset($_SESSION['uNombre']);
-                        unset($_SESSION['uApellidos']);
-                        unset($_SESSION['uEmail']);
-                        unset($_SESSION['uUsuario']);
-                        unset($_SESSION['uPassword']);
-                        unset($_SESSION['uDireccion']);
-                        unset($_SESSION['uTlf1']);
-					}
+function salirf() {	unset($_SESSION['uid']);
+                    unset($_SESSION['uNivel']);
+                    unset($_SESSION['uNombre']);
+                    unset($_SESSION['uApellidos']);
+                    unset($_SESSION['uEmail']);
+                    unset($_SESSION['uUsuario']);
+                    unset($_SESSION['uPassword']);
+                    unset($_SESSION['uDireccion']);
+                    unset($_SESSION['uTlf1']);
+				}
 
 function process_login(){
 		if ($_SESSION['Nivel'] == 'user'){}

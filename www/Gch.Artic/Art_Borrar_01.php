@@ -35,8 +35,6 @@ if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){
 			show_form();
 			ver_todo();}
 
-	//require 'Inc_Logica_01.php';
-
 } else {  require '../Gch.Inclu/table_permisos.php'; }
 
 		

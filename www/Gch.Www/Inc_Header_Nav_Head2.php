@@ -23,8 +23,11 @@
     require '../Gch.Users/Only.index.user.php';
 
     if (isset($_POST['salir'])) { 
+                    require '../Gch.Connet/conection.php';
+                    require '../Gch.Connet/conect.php';
+                    sale_usuario();
                     //session_destroy();
-                    salir();
+                    //salirf();
                     /* */
                     global $redir;
                     $redir = "<script type='text/javascript'>
@@ -52,7 +55,7 @@
       }
 
 
-  function salir() {  unset($_SESSION['uid']);
+  function salirf() { unset($_SESSION['uid']);
                       unset($_SESSION['uNivel']);
                       unset($_SESSION['uNombre']);
                       unset($_SESSION['uApellidos']);

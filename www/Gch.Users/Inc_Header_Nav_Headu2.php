@@ -33,8 +33,11 @@
       require 'Only.index.user.php';
 
       if (isset($_POST['salir'])) { 
+                      require '../Gch.Connet/conection.php';
+                      require '../Gch.Connet/conect.php';
+                      sale_usuario();
                       //session_destroy();
-                      salirf();
+                      //salirf();
                       /**/
                       global $redir;
                       $redir = "<script type='text/javascript'>
@@ -60,7 +63,9 @@
               
             }
 
-//////////////////////////////////////////////////////////////////////////////////////////////
+                    ////////////////////				   ////////////////////
+      ////////////////////				////////////////////				////////////////////
+                ////////////////////				  ///////////////////
 
     function salirf() {	unset($_SESSION['uid']);
                         unset($_SESSION['uNivel']);
