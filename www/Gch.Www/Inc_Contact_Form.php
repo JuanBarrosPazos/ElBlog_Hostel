@@ -154,23 +154,23 @@ print("
 		<form name='contacto' method='post' action='$_SERVER[PHP_SELF]#anclaform'>
 		
         <div style=\"display: block;\">
-            <input name='asunto' id='asunto' type='text' size='33' maxlength='35' placeholder=\"&nbsp;ASUNTO\" value='".$defaults['asunto']."'/>
+            <input name='asunto' id='asunto' type='text' size='31' maxlength='35' placeholder=\"&nbsp;ASUNTO\" value='".$defaults['asunto']."'/>
         </div>
 
         <div style=\"display: block;\">
-            <input name='nombre' id='nombre' type='text' size='33' maxlength='35' placeholder=\"&nbsp;NOMBRE\" value='".$defaults['nombre']."'/>
+            <input name='nombre' id='nombre' type='text' size='31' maxlength='35' placeholder=\"&nbsp;NOMBRE\" value='".$defaults['nombre']."'/>
         </div>
 
         <div style=\"display: block;\">
-            <input name='apellidos' id='apellidos' type='text' size='33' maxlength='35' placeholder=\"&nbsp;APELLIDOS\" value='".$defaults['apellidos']."'/>
+            <input name='apellidos' id='apellidos' type='text' size='31' maxlength='35' placeholder=\"&nbsp;APELLIDOS\" value='".$defaults['apellidos']."'/>
         </div>
 
         <div style=\"display: block;\">
-            <input name='tlf' id='tlf' type='text' size='33' maxlength='9' placeholder=\"&nbsp;TELEFONO CONTACTO\" value='".$defaults['tlf']."'/>
+            <input name='tlf' id='tlf' type='text' size='31' maxlength='9' placeholder=\"&nbsp;TELEFONO CONTACTO\" value='".$defaults['tlf']."'/>
         </div>
 
         <div style=\"display: block;\">
-            <input name='Email' id='Email' type='text' size='33' maxlength='40' placeholder=\"&nbsp;SU EMAIL\" value='".$defaults['Email']."'/>
+            <input name='Email' id='Email' type='text' size='31' maxlength='40' placeholder=\"&nbsp;SU EMAIL\" value='".$defaults['Email']."'/>
         </div>
 
         <div style=\"display: block;\">

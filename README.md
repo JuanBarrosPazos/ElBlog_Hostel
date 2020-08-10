@@ -8,6 +8,14 @@
 
 ### 2020.08.04
 
+* SE HA SOLUCIONADO UN ERROR CRITICO.
+
+* SE RECOMIENDA SOBREESCRIBIR: Gch.Www, Gch.Users, Gch.Syst y Gch.Artic.
+
+----
+
+### 2020.08.04
+
 * SE RECOMIENDA SOBREESCRIBIR: Gch.Www, Gch.Users y Gch.Artic.
 
 * Modificado index_Play_System(Docker).php (y otros relacionados) sobreescribir y renombrar a index.php.

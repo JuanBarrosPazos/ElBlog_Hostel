@@ -161,19 +161,19 @@ print("<div class=\"row\">
     <div class=\"juancentramail\">
         <form name='contacto' method='post' action='$_SERVER[PHP_SELF]#anclaform'>
         <div style=\"display: block;\">
-            <input name='nombre' id='nombre' type='text' size='36' maxlength='35' placeholder=\"&nbsp;NOMBRE\" value='".$defaults['nombre']."'/>
+            <input name='nombre' id='nombre' type='text' size='31' maxlength='35' placeholder=\"&nbsp;NOMBRE\" value='".$defaults['nombre']."'/>
         </div>
 
         <div style=\"display: block;\">
-            <input name='apellidos' id='apellidos' type='text' size='36' maxlength='35' placeholder=\"&nbsp;APELLIDOS\" value='".$defaults['apellidos']."'/>
+            <input name='apellidos' id='apellidos' type='text' size='31' maxlength='35' placeholder=\"&nbsp;APELLIDOS\" value='".$defaults['apellidos']."'/>
         </div>
 
         <div style=\"display: block;\">
-            <input name='Email' id='Email' type='text' size='36' maxlength='40' placeholder=\"&nbsp;SU EMAIL\" value='".$defaults['Email']."'/>
+            <input name='Email' id='Email' type='text' size='31' maxlength='40' placeholder=\"&nbsp;SU EMAIL\" value='".$defaults['Email']."'/>
         </div>
 
         <div style=\"display: block;\">
-            <input name='tlf' id='tlf' type='text' size='36' maxlength='9' placeholder=\"&nbsp;TELEFONO CONTACTO\" value='".$defaults['tlf']."'/>
+            <input name='tlf' id='tlf' type='text' size='31' maxlength='9' placeholder=\"&nbsp;TELEFONO CONTACTO\" value='".$defaults['tlf']."'/>
         </div>
 
         <input name='asunto' type='hidden' id='asunto' value='RESERVA DE MESA'/>
@@ -196,7 +196,7 @@ print("<div class=\"row\">
         </div>
 
         <div style=\"display: block;\">
-<textarea onkeypress='return limita(event, 200)' onkeyup='actualizaInfo(200)' name='mensaje' id='mensaje' cols='40' rows='5' placeholder=\"&nbsp;COMENTARIOS ADICIONALES\">".$defaults['mensaje']."</textarea>
+<textarea onkeypress='return limita(event, 200)' onkeyup='actualizaInfo(200)' name='mensaje' id='mensaje' cols='34' rows='6' placeholder=\"&nbsp;COMENTARIOS ADICIONALES\">".$defaults['mensaje']."</textarea>
        </div>
 
  		<div id=\"info\" style=\"display: block; text-align: center; color: #343434;\">

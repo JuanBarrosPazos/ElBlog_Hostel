@@ -66,6 +66,40 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 
+ function sale_usuario(){
+
+    global $db;
+    global $db_name;
+    global $userid;
+    $userid = $_SESSION['uid'];
+        
+    global $dateadout;
+    $dateadout = date('Y-m-d/H:i:s');
+        
+    $sqladout = "UPDATE `$db_name`.`gch_user` SET `lastout` = '$dateadout' WHERE `gch_user`.`id` = '$userid' LIMIT 1 ";
+            
+    if(mysqli_query($db, $sqladout)){
+
+	 } else { print("</br>
+                <font color='#FF0000'>
+            * FATAL ERROR funcion sale_usuario(): ".mysqli_error($db))."</font>
+                </br>";
+                  }
+    global $dir;
+    $dir = "../Gch.Log";
+    $text = PHP_EOL."** FIN DE SESION ".$_SESSION['Nombre']." ".$_SESSION['Apellidos']." => ".$dateadout;
+    $logdocu = $_SESSION['uref'];
+    $logdate = date('Y_m_d');
+    $logtext = PHP_EOL.$text.PHP_EOL.PHP_EOL;
+    $filename = $dir."/".$logdate."_".$logdocu.".log";
+    $log = fopen($filename, 'ab+');
+    fwrite($log, $logtext);
+    fclose($log);
+
+	  salirf();
+
+          }
+
     function salirf() {	unset($_SESSION['uid']);
                         unset($_SESSION['uNivel']);
                         unset($_SESSION['uNombre']);
