@@ -405,13 +405,13 @@ a:hover  img {
 .juancentramail {
 	margin: 0.3em auto 2em auto; 
 	text-align: left;
-    width: 30vw;
-    min-width:406px;
+    width: 26vw;
+    min-width:340px;
     height: auto;
 	/* border: solid 1px #343434; */
 }
 
-.juancentramail input, .juancentramail label {
+.juancentramail input, .juancentramail label, .juancentramail textarea  {
 	margin: 1px 0px 1px 6px;
 }
 
