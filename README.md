@@ -1,5 +1,5 @@
 # ElBlog_Hostel (beta)
-
+* https://juanchopazos.000webhostapp.com/BMoll/www/index.php
 ----
 
 ## EN EL DIRECTORIO Gch.Tutorial SE ENCUENTRA UNA GUÍA GENERAL DE LA APP.
@@ -12,7 +12,7 @@
 
 * Modificado index_Play_System(Docker).php (y otros relacionados) sobreescribir y renombrar a index.php.
 
-* Se graba la fecha y hora de acceso de los usuarios comunes y el número de accesos
+* Se graba la fecha y hora de acceso / salida, de los usuarios comunes y el número de accesos de cada usuario.
 
 ----
 
