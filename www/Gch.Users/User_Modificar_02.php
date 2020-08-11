@@ -33,8 +33,8 @@ if((@$_SESSION['uNivel'] == 'useru')||(@$_SESSION['uNivel'] == 'adminu')){
 							}
 			} else { show_form(); }
 	} else { require '../Gch.Inclu/table_permisos.php';
-			 require 'Inc_Footer.php';
-			 require '../Gch.Www/Inc_Jquery_Boots_Foot.php';
+			 //require 'Inc_Footer.php';
+			 //require '../Gch.Www/Inc_Jquery_Boots_Foot.php';
 			 }
 
 				   ////////////////////				   ////////////////////

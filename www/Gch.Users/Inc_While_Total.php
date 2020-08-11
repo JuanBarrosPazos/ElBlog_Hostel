@@ -144,7 +144,7 @@ $text = "<tr>
 	<input name='Tlf1' type='hidden' value='".$rowb['Tlf1']."' />
 	<input name='lastin' type='hidden' value='".$rowb['lastin']."' />
 	<input name='lastout' type='hidden' value='".$rowb['lastout']."' />
-	<input name='visitauser' type='hidden' value='".$rowb['visitauser']."' />
+	<input name='visitauser' type='hidden' value='".$rowb['visituser']."' />
                                      
 		".$formulariofi.$formulariod."
 
@@ -163,7 +163,7 @@ $text = "<tr>
 	<input name='Tlf1' type='hidden' value='".$rowb['Tlf1']."' />
 	<input name='lastin' type='hidden' value='".$rowb['lastin']."' />
 	<input name='lastout' type='hidden' value='".$rowb['lastout']."' />
-	<input name='visitauser' type='hidden' value='".$rowb['visitauser']."' />
+	<input name='visitauser' type='hidden' value='".$rowb['visituser']."' />
                                      
 		".$formulariofd."</tr>");
                     

@@ -20,7 +20,7 @@
 
 
 <?php
-    require '../Gch.Users/Only.index.user.php';
+    //require '../Gch.Users/Only.index.user.php';
 
 //echo $_SESSION['a'];
 

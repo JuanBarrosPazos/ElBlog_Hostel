@@ -26,7 +26,7 @@ session_start();
 	*/
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
-echo "**** ".$_SESSION['uNivel'];
+//echo "**** ".$_SESSION['uNivel'];
 if((@$_SESSION['uNivel'] == 'useru')||(@$_SESSION['uNivel'] == 'adminu')){ 
 
 	if (isset($_POST['oculto2'])){ show_form(); }
@@ -42,8 +42,6 @@ if((@$_SESSION['uNivel'] == 'useru')||(@$_SESSION['uNivel'] == 'adminu')){
 
 	} else { require '../Gch.Inclu/table_permisos.php'; 
 				global $redir;
-				// 600000 microsegundos 10 minutos
-				// 60000 microsegundos 1 minuto
 				$redir = "<script type='text/javascript'>
 							function redir(){
 								window.close();
@@ -113,7 +111,7 @@ function process_form(){
 
 		$ActionTime = date('Y-m-d');
 
-	$sqla = "INSERT INTO `$db_name`.$tablename (`refart`,`refuser`,`refayto`,`refisla`,`opina`,`valora`,`precio`,`datein`,`datemod`,`modera`) VALUES ('$_SESSION[refart]', '$_SESSION[ref]', '$_SESSION[ayto]', '$_SESSION[isla]', '$_POST[coment]', '$_POST[valora]', '$_POST[precio]', '$ActionTime', '00-00-00', 'y')";
+	$sqla = "INSERT INTO `$db_name`.$tablename (`refart`,`refuser`,`refayto`,`refisla`,`opina`,`valora`,`precio`,`datein`,`datemod`,`modera`) VALUES ('$_SESSION[refart]', '$_SESSION[uref]', '$_SESSION[ayto]', '$_SESSION[isla]', '$_POST[coment]', '$_POST[valora]', '$_POST[precio]', '$ActionTime', '00-00-00', 'y')";
 
 	if(mysqli_query($db, $sqla)){
 
@@ -329,7 +327,7 @@ function show_form($errors=''){
 		<table align='center' style=\"margin-top:10px\">
 			<tr>
 				<th style=\"text-align:center;\" colspan=2 class='BorderInf'>
-				".strtoupper($_SESSION['Nombre'])." ".strtoupper($_SESSION['Apellidos'])."<br>
+				".strtoupper($_SESSION['uNombre'])." ".strtoupper($_SESSION['uApellidos'])."<br>
 		CREE UNA VALORACIÓN PARA <br>".strtoupper($_SESSION['refart']." / ".$_SESSION['tit'])."
 						<br>RESTAURANTE EN ".strtoupper($_SESSION['isla']." / ".$_SESSION['ayto'])."
 				</th>

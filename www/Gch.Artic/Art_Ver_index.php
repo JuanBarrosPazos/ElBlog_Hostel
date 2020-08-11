@@ -413,7 +413,7 @@ function show_form(){
 	} else {
 		while($rows = mysqli_fetch_assoc($qb)){
 					print ("<option value='".$rows['refisla']."' ");
-					if($rows['refisla'] == $_SESSION['isla']){
+					if($rows['refisla'] == @$_SESSION['isla']){
 										print ("selected = 'selected'");
 													}
 						print ("> ".$rows['isla']."</option>");
@@ -448,7 +448,7 @@ function show_form(){
 						
 	<input type='hidden' name='isla' value='".$_SESSION['isla']."' />
 
-	<input type='text' name='nombre' size=24 maxlength=22 pattern=\"[a-zA-Z0-9\s]{2,20}\" placeholder=\"&nbsp;&nbsp;OPCION POR NOMBRE\" value='".$_SESSION['nombre']."' autofocus />
+	<input type='text' name='nombre' size=24 maxlength=22 pattern=\"[a-zA-Z0-9\s]{2,20}\" placeholder=\"&nbsp;&nbsp;OPCION POR NOMBRE\" value='".@$_SESSION['nombre']."' autofocus />
 
 		<select name='ayto'>
 		<option value=''>AYUNTAMIENTO</option>");

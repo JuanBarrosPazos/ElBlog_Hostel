@@ -1,5 +1,5 @@
 <?php
-session_start();
+@session_start();
 
     require '../Gch.Connet/conection.php';
     require '../Gch.Connet/conect.php';
@@ -63,6 +63,15 @@ if(!$qa){ print("* ".mysqli_error($db)."</br>");
                 <input type='hidden' name='oculto2' value=1 />
             </form>";
 
+            if((@$_SESSION['uNivel'] == 'useru')||(@$_SESSION['uNivel'] == 'adminu')){ }
+            else {
+            global $opina;
+            $opina = "<br>
+             <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\" style=\"margin: 0.6em 0em -3.0em -0em;\">
+                      PARA OPINAR SOBRE ESTE LOCAL INICIAR SESION 
+             </button>";
+              }
+      
             global $nombrerest;
             $nombrerest = $rowb['tit'];
 

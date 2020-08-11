@@ -37,16 +37,6 @@
                       require '../Gch.Connet/conect.php';
                       sale_usuario();
                       //session_destroy();
-                      //salirf();
-                      /**/
-                      global $redir;
-                      $redir = "<script type='text/javascript'>
-                          function redir(){
-                          window.location.href='../index.php';
-                        }
-                        setTimeout('redir()',1);
-                        </script>";
-                      print ($redir);
                   }
 
       if(isset($_POST['login'])){
@@ -98,6 +88,15 @@
     fclose($log);
 
 	  salirf();
+
+    global $redir;
+    $redir = "<script type='text/javascript'>
+        function redir(){
+        window.location.href='../index.php';
+      }
+      setTimeout('redir()',1);
+      </script>";
+    print ($redir);
 
           }
 

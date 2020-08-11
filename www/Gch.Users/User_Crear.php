@@ -244,7 +244,7 @@ function show_form($errors=''){
 									'Apellidos' => '',
 									'Nivel' => 'useru',
 									'ref' => '',
-									'Email' => 'Solo letras minúsculas',
+									'Email' => '',
 									'Usuario' => '',
 									'Usuario2' => '',
 									'Password' => '',
@@ -281,143 +281,71 @@ function show_form($errors=''){
 		$nuser = mysqli_num_rows($user);
 	
 
-	print("<table align='center' style=\"margin-top:4px\">
-				<tr>
-					<th colspan=2 class='BorderInf'>
-							DATOS DEL NUEVO USUARIO
-					</th>
-				</tr>
+	print("<div class=\"juancentramail\" style=\"margin-top:4px; width: 62vw !important;\">
+			<div align='center'>
+					DATOS DEL NUEVO USUARIO
+			</div>
 				
 <form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'  enctype='multipart/form-data'>
 						
-				<tr>
-					<td width=130px>	
-						<font color='#FF0000'>*</font>
-						Ref User:
-					</td>
-					<td width=280px>
-						SE GENERA LA CLAVE AUTO.
-					</td>
-				</tr>
+			<div align='lefth'>
+				&nbsp;&nbsp;Ref User: SE GENERA LA CLAVE AUTO.
+			</div>
 					
-				<tr>
-					<td>	
-						<font color='#FF0000'>*</font>
-						Nombre:
-					</td>
-					<td>
-		<input type='text' name='Nombre' size=28 maxlength=25 value='".$defaults['Nombre']."' />
-					</td>
-				</tr>
+			<div>
+		<input type='text' name='Nombre' size=28 maxlength=25 value='".$defaults['Nombre']."' placeholder='NOMBRE'/>
+			</div>
 					
-				<tr>
-					<td>
-						<font color='#FF0000'>*</font>
-						Apellidos:
-					</td>
-					<td>
-	<input type='text' name='Apellidos' size=28 maxlength=25 value='".$defaults['Apellidos']."' />
-					</td>
-				</tr>
+			<div>
+	<input type='text' name='Apellidos' size=28 maxlength=25 value='".$defaults['Apellidos']."' placeholder='APELLIDOS'/>
+			</div>
 
-				<tr>
-					<td>
-						<font color='#FF0000'>*</font>
-						Mail:
-					</td>
-					<td>
-		<input type='text' name='Email' size=52 maxlength=50 value='".$defaults['Email']."' />
-					</td>
-				</tr>	
+			<div>
+		<input type='text' name='Email' size=40 maxlength=50 value='".$defaults['Email']."' placeholder='EMAIL LOWER TEXT'/>
+			</div>
 				
-				<tr>
-					<td>
-						<font color='#FF0000'>*</font>
-						Nivel Usuario:
-					</td>
-					<td>
+			<div>
+			&nbsp;&nbsp;Nivel Usuario:
 	<input type='hidden' name='Nivel' value='".$defaults['Nivel']."' />".$defaults['Nivel']."
-					</td>
-				</tr>
+			</div>
 					
-				<tr>
-					<td>
-						<font color='#FF0000'>*</font>
-						Nombre Usuario:
-					</td>
-					<td>
-		<input type='text' name='Usuario' size=12 maxlength=10 value='".$defaults['Usuario']."' />
-					</td>
-				</tr>
+			<div>
+		<input type='text' name='Usuario' size=12 maxlength=10 value='".$defaults['Usuario']."' placeholder='USER NAME'/>
+			</div>
 
-				<tr>
-					<td>
-						<font color='#FF0000'>*</font>
-						Confirme Usuario:
-					</td>
-					<td>
-		<input type='text' name='Usuario2' size=12 maxlength=10 value='".$defaults['Usuario2']."' />
-					</td>
-				</tr>
+			<div>
+		<input type='text' name='Usuario2' size=12 maxlength=10 value='".$defaults['Usuario2']."' placeholder='USER CONFIRM'/>
+			</div>
 							
-				<tr>
-					<td>
-						<font color='#FF0000'>*</font>
-						Password:
-					</td>
-					<td>
-		<input type='text' name='Password' size=12 maxlength=10 value='".$defaults['Password']."' />
-					</td>
-				</tr>
+			<div>
+		<input type='text' name='Password' size=12 maxlength=10 value='".$defaults['Password']."' placeholder='PASSWORD'/>
+			</div>
 
-				<tr>
-					<td>
-						<font color='#FF0000'>*</font>
-						Confirme Password:
-					</td>
-					<td>
-	<input type='text' name='Password2' size=12 maxlength=10 value='".$defaults['Password2']."' />
-					</td>
-				</tr>
+			<div>
+	<input type='text' name='Password2' size=12 maxlength=10 value='".$defaults['Password2']."' placeholder='PASSW CONFIRM'/>
+			</div>
 
-				<tr>
-					<td>
-						<font color='#FF0000'>*</font>
-						Dirección:
-					</td>
-					<td>
-	<input type='text' name='Direccion' size=52 maxlength=60 value='".$defaults['Direccion']."' />
-					</td>
-				</tr>
+			<div>
+	<input type='text' name='Direccion' size=40 maxlength=60 value='".$defaults['Direccion']."' placeholder='ADRESS'/>
+			</div>
 				
-				<tr>
-					<td>
-						<font color='#FF0000'>*</font>
-						Teléfono 1:
-					</td>
-					<td>
-		<input type='text' name='Tlf1' size=12 maxlength=9 value='".$defaults['Tlf1']."' />
-					</td>
-				</tr>
+			<div>
+		<input type='text' name='Tlf1' size=12 maxlength=9 value='".$defaults['Tlf1']."' placeholder='PHONE NUMBER'/>
+			</div>
 				
-				<tr>
-					<td colspan='2'  align='right' valign='middle'  class='BorderSup'>
-						<input type='submit' value='REGISTRAR CON ESTOS DATOS' />
-						<input type='hidden' name='oculto' value=1 />
-						
-					</td>
-				</tr>
+			<div align='right' valign='middle' >
+				<input type='submit' value='REGISTRAR CON ESTOS DATOS' />
+				<input type='hidden' name='oculto' value=1 />
+			</div>
 		</form>														
 
-				<tr>
-					<td colspan=2 align='right' class='BorderSup'>
-						<form name='closewindow' action='$_SERVER[PHP_SELF]' onsubmit=\"window.close()\">
-							<input type='submit' value='CERRAR VENTANA' />
-							<input type='hidden' name='cerrar' value=1 />
-						</form>
-					</td>
-				</tr>
-			</table>"); 
+			<div align='right' style='width:100%;'>
+				<form name='closewindow' action='$_SERVER[PHP_SELF]' onsubmit=\"window.close()\">
+					<input type='submit' value='CERRAR VENTANA' />
+					<input type='hidden' name='cerrar' value=1 />
+				</form>
+			</div>
+		</div>"); 
 	
 	} // FIN FUNCTION SHOW_FORM
 

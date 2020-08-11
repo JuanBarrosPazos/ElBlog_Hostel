@@ -60,7 +60,7 @@
         global $db;
         global $db_name;
         global $userid;
-        $userid = $_SESSION['uid'];
+        $userid = @$_SESSION['uid'];
             
         global $dateadout;
         $dateadout = date('Y-m-d/H:i:s');
@@ -76,7 +76,7 @@
                       }
         global $dir;
         $dir = "../Gch.Log";
-        $text = PHP_EOL."** FIN DE SESION ".$_SESSION['Nombre']." ".$_SESSION['Apellidos']." => ".$dateadout;
+        $text = PHP_EOL."** FIN DE SESION ".@$_SESSION['Nombre']." ".@$_SESSION['Apellidos']." => ".$dateadout;
         $logdocu = $_SESSION['uref'];
         $logdate = date('Y_m_d');
         $logtext = PHP_EOL.$text.PHP_EOL.PHP_EOL;

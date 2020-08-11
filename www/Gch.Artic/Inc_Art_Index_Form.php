@@ -1,5 +1,5 @@
 <?php
-
+	global $page;
 	if ($page > 1){
 		global $pg;
 		$pg = "<input type='hidden' name='page' value=".$page." />";
@@ -44,9 +44,10 @@
 		<input name='tit' type='hidden' value='".$rowb['tit']."' />
 		<input name='isla' type='hidden' value='ISLA ".$islaname."' />
 		<input name='ayto' type='hidden' value='AYUNTAMIENTO ".@$aytoname."' />
-		<input type='submit' value='OPINIONES' />
+		<input type='submit' value='LEER OPINIONES USUARIOS' />
 		<input type='hidden' name='oculto2' value=1 />
 	</form>";
+
 	global $opina;
 	$opina = "<form style=\"display: inline-block;\" name='creaopina' action='Gch.Syst/Opina_Cliente.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=420px, height=580px')\">
 		<input name='id' type='hidden' value='".$rowb['id']."' />
@@ -56,14 +57,25 @@
 		<input name='isla' type='hidden' value='".$rowb['refisla']."' />
 		<input name='ayto' type='hidden' value='".$rowb['refayto']."' />
 		<input name='myimg1' type='hidden' value='".$rowb['myimg1']."' />
-		<input type='submit' value='VALORAR' />
+		<input type='submit' value='VALORAR ESTE RESTAURANTE' />
 		<input type='hidden' name='oculto2' value=1 />
 	</form>";
+
+	if((@$_SESSION['uNivel'] == 'useru')||(@$_SESSION['uNivel'] == 'adminu')){ }
+	else {
+	global $opina;
+	$opina = "<button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\" style=\"margin: 0.1em 0.0em 0.1em 0.0em;\">
+			  PARA OPINAR SOBRE ESTE LOCAL INICIAR SESION 
+	 </button><br>";
+	}
+	/*	*/
+
+
 	global $contem;
 	//$contem = substr($rowb['conte'],0,100);
 	$contem = "";
 	$contem = $contem."<!-- ...&nbsp; -->
-	".$veropina.$opina."<form style=\"display: inline-block;\" name='ver' name='ver' action=\"index.php#".$rowb['refart']."\" method='post' >
+	".$opina.$veropina."<form style=\"display: inline-block;\" name='ver' name='ver' action=\"index.php#".$rowb['refart']."\" method='post' >
 				<input name='id' type='hidden' value='".$rowb['id']."' />
 				<input name='refart' type='hidden' value='".$rowb['refart']."' />
 				<input name='refuser' type='hidden' value='".$rowb['refuser']."' />
@@ -77,7 +89,7 @@
 	$contep = $rowb['conte'];
 	$contep = /*$autor.*/$calle.$url.$email.$tlf.$contep."
 	<img src='".$rut."Gch.Img.Art/".@$_POST['myimg1']."' style=\"width:98%; max-width:700px; height:auto; max-height:260px;\" />
-	".$veropina.$opina."<form style=\"display: inline-block;\" name='ver' name='ver' action=\"index.php#".$rowb['refart']."\" method='post' >
+	".$opina.$veropina."<form style=\"display: inline-block;\" name='ver' name='ver' action=\"index.php#".$rowb['refart']."\" method='post' >
 				<input type='hidden' name='id' value='".$rowb['id']."' />
 				<input type='hidden' name='refart' value='".$rowb['refart']."' />
 				<input name='refuser' type='hidden' value='".$rowb['refuser']."' />

@@ -41,28 +41,14 @@ if (($_SESSION['uNivel'] == 'adminu') || ($_SESSION['uNivel'] == 'useru')){
 
 	} else { show_form(); }
 		} else { require '../Gch.Inclu/table_permisos.php'; 
-				 require 'Inc_Footer.php';
-				 require '../Gch.Www/Inc_Jquery_Boots_Foot.php';
+				 //require 'Inc_Footer.php';
+				 //require '../Gch.Www/Inc_Jquery_Boots_Foot.php';
 					}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-function salirf() {	unset($_SESSION['uid']);
-					unset($_SESSION['uNivel']);
-					unset($_SESSION['uNombre']);
-					unset($_SESSION['uApellidos']);
-					unset($_SESSION['uEmail']);
-					unset($_SESSION['uUsuario']);
-					unset($_SESSION['uPassword']);
-					unset($_SESSION['uDireccion']);
-					unset($_SESSION['uTlf1']);
-				}
-
-				   ////////////////////				   ////////////////////
-////////////////////				////////////////////				////////////////////
-				 ////////////////////				  ///////////////////
 
 function process_form(){
 

@@ -32,8 +32,8 @@ if (($_SESSION['uNivel'] == 'adminu')||($_SESSION['uNivel'] == 'useru')){
 								}
 		} else { show_form(); }
 	} else { require '../Gch.Inclu/table_permisos.php'; 
-			 require 'Inc_Footer.php';
-			 require '../Gch.Www/Inc_Jquery_Boots_Foot.php';
+			 //require 'Inc_Footer.php';
+			 //require '../Gch.Www/Inc_Jquery_Boots_Foot.php';
 				}
 
 				   ////////////////////				   ////////////////////
@@ -225,14 +225,13 @@ function show_form($errors=''){
 
 	$id = $_POST['id'];
 	$img = 	isset($_POST['myimg']);
-	$dt = $_POST['doc'];
+	$dt = @$_POST['doc'];
 
 	if(isset($_POST['oculto2'])){
 
 	$_SESSION['smyimg'] = $_POST['myimg'];
 	$_SESSION['sref'] = $_POST['ref'];
 	$_SESSION['sid'] = $_POST['id'];
-	$_SESSION['sdni'] = $_POST['dni'];
 	
 		$defaults = array ( 'id' => $_POST['id'],
 							'Nombre' => $_POST['Nombre'],

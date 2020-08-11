@@ -1,5 +1,5 @@
 <?php
-//session_start();
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -77,10 +77,10 @@ function MM_validateForm() {
 
       require 'Inc_Header_Nav_Headp.php'; 
 
-      global $opina;
 
       if((@$_SESSION['uNivel'] == 'useru')||(@$_SESSION['uNivel'] == 'adminu')){ }
       else {
+      global $opina;
       $opina = "<br>
        <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\" style=\"margin: 0.6em 0em -3.0em -0em;\">
                 PARA OPINAR SOBRE ESTE LOCAL INICIAR SESION 

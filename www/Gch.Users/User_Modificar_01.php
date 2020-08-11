@@ -33,8 +33,8 @@ if ($_SESSION['uNivel'] == 'useru'){ ver_todo(); }
 	} 
 
 else { 	require '../Gch.Inclu/table_permisos.php'; 
-	   	require 'Inc_Footer.php';
-	   	require '../Gch.Www/Inc_Jquery_Boots_Foot.php';
+	   	//require 'Inc_Footer.php';
+	   	//require '../Gch.Www/Inc_Jquery_Boots_Foot.php';
 			}
 
 				   ////////////////////				   ////////////////////
@@ -140,7 +140,7 @@ function ver_todo(){
 	
 	elseif ($_SESSION['uNivel'] == 'adminu') { 
 				global $orden;
-				if($_POST['Orden'] == ''){ $orden = '`id` ASC'; }
+				if(@$_POST['Orden'] == ''){ $orden = '`id` ASC'; }
 				else {$orden = @$_POST['Orden'];}
 				$sqlb =  "SELECT * FROM `gch_user` WHERE `Nivel` = 'useru' ORDER BY $orden ";
 				$qb = mysqli_query($db, $sqlb);

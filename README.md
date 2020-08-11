@@ -1,8 +1,17 @@
 # ElBlog_Hostel (beta)
 * https://juanchopazos.000webhostapp.com/BMoll/www/index.php
+
 ----
 
 ## EN EL DIRECTORIO Gch.Tutorial SE ENCUENTRA UNA GUÍA GENERAL DE LA APP.
+
+----
+
+### 2020.08.11
+
+* SE HA SOLUCIONADO VARIOS ERRORES CRITICOS Y CUESTIONES DE DISEÑO.
+
+* SE RECOMIENDA SOBREESCRIBIR: Gch.Www, Gch.Users, Gch.Syst, Gch.Artic, Gch.Css, vendor y css.
 
 ----
 

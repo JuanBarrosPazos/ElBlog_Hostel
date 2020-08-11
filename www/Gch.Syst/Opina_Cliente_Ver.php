@@ -113,7 +113,7 @@ function ver_todo(){
 							</tr>
 							<tr>
 								<td colspan=3 class='BorderInf' align='center'>
-							".$_SESSION['islaopina']." :: ".$_SESSION['aytoopina']."
+							".$_SESSION['islaopina']." || ".$_SESSION['aytoopina']."
 								</td>
 							</tr>
 							<tr>
@@ -156,7 +156,7 @@ function ver_todo(){
 									</tr>
 									<tr>
 										<td colspan=3 class='BorderInf' align='center'>
-							".$_SESSION['islaopina']." :: ".$_SESSION['aytoopina']."
+							".$_SESSION['islaopina']." || ".$_SESSION['aytoopina']."
 										</td>
 									</tr>
 									<tr>

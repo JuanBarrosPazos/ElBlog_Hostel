@@ -6,7 +6,7 @@
 
       <h5 class="modal-title" id="exampleModalCenterTitle">
 
-<form style="display: inline-block;" name='veropina' action='../Gch.Users/User_Crear.php' target='popup' method='POST' onsubmit="window.open('', 'popup', 'width=640px, height=680px')">
+<form style="display: inline-block;" name='veropina' action='../Gch.Users/User_Crear.php' target='popup' method='POST' onsubmit="window.open('', 'popup', 'width=560px, height=680px')">
 <input type='submit' value='REGISTRARME COMO USUARIO' />
 </form>
 
@@ -27,7 +27,7 @@
 
           <img class="mb-4" src="../Gch.Img.Sys/LogoBMoll.png" alt="" width="40%" height="40%">
 
-          <input type='Password' name='Usuario' class="form-control" placeholder="USUARIO" required autofocus>
+          <input autofocus type='Password' name='Usuario' class="form-control" placeholder="USUARIO" required>
           <input type='Password' name='Password' class="form-control" placeholder="PASSWORD" required>
 
           <button  class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>

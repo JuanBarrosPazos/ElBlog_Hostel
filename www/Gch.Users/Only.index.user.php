@@ -27,9 +27,74 @@ if((isset($_POST['Usuario'])&&(isset($_POST['Password'])))){
 	$_SESSION['ulastout'] = $row['lastout'];
 	$_SESSION['uvisituser'] = $row['visituser'];
 
+	global $userid;
 	$userid = $_SESSION['uid'];
+	global $uservisita;
 	$uservisita = $_SESSION['uvisituser'];
+
+	user_entrada();
+
 		}
 	}
+
+
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
+
+function user_entrada(){
+
+	global $db;
+	global $db_name;
+	global $userid;
+	$userid = $_SESSION['uid'];
+	
+	global $uservisita;
+	$uservisita = $_SESSION['uvisituser'];
+	$total = $uservisita + 1;
+	
+	global $datein;
+	$datein = date('Y-m-d/H:i:s');
+
+	$sqladin = "UPDATE `$db_name`.`gch_user` SET `lastin` = '$datein', `visituser` = '$total' WHERE `gch_user`.`id` = '$userid' LIMIT 1 ";
+		
+	if(mysqli_query($db, $sqladin)){
+			// print("* ");
+				} else {
+				print("</br>
+				<font color='#FF0000'>
+		* FATAL ERROR funcion admin_entrada(): </font></br> ".mysqli_error($db))."
+				</br>";
+							}
+					
+	global $dir;
+	$dir = "../Gch.Log";
+
+	global $datos;
+	global $logdocu;
+	$logdocu = $_SESSION['uref'];
+	global $logdate;
+	$logdate = date('Y_m_d');
+	//echo 	$_SESSION['ref'];
+	global $logtext;
+	$logtext = PHP_EOL."** INICIO SESION => ".$datein;
+	$logtext = $logtext.PHP_EOL.".\t User Ref: ".$_SESSION['ref'];
+	$logtext = $logtext.PHP_EOL.".\t User Name: ".$_SESSION['Nombre']." ".$_SESSION['Apellidos'];
+	$logtext = $logtext.PHP_EOL.$datos;
+
+	global $filename;
+	global $log;
+	$filename = $dir."/".$logdate."_".$logdocu.".log";
+	//echo $filename;
+	$log = fopen($filename, 'ab+');
+	fwrite($log, $logtext);
+	fclose($log);
+
+	}
+
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
+
 
 ?>
