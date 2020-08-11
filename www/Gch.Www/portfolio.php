@@ -77,7 +77,7 @@ function MM_validateForm() {
 
       require 'Inc_Header_Nav_Headp.php'; 
 
-
+    /*
       if((@$_SESSION['uNivel'] == 'useru')||(@$_SESSION['uNivel'] == 'adminu')){ }
       else {
       global $opina;
@@ -86,6 +86,7 @@ function MM_validateForm() {
                 PARA OPINAR SOBRE ESTE LOCAL INICIAR SESION 
        </button>";
         }
+    */
   ?>
 
   

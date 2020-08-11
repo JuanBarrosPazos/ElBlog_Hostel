@@ -65,7 +65,7 @@
 	else {
 	global $opina;
 	$opina = "<button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\" style=\"margin: 0.1em 0.0em 0.1em 0.0em;\">
-			  PARA OPINAR SOBRE ESTE LOCAL INICIAR SESION 
+			  PARA OPINAR INICIE SESION 
 	 </button><br>";
 	}
 	/*	*/
