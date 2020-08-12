@@ -392,7 +392,7 @@ function show_form($errors=''){
 
 			<tr>
 				<td colspan=2 align='center'>
-<textarea cols='40' rows='5' onkeypress='return limitac(event, 200);' onkeyup='actualizaInfoc(200)' name='coment' id='coment'>".@$defaults['coment']."</textarea>
+<textarea cols='34' rows='6' onkeypress='return limitac(event, 200);' onkeyup='actualizaInfoc(200)' name='coment' id='coment'>".@$defaults['coment']."</textarea>
 
 		</br>
 			<div id='infoc' align='center' style='color:#0080C0;'>

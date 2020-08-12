@@ -76,7 +76,10 @@ function process_form(){
 				}
 
 	if ($_SESSION['uNivel'] == 'adminu') { 
-	$sqlb =  "SELECT * FROM `gch_user` WHERE `Nivel` = 'useru' AND (`Nombre` LIKE '$nom' OR `Apellidos` LIKE '$ape')  ORDER BY `Nombre` ASC ";
+		global $orden;
+		if(@$_POST['Orden'] == ''){ $orden = '`id` ASC'; }
+		else {$orden = @$_POST['Orden'];}
+	$sqlb =  "SELECT * FROM `gch_user` WHERE `Nivel` = 'useru' AND (`Nombre` LIKE '$nom' OR `Apellidos` LIKE '$ape')  ORDER BY $orden ";
 	$qb = mysqli_query($db, $sqlb);
 				}
 
@@ -85,26 +88,7 @@ function process_form(){
 	global $twhile;
 	$twhile = "USUARIOS";
 	
-	global $formularioh;
-	$formularioh = "<form name='modifica' action='User_Modificar_02.php' method='POST'>";
-						
-	global $formulariof;
-	$formulariof = "<td align='right' class='BorderInf'></td>
-					<td colspan=2 align='center' class='BorderInfDch'>
-						<input type='submit' value='MODIFICAR DATOS' />
-						<input type='hidden' name='oculto2' value=1 />
-				</form>
-					</td>";
-		
-	global $formulariohi;
-	$formulariohi = "<td colspan=2 align='center' class='BorderInf'>
-	<form name='modifica_img' action='User_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=540px,height=680px')\">";
-
-	global $formulariofi;
-	$formulariofi = "<input type='submit' value='MODIFICAR IMAGEN' />
-					 <input type='hidden' name='oculto2' value=1 />
-						</form>
-					</td>";
+	require 'Inc_While_Total_Form.php';
 
 	require 'Inc_While_Total.php';
 	
@@ -151,38 +135,7 @@ function ver_todo(){
 	global $twhile;
 	$twhile = "USUARIOS";
 	
-	global $formularioh;
-	$formularioh = "<form name='modifica' action='User_Modificar_02.php' method='POST'>";
-	
-	global $formulariof;
-	$formulariof = "<td align='right' class='BorderInf'></td>
-					<td colspan=2 align='center' class='BorderInfDch'>
-						<input type='submit' value='MODIFICAR ESTOS DATOS' />
-						<input type='hidden' name='oculto2' value=1 />
-					</form>
-						</td>";
-
-	global $formulariohi;
-	$formulariohi = "<td colspan=2 align='center' class='BorderInfDch'>
-	<form name='modifica_img' action='User_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=540px,height=680px')\">";
-
-	global $formulariofi;
-	$formulariofi = "<input type='submit' value='MODIFICAR IMAGEN' />
-					 <input type='hidden' name='oculto2' value=1 />
-						</form>
-					</td>";
-
-	global $formulariod;
-	$formulariod = "<form name='borrar' action='User_Borrar_02.php' method='POST'>";
-
-	global $formulariofd;
-	$formulariofd = "<td colspan=2 align='center' class='BorderInf'>
-						<input type='submit' value='BORRAR DATOS' />
-						<input type='hidden' name='oculto2' value=1 />
-					</form>
-						</td>";
-
-
+	require 'Inc_While_Total_Form.php';
 	require 'Inc_While_Total.php';
 
 			////////////////////		**********  		////////////////////

@@ -37,8 +37,7 @@
                       setTimeout('redir()',1);
                       </script>";
                     print ($redir);
-                   
-                }
+                  }
 
     if(isset($_POST['login'])){
                 //process_login();
@@ -51,9 +50,7 @@
                     setTimeout('redir()',1);
                     </script>";
                 print ($redir);
-                
-      }
-
+              }
 
   function sale_usuario(){
 

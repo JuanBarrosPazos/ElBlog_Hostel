@@ -202,6 +202,11 @@ a:hover  img {
 	border-right-style: solid;
 	border-right-color: #CCC;
 }
+.BorderIzd{
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #CCC;
+}
 
 .limpiar {
 	clear: both;
@@ -493,4 +498,9 @@ a:hover  img {
 	top: 235px;
 }
 
+.whiletotal {
+	display:inline-block; 
+	padding: 1px 4px 1px 4px; 
+	margin: 1px 3px 1px 3px;
+}
 /* Creado por Juan Barros Pazos 2020 */

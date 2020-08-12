@@ -111,7 +111,7 @@ function process_form(){
 
 		$ActionTime = date('Y-m-d');
 
-	$sqla = "INSERT INTO `$db_name`.$tablename (`refart`,`refuser`,`refayto`,`refisla`,`opina`,`valora`,`precio`,`datein`,`datemod`,`modera`) VALUES ('$_SESSION[refart]', '$_SESSION[uref]', '$_SESSION[ayto]', '$_SESSION[isla]', '$_POST[coment]', '$_POST[valora]', '$_POST[precio]', '$ActionTime', '00-00-00', 'y')";
+	$sqla = "INSERT INTO `$db_name`.$tablename (`refart`,`refuser`,`refayto`,`refisla`,`opina`,`valora`,`precio`,`datein`,`datemod`,`modera`) VALUES ('$_SESSION[refart]', '$_SESSION[uref]', '$_SESSION[ayto]', '$_SESSION[isla]', '$_POST[coment]', '$_POST[valora]', '$_POST[precio]', '$ActionTime', '00-00-00', 'n')";
 
 	if(mysqli_query($db, $sqla)){
 
@@ -304,19 +304,19 @@ function show_form($errors=''){
 				</table>");
 		}
 
-		$precio = array ('' => 'EUROS',
-						 '1' => '1 de 5',
-						 '2' => '2 de 5',
-						 '3' => '3 de 5',
-						 '4' => '4 de 5',
-						 '5' => '5 de 5');														
+		$precio = array ('' => 'EUROS / SERVICIO',
+						 '1' => '1 de 5 MUY MALOS',
+						 '2' => '2 de 5 MALOS',
+						 '3' => '3 de 5 NORMALES',
+						 '4' => '4 de 5 BUENOS',
+						 '5' => '5 de 5 MUY BUENOS');														
 
-		$valora = array ('' => 'PUNTOS',
-						'1' => '1 de 5',
-						'2' => '2 de 5',
-						'3' => '3 de 5',
-						'4' => '4 de 5',
-						'5' => '5 de 5');														
+		$valora = array ('' => 'ATENCIÓN / LOCAL',
+						'1' => '1 de 5 MUY MALOS',
+						'2' => '2 de 5 MALOS',
+						'3' => '3 de 5 NORMALES',
+						'4' => '4 de 5 BUENOS',
+						'5' => '5 de 5 MUY BUENOS');														
 
 	global $db;
 	global $db_name;
@@ -403,7 +403,7 @@ function show_form($errors=''){
 
 				<tr>
 					<td align='right'>
-						VALORACION
+						SERVICIOS
 					</td>
 					<td>
 	
@@ -425,7 +425,7 @@ function show_form($errors=''){
 			</tr>
 			<tr>
 				<td colspan=2 align='center'>
-<textarea cols='40' rows='5' onkeypress='return limitac(event, 200);' onkeyup='actualizaInfo(200)' name='coment' id='coment'>".@$defaults['coment']."</textarea>
+<textarea cols='34' rows='6' onkeypress='return limitac(event, 200);' onkeyup='actualizaInfo(200)' name='coment' id='coment'>".@$defaults['coment']."</textarea>
 
 		</br>
 			<div id='info' align='center' style='color:#0080C0;'>

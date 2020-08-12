@@ -29,60 +29,29 @@ if ($errors){
             </table>");
                 }
     
-$ordenar = array (	'`id` ASC' => 'ID Ascendente',
-                    '`id` DESC' => 'ID Descendente',
-                    '`Nombre` ASC' => 'Nombre Ascendente',
-                    '`Nombre` DESC' => 'Nombre Descendente',
-                    '`Apellidos` ASC' => 'Apellidos Ascenedente',
-                    '`Apellidos` DESC' => 'Apellidos Descendente',
+$ordenar = array (	'' => 'ORDENAR POR',
+                    '`id` ASC' => 'ID Ascen',
+                    '`id` DESC' => 'ID Descen',
+                    '`Nombre` ASC' => 'Nombre Ascen',
+                    '`Nombre` DESC' => 'Nombre Descen',
+                    '`Apellidos` ASC' => 'Apellido Ascen',
+                    '`Apellidos` DESC' => 'Apellido Descen',
                                                             );
 
 if (($_SESSION['uNivel'] == 'adminu')){ 
 
-print(" <table align='center' style=\"border:0px;margin-top:24px\">
-            <tr>
-                <td colspan=3 align='center'>
+print(" <div class=\"juancentramail col-xs-12 col-sm-12 col-lg-6\" >
+            <div style=\"text-align:center;\">
                         ".$titulo."
-                </td>
-            </tr>
+            </div>
             
     <form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
                     
-            <tr>
-                <td align='right'>
-                    <input type='submit' value='USER CONSULTA' />
+                <div style=\"text-align:left; display:inline-block;\">
+                    <input type='submit' value='USER CONSULTA' style=\"width:140px;\" />
                     <input type='hidden' name='oculto' value=1 />
-                </td>
-                <td>	
-                    Nombre:
-                </td>
-                <td>
-        <input type='text' name='Nombre' size=20 maxlenth=10 value='".@$defaults['Nombre']."' />
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                </td>
-                <td>	
-                    Apellido:
-                </td>
-                <td>
-<input type='text' name='Apellidos' size=20 maxlenth=10 value='".@$defaults['Apellidos']."' />
-                </td>
-            </tr>
-    </form>	
-            
-    <form name='todo' method='post' action='$_SERVER[PHP_SELF]' >
-            <tr>
-                <td align='right'>
-                    <input type='submit' value='USER TODOS' />
-                    <input type='hidden' name='todo' value=1 />
-                </td>
-                <td>	
-                    Ordenar Por:
-                </td>
-                <td>
+                </div>
+                <div style=\"display:inline-block;\">
                     <select name='Orden'>");
                     
             foreach($ordenar as $option => $label){
@@ -93,10 +62,47 @@ print(" <table align='center' style=\"border:0px;margin-top:24px\">
                                                 print ("> $label </option>");
                                             }	
         print ("	</select>
-                        </td>
-                    </tr>
+                        </div>
+
+            <div style=\"clear:both\"></div>
+
+                <div style=\"text-align:left; display:inline-block;\">
+                    <label>	
+                        Nombre:
+                    </label>
+            <input type='text' name='Nombre' size=20 maxlenth=10 value='".@$defaults['Nombre']."' />
+                </div>  
+        
+                <div style=\"text-align:left; display:inline-block;\">
+                <label>
+                    Apellido:
+                </label>	
+            <input type='text' name='Apellidos' size=20 maxlenth=10 value='".@$defaults['Apellidos']."' />
+                </div>
+            </form>	
+            
+        <div style=\"clear:both\"></div>
+
+    <form name='todo' method='post' action='$_SERVER[PHP_SELF]' >
+
+                <div style=\"text-align:left; display:inline-block; width:140px;\">
+                    <input type='submit' value='USER VER TODOS' />
+                    <input type='hidden' name='todo' value=1 />
+                </div>
+                <div style=\"display:inline-block; margin-left:6px;\">
+                    <select name='Orden'>");
+                    
+            foreach($ordenar as $option => $label){
+                
+                print ("<option value='".$option."' ");
+                
+                if($option == @$defaults['Orden']){ print ("selected = 'selected'"); }
+                                                print ("> $label </option>");
+                                            }	
+        print ("	</select>
+                        </div>
             </form>														
-        </table>");
+        </div>");
                 }	// CONDICIONAL NIVEL ADMIN
 
 ?>

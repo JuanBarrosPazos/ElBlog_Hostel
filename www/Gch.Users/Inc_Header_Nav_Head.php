@@ -7,7 +7,7 @@
 
 <head>
 
-  <title>Juan Barros Pazos - Contact</title>
+  <title>Juan Barros Pazos - Users</title>
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
