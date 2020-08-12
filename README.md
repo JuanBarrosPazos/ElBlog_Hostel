@@ -1,4 +1,4 @@
-# ElBlog_Hostel (beta)
+# ElBlog_Hostel F03.V19 Estable.
 * https://juanchopazos.000webhostapp.com/BMoll/www/index.php
 
 ----
