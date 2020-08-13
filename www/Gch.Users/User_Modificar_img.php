@@ -166,16 +166,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						Tipo Usuario
-					</td>
-					<td>"
-						.$_POST['Nivel'].
-					"</td>
-				</tr>
-				
-				<tr>
-					<td>
-						Usuario:
+						USER
 					</td>
 					<td>"
 						.$_POST['Usuario'].
@@ -184,7 +175,16 @@ function process_form(){
 				
 				<tr>
 					<td>
-						Teléfono 1:
+						NIVEL
+					</td>
+					<td>"
+						.$_POST['Nivel'].
+					"</td>
+				</tr>
+				
+				<tr>
+					<td>
+						TLF
 					</td>
 					<td>"
 						.$_POST['Tlf1'].
@@ -282,69 +282,44 @@ function show_form($errors=''){
 				 </table>");
 				}
 		
-	print("<table align='center'  border=0 style='margin-top:20px; width:95.5%'>
-				<tr>
-					<td colspan=2 class='BorderInf' align='center'>
+	print("<div class=\"juancentra\" style=\"margin-top:20px; width:98vw !important;\">
+
+			<div class='BorderInf' align='center'>
 				SELECCIONE UNA NUEVA IMAGEN.<br>
-				LA IMAGEN ACTUAL DE : </br>".$defaults['Nombre']." ".$defaults['Apellidos'].".
-					</td>
-				</tr>
+				IMAGEN ACTUAL DE : </br>".$defaults['Nombre']." ".$defaults['Apellidos'].".
+			</div>
 				
-				<tr>
-					<td colspan=2 class='BorderInf' align='center'>
+			<div colspan=2 class='BorderInf' align='center'>
 		<img src='../Gch.Img.User/".$_SESSION['smyimg']."' width='240px' height='auto' />
-					</td>
-				</tr>
+			</div>
 				
-				<tr>
-					<td>
-							Seleccione una Fotografía:	
-					</td>
-					<td>
-	<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'  enctype='multipart/form-data'>
-				<input type='file' name='myimg' value='".$defaults['myimg']."' />						
-					</td>
-				</tr>
+		<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
 
-				<tr align='center' height=30px>
-					<td>
-					</td>
-					<td >
-						<input type='hidden' name='id' value='".$defaults['id']."' />					
-						<input type='hidden' name='ref' value='".$_SESSION['sref']."' />					
-						<input type='hidden' name='Nombre' value='".$defaults['Nombre']."' />
-						<input type='hidden' name='Apellidos' value='".$defaults['Apellidos']."' />
-						<input type='hidden' name='Email' value='".$defaults['Email']."' />
-						<input type='hidden' name='Nivel' value='".$defaults['Nivel']."' />
-						<input type='hidden' name='Usuario' value='".$defaults['Usuario']."' />
-						<input type='hidden' name='Password' value='".$defaults['Password']."' />
-						<input type='hidden' name='Direccion' value='".$defaults['Direccion']."' />
-						<input type='hidden' name='Tlf1' value='".$defaults['Tlf1']."' />
+			<input style=\"font-size:0.9em;\" type='file' name='myimg' value='".$defaults['myimg']."' />						
 
-						<input type='submit' value='MODIFICAR IMAGEN' />
-						<input type='hidden' name='imagenmodif' value=1 />
+			<div style=\"text-align:left;\">
+				<input type='hidden' name='id' value='".$defaults['id']."' />					
+				<input type='hidden' name='ref' value='".$_SESSION['sref']."' />					
+				<input type='hidden' name='Nombre' value='".$defaults['Nombre']."' />
+				<input type='hidden' name='Apellidos' value='".$defaults['Apellidos']."' />
+				<input type='hidden' name='Nivel' value='".$defaults['Nivel']."' />
+				<input type='hidden' name='Usuario' value='".$defaults['Usuario']."' />
+				<input type='hidden' name='Tlf1' value='".$defaults['Tlf1']."' />
+
+				<input type='submit' value='MODIFICAR IMAGEN' />
+				<input type='hidden' name='imagenmodif' value=1 />
 		</form>																				
-					</td>
-				</tr>
+			</div>
 			
-				<tr>
-					<td class='BorderSup'>
-					</td>
-					<td align='right' class='BorderSup'>
-					</td>
-				</tr>
+		<div class='BorderSup'></div>
 				
-				<tr>
-					<td class='BorderSup'>
-					</td>
-					<td align='right' class='BorderSup'>
+				<div align='right' class='BorderSup'>
 			<form name='closewindow' action='$_SERVER[PHP_SELF]'  onsubmit=\"window.close()\">
 											<input type='submit' value='CERRAR VENTANA' />
 											<input type='hidden' name='oculto2' value=1 />
 			</form>
-					</td>
-				</tr>
-			</table>");
+				</div>
+			</div>");
 		}
 
 				   ////////////////////				   ////////////////////

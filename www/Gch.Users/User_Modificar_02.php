@@ -239,225 +239,80 @@ function show_form($errors=''){
 				</table>");
 					}
 		
-	if($_SESSION['uNivel'] == 'adminu'){
+	if(($_SESSION['uNivel'] == 'adminu')||($_SESSION['uNivel'] == 'useru')){
 	
-	print("<table align='center' border=0>
+	print("<div class=\"juancentramail\" style=\"margin-top:4px; width: 70vw !important; max-width: 440px\">
 
-		<tr>
-			<td colspan=2 class='BorderInf' align='center'>
-				<img src='../Gch.Img.User/".$_POST['myimg']."' height='44px' width='33px' />
-								INTRODUZCA LOS NUEVOS DATOS.
-			</td>
-		</tr>
+		<div class='BorderInf' align='center'>
+			<img src='../Gch.Img.User/".$_POST['myimg']."' height='44px' width='33px' />
+						INTRODUZCA LOS NUEVOS DATOS.
+		</div>
 				
 		<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'>
 			
-		<input name='id' type='hidden' value='".$defaults['id']."' />					
-		<input name='myimg' type='hidden' value='".$_POST['myimg']."' />	
+		<input type='hidden' name='id' value='".$defaults['id']."' />					
+		<input type='hidden' name='myimg' value='".$_POST['myimg']."' />	
 
-		<tr>
-			<td> REFERENCIA </td>
-			<input name='ref' type='hidden' value='".$defaults['ref']."' />
-			<td>".$defaults['ref']."</td>			
-		</tr>			
+		<label style=\"width:96px;\">REFERENCIA</label>			
+		<input type='hidden' name='ref' value='".$defaults['ref']."' />".$defaults['ref']."
 
-		<tr>
-			<td>NOMBRE</td>
-			<td>
+		<div style='clear:both'></div>
+
+		<label style=\"width:90px;\">NOMBRE</label>
 		<input type='text' name='Nombre' size=30 maxlength=25 value='".$defaults['Nombre']."' />
-			</td>	
-		</tr>
 		
-		<tr>
-			<td>APELLIDOS</td>
-			<td>	
+		<label style=\"width:90px;\">APELLIDOS</label>
 		<input type='text' name='Apellidos' size=30 maxlength=25 value='".$defaults['Apellidos']."' />
-			</td>
-		</tr>
 
-		<tr>
-			<td>EMAIL</td>
-			<td>
-			<input type='text' name='Email' size=30 maxlength=50 value='".$defaults['Email']."' />
-			</td>
-		</tr>
+		<label style=\"width:90px;\">EMAIL</label>
+		<input type='text' name='Email' size=30 maxlength=50 value='".$defaults['Email']."' />
 				
-		<tr>
-			<td>NIVEL </td>
-			<input name='Nivel' type='hidden' value='".$defaults['Nivel']."' />
-			<td>".$defaults['Nivel']."</td>
-		</tr>
-					
-				<tr>
-					<td>
-						<font color='#FF0000'>*</font>
-						Nombre de Usuario:
-					</td>
-					<td>
+		<label style=\"width:96px;\">NIVEL</label>
+		<input name='Nivel' type='hidden' value='".$defaults['Nivel']."' />".$defaults['Nivel']."
+
+		<div style='clear:both'></div>
+
+		<label style=\"width:140px;\">USER</label>
 		<input type='text' name='Usuario' size=12 maxlength=10 value='".$defaults['Usuario']."' />
-					</td>
-				</tr>
 				
-				<tr>
-					<td>
-						<font color='#FF0000'>*</font>
-						Confirme el Usuario:
-					</td>
-					<td>
+		<div style='clear:both'></div>
+
+		<label style=\"width:140px;\">USER REPEAT</label>
 		<input type='text' name='Usuario2' size=12 maxlength=10 value='".$defaults['Usuario2']."' />
-					</td>
-				</tr>
 							
-				<tr>
-					<td>
-						<font color='#FF0000'>*</font>
-						Password:
-					</td>
-					<td>
+		<div style='clear:both'></div>
+
+		<label style=\"width:140px;\">PASSWORD</label>
 		<input type='text' name='Password' size=12 maxlength=10 value='".$defaults['Password']."' />
-					</td>
-				</tr>
 
-				<tr>
-					<td>
-						<font color='#FF0000'>*</font>
-						Confirme el Password:
-					</td>
-					<td>
+		<div style='clear:both'></div>
+
+		<label style=\"width:140px;\">PASSWORD REPEAT</label>
 	<input type='text' name='Password2' size=12 maxlength=10 value='".$defaults['Password2']."' />
-					</td>
-				</tr>
 
-		<tr>
-			<td>DIRECCIÓN</td>
-			<td>
-	<input type='text' name='Direccion' size=30 maxlength=60 value='".$defaults['Direccion']."' />
-			</td>
-		</tr>
+	<div style='clear:both'></div>
+
+		<label style=\"width:90px;\">DIRECCIÓN</label>
+		<input type='text' name='Direccion' size=30 maxlength=60 value='".$defaults['Direccion']."' />
 				
-		<tr>
-			<td>TELEFONO</td>
-			<td>
+		<label style=\"width:90px;\">TELEFONO</label>
 	<input type='text' name='Tlf1' size=12 maxlength=9 value='".$defaults['Tlf1']."' />
-			</td>
-		</tr>
 
-		<tr>
-			<td colspan=2 align='right'>
+			<div align='right'>
 				<input type='submit' value='MODIFICAR DATOS' />
 				<input type='hidden' name='modifica' value=1 />
-			</td>
-		</tr>
-			</form>														
+			</div>
+		</form>														
 		
-		<tr>
-			<td colspan=3 align='right' class='BorderSup'>
+			<div align='right' class='BorderSup'>
 				<form name='closewindow' action='User_Modificar_01.php'  \">
 					<input type='submit' value='CANCELAR Y VOLVER' />
 					<input type='hidden' name='volver' value=1 />
 				</form>
-			</td>
-		</tr>
-	</table>");
+			</div>
+	</div>");
 
-			} // FIN ELSE IF USER / PLUS
-	
-	elseif($_SESSION['uNivel'] == 'useru'){
-	
-		print("<table align='center' border=0>
-
-		<tr>
-			<td colspan=2 class='BorderInf' align='center'>
-				<img src='../Gch.Img.User/".$_POST['myimg']."' height='44px' width='33px' />
-								INTRODUZCA LOS NUEVOS DATOS.
-			</td>
-		</tr>
-				
-		<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'>
-			
-		<input name='id' type='hidden' value='".$defaults['id']."' />					
-		<input name='myimg' type='hidden' value='".$_POST['myimg']."' />	
-
-		<tr>
-			<td> REFERENCIA </td>
-			<input name='ref' type='hidden' value='".$defaults['ref']."' />
-			<td>".$defaults['ref']."</td>			
-		</tr>			
-
-		<tr>
-			<td>NOMBRE</td>
-			<td>
-		<input type='text' name='Nombre' size=30 maxlength=25 value='".$defaults['Nombre']."' />
-			</td>	
-		</tr>
-		
-		<tr>
-			<td>APELLIDOS</td>
-			<td>	
-		<input type='text' name='Apellidos' size=30 maxlength=25 value='".$defaults['Apellidos']."' />
-			</td>
-		</tr>
-
-		<tr>
-			<td>EMAIL</td>
-			<td>
-			<input type='text' name='Email' size=30 maxlength=50 value='".$defaults['Email']."' />
-			</td>
-		</tr>
-				
-		<tr>
-			<td>NIVEL </td>
-			<input name='Nivel' type='hidden' value='".$defaults['Nivel']."' />
-			<td>".$defaults['Nivel']."</td>
-		</tr>
-					
-		<tr>
-			<td>USUARIO  </td>
-			<input name='Usuario' type='hidden' value='".$defaults['Usuario']."' />
-			<input name='Usuario2' type='hidden' value='".$defaults['Usuario']."' />
-			<td>".$defaults['Usuario']."</td>	
-		</tr>
-				
-		<tr>
-			<td>PASSWORD </td>
-			<input name='Password' type='hidden' value='".$defaults['Password']."' />
-			<input name='Password2' type='hidden' value='".$defaults['Password']."' />
-			<td>".$defaults['Password']."</td>
-		</tr>
-
-		<tr>
-			<td>DIRECCIÓN</td>
-			<td>
-	<input type='text' name='Direccion' size=30 maxlength=60 value='".$defaults['Direccion']."' />
-			</td>
-		</tr>
-				
-		<tr>
-			<td>TELEFONO</td>
-			<td>
-	<input type='text' name='Tlf1' size=12 maxlength=9 value='".$defaults['Tlf1']."' />
-			</td>
-		</tr>
-
-		<tr>
-			<td colspan=2 align='right'>
-				<input type='submit' value='MODIFICAR DATOS' />
-				<input type='hidden' name='modifica' value=1 />
-			</td>
-		</tr>
-			</form>	
-		
-		<tr>
-			<td colspan=3 align='right' class='BorderSup'>
-				<form name='closewindow' action='User_Modificar_01.php'  \">
-					<input type='submit' value='CANCELAR Y VOLVER' />
-					<input type='hidden' name='volver' value=1 />
-				</form>
-			</td>
-		</tr>
-	</table>");
-
-			} // FIN ELSE IF USERU
+	} else{ }
 	
 	} // FIN FUNCTION SHOW_FOMR
 

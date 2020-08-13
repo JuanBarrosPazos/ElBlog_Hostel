@@ -1,9 +1,18 @@
-# ElBlog_Hostel (beta)
+# ElBlog_Hostel 
+## F03.V20 ESTABLE
 * https://juanchopazos.000webhostapp.com/BMoll/www/index.php
 
 ----
 
 ## EN EL DIRECTORIO Gch.Tutorial SE ENCUENTRA UNA GUÍA GENERAL DE LA APP.
+
+----
+
+### 2020.08.13
+
+* SE HAN MODIFICADO CUESTIONES DE MAQUETACIÓN ORIENTATAS A FRONT END MOVIL FIRST
+
+* SE RECOMIENDA SOBREESCRIBIR: Gch.Www, Gch.Users, Gch.Artic.
 
 ----
 

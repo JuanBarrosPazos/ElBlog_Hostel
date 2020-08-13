@@ -23,7 +23,8 @@ function process_form(){
             $refrest = $_GET['portfolio'];
             $_SESSION['a'] = $_GET['portfolio'];
                                 }
-        else { $refrest = $_SESSION['refartop']; 
+        else { //$refrest = $_SESSION['refartop']; 
+                $refrest = '';
                 $_SESSION['a'] = $_SESSION['refartop'];
                                         }
            //$refrest = "2020.06.16.13.18.15";

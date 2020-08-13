@@ -110,10 +110,10 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 				</tr>
 								
 				<tr>
-					<td width=150px>
+					<td width=140px>
 						Nombre:
 					</td>
-					<td width=200px>"
+					<td width=180px>"
 						.$_POST['Nombre'].
 					"</td>
 					<td rowspan='5' align='center'>
@@ -207,7 +207,7 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 						function redir(){
 							window.close();
 								}
-						setTimeout('redir()',6000);
+						setTimeout('redir()',8000);
 					</script>";
 			print ($redir);
 
@@ -282,16 +282,12 @@ function show_form($errors=''){
 	
 
 	print("<div class=\"juancentramail\" style=\"margin-top:4px; width: 62vw !important;\">
-			<div align='center'>
+			<div class='BorderInf' align='center'>
 					DATOS DEL NUEVO USUARIO
 			</div>
 				
 <form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'  enctype='multipart/form-data'>
 						
-			<div align='lefth'>
-				&nbsp;&nbsp;Ref User: SE GENERA LA CLAVE AUTO.
-			</div>
-					
 			<div>
 		<input type='text' name='Nombre' size=28 maxlength=25 value='".$defaults['Nombre']."' placeholder='NOMBRE'/>
 			</div>
@@ -301,13 +297,10 @@ function show_form($errors=''){
 			</div>
 
 			<div>
-		<input type='text' name='Email' size=40 maxlength=50 value='".$defaults['Email']."' placeholder='EMAIL LOWER TEXT'/>
+	<input type='text' name='Email' size=34 maxlength=50 value='".$defaults['Email']."' placeholder='EMAIL LOWER TEXT'/>
 			</div>
 				
-			<div>
-			&nbsp;&nbsp;Nivel Usuario:
-	<input type='hidden' name='Nivel' value='".$defaults['Nivel']."' />".$defaults['Nivel']."
-			</div>
+	<input type='hidden' name='Nivel' value='".$defaults['Nivel']."' />
 					
 			<div>
 		<input type='text' name='Usuario' size=12 maxlength=10 value='".$defaults['Usuario']."' placeholder='USER NAME'/>
@@ -326,11 +319,11 @@ function show_form($errors=''){
 			</div>
 
 			<div>
-	<input type='text' name='Direccion' size=40 maxlength=60 value='".$defaults['Direccion']."' placeholder='ADRESS'/>
+	<input type='text' name='Direccion' size=34 maxlength=60 value='".$defaults['Direccion']."' placeholder='ADRESS'/>
 			</div>
 				
 			<div>
-		<input type='text' name='Tlf1' size=12 maxlength=9 value='".$defaults['Tlf1']."' placeholder='PHONE NUMBER'/>
+	<input type='text' name='Tlf1' size=12 maxlength=9 value='".$defaults['Tlf1']."' placeholder='PHONE NUMBER'/>
 			</div>
 				
 			<div align='right' valign='middle' >
