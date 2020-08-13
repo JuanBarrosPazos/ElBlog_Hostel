@@ -1,6 +1,6 @@
+<<<<<<< HEAD
 # ElBlog_Hostel 
 ## F03.V20 ESTABLE
-* https://juanchopazos.000webhostapp.com/BMoll/www/index.php
 
 ----
 
