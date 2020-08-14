@@ -85,28 +85,28 @@ function process_form(){
             // DEFINO LAS IMAGENES
             global $img1;
             $img1 = "<div class='protfolioimg'>
-                    <a href='../Gch.Img.Art/".$rowb['myimg1']."' rel=\"lightbox[juan]\" title='IMAGEN 1'>
-                        <img class='img-fluid' src='../Gch.Img.Art/".$rowb['myimg1']."' alt=''>
-                    </a>
+                        <img class='img-fluid'  src='../Gch.Img.Art/".$rowb['myimg1']."' alt=''>
                     </div>";
+            global $img1b;
+            $img1b = "<img class='img-fluid d-block mx-auto' src='../Gch.Img.Art/".$rowb['myimg1']."' alt=''>";
             global $img2;
             $img2 = "<div class='protfolioimg'>
-                    <a href='../Gch.Img.Art/".$rowb['myimg2']."' rel='lightbox[juan]' title='IMAGEN 2'>
                         <img class='img-fluid' src='../Gch.Img.Art/".$rowb['myimg2']."' alt=''>
-                    </a>
                     </div>";
+            global $img2b;
+            $img2b = "<img class='img-fluid d-block mx-auto' src='../Gch.Img.Art/".$rowb['myimg2']."' alt=''>";
             global $img3;
             $img3 = "<div class='protfolioimg'>
-                    <a href='../Gch.Img.Art/".$rowb['myimg3']."' rel='lightbox[juan]' title='IMAGEN 2'>
                         <img class='img-fluid' src='../Gch.Img.Art/".$rowb['myimg3']."' alt=''>
-                    </a>
                     </div>";
+            global $img3b;
+            $img3b = "<img class='img-fluid d-block mx-auto' src='../Gch.Img.Art/".$rowb['myimg3']."' alt=''>";
             global $img4;
             $img4 = "<div class='protfolioimg'>
-                    <a href='../Gch.Img.Art/".$rowb['myimg4']."' rel='lightbox[juan]' title='IMAGEN 2'>
                         <img class='img-fluid' src='../Gch.Img.Art/".$rowb['myimg4']."' alt=''>
-                    </a>
                     </div>";
+            global $img4b;
+            $img4b = "<img class='img-fluid d-block mx-auto' src='../Gch.Img.Art/".$rowb['myimg4']."' alt=''>";
 
             global $especialidades;
             $especialidades = "Tipo de Local: ".$tipname."<br> Especialidades: ".$espec1name." / ".$espec2name."<br>";

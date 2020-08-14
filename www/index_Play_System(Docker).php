@@ -70,7 +70,7 @@
                       </a>
                     </li>
               <form name='cerrar' action='$_SERVER[PHP_SELF]' method='POST'>
-                  <input type='submit' value='CLOSE SESSION' class=\"btn btn-primary\" />
+                <input type='submit' value='CLOSE SESSION' class=\"btn btn-primary\" />
                 <input type='hidden' name='salir' value=1 />
               </form>
                 ");
@@ -78,7 +78,7 @@
             else { 
               print("
               <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\">
-                        Iniciar Sesion
+                        INICIAR SESION
                </button>");
                 }
           ?>
@@ -115,8 +115,8 @@
           if(($h >= 6 )&&($h <= 13 )){ $m = "BUENOS DÍAS: "; }
           elseif(($h >= 14 )&&($h <= 21 )){ $m = "BUENAS TARDES: "; }
           elseif(($h >= 22 )&&($h <= 5 )){ $m = "BUENAS NOCHES: "; }
-          print ("<h6 style=\"color: #cfcfcf\">
-                        ".$m.$_SESSION['uNombre']." ".$_SESSION['uApellidos']."
+          print ("<h6 style=\"color: #fbaf00\">
+                        ".$m.strtoupper($_SESSION['uNombre'])." ".strtoupper($_SESSION['uApellidos'])."
                   </h6>");
             } else { }
       ?>

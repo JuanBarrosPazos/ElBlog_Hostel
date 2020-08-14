@@ -60,7 +60,7 @@ CREATE TABLE `gch_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `gch_user` (`id`, `ref`, `Nivel`, `Nombre`, `Apellidos`, `myimg`, `Email`, `Usuario`, `Password`, `Direccion`, `Tlf1`, `lastin`, `lastout`, `visituser`) VALUES
-(1, 'jbp55555555k', 'user', 'Juan', 'Barros Pazos', 'jbp55555555k.jpg', 'juanbarrospazos@hotmail.es', 'user', 'user', 'Palma de Mallorca', '111111111', '2020-06-26/09:47:48', '2020-06-25/19:18:41', '1');
+(1, 'jbp55555555k', 'adminu', 'Juan', 'Barros Pazos', 'jbp55555555k.jpg', 'juanbarrospazos@hotmail.es', 'admin', 'admin', 'Palma de Mallorca', '111111111', '2020-06-26/09:47:48', '2020-06-25/19:18:41', '1');
 
 
 CREATE TABLE IF NOT EXISTS `gch_art` (

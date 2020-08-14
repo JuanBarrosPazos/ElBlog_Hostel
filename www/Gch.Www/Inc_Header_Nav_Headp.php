@@ -22,7 +22,7 @@
 <?php
     //require '../Gch.Users/Only.index.user.php';
 
-//echo $_SESSION['a'];
+    //echo $_SESSION['a'];
 
     if (isset($_POST['salir'])) { 
                     require '../Gch.Connet/conection.php';
@@ -86,7 +86,6 @@
 	  salirf();
 
           }
-
 
   function salirf() { unset($_SESSION['uid']);
                       unset($_SESSION['uNivel']);
@@ -191,8 +190,8 @@
           if(($h >= 6 )&&($h <= 13 )){ $m = "BUENOS DÍAS: "; }
           elseif(($h >= 14 )&&($h <= 21 )){ $m = "BUENAS TARDES: "; }
           elseif(($h >= 22 )||($h <= 5 )){ $m = "BUENAS NOCHES: "; }
-          print ("<h6 style=\"color: #cfcfcf\">
-                        ".$m.$_SESSION['uNombre']." ".$_SESSION['uApellidos']."
+          print ("<h6 style=\"color: #fbaf00\">
+                        ".$m.strtoupper($_SESSION['uNombre'])." ".strtoupper($_SESSION['uApellidos'])."
                   </h6>");
             } else { }
       ?>

@@ -46,9 +46,9 @@
 	}
 
     function process_login(){
-            if ($_SESSION['Nivel'] == 'user'){}
-            else { print("Acceso no permitido");}
-    }
+                      if((@$_SESSION['uNivel'] == 'useru')||(@$_SESSION['uNivel'] == 'adminu')){}
+                      else { print("Acceso no permitido");}
+                    }
     */
 
 //////////////////////////////////////////////////////////////////////////////////////////////

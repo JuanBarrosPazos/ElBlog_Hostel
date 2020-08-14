@@ -13,7 +13,6 @@
                     sale_usuario();
 					//session_destroy();
 					//salirf();
-					/* */
 					global $redir;
 					$redir = "<script type='text/javascript'>
 								function redir(){
@@ -27,10 +26,11 @@
 	if(isset($_POST['login'])){
 				//process_login();
 				/**/
+				if ($_SESSION['logpage'] == ''){$_SESSION['logpage'] = '?page=1';}
 				global $redir;
 				$redir = "<script type='text/javascript'>
 						function redir(){
-						window.location.href='index.php';
+						window.location.href='index.php".$_SESSION['logpage']."';
 					}
 					setTimeout('redir()',1);
 					</script>";
@@ -46,7 +46,7 @@
 	elseif (isset($_GET['pagef'])) { show_form();
 									 process_form();
 											}
-	elseif ((isset($_GET['page'])) || (isset($_POST['page']))) {
+	elseif ((isset($_GET['page'])) || (isset($_POST['page'])) || (isset($_SESSION['logpage']))) {
 											show_form();
 											ver_todo();
 										}
@@ -58,6 +58,9 @@
 			unset($_SESSION['refartop']);
 			unset($_SESSION['mailto']);
 			unset($_SESSION['titulo']);
+			unset($_SESSION['logpage']);
+			unset($_SESSION['a']);
+			
 			show_form();
 			ver_todo();
 				}
@@ -94,7 +97,7 @@ function sale_usuario(){
     fwrite($log, $logtext);
     fclose($log);
 
-	  salirf();
+	salirf();
 
           }
 
@@ -106,13 +109,14 @@ function salirf() {	unset($_SESSION['uid']);
                     unset($_SESSION['uUsuario']);
                     unset($_SESSION['uPassword']);
                     unset($_SESSION['uDireccion']);
-                    unset($_SESSION['uTlf1']);
+					unset($_SESSION['uTlf1']);
+					unset($_SESSION['logpage']);
 				}
 
 function process_login(){
-		if ($_SESSION['Nivel'] == 'user'){}
-		else { print("Acceso no permitido");}
-  }
+                if((@$_SESSION['uNivel'] == 'useru')||(@$_SESSION['uNivel'] == 'adminu')){}
+                else { print("Acceso no permitido");}
+            }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -348,9 +352,11 @@ function process_form(){
     }
     echo '</ul>';
     echo '</nav>';
-
 			} 
-		}
+
+		$_SESSION['logpage'] = '?pagef='.$pagef;
+
+	}
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -728,7 +734,9 @@ function ver_todo(){
     echo '</nav>';
 
 			} 
-		
+
+	$_SESSION['logpage'] = '?page='.$page;
+
 	}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
