@@ -80,9 +80,11 @@ function validate_form(){
 			if($ancho < 400){
 				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ANCHURA MENOR DE 400 ".$ancho;
 			}
+			/*
 			elseif(($ancho > 900)&&($alto < 400)){
 				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ALTURA MENOR DE 400 ".$alto;
 			}
+			*/
 			elseif(($ancho > 400)&&($alto < 400)){
 				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ALTURA MENOR DE 400 ".$alto;
 			}

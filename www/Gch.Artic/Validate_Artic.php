@@ -361,9 +361,11 @@
 			if($ancho < 400){
 				$errors [] = "IMAGEN ".$_FILES['myimg1']['name']." ANCHURA MENOR DE 400 ".$ancho;
 			}
+			/*
 			elseif(($ancho > 900)&&($alto < 400)){
 				$errors [] = "IMAGEN ".$_FILES['myimg1']['name']." ALTURA MENOR DE 400 ".$alto;
 			}
+			*/
 			elseif(($ancho > 400)&&($alto < 400)){
 				$errors [] = "IMAGEN ".$_FILES['myimg1']['name']." ALTURA MENOR DE 400 ".$alto;
 			}
@@ -415,9 +417,11 @@
 			if($ancho < 400){
 				$errors [] = "IMAGEN ".$_FILES['myimg2']['name']." ANCHURA MENOR DE 400 ".$ancho;
 			}
+			/*
 			elseif(($ancho > 900)&&($alto < 400)){
 				$errors [] = "IMAGEN ".$_FILES['myimg2']['name']." ALTURA MENOR DE 400 ".$alto;
 			}
+			*/
 			elseif(($ancho > 400)&&($alto < 400)){
 				$errors [] = "IMAGEN ".$_FILES['myimg2']['name']." ALTURA MENOR DE 400 ".$alto;
 			}
@@ -469,9 +473,11 @@
 			if($ancho < 400){
 				$errors [] = "IMAGEN ".$_FILES['myimg3']['name']." ANCHURA MENOR DE 400 ".$ancho;
 			}
+			/*
 			elseif(($ancho > 900)&&($alto < 400)){
 				$errors [] = "IMAGEN ".$_FILES['myimg3']['name']." ALTURA MENOR DE 400 ".$alto;
 			}
+			*/
 			elseif(($ancho > 400)&&($alto < 400)){
 				$errors [] = "IMAGEN ".$_FILES['myimg3']['name']." ALTURA MENOR DE 400 ".$alto;
 			}
@@ -522,9 +528,11 @@
 			if($ancho < 400){
 				$errors [] = "IMAGEN ".$_FILES['myimg4']['name']." ANCHURA MENOR DE 400 ".$ancho;
 			}
+			/*
 			elseif(($ancho > 900)&&($alto < 400)){
 				$errors [] = "IMAGEN ".$_FILES['myimg4']['name']." ALTURA MENOR DE 400 ".$alto;
 			}
+			*/
 			elseif(($ancho > 400)&&($alto < 400)){
 				$errors [] = "IMAGEN ".$_FILES['myimg4']['name']." ALTURA MENOR DE 400 ".$alto;
 			}

@@ -13,9 +13,9 @@
 
 * EN Gch.Artic/Validate_Artic.php SE LIMITA EL PESO DE LA IMAGEN L.317
 
-* EN Gch.Artic/Validate_Artic.php SE LIMITA IMAGEN $ancho < 400, ($ancho > 900)&&($alto < 400), ($ancho > 400)&&($alto < 400). L.354, L.408, L.515.
+* EN Gch.Artic/Validate_Artic.php SE LIMITA IMAGEN $ancho < 400, ($ancho > 400)&&($alto < 400). L.354, L.410, L.466, L.521.
 
-* Y EN Gch.Artic/Art_Modificar_img.php SE LIMITA IMAGEN $ancho < 400, ($ancho > 900)&&($alto < 400), ($ancho > 400)&&($alto < 400). L.73.
+* Y EN Gch.Artic/Art_Modificar_img.php SE LIMITA IMAGEN $ancho < 400, ($ancho > 400)&&($alto < 400). L.73.
 
 * SE BORRA AUTOMATICAMENTE EL CONTENIDO DE Gch.Temp/ AL CARGAR Gch.Artic/Art_Crear.php, Art_Modificar_01.php y Art_Modificar_img.php
 
