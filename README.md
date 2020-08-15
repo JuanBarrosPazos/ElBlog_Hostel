@@ -7,6 +7,24 @@
 
 ----
 
+### 2020.08.15
+
+* SE REDIMENSIONAN LAS IMAGENES EN Gch.Artic/Inc_Crea_Img.php Y Gch.Artic/Inc_Modificar_Img.php SI SON ANCHO > 900 O ALTO > 400 
+
+* EN Gch.Artic/Validate_Artic.php SE LIMITA EL PESO DE LA IMAGEN L.317
+
+* EN Gch.Artic/Validate_Artic.php SE LIMITA IMAGEN $ancho < 400, ($ancho > 900)&&($alto < 400), ($ancho > 400)&&($alto < 400). L.354, L.408, L.515.
+
+* Y EN Gch.Artic/Art_Modificar_img.php SE LIMITA IMAGEN $ancho < 400, ($ancho > 900)&&($alto < 400), ($ancho > 400)&&($alto < 400). L.73.
+
+* SE BORRA AUTOMATICAMENTE EL CONTENIDO DE Gch.Temp/ AL CARGAR Gch.Artic/Art_Crear.php, Art_Modificar_01.php y Art_Modificar_img.php
+
+* SE HAN CREADO NUEVOS ARCHIVOS Y DEPENDENCIAS
+
+* SE RECOMIENDA SOBREESCRIBIR: Gch.Admin, Gch.Artic.
+
+----
+
 ### 2020.08.14
 
 * SE HA SUSTITUIDO LA PRESENTACIÓN DE IMAGENTES POR UN LIGHTBOX

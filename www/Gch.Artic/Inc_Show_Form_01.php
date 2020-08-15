@@ -17,9 +17,17 @@ if(isset($_POST['oculto'])){ 	$_SESSION['ayto'] = $_POST['ayto'];
 else {	$defaults = array (	'isla' => @$_SESSION['isla'],
 							'ayto' => @$_SESSION['ayto'],
 							'tipo' => @$_SESSION['tipo'],
-							'espec1' => @$_SESSION['espec1']
-								);
-									}
+							'espec1' => @$_SESSION['espec1']);
+
+		$ctemp = "../Gch.Temp";
+		if(file_exists($ctemp)){$dir1 = $ctemp."/";
+								$handle1 = opendir($dir1);
+								while ($file1 = readdir($handle1))
+										{if (is_file($dir1.$file1))
+											{unlink($dir1.$file1);}
+											}	
+							} else {}
+			}
 
 	global $isla;
 	//$isla = @$_POST['isla'];
@@ -93,6 +101,9 @@ else {	$defaults = array (	'isla' => @$_SESSION['isla'],
 <form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
 						
 	<input name='isla' type='hidden' value='".$defaults['isla']."' />
+	
+	<input type='submit' value='APLICAR FILTRO' />
+	<input type='hidden' name='oculto' value=1 />
 
 		<select name='ayto'>
 		<option value=''>AYUNTAMIENTO</option>");
@@ -170,14 +181,11 @@ else {	$defaults = array (	'isla' => @$_SESSION['isla'],
 			}  
 
 	print ("</select>
-
-				<input type='submit' value='APLICAR FILTRO' />
-				<input type='hidden' name='oculto' value=1 />
-		</form>
-		</div>
-		</td>
-				</tr>
-		</table>");
+				</form>
+				</div>
+					</td>
+						</tr>
+				</table>");
 		
 				}
 					}	else {print ("</td></tr></table>");}			

@@ -7,7 +7,9 @@ session_start();
 	require '../Gch.Connet/conection.php';
 	require '../Gch.Connet/conect.php';
 
-///////////////////////////////////////////////////////////////////////////////////////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
 if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'userpro')){
 
@@ -26,9 +28,11 @@ if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'userpro')){
 								}
 } else { require '../Gch.Inclu/table_permisos.php'; } 
 
-//////////////////////////////////////////////////////////////////////////////////////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
-function validate_form(){
+function validate_form() {
 	
 	global $db;
 	global $db_name;
@@ -38,476 +42,15 @@ function validate_form(){
 
 	$errors = array();
 
-/*
-	if(strlen(trim($_POST['refart'])) != 0){	
-			$secc1 = "gch_art";
-			$secc1 = "`".$secc1."`";
-			$sqlc =  "SELECT * FROM `$db_name`.$secc1 WHERE `refart` = '$_POST[refart]'";
-			$qc = mysqli_query($db, $sqlc);
-			global $conutc;
-			$countc = mysqli_num_rows($qc);
-			if($countc > 0){
-				$errors [] = "YA EXISTE EL RESTAURANTE.";
-				}
-		}
-*/
-		///////////////////////////////////////////////////////////////////////////////////
-
-	if(strlen(trim($_POST['ayto'])) == 0){
-		$errors [] = "AYUNTAMIENTO <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
-		}
-
-		///////////////////////////////////////////////////////////////////////////////////
-
-	if(strlen(trim($_POST['titulo'])) == 0){
-		$errors [] = "RESTAURANTE <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
-		}
-	
-	elseif (strlen(trim($_POST['titulo'])) < 6){
-		$errors [] = "RESTAURANTE <font color='#FF0000'>Más de 5 carácteres.</font>";
-		}
-		
-	elseif (!preg_match('/^[^@#$&%<>:´"·\(\)=¿?!¡\[\]\{\};,:\*\']+$/',$_POST['titulo'])){
-		$errors [] = "RESTAURANTE <font color='#FF0000'>Caracteres no válidos.</font>";
-		}
-		
-	elseif (!preg_match('/^[a-z A-Z,0-9\s]+$/',$_POST['titulo'])){
-		$errors [] = "RESTAURANTE  <font color='#FF0000'>Solo mayusculas o números sin acentos.</font>";
-		}
-	
-	elseif((strlen(trim($_POST['titulo'])) != 0)||(strlen(trim($_POST['refart'])) != 0)){	
-		$secc1 = "gch_art";
-		$secc1 = "`".$secc1."`";
-	$sqlc =  "SELECT * FROM `$db_name`.$secc1 WHERE `tit` = '$_POST[titulo]' OR `refart` = '$_POST[refart]'";
-		$qc = mysqli_query($db, $sqlc);
-		global $conutc;
-		$countc = mysqli_num_rows($qc);
-	if($countc > 0){
-			$errors [] = "YA EXISTE ESTE RESTAURANTE";
-				}
-		}
-
-		///////////////////////////////////////////////////////////////////////////////////
-
-	if(strlen(trim($_POST['subtitul'])) == 0){
-		$errors [] = "SUBTITULO  <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
-		}
-	
-	elseif (strlen(trim($_POST['subtitul'])) < 5){
-		$errors [] = "SUBTITULO  <font color='#FF0000'>Más de 4 carácteres.</font>";
-		}
-		
-	elseif (!preg_match('/^[^@#$&%<>:´"·\(\)=¿?!¡\[\]\{\};,:\.\*\']+$/',$_POST['subtitul'])){
-		$errors [] = "SUBTITULO  <font color='#FF0000'>Caracteres no válidos.</font>";
-		}
-		
-	elseif (!preg_match('/^[a-z A-Z,0-9\s]+$/',$_POST['subtitul'])){
-		$errors [] = "SUBTITULO  <font color='#FF0000'>Solo mayusculas o números sin acentos.</font>";
-		}
-	
-	elseif(strlen(trim($_POST['subtitul'])) != 0){	
-			$secc1 = "gch_art";
-			$secc1 = "`".$secc1."`";
-			$sqlc =  "SELECT * FROM `$db_name`.$secc1 WHERE `titsub` = '$_POST[subtitul]'";
-			$qc = mysqli_query($db, $sqlc);
-			global $conutc;
-			$countc = mysqli_num_rows($qc);
-			if($countc > 0){
-			$errors [] = "YA EXISTE ESTE SUBTITULO";
-				}
-		}
-
-		///////////////////////////////////////////////////////////////////////////////////
-
-	if(strlen(trim($_POST['autor'])) == 0){
-		$errors [] = "AUTOR <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
-		}
-
-		///////////////////////////////////////////////////////////////////////////////////
-
-	if(strlen(trim($_POST['url'])) == 0){
-		$errors [] = "URL PAGINA WEB <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
-		}
-
-	elseif (strlen(trim($_POST['url'])) < 10){
-		$errors [] = "URL PAGINA WEB  <font color='#FF0000'>Más de 10 carácteres.</font>";
-		}
-		
-	elseif (!preg_match('/^[^@#$<>´"·,\[\]\{\}\*]+$/',$_POST['url'])){
-		$errors [] = "URL PAGINA WEB <font color='#FF0000'>Caracteres no válidos.</font>";
-		}
-		
-	if(strlen(trim($_POST['map'])) == 0){
-		$errors [] = "URL MAPA WEB <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
-		}
-
-	elseif (strlen(trim($_POST['map'])) < 10){
-		$errors [] = "URL MAPA WEB  <font color='#FF0000'>Más de 10 carácteres.</font>";
-		}
-		
-	elseif (!preg_match('/^[^@#$<>´"·,\[\]\{\}\*]+$/',$_POST['map'])){
-		$errors [] = "URL MAPA WEB <font color='#FF0000'>Caracteres no válidos.</font>";
-		}
-		
-	if(strlen(trim($_POST['mapiframe'])) == 0){
-		$errors [] = "URL MAPIFRAME <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
-		}
-
-	elseif (strlen(trim($_POST['mapiframe'])) < 10){
-		$errors [] = "URL MAPIFRAME  <font color='#FF0000'>Más de 10 carácteres.</font>";
-		}
-		
-	elseif (!preg_match('/^[^@#$<>´"·,\[\]\{\}\*]+$/',$_POST['mapiframe'])){
-		$errors [] = "URL MAPIFRAME <font color='#FF0000'>Caracteres no válidos.</font>";
-		}
-		
-	if(strlen(trim($_POST['latitud'])) == 0){
-		$errors [] = "LATITUD <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
-		}
-
-	elseif (strlen(trim($_POST['latitud'])) < 6){
-		$errors [] = "LATITUD  <font color='#FF0000'>Más de 5 carácteres.</font>";
-		}
-		
-	elseif (!preg_match('/^[^@#$&%<>:´"·\(\)=¿?!¡\[\]\{\};:\*\']+$/',$_POST['latitud'])){
-		$errors [] = "LATITUD <font color='#FF0000'>Caracteres no válidos.</font>";
-		}
-		
-	elseif (!preg_match('/^[.0-9]+$/',$_POST['latitud'])){
-		$errors [] = "LATITUD  <font color='#FF0000'>Sólo números o ,</font>";
-		}
-
-	if(strlen(trim($_POST['longitud'])) == 0){
-		$errors [] = "LONGITUD <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
-		}
-
-	elseif (strlen(trim($_POST['longitud'])) < 6){
-		$errors [] = "LONGITUD  <font color='#FF0000'>Más de 5 carácteres.</font>";
-		}
-		
-	elseif (!preg_match('/^[^@#$&%<>:´"·\(\)=¿?!¡\[\]\{\};:\*\']+$/',$_POST['longitud'])){
-		$errors [] = "LONGITUD <font color='#FF0000'>Caracteres no válidos.</font>";
-		}
-		
-	elseif (!preg_match('/^[.0-9]+$/',$_POST['longitud'])){
-		$errors [] = "LONGITUD  <font color='#FF0000'>Sólo números o ,</font>";
-		}
-
-		///////////////////////////////////////////////////////////////////////////////////
-
-	if(strlen(trim($_POST['calle'])) == 0){
-		$errors [] = "CALLE <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
-		}
-		
-	elseif (strlen(trim($_POST['calle'])) < 6){
-		$errors [] = "CALLE <font color='#FF0000'>Más de 5 carácteres.</font>";
-		}
-			
-	elseif (!preg_match('/^[^@#$&%<>"·\(\)=¿?!¡\[\]\{\};\*]+$/',$_POST['calle'])){
-		$errors [] = "CALLE <font color='#FF0000'>Caracteres no válidos.</font>";
-		}
-
-		///////////////////////////////////////////////////////////////////////////////////
-
-	/* Validamos el campo mail. */
-	
-	global $sqlml;
-	global $qml;
-
-	$sqlml =  "SELECT * FROM `$db_name`.`gch_art` WHERE `gch_art`.`Email` = '$_POST[Email]'";
-	$qml = mysqli_query($db, $sqlml);
-	$rowml = mysqli_fetch_assoc($qml);
-
-	if (isset($_POST['id']) == $rowml['id']){}
-	elseif(mysqli_num_rows($qml)!= 0){
-		$errors [] = "Mail: <font color='#FF0000'>Ya Existe.</font>";
-		}
-		
-	if(strlen(trim($_POST['Email'])) == 0){
-		$errors [] = "Mail: <font color='#FF0000'>Este campo es obligatorio.</font>";
-		}
-	
-	elseif (strlen(trim($_POST['Email'])) < 5 ){
-		$errors [] = "Mail: <font color='#FF0000'>Escriba más de cinco carácteres.</font>";
-		}
-		
-	elseif (!preg_match('/^[^A-Z]+$/',$_POST['Email'])){
-		$errors [] = "Mail: <font color='#FF0000'>Solo Minusculas</font>";
-		}
-
-	elseif (!preg_match('/^[^@´`\'áéíóú#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:*\s]+@([-a-z0-9]+\.)+[a-z]{2,}$/',$_POST['Email'])){
-		$errors [] = "Mail: <font color='#FF0000'>Esta dirección no es válida.</font>";
-		}
-		
-/* 
-	if(trim($_POST['id'] == $rowd['id'])&&(!strcasecmp($_POST['Email'] , $rowd['Email']))){}
-			elseif(!strcasecmp($_POST['Email'] , $rowd['Email'])){
-				$errors [] = "Mail: <font color='#FF0000'>No se puede registrar con este Mail.</font>";
-				}	
-	
-	elseif(!strcasecmp($_POST['Email'] , $rowd['Email'])){
-		$errors [] = "Mail: <font color='#FF0000'>No se puede registrar con este Mail.</font>";
-		}	
-*/
-
-		///////////////////////////////////////////////////////////////////////////////////
-
-	/* Validamos el campo Tlf1 */
-	
-	$sqltlf1 =  "SELECT * FROM `$db_name`.`gch_art` WHERE `gch_art`.`Tlf1` = '$_POST[Tlf1]' OR `gch_art`.`Tlf2` = '$_POST[Tlf1]' ";
-	$qtlf1 = mysqli_query($db, $sqltlf1);
-	$rowtlf1 = mysqli_fetch_assoc($qtlf1);
-	$countlf1 = mysqli_num_rows($qtlf1);
-
-	if (@$_POST['id'] == $rowtlf1['id']){}
-	elseif($countlf1 != 0){
-		$errors [] = "Teléfono 1: <font color='#FF0000'>YA EXISTE.</font>";
-		}
-
-	if(strlen(trim($_POST['Tlf1'])) == 0){
-		$errors [] = "Teléfono 1: <font color='#FF0000'>Este campo es obligatorio.</font>";
-		}
-	
-	elseif ((trim($_POST['Tlf1'])) == (trim($_POST['Tlf2']))){
-					$errors [] = "Teléfono 1 y 2: <font color='#FF0000'>SON IGUALES</font>";
-		}
-
-	elseif (!preg_match('/^[\d]+$/',$_POST['Tlf1'])){
-		$errors [] = "Teléfono 1: <font color='#FF0000'>Sólo se admiten números.</font>";
-		}
-
-	elseif (strlen(trim($_POST['Tlf1'])) < 9){
-		$errors [] = "Teléfono 1: <font color='#FF0000'>No menos de nueve números</font>";
-		}
-
-	if(strlen(trim($_POST['Tlf2'])) > 0){
-	$sqltlf2 =  "SELECT * FROM `$db_name`.`gch_art` WHERE `gch_art`.`Tlf1` = '$_POST[Tlf2]' OR `gch_art`.`Tlf2` = '$_POST[Tlf2]' ";
-	$qtlf2 = mysqli_query($db, $sqltlf2);
-	$rowtlf2 = mysqli_fetch_assoc($qtlf2);
-	$countlf2 = mysqli_num_rows($qtlf2);
-
-	if (!preg_match('/^[\d]+$/',$_POST['Tlf2'])){
-			$errors [] = "Teléfono 2: <font color='#FF0000'>Sólo se admiten números.</font>";
-			}
-	elseif (@$_POST['id'] == $rowtlf2['id']){}
-	elseif($countlf2 != 0){
-			$errors [] = "Teléfono 2: <font color='#FF0000'>YA EXISTE.</font>";
-			}
-		}
-	
-		///////////////////////////////////////////////////////////////////////////////////
-
-	if(strlen(trim($_POST['tipo'])) == 0){
-		$errors [] = "CATEGORIA <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
-		}
-
-		///////////////////////////////////////////////////////////////////////////////////
-
-	if(strlen(trim($_POST['espec1'])) == 0){
-		$errors [] = "ESPECIALIDAD 1 Y 2 <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
-		}
-
-	elseif(strlen(trim($_POST['espec2'])) == 0){
-		$errors [] = "ESPECIALIDAD 2 <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
-		}
-
-	elseif ((trim($_POST['espec1'])) == (trim($_POST['espec2']))){
-					$errors [] = "ESPECIALIDADES <font color='#FF0000'>SON IGUALES</font>";
-		}
-	
-	if(strlen(trim($_POST['precio'])) == 0){
-		$errors [] = "PRECIOS <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
-		}
-
-	if(strlen(trim($_POST['valora'])) == 0){
-		$errors [] = "SERVICIOS <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
-		}
-
-		///////////////////////////////////////////////////////////////////////////////////
-
-	if(strlen(trim($_POST['coment'])) == 0){
-		$errors [] = "DESCRIPCION <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
-		}
-
-	elseif(strlen(trim($_POST['coment'])) <= 50){
-		$errors [] = "DESCRIPCION <font color='#FF0000'>Mas de 50 carácteres.</font>";
-		}
-
-	elseif(strlen(trim($_POST['coment'])) >= 402){
-		$errors [] = "DESCRIPCION <font color='#FF0000'>Excedió más de 400 carácteres.</font>";
-		}
-		
-
-	elseif (!preg_match('/^[^#$&<>\(\)\[\]\{\}]+$/',$_POST['coment'])){
-		$errors [] = "DESCRIPCION <font color='#FF0000'>No Permitidos #$&<>()[]{}</font>";
-		}
-		
-
-		///////////////////////////////////////////////////////////////////////////////////
-	
-	/* VALIDO IMAGEN 1 */
-	if($_FILES['myimg1']['size'] == 0){
-		$errors [] = "FOTOGRAFÍA 1 ES OBLIGATORIA";
-		}
-	
-	else{
-			
-	$limite = 600 * 1024;
-	
-	$ext_permitidas = array('jpg','JPG','gif','GIF','png','PNG');
-	$extension = substr($_FILES['myimg1']['name'],-3);
-	// print($extension);
-	$ext_correcta = in_array($extension, $ext_permitidas);
-
-	// $tipo_correcto = preg_match('/^image\/(gif|png|jpg|bmp)$/', $_FILES['myimg1']['type']);
-
-		 
-		if(!$ext_correcta){
-			$errors [] = "EXTENSIÓN NO ADMITIDA: ".$_FILES['myimg1']['name'];
-			}
-	/*
-		elseif(!$tipo_correcto){
-			$errors [] = "Este tipo de archivo no esta admitido: ".$_FILES['myimg1']['name'];
-			}
-	*/
-		elseif ($_FILES['myimg1']['size'] > $limite){
-		$tamanho = $_FILES['myimg1']['size'] / 1024;
-		$errors [] = "El archivo ".$_FILES['myimg1']['name']." MAYOR 500 KBytes. ".$tamanho." KB";
-			}
-		
-			elseif ($_FILES['myimg1']['error'] == UPLOAD_ERR_PARTIAL){
-				$errors [] = "La carga del archivo se ha interrumpido.";
-				}
-				
-				elseif ($_FILES['myimg1']['error'] == UPLOAD_ERR_NO_FILE){
-					$errors [] = "Es archivo no se ha cargado.";
-					}
-		}
-
-	//////////////
-
-	/* VALIDO IMAGEN 2 */
-	if($_FILES['myimg2']['size'] == 0){}
-	
-	else{
-			
-	$limite = 600 * 1024;
-	
-	$ext_permitidas = array('jpg','JPG','gif','.GIF','png','PNG');
-	$extension = substr($_FILES['myimg2']['name'],-3);
-	// print($extension);
-	$ext_correcta = in_array($extension, $ext_permitidas);
-
-	// $tipo_correcto = preg_match('/^image\/(gif|png|jpg|bmp)$/', $_FILES['myimg2']['type']);
-
-		 
-		if(!$ext_correcta){
-			$errors [] = "EXTENSIÓN NO ADMITIDA: ".$_FILES['myimg2']['name'];
-			}
-	/*
-		elseif(!$tipo_correcto){
-			$errors [] = "Este tipo de archivo no esta admitido: ".$_FILES['myimg2']['name'];
-			}
-	*/
-		elseif ($_FILES['myimg2']['size'] > $limite){
-		$tamanho = $_FILES['myimg2']['size'] / 1024;
-		$errors [] = "El archivo ".$_FILES['myimg2']['name']." MAYOR 500 KBytes. ".$tamanho." KB";
-			}
-		
-			elseif ($_FILES['myimg2']['error'] == UPLOAD_ERR_PARTIAL){
-				$errors [] = "La carga del archivo se ha interrumpido.";
-				}
-				
-				elseif ($_FILES['myimg2']['error'] == UPLOAD_ERR_NO_FILE){
-					$errors [] = "Es archivo no se ha cargado.";
-					}
-		}
-
-	//////////////
-
-	/* VALIDO IMAGEN 3 */
-	if($_FILES['myimg3']['size'] == 0){}
-	
-	else{
-			
-	$limite = 600 * 1024;
-	
-	$ext_permitidas = array('jpg','JPG','gif','GIF','png','PNG');
-	$extension = substr($_FILES['myimg3']['name'],-3);
-	// print($extension);
-	$ext_correcta = in_array($extension, $ext_permitidas);
-
-	// $tipo_correcto = preg_match('/^image\/(gif|png|jpg|bmp)$/', $_FILES['myimg3']['type']);
-
-		 
-		if(!$ext_correcta){
-			$errors [] = "EXTENSIÓN NO ADMITIDA: ".$_FILES['myimg3']['name'];
-			}
-	/*
-		elseif(!$tipo_correcto){
-			$errors [] = "Este tipo de archivo no esta admitido: ".$_FILES['myimg3']['name'];
-			}
-	*/
-		elseif ($_FILES['myimg3']['size'] > $limite){
-		$tamanho = $_FILES['myimg3']['size'] / 1024;
-		$errors [] = "El archivo ".$_FILES['myimg3']['name']." MAYOR 500 KBytes. ".$tamanho." KB";
-			}
-		
-			elseif ($_FILES['myimg3']['error'] == UPLOAD_ERR_PARTIAL){
-				$errors [] = "La carga del archivo se ha interrumpido.";
-				}
-				
-				elseif ($_FILES['myimg3']['error'] == UPLOAD_ERR_NO_FILE){
-					$errors [] = "Es archivo no se ha cargado.";
-					}
-		}
-
-	//////////////
-
-	/* VALIDO IMAGEN 4 */
-	if($_FILES['myimg4']['size'] == 0){}
-	
-	else{
-			
-	$limite = 600 * 1024;
-	
-	$ext_permitidas = array('jpg','JPG','gif','GIF','png','PNG');
-	$extension = substr($_FILES['myimg4']['name'],-3);
-	// print($extension);
-	$ext_correcta = in_array($extension, $ext_permitidas);
-
-	// $tipo_correcto = preg_match('/^image\/(gif|png|jpg|bmp)$/', $_FILES['myimg4']['type']);
-
-		 
-		if(!$ext_correcta){
-			$errors [] = "EXTENSIÓN NO ADMITIDA: ".$_FILES['myimg4']['name'];
-			}
-	/*
-		elseif(!$tipo_correcto){
-			$errors [] = "Este tipo de archivo no esta admitido: ".$_FILES['myimg4']['name'];
-			}
-	*/
-		elseif ($_FILES['myimg4']['size'] > $limite){
-		$tamanho = $_FILES['myimg4']['size'] / 1024;
-		$errors [] = "El archivo ".$_FILES['myimg4']['name']." MAYOR 500 KBytes. ".$tamanho." KB";
-			}
-		
-			elseif ($_FILES['myimg4']['error'] == UPLOAD_ERR_PARTIAL){
-				$errors [] = "La carga del archivo se ha interrumpido.";
-				}
-				
-				elseif ($_FILES['myimg4']['error'] == UPLOAD_ERR_NO_FILE){
-					$errors [] = "Es archivo no se ha cargado.";
-					}
-		}
-
-	//////////////
+		require 'Validate_Artic.php';
 
 	return $errors;
 
 		} 
 		
-//////////////////////////////////////////////////////////////////////////////////////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
 function process_form(){
 	
@@ -523,12 +66,16 @@ function process_form(){
 	$_sec = $rowautor['Nombre']." ".$rowautor['Apellidos'];
 	//echo $rowautor['Nombre']." ".$rowautor['Apellidos']."</br>";
 	
-
 	/* TRATAMOS EL NOMBRE DE LAS IMAGENES */
 	global $carpetaimg;
 	$carpetaimg = "../Gch.Img.Art";
 
-	$extension1 = substr($_FILES['myimg1']['name'],-3);
+	global $extension1;
+	$extension1 = substr($_FILES['myimg1']['name'],-4);
+	$extension1 = strtolower($extension1);
+	global $extension1;
+	$extension1 = str_replace(".","",$extension1);
+
 	global $new_name1;
 	$new_name1 = $_POST['refart']."_01.".$extension1;
 
@@ -537,7 +84,11 @@ function process_form(){
 		$new_name2 = $_POST['refart']."_02.png";
 	}
 	else{
-	$extension2 = substr($_FILES['myimg2']['name'],-3);
+	global $extension2;
+	$extension2 = substr($_FILES['myimg2']['name'],-4);
+	$extension2 = strtolower($extension2);
+	global $extension2;
+	$extension2 = str_replace(".","",$extension2);
 	global $new_name2;
 	$new_name2 = $_POST['refart']."_02.".$extension2;
 	}
@@ -547,7 +98,11 @@ function process_form(){
 		$new_name3 = $_POST['refart']."_03.png";
 	}
 	else{
-	$extension3 = substr($_FILES['myimg3']['name'],-3);
+	global $extension3;
+	$extension3 = substr($_FILES['myimg3']['name'],-4);
+	$extension3 = strtolower($extension3);
+	global $extension3;
+	$extension3 = str_replace(".","",$extension3);
 	global $new_name3;
 	$new_name3 = $_POST['refart']."_03.".$extension3;
 	}
@@ -557,7 +112,11 @@ function process_form(){
 		$new_name4 = $_POST['refart']."_04.png";
 	}
 	else{
-	$extension4 = substr($_FILES['myimg4']['name'],-3);
+	global $extension4;
+	$extension4 = substr($_FILES['myimg4']['name'],-4);
+	$extension4 = strtolower($extension4);
+	global $extension4;
+	$extension4 = str_replace(".","",$extension4);
 	global $new_name4;
 	$new_name4 = $_POST['refart']."_04.".$extension4;
 	}
@@ -592,152 +151,90 @@ function process_form(){
 			</tr>
 												
 			<tr>
-				<td width=120px>
-					REFERENCIA
-				</td>
-				<td width=100px>"
-					.$_POST['refart'].
-				"</td>
+				<td width=120px>REFERENCIA</td>
+				<td width=100px>".$_POST['refart']."</td>
 				<td rowspan='5' align='center' width='120px'>
-			<img src='".$carpetaimg."/".$new_name1."' height='120px' width='90px' />
+			<img src='".$carpetaimg."/".$new_name1."'  width='90px' height='auto'/>
 				</td>
 			</tr>
 				
 			<tr>
-				<td>
-					TITULO
-				</td>
-				<td>"
-					.$_POST['titulo'].
-				"</td>
+				<td>TITULO</td>
+				<td>".$_POST['titulo']."</td>
 			</tr>				
 				
 			<tr>
-				<td>	
-					SUBTITULO
-				</td>
-				<td>"
-					.$_POST['subtitul'].
-				"</td>
+				<td>SUBTITULO</td>
+				<td>".$_POST['subtitul']."</td>
 			</tr>
 				
 			<tr>
-				<td>	
-					DATE IN
-				</td>
-				<td>"
-					.$_POST['datein'].
-				"</td>
+				<td>DATE IN</td>
+				<td>".$_POST['datein']."</td>
 			</tr>
 				
 			<tr>
-				<td>	
-					TIME IN
-				</td>
-				<td>"
-					.$_POST['timein'].
-				"</td>
+				<td>TIME IN</td>
+				<td>".$_POST['timein']."</td>
 			</tr>
 				
 			<tr>
-				<td>	
-					ISLA
-				</td>
-				<td colspan=2>"
-					.$_POST['isla']." / ".$islaname.
-				"</td>
+				<td>ISLA</td>
+				<td colspan=2>".$_POST['isla']." / ".$islaname."</td>
 			</tr>
 				
 			<tr>
 				<td>	
 					AYUNTAMIENTO
 				</td>
-				<td colspan=2>"
-					.$_POST['ayto']." / ".$aytoname.
-				"</td>
+				<td colspan=2>".$_POST['ayto']." / ".$aytoname."</td>
 			</tr>
 				
 			<tr>
-				<td>	
-					TIPO
-				</td>
-				<td colspan=2>"
-					.$_POST['tipo']." / ".$tipname.
-				"</td>
+				<td>TIPO</td>
+				<td colspan=2>".$_POST['tipo']." / ".$tipname."</td>
 			</tr>
 				
 			<tr>
-				<td>	
-					ESPECIALIDAD 1
-				</td>
-				<td colspan=2>"
-					.$_POST['espec1']." / ".$espec1name.
-				"</td>
+				<td>ESPECIALIDAD 1</td>
+				<td colspan=2>".$_POST['espec1']." / ".$espec1name."</td>
 			</tr>
 				
 			<tr>
-				<td>	
-					ESPECIALIDAD 2
-				</td>
-				<td colspan=2>"
-					.$_POST['espec2']." / ".$espec1name.
-				"</td>
+				<td>ESPECIALIDAD 2</td>
+				<td colspan=2>".$_POST['espec2']." / ".$espec1name."</td>
 			</tr>
 				
 			<tr>
-				<td>	
-					URL WEB
-				</td>
-				<td colspan=2>"
-					.$_POST['url'].
-				"</td>
+				<td>URL WEB</td>
+				<td colspan=2>".$_POST['url']."</td>
 			</tr>
 				
 			<tr>
-				<td>	
-					CALLE
-				</td>
-				<td colspan=2>"
-					.$_POST['calle'].
-				"</td>
+				<td>CALLE</td>
+				<td colspan=2>".$_POST['calle']."</td>
 			</tr>
 				
 			<tr>
-				<td>	
-					EMAIL
-				</td>
-				<td colspan=2>"
-					.$_POST['Email'].
-				"</td>
+				<td>EMAIL</td>
+				<td colspan=2>".$_POST['Email']."</td>
 			</tr>
 				
 			<tr>
-				<td>	
-					TELEFONO 1
-				</td>
-				<td colspan=2>"
-					.$_POST['Tlf1'].
-				"</td>
+				<td>TELEFONO 1</td>
+				<td colspan=2>".$_POST['Tlf1']."</td>
 			</tr>
 				
 			<tr>
-				<td>	
-					TELEFONO 2
-				</td>
-				<td colspan=2>"
-					.$_POST['Tlf2'].
-				"</td>
+				<td>TELEFONO 2</td>
+				<td colspan=2>".$_POST['Tlf2']."</td>
 			</tr>
 				
 			<tr>
-				<td colspan=3  align='center'>
-					DESCRIPCION
-				</td>
+				<td colspan=3  align='center'>DESCRIPCION</td>
 			</tr>
 			<tr>
-				<td colspan=3>"
-					.$_POST['coment'].
-				"</td>
+				<td colspan=3>".$_POST['coment']."</td>
 			</tr>
 			<tr>
 				<th colspan=3 class='BorderSup'>
@@ -746,93 +243,11 @@ function process_form(){
 			</tr>
 		</table>");
 			
-		/************* CREAMOS LAS IMAGENES DEL RESTAURANTE EN EL DIRECTORIO Gch.Img.Art ***************/
+	/************* CREAMOS LAS IMAGENES DEL RESTAURANTE EN EL DIRECTORIO Gch.Img.Art ***************/
 
-	/* GRABAMOS LA IMAGEN 1 */
-	if($_FILES['myimg1']['size'] == 0){
-				global $carpetaimg;
-				global $new_name1;
-				copy("../Gch.Img.Sys/untitled.png", $carpetaimg."/".$new_name1);
-	} else{	$safe_filename = trim(str_replace('/', '', $_FILES['myimg1']['name']));
-			$safe_filename = trim(str_replace('..', '', $safe_filename));
-			$nombre = $_FILES['myimg1']['name'];
-			$destination_file = $carpetaimg.'/'.$safe_filename;
-			if( file_exists( $carpetaimg.'/'.$nombre) ){
-					unlink($carpetaimg."/".$nombre);
-				//	print("* El archivo ".$nombre." ya existe, seleccione otra imagen.</br>");
-			} elseif (move_uploaded_file($_FILES['myimg1']['tmp_name'], $destination_file)){
-					global $carpetaimg;
-					global $new_name1;
-					$rename_filename = $carpetaimg."/".$new_name1;								
-					rename($destination_file, $rename_filename);
-					// print("El archivo se ha guardado en: ".$destination_file);
-					}
-			else {print("NO SE HA PODIDO GUARDAR EN ".$destination_file);}
-		}
+		require 'Inc_Crea_Img.php';
 
-	/* GRABAMOS LA IMAGEN 2 */
-	if($_FILES['myimg2']['size'] == 0){
-				global $carpetaimg;
-				global $new_name2;
-				copy("../Gch.Img.Sys/untitled.png", $carpetaimg."/".$new_name2);
-	} else {	$safe_filename = trim(str_replace('/', '', $_FILES['myimg2']['name']));
-				$safe_filename = trim(str_replace('..', '', $safe_filename));
-				$nombre = $_FILES['myimg2']['name'];
-				$destination_file = $carpetaimg.'/'.$safe_filename;
-			if( file_exists( $carpetaimg.'/'.$nombre) ){
-					unlink($carpetaimg."/".$nombre);
-				//	print("* El archivo ".$nombre." ya existe, seleccione otra imagen.</br>");
-			} elseif (move_uploaded_file($_FILES['myimg2']['tmp_name'], $destination_file)){
-					global $carpetaimg;
-					global $new_name2;
-					$rename_filename = $carpetaimg."/".$new_name2;								
-					rename($destination_file, $rename_filename);
-					// print("El archivo se ha guardado en: ".$destination_file);
-			} else {print("NO SE HA PODIDO GUARDAR EN ".$destination_file);}
-		}
-
-	/* GRABAMOS LA IMAGEN 3 */
-	if($_FILES['myimg3']['size'] == 0){
-				global $carpetaimg;
-				global $new_name3;
-				copy("../Gch.Img.Sys/untitled.png", $carpetaimg."/".$new_name3);
-	} else {$safe_filename = trim(str_replace('/', '', $_FILES['myimg3']['name']));
-			$safe_filename = trim(str_replace('..', '', $safe_filename));
-			$nombre = $_FILES['myimg3']['name'];
-			$destination_file = $carpetaimg.'/'.$safe_filename;
-			if( file_exists( $carpetaimg.'/'.$nombre) ){
-					unlink($carpetaimg."/".$nombre);
-				//	print("* El archivo ".$nombre." ya existe, seleccione otra imagen.</br>");
-			} elseif (move_uploaded_file($_FILES['myimg3']['tmp_name'], $destination_file)){
-					global $carpetaimg;
-					global $new_name3;
-					$rename_filename = $carpetaimg."/".$new_name3;								
-					rename($destination_file, $rename_filename);
-					// print("El archivo se ha guardado en: ".$destination_file);
-			} else {print("NO SE HA PODIDO GUARDAR EN ".$destination_file);}
-		}
-
-	/* GRABAMOS LA IMAGEN 4 */
-	if($_FILES['myimg4']['size'] == 0){
-				global $carpetaimg;
-				global $new_name4;
-				copy("../Gch.Img.Sys/untitled.png", $carpetaimg."/".$new_name4);
-	} else {	$safe_filename = trim(str_replace('/', '', $_FILES['myimg4']['name']));
-				$safe_filename = trim(str_replace('..', '', $safe_filename));
-				$nombre = $_FILES['myimg4']['name'];
-				$destination_file = $carpetaimg.'/'.$safe_filename;
-			if( file_exists( $carpetaimg.'/'.$nombre) ){
-					unlink($carpetaimg."/".$nombre);
-				//	print("* El archivo ".$nombre." ya existe, seleccione otra imagen.</br>");
-			} elseif (move_uploaded_file($_FILES['myimg4']['tmp_name'], $destination_file)){
-					
-					global $carpetaimg;
-					global $new_name4;
-					$rename_filename = $carpetaimg."/".$new_name4;								
-					rename($destination_file, $rename_filename);
-					// print("El archivo se ha guardado en: ".$destination_file);
-			} else {print("NO SE HA PODIDO GUARDAR EN ".$destination_file);}
-		}
+	/* FIN CREAMOS IMAGENES */
 
 	} 	// NO SE CUMPLE EL QUERY
 	else {print("* MODIFIQUE LA ENTRADA L.512: ".mysqli_error($db));
@@ -843,9 +258,12 @@ function process_form(){
 		
 	}	/* FINAL process_form(); */
 
-//////////////////////////////////////////////////////////////////////////////////////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
 function show_form($errors=''){
+
 	
 	if(isset($_POST['oculto1'])){
 		$defaults = $_POST;
@@ -855,33 +273,44 @@ function show_form($errors=''){
 		} 
 	elseif(isset($_POST['oculto'])){
 		$defaults = $_POST;
-		} else {
-				$defaults = array ( 'autor' => isset($_POST['autor']),  // refautor
-									'titulo' => '', // Nombre restaurante
-									'subtitul' => '', // Sub Titulo
-								   	//'refart' => @$_SESSION['refart'],  Referencia articulo
-								   	'coment' => '',
-									'valora' => isset($_POST['valora']),
-									'precio' => isset($_POST['precio']),
-									'myimg1' => isset($_POST['myimg1']),
-									'myimg2' => isset($_POST['myimg2']),
-									'myimg3' => isset($_POST['myimg3']),
-									'myimg4' => isset($_POST['myimg4']),
-									'isla' => isset($_POST['isla']),  // refisla
-									'ayto' => isset($_POST['ayto']),  // refayto
-									'tipo' => isset($_POST['tipo']),
-									'espec1' => isset($_POST['espec1']),
-									'espec2' => isset($_POST['espec2']),									
-									'url' => isset($_POST['url']),
-									'map' => isset($_POST['map']),
-									'mapiframe' => isset($_POST['mapiframe']),
-									'latitud' => isset($_POST['latitud']),
-									'longitud' => isset($_POST['longitud']),
-									'calle' => isset($_POST['calle']),
-									'Email' => 'Solo letras minúsculas',
-									'Tlf1' => '',
-									'Tlf2' => '');
-								   					}
+		 
+	} else { $defaults = array ( 'autor' => isset($_POST['autor']),  // refautor
+								 'titulo' => '', // Nombre restaurante
+								 'subtitul' => '', // Sub Titulo
+								 //'refart' => @$_SESSION['refart'],  Referencia articulo
+								 'coment' => '',
+								 'valora' => isset($_POST['valora']),
+								 'precio' => isset($_POST['precio']),
+								 'myimg1' => isset($_POST['myimg1']),
+								 'myimg2' => isset($_POST['myimg2']),
+								 'myimg3' => isset($_POST['myimg3']),
+								 'myimg4' => isset($_POST['myimg4']),
+								 'isla' => isset($_POST['isla']),  // refisla
+								 'ayto' => isset($_POST['ayto']),  // refayto
+								 'tipo' => isset($_POST['tipo']),
+								 'espec1' => isset($_POST['espec1']),
+								 'espec2' => isset($_POST['espec2']),									
+								 'url' => isset($_POST['url']),
+								 'map' => isset($_POST['map']),
+								 'mapiframe' => isset($_POST['mapiframe']),
+								 'latitud' => isset($_POST['latitud']),
+								 'longitud' => isset($_POST['longitud']),
+								 'calle' => isset($_POST['calle']),
+								 'Email' => 'Solo letras minúsculas',
+								 'Tlf1' => '',
+								 'Tlf2' => '');
+
+			$ctemp = "../Gch.Temp";
+			if(file_exists($ctemp)){$dir1 = $ctemp."/";
+									$handle1 = opendir($dir1);
+									while ($file1 = readdir($handle1))
+											{if (is_file($dir1.$file1))
+												{unlink($dir1.$file1);}
+												}	
+								} else {}
+
+			}
+													   
 		$precio = array ('' => 'RELACIÓN EUROS / SERVICIO',
 						 '1' => '1 de 5 MUY MALOS',
 						 '25' => '2 de 5 MALOS',
@@ -989,7 +418,7 @@ function show_form($errors=''){
 								</table>");
 												}	
 
-//////////////////////////
+			////////////////////		**********  		////////////////////
 
 		if ($_POST['isla'] == ''){print("
 								<table align='center' style=\"margin-top:20px;margin-bottom:20px\">
@@ -1424,7 +853,9 @@ function show_form($errors=''){
 	
 	}	
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 /*
 function accion_Log(){
 
@@ -1458,7 +889,10 @@ $text = "- PRODUCTO CREAR ".$ActionTime.". ".$secc.".\n\t Pro Name: ".$_POST['su
 
 	}
 */
-/////////////////////////////////////////////////////////////////////////////////////////////////
+
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 	
 	function master_index(){
 		
@@ -1466,7 +900,9 @@ $text = "- PRODUCTO CREAR ".$ActionTime.". ".$secc.".\n\t Pro Name: ".$_POST['su
 		
 				} 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 	
 	function desconexion(){
 
@@ -1482,7 +918,9 @@ $text = "- PRODUCTO CREAR ".$ActionTime.". ".$secc.".\n\t Pro Name: ".$_POST['su
 	
 			} 
 	
-/////////////////////////////////////////////////////////////////////////////////////////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
 	require '../Gch.Inclu/Admin_Inclu_02.php';
 

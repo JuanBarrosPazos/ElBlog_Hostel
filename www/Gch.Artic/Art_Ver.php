@@ -107,7 +107,7 @@ function process_form(){
 	
 	// DEFINO EL NUMERO DE ARTICULOS POR PÁGINA
 	global $nitem;
-	$nitem = 3;
+	$nitem = 5;
 	
 	global $pageb;
 
@@ -331,7 +331,7 @@ function ver_todo(){
 	
 	// DEFINO EL NUMERO DE ARTICULOS POR PÁGINA
 	global $nitem;
-	$nitem = 3;
+	$nitem = 5;
 	
 	global $page;
 

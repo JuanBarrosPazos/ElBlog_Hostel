@@ -37,22 +37,27 @@ function validate_form(){
 
 	$errors = array();
 
-	$limite = 600 * 1024;
+	$limite = 900 * 1024;
 	
-	$ext_permitidas = array('jpg','JPG','gif','GIF','png','PNG');
-	
-	$extension = substr($_FILES['myimg']['name'],-3);
+	$ext_permitidas = array('.jpg','.JPG','.gif','.GIF','.png','.PNG', 'jpeg', 'JPEG');
+	$extension = substr($_FILES['myimg']['name'],-4);
 	// print($extension);
 	$ext_correcta = in_array($extension, $ext_permitidas);
+
+	global $extension1;
+	$extension1 = strtolower($extension);
+	$extension1 = str_replace(".","",$extension1);
+	global $ctemp;
+	$ctemp = "../Gch.Temp";
 
 	// $tipo_correcto = preg_match('/^image\/(gif|png|jpg|bmp)$/', $_FILES['myimg']['type']);
 
 		if($_FILES['myimg']['size'] == 0){
-			$errors [] = "Ha de seleccionar una fotograf&iacute;a.";
+			$errors [] = "SELECCIONE UNA FOTOGRAFÍA";
 		}
 		 
 		elseif(!$ext_correcta){
-			$errors [] = "La extension no esta admitida: ".$_FILES['myimg']['name'];
+			$errors [] = "EXTENSION NO ADMITIDA ".$_FILES['myimg']['name'];
 			}
 
 	/*	elseif(!$tipo_correcto){
@@ -62,15 +67,32 @@ function validate_form(){
 	
 	elseif ($_FILES['myimg']['size'] > $limite){
 	$tamanho = $_FILES['myimg']['size'] / 1024;
-	$errors [] = "El archivo".$_FILES['myimg']['name']." es mayor de 500 KBytes. ".$tamanho." KB";
+	$errors [] = "IMAGEN ".$_FILES['myimg']['name']." MAYOR DE 90 KBytes. ".$tamanho." KB";
 			}
 		
+		elseif ($_FILES['myimg']['size'] <= $limite){
+			//copy($_FILES['myimg']['tmp_name'], $ctemp."/ini1v.".$extension1); 
+			global $ancho;
+			global $alto;
+			//list($ancho, $alto, $tipo, $atributos) = getimagesize($ctemp."/ini1v.".$extension1);
+			list($ancho, $alto, $tipo, $atributos) = getimagesize($_FILES['myimg']['name']);
+
+			if($ancho < 400){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ANCHURA MENOR DE 400 ".$ancho;
+			}
+			elseif(($ancho > 900)&&($alto < 400)){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ALTURA MENOR DE 400 ".$alto;
+			}
+			elseif(($ancho > 400)&&($alto < 400)){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ALTURA MENOR DE 400 ".$alto;
+			}
+		}
 			elseif ($_FILES['myimg']['error'] == UPLOAD_ERR_PARTIAL){
-				$errors [] = "La carga del archivo se ha interrumpido.";
+				$errors [] = "LA CARGA DEL ARCHIVO SE HA INTERRUMPIDO";
 				}
 				
 				elseif ($_FILES['myimg']['error'] == UPLOAD_ERR_NO_FILE){
-					$errors [] = "Es archivo no se ha cargado.";
+					$errors [] = "EL ARCHIVO NO SE HA CARGADO";
 					}
 					
 	return $errors;
@@ -83,47 +105,36 @@ function modifica_form(){
 	
 		global $db;
 		global $db_name;
+		
+		global $redir;
+		$redir = "<script type='text/javascript'>
+						function redir(){
+						window.location.href='Art_Modificar_img.php?cero=1';
+					}
+					setTimeout('redir()',1000);
+					</script>";
+
+		// RENOMBRAR ARCHIVO
+			global $extension;
+			$extension = substr($_FILES['myimg']['name'],-4);
+			$extension = strtolower($extension);
+			global $extension;
+			$extension = str_replace(".","",$extension);
+			// print($extension);
+			date('H:i:s');
+			date('Y_m_d');
+			$dt = date('is');
+			global $new_name;
+			$new_name = $_SESSION['refart']."_".$dt.".".$extension;
+
+			global $ruta;
+			$ruta = "../Gch.Img.Art/";
+			$_SESSION['ruta'] = $ruta;
+
 		global $imgcamp;
-
-		global $ruta;
-		$ruta = "../Gch.Img.Art/";
-		$_SESSION['ruta'] = $ruta;
-
-		$safe_filename = trim(str_replace('/', '', $_FILES['myimg']['name']));
-		$safe_filename = trim(str_replace('..', '', $safe_filename));
-
-		$nombre = $_FILES['myimg']['name'];
-
-		global $destination_file;
-		$destination_file = $ruta.$safe_filename;
-		
-	    if( file_exists($ruta.$nombre) ){
-			unlink($ruta.$nombre);
-			}
-			
-		elseif (move_uploaded_file($_FILES['myimg']['tmp_name'], $destination_file)){
-
-		// Eliminar el archivo antiguo untitled.png
-		if($_SESSION['myimg'] != 'untitled.png' ){
-		unlink($ruta.$_SESSION['myimg']);
-									}
-		// Renombrar el archivo:
-		$extension = substr($_FILES['myimg']['name'],-3);
-		// print($extension);
-		date('H:i:s');
-		date('Y_m_d');
-		$dt = date('is');
-		global $new_name;
-		$new_name = $_SESSION['refart']."_".$dt.".".$extension;
-		$rename_filename = $ruta.$new_name;								
-		rename($destination_file, $rename_filename);
-		
-		global $db;
-		global $db_name;
-
-		global $refart;
 		$imgcamp = $_SESSION['imgcamp'];
 		$imgcamp = "`".$imgcamp."`";
+		global $refart;
 		$refart = $_SESSION['refart'];
 		
 	global $vname;
@@ -134,26 +145,15 @@ $sqla = "UPDATE `$db_name`.$vname SET $imgcamp = '$new_name'  WHERE $vname.`refa
 		
 		if(mysqli_query($db, $sqla)){
 
-			$_SESSION['myimg'] = $new_name;
-			global $redir;
-			$redir = "<script type='text/javascript'>
-							function redir(){
-							window.location.href='Art_Modificar_img.php?cero=1';
-						}
-						setTimeout('redir()',1000);
-						</script>";
-			print ($redir);
+			require 'Inc_Modificar_Img.php';
 
-		}
-		
-		else { print("* ERROR ".mysqli_error($db));
-				show_form ();
+		} // FIN SI SE CUMPLE EL QUERY
+
+		else { 	print("* ERROR ".mysqli_error($db));
+			   	show_form();
 				global $texerror;
 				$texerror = "\n\t ".mysqli_error($db);
-					}
-		}
-						
-		else {print("NO SE HA PODIDO GUARDAR EN: ".$ruta.$new_name);}
+				}
 
 	} 
 	
@@ -357,7 +357,16 @@ function show_form($errors=''){
 									'ref' => '',										
 									'myimg' => '',
 											);
-								   		}
+
+		$ctemp = "../Gch.Temp";
+		if(file_exists($ctemp)){$dir1 = $ctemp."/";
+								$handle1 = opendir($dir1);
+								while ($file1 = readdir($handle1))
+										{if (is_file($dir1.$file1))
+											{unlink($dir1.$file1);}
+											}	
+							} else {}
+		}
 								   
 	elseif(($_POST['mimg1'])||($_POST['mimg2'])||($_POST['mimg3'])||($_POST['mimg4'])){
 				$defaults = array ( 'id' => $_SESSION['miid'],
