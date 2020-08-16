@@ -100,9 +100,9 @@ else {	$defaults = array (	'isla' => @$_SESSION['isla'],
 				
 <form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
 						
-	<input name='isla' type='hidden' value='".$defaults['isla']."' />
+	<input type='hidden' name='isla' value='".$defaults['isla']."' />
 	
-	<input type='submit' value='APLICAR FILTRO' />
+	<input type='submit' value='APLICAR FILTROS' />
 	<input type='hidden' name='oculto' value=1 />
 
 		<select name='ayto'>

@@ -435,7 +435,8 @@ mark {
 .img-fluid {
 /*  max-width: 100%;
   height: auto;*/
-  width: 100%;
+  width: auto;
+  min-width: 170px;
   height: 100%;
 }
 .img-thumbnail {

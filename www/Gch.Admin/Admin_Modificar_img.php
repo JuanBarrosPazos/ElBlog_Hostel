@@ -74,6 +74,25 @@ function validate_form(){
 		global $img2;
 		$img2 = 'untitled.png';
 			}
+			
+		elseif ($_FILES['myimg']['size'] <= $limite){
+			global $ancho;
+			global $alto;
+			list($ancho, $alto, $tipo, $atributos) = getimagesize($_FILES['myimg']['name']);
+
+			if($ancho < 200){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ANCHURA MENOR DE 200 ".$ancho;
+			}
+			elseif($ancho > 400){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ANCHURA MAYOR DE 400 ".$ancho;
+			}
+			elseif(($ancho <= 400)&&($alto < 200)){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ALTURA MENOR DE 200 ".$alto;
+			}
+			elseif(($ancho <= 400)&&($alto > 500)){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ALTURA MAYOR DE 500 ".$alto;
+			}
+		}
 		
 			elseif ($_FILES['myimg']['error'] == UPLOAD_ERR_PARTIAL){
 				$errors [] = "La carga del archivo se ha interrumpido.";

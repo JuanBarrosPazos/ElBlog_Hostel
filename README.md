@@ -7,6 +7,12 @@
 
 ----
 
+#### 2020.08.16
+
+* SE RECOMIENDA SOBREESCRIBIR: css, Gch.Admin, Gch.Artic, Gch.Inclu, Gch.Syst, Gch.Users, Gch.Www, vendor/bootstrap/css
+
+----
+
 ### 2020.08.15
 
 * SE REDIMENSIONAN LAS IMAGENES EN Gch.Artic/Inc_Crea_Img.php Y Gch.Artic/Inc_Modificar_Img.php SI SON ANCHO > 900 O ALTO > 400 

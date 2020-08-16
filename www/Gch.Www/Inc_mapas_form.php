@@ -270,6 +270,9 @@ function show_form(){
 <form name='form_datos' action='$_SERVER[PHP_SELF]' method='POST'>
 						
 	<input type='hidden' name='isla' value='".$_SESSION['isla']."' />
+	
+	<input type='submit' value='APLICAR FILTROS' />
+	<input type='hidden' name='oculto' value=1 />
 
 		<select name='ayto'>
 		<option value=''>AYUNTAMIENTO</option>");
@@ -340,8 +343,6 @@ function show_form(){
 
 	print ("</select>
 
-				<input type='submit' value='APLICAR FILTRO' />
-				<input type='hidden' name='oculto' value=1 />
 		</form>
 		</div>
 		<div style='clear:both'></div>"); 

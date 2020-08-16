@@ -133,7 +133,7 @@ function process_form(){
 				</tr>
 			</table>"; 
 
-	if ($_SESSION['uNivel'] == 'adminu') {
+	if (($_SESSION['uNivel'] == 'adminu')||($_SESSION['uNivel'] == 'useru')) {
 		
 	$sqlc = "UPDATE `$db_name`.`gch_user` SET `Nombre` = '$_POST[Nombre]', `Apellidos` = '$_POST[Apellidos]', `Email` = '$_POST[Email]', `Usuario` = '$_POST[Usuario]', `Password` = '$_POST[Password]', `Direccion` = '$_POST[Direccion]', `Tlf1` = '$_POST[Tlf1]' WHERE `gch_user`.`id` = '$_POST[id]' LIMIT 1 ";
 
@@ -153,25 +153,8 @@ function process_form(){
 						$texerror = "\n\t ".mysqli_error($db);
 							}
 		
-					} // FIN CONDICIONAL ADMIN
-	
-	elseif ($_SESSION['uNivel'] == 'useru'){
-		
-	$sqlc = "UPDATE `$db_name`.`gch_user` SET `Nombre` = '$_POST[Nombre]', `Apellidos` = '$_POST[Apellidos]', `Email` = '$_POST[Email]', `Direccion` = '$_POST[Direccion]', `Tlf1` = '$_POST[Tlf1]' WHERE `gch_user`.`id` = '$_POST[id]' LIMIT 1 ";
-
-	if(mysqli_query($db, $sqlc)){ global $tabla;
-								  print( $tabla );
-				} else {
-				print("<font color='#FF0000'>
-						* MODIFIQUE LA ENTRADA 241: </font>
-						</br>
-						&nbsp;&nbsp;&nbsp;".mysqli_error($db))."
-						</br>";
-						show_form ();
-						global $texerror;
-						$texerror = "\n\t ".mysqli_error($db);
-							}
-					} // FIN CONDICIONAL USER / PLUS
+		} // FIN CONDICIONAL ADMIN
+		else { }
 	
  	} // FIN FUNCTION PROCESS_FORM
 

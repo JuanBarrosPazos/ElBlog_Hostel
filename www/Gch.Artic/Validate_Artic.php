@@ -361,11 +361,6 @@
 			if($ancho < 400){
 				$errors [] = "IMAGEN ".$_FILES['myimg1']['name']." ANCHURA MENOR DE 400 ".$ancho;
 			}
-			/*
-			elseif(($ancho > 900)&&($alto < 400)){
-				$errors [] = "IMAGEN ".$_FILES['myimg1']['name']." ALTURA MENOR DE 400 ".$alto;
-			}
-			*/
 			elseif(($ancho > 400)&&($alto < 400)){
 				$errors [] = "IMAGEN ".$_FILES['myimg1']['name']." ALTURA MENOR DE 400 ".$alto;
 			}
@@ -397,11 +392,6 @@
 		if(!$ext_correcta){
 			$errors [] = "EXTENSIÓN NO ADMITIDA: ".$_FILES['myimg2']['name'];
 			}
-	/*
-		elseif(!$tipo_correcto){
-			$errors [] = "Este tipo de archivo no esta admitido: ".$_FILES['myimg2']['name'];
-			}
-	*/
 		elseif ($_FILES['myimg2']['size'] > $limite){
 		$tamanho = $_FILES['myimg2']['size'] / 1024;
 		$errors [] = "IMAGEN ".$_FILES['myimg2']['name']." MAYOR DE 90 KBytes. ".$tamanho." KB";
@@ -453,11 +443,6 @@
 		if(!$ext_correcta){
 			$errors [] = "EXTENSIÓN NO ADMITIDA: ".$_FILES['myimg3']['name'];
 			}
-	/*
-		elseif(!$tipo_correcto){
-			$errors [] = "Este tipo de archivo no esta admitido: ".$_FILES['myimg3']['name'];
-			}
-	*/
 		elseif ($_FILES['myimg3']['size'] > $limite){
 		$tamanho = $_FILES['myimg3']['size'] / 1024;
 		$errors [] = "IMAGEN ".$_FILES['myimg3']['name']." MAYOR DE 90 KBytes. ".$tamanho." KB";
@@ -528,11 +513,6 @@
 			if($ancho < 400){
 				$errors [] = "IMAGEN ".$_FILES['myimg4']['name']." ANCHURA MENOR DE 400 ".$ancho;
 			}
-			/*
-			elseif(($ancho > 900)&&($alto < 400)){
-				$errors [] = "IMAGEN ".$_FILES['myimg4']['name']." ALTURA MENOR DE 400 ".$alto;
-			}
-			*/
 			elseif(($ancho > 400)&&($alto < 400)){
 				$errors [] = "IMAGEN ".$_FILES['myimg4']['name']." ALTURA MENOR DE 400 ".$alto;
 			}

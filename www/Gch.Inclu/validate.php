@@ -18,7 +18,7 @@ $errors = array();
 
 	if($_POST['modifica']){
 		if(strlen(trim ($_POST['myimg'])) == 0){
-			$errors [] = "Ha de seleccionar un archivo.";
+			$errors [] = "SELECCIONE UNA IMAGEN";
 			global $img;
 			$img = $_SESSION['myimgcl'];
 		}

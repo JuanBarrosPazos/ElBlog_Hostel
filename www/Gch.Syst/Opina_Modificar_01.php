@@ -104,7 +104,7 @@ function ver_del_opiniones(){
 		
 		// DEFINO EL NUMERO DE ARTICULOS POR PÁGINA
 		global $nitem;
-		$nitem = 4;
+		$nitem = 5;
 		
 		global $pagedel;
 	
@@ -457,7 +457,7 @@ function process_form(){
 	
 	// DEFINO EL NUMERO DE ARTICULOS POR PÁGINA
 	global $nitem;
-	$nitem = 3;
+	$nitem = 5;
 	
 	global $pageb;
 
@@ -683,7 +683,7 @@ function ver_todo(){
 	
 	// DEFINO EL NUMERO DE ARTICULOS POR PÁGINA
 	global $nitem;
-	$nitem = 3;
+	$nitem = 5;
 	
 	global $page;
 
@@ -883,7 +883,7 @@ function ver_modera(){
 	
 	// DEFINO EL NUMERO DE ARTICULOS POR PÁGINA
 	global $nitem;
-	$nitem = 3;
+	$nitem = 5;
 	
 	global $pagem;
 

@@ -59,7 +59,7 @@ function ver_todo(){
 	
 	// DEFINO EL NUMERO DE ARTICULOS POR PÁGINA
 	global $nitem;
-	$nitem = 3;
+	$nitem = 5;
 	
 	global $page;
 
@@ -90,7 +90,6 @@ function ver_todo(){
     //pongo el n�mero de registros total, el tama�o de p�gina y la p�gina que se muestra
     echo '<h7>* OPINIONES: '.$nres.' de '.$num_total_rows.' * P&aacute;gina '.$page.' de ' .$total_pages.'.</h7>';
 
-
 	global $limit;
 	$limit = " LIMIT ".$start.", ".$nitem;
 
@@ -106,32 +105,32 @@ function ver_todo(){
 		} else {
 			if(mysqli_num_rows($qb)== 0){
 				print ("<table align='center'>
-							<tr>
-								<td colspan=3 class='BorderInf' align='center'>
+					<tr>
+						<td colspan=3 class='BorderInf' align='center'>
 							RESTAURANTE: ".$_SESSION['titopina']."
-								</td>
-							</tr>
-							<tr>
-								<td colspan=3 class='BorderInf' align='center'>
+						</td>
+					</tr>
+					<tr>
+						<td colspan=3 class='BorderInf' align='center'>
 							".$_SESSION['islaopina']." || ".$_SESSION['aytoopina']."
-								</td>
-							</tr>
-							<tr>
-								<td align='center'>
-									<font color='#FF0000'>
-										NO HAY DATOS
-									</font>
-								</td>
-							</tr>
-							<tr>
-						<form name='closewindow' action='$_SERVER[PHP_SELF]' onsubmit=\"window.close()\">
-								<td colspan=3 class='BorderSup' valign='middle' align='center'>
-							<input type='submit' value='CERRAR VENTANA' />
-							<input type='hidden' name='closew' value=1 />
-								</td>
-						</form>
-							</tr>
-					</table>");
+						</td>
+					</tr>
+					<tr>
+						<td align='center'>
+							<font color='#FF0000'>
+								NO HAY DATOS
+							</font>
+						</td>
+					</tr>
+					<tr>
+							<form name='closewindow' action='$_SERVER[PHP_SELF]' onsubmit=\"window.close()\">
+						<td colspan=3 class='BorderSup' valign='middle' align='center'>
+								<input type='submit' value='CERRAR VENTANA' />
+								<input type='hidden' name='closew' value=1 />
+						</td>
+							</form>
+					</tr>
+				</table>");
 					global $redir;
 					// 600000 microsegundos 10 minutos
 					// 60000 microsegundos 1 minuto
@@ -143,35 +142,40 @@ function ver_todo(){
 							</script>";
 					print ($redir);
 									
-				} else { 	print ("<table align='center'>
-									<tr>
-										<td colspan=3 class='BorderInf' align='center'>
+				} else { 	
+					print ("<table align='center'>
+								<tr>
+									<td colspan=4 class='BorderInf' align='center'>
 							OPINIONES MODERADAS: ".$nres." de ".$num_total_rows."
-										</td>
-									</tr>
-									<tr>
-										<td colspan=3 class='BorderInf' align='center'>
+									</td>
+								</tr>
+								<tr>
+									<td colspan=4 class='BorderInf' align='center'>
 							RESTAURANTE: ".$_SESSION['titopina']."
-										</td>
-									</tr>
-									<tr>
-										<td colspan=3 class='BorderInf' align='center'>
+									</td>
+								</tr>
+								<tr>
+									<td colspan=4 class='BorderInf' align='center'>
 							".$_SESSION['islaopina']." || ".$_SESSION['aytoopina']."
-										</td>
-									</tr>
-									<tr>
-										<td class='BorderInfDch' align='center'>
-											FECHA
-										</td>
+									</td>
+								</tr>
+								<tr>
+									<td class='BorderInfDch' align='center'>
+										FECHA
+									</td>
 										
-										<td class='BorderInfDch' align='center'>
-											VALOR
-										</td>
+									<td class='BorderInfDch' align='center'>
+										LOCAL
+									</td>
 																				
-										<td class='BorderInf' align='center'>
-											OPINIÓN
-										</td>
-									</tr>");
+									<td class='BorderInfDch' align='center'>
+										EUROS
+									</td>
+																				
+									<td class='BorderInf' align='center'>
+										OPINIÓN
+									</td>
+								</tr>");
 			
 			
 	while($rowb = mysqli_fetch_assoc($qb)){
@@ -186,6 +190,10 @@ function ver_todo(){
 
 						<td class='BorderInfDch'>
 								".$rowb['valora']." de 5
+						</td>
+
+						<td class='BorderInfDch'>
+								".$rowb['precio']." de 5
 						</td>
 
 						<td class='BorderInfDch' align='left'>

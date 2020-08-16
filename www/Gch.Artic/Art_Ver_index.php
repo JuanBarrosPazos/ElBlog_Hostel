@@ -291,7 +291,7 @@ function process_form(){
 		print ("
 			<li  class='".$estilo[$estiloin]."'> <!-- Inicio Li contenedor -->
 			<div class='timeline-image'>
-			<img class='rounded-circle img-fluid' src='Gch.Img.Art/".$rowb['myimg1']."' alt=''>
+			<img class='<!--rounded-circle--> img-fluid' src='Gch.Img.Art/".$rowb['myimg1']."' alt=''>
 			</div>
 			<div class='timeline-panel'>
 			<div class='timeline-heading'>
@@ -366,7 +366,8 @@ function show_form(){
 	global $defaults;
 
 	/* SELECCIONO LA ISLA*/
-	if(isset($_POST['oculto1'])){	$_SESSION['isla'] = $_POST['isla'];
+	if((isset($_POST['oculto1']))||(isset($_GET['inicio']))){	
+									$_SESSION['isla'] = $_POST['isla'];
 									unset($_SESSION['ayto']);
 									unset($_SESSION['tipo']);
 									unset($_SESSION['espec1']);
@@ -454,6 +455,9 @@ function show_form(){
 						
 	<input type='hidden' name='isla' value='".$_SESSION['isla']."' />
 
+	<input type='submit' value='APLICAR FILTROS' />
+	<input type='hidden' name='oculto' value=1 />
+
 	<input type='text' name='nombre' size=24 maxlength=22 pattern=\"[a-zA-Z0-9\s]{2,20}\" placeholder=\"&nbsp;&nbsp;OPCION POR NOMBRE\" value='".@$_SESSION['nombre']."' autofocus />
 
 		<select name='ayto'>
@@ -535,8 +539,6 @@ function show_form(){
 						}
 	print ("</select>
 
-				<input type='submit' value='APLICAR FILTRO' />
-				<input type='hidden' name='oculto' value=1 />
 		</form>
 		</div>
 		<div style='clear:both'></div>"); 
@@ -665,7 +667,7 @@ function ver_todo(){
 	print ("
 	<li class='".$estilo[$estiloin]."'> <!-- Inicio Li contenedor -->
 			<div class='timeline-image'>
-			<img class='rounded-circle img-fluid' src='Gch.Img.Art/".$rowb['myimg1']."' alt=''>
+			<img class='<!--rounded-circle--> img-fluid' src='Gch.Img.Art/".$rowb['myimg1']."' alt=''>
 			</div>
 
 		<div class='timeline-panel'>

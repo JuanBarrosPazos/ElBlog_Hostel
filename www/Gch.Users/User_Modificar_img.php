@@ -44,39 +44,58 @@ function validate_form(){
 	
 	$errors = array();
 
-	$limite = 500 * 1024;
+	$limite = 600 * 1024;
 	
 	$ext_permitidas = array('jpg','JPG','gif','GIF','png','PNG');
 	$extension = substr($_FILES['myimg']['name'],-3);
 	$ext_correcta = in_array($extension, $ext_permitidas);
 
 		if($_FILES['myimg']['size'] == 0){
-			$errors [] = "Ha de seleccionar una fotograf&iacute;a.";
+			$errors [] = "SELECCIONE UNA IMAGEN";
 			global $img2;
 			$img2 = 'untitled.png';
 		}
 		 
 		elseif(!$ext_correcta){
-			$errors [] = "La extension no esta admitida: ".$_FILES['myimg']['name'];
+			$errors [] = "EXTENSION NO ADMITIDA ".$_FILES['myimg']['name'];
 			global $img2;
 			$img2 = 'untitled.png';
 			}
 
 		elseif ($_FILES['myimg']['size'] > $limite){
 		$tamanho = $_FILES['myimg']['size'] / 1024;
-		$errors [] = "El archivo".$_FILES['myimg']['name']." es mayor de 500 KBytes. ".$tamanho." KB";
+		$errors [] = "IMAGEN ".$_FILES['myimg']['name']." MAYOR DE 60 KBytes. ".$tamanho." KB";
 		global $img2;
 		$img2 = 'untitled.png';
 			}
-		
+
+		elseif ($_FILES['myimg']['size'] <= $limite){
+			global $ancho;
+			global $alto;
+			list($ancho, $alto, $tipo, $atributos) = getimagesize($_FILES['myimg']['name']);
+
+			if($ancho < 200){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ANCHURA MENOR DE 200 ".$ancho;
+			}
+			elseif($ancho > 400){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ANCHURA MAYOR DE 400 ".$ancho;
+			}
+			elseif(($ancho <= 400)&&($alto < 200)){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ALTURA MENOR DE 200 ".$alto;
+			}
+			elseif(($ancho <= 400)&&($alto > 500)){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ALTURA MAYOR DE 500 ".$alto;
+			}
+		}
+
 			elseif ($_FILES['myimg']['error'] == UPLOAD_ERR_PARTIAL){
-				$errors [] = "La carga del archivo se ha interrumpido.";
+				$errors [] = "LA CARGA DEL ARCHIVO SE HA INTERRUMPIDO";
 				global $img2;
 				$img2 = 'untitled.png';
 				}
 				
 				elseif ($_FILES['myimg']['error'] == UPLOAD_ERR_NO_FILE){
-					$errors [] = "Es archivo no se ha cargado.";
+					$errors [] = "EL ARCHIVO NO SE HA CARGADO";
 					global $img2;
 					$img2 = 'untitled.png';
 					}

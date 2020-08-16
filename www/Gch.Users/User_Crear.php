@@ -110,87 +110,51 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 				</tr>
 								
 				<tr>
-					<td width=140px>
-						Nombre:
-					</td>
-					<td width=180px>"
-						.$_POST['Nombre'].
-					"</td>
+					<td width=140px>NOMBBRE</td>
+					<td width=180px>".$_POST['Nombre']."</td>
 					<td rowspan='5' align='center'>
 				<img src='".$carpetaimg."/".$new_name."' height='120px' width='90px' />
 					</td>
 				</tr>
 				
 				<tr>
-					<td>
-						Apellidos:
-					</td>
-					<td>"
-						.$_POST['Apellidos'].
-					"</td>
+					<td>APELLIDO</td>
+					<td>".$_POST['Apellidos']."</td>
 				</tr>				
 				
 				<tr>
-					<td>
-						Mail:
-					</td>
-					<td colspan='2'>"
-						.$_POST['Email'].
-					"</td>
+					<td>MAIL</td>
+					<td colspan='2'>".$_POST['Email']."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						Tipo Usuario
-					</td>
-					<td colspan='2'>"
-						.$_POST['Nivel'].
-					"</td>
+					<td>NIVEL</td>
+					<td colspan='2'>".$_POST['Nivel']."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						Referencia Usuario
-					</td>
-					<td colspan='2'>"
-						.$rf.
-					"</td>
+					<td>REFERENCIA</td>
+					<td colspan='2'>".$rf."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						Usuario:
-					</td>
-					<td colspan='2'>"
-						.$_POST['Usuario'].
-					"</td>
+					<td>USUARIO:</td>
+					<td colspan='2'>".$_POST['Usuario']."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						Password:
-					</td>
-					<td colspan='2'>"
-						.$_POST['Password'].
-					"</td>
+					<td>PASSWORD</td>
+					<td colspan='2'>".$_POST['Password']."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						Pais:
-					</td>
-					<td colspan='2'>"
-						.$_POST['Direccion'].
-					"</td>
+					<td>DIRECCION</td>
+					<td colspan='2'>".$_POST['Direccion']."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						Teléfono 1:
-					</td>
-					<td colspan='2'>"
-						.$_POST['Tlf1'].
-					"</td>
+					<td>TELEFONO</td>
+					<td colspan='2'>".$_POST['Tlf1']."</td>
 				</tr>
 				
 				<tr>
@@ -297,7 +261,7 @@ function show_form($errors=''){
 			</div>
 
 			<div>
-	<input type='text' name='Email' size=34 maxlength=50 value='".$defaults['Email']."' placeholder='EMAIL LOWER TEXT'/>
+	<input type='text' name='Email' size=31 maxlength=50 value='".$defaults['Email']."' placeholder='EMAIL LOWER TEXT'/>
 			</div>
 				
 	<input type='hidden' name='Nivel' value='".$defaults['Nivel']."' />
@@ -319,7 +283,7 @@ function show_form($errors=''){
 			</div>
 
 			<div>
-	<input type='text' name='Direccion' size=34 maxlength=60 value='".$defaults['Direccion']."' placeholder='ADRESS'/>
+	<input type='text' name='Direccion' size=31 maxlength=60 value='".$defaults['Direccion']."' placeholder='ADRESS'/>
 			</div>
 				
 			<div>
