@@ -6,6 +6,7 @@ require 'misdatos.php';
 	
 <head>
 	
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="content-type" content="text/html" charset="<?php print($meta_type_charset);?>" />
 <meta http-equiv="Content-Language" content="<?php print($meta_lang_cotent2);?>">
 <meta name="Language" content="<?php print($meta_lang_cotent);?>">
@@ -76,8 +77,8 @@ require 'misdatos.php';
 	
 <body topmargin="0" onload="hora()">
 
+<div id="Conte">
 	
-	<div id="Conte">
   <div id="head"> 
   			<span style="font-size:18px">
   							<?php print(strtoupper($head_titulo));?>
@@ -100,8 +101,6 @@ require 'misdatos.php';
     
 	</div>
 			  <div style="clear:both"></div>
-
-  
 
   <div id="Caja2Admin">
 

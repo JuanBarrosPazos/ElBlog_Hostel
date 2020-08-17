@@ -477,9 +477,9 @@ function show_form($errors=''){
 				</table>");
 		}
 	
-	print("<table align='center' style=\"margin-top:2px; margin-bottom:2px\" >
+	print("<table align='center' style=\"margin-top:2px; margin-bottom:2px; width=100%;\" >
 				<tr>
-					<th colspan=2 width=100% valign=\"bottom\" class='BorderInf'>
+					<th colspan=2 valign=\"bottom\" class='BorderInf'>
 						SUS DATOS DE ACCESO
 					</th>
 				</tr>
