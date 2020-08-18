@@ -172,127 +172,35 @@ function process_form(){
 								</tr>
 							</table>");
 									
-		} else { 	print ("<table align='center'>
-									<tr>
-										<th colspan=5 class='BorderInf'>
-					Restaurantes Filtro: ".$nres." de ".$num_total_rows."
-										</th>
-									</tr>
-									
-									<tr>
-										<th class='BorderInfDch'>
-											Nombre
-										</th>
-										
-										<th class='BorderInfDch'>
-											Isla
-										</th>
-																				
-										<th class='BorderInfDch'>
-											Ayuntamiento
-										</th>
+		} else { 	
+			print ("<div class=\"juancentra col-xs-12 col-sm-12 col-lg-6\" style=\"	vertical-align: top !important; margin-top: 6px;\">
 
-										<th class='BorderInfDch'>
-											Contenido
-										</th>
-
-										<th class='BorderInfDch'>
-											Imagen
-										</th>
-									</tr>");
+			RESTAURANTES ".$nres." de ".$num_total_rows."<br>");
 			
 	while($rowb = mysqli_fetch_assoc($qb)){
-				global $conte;
-				$conte = substr($rowb['conte'],0,56);
-				$conte = $conte." ...";	
 
 	require 'Inclu_Name_Ref_to_Name.php';
 				
-	print (	"<tr align='center'>
-									
-	<form name='ver' action='Art_Modificar_02.php' method='POST'>
+	global $actionforma;
+	$actionforma = "<form name='ver' action='Art_Modificar_02.php' method='POST'>";
+	global $formbotona;
+	$formbotona = "<div class='whiletotala' style=\"width:41% !important; min-width:124px !important; border: #fff solid 1px;\";>
+						<input type='submit' value='MODIFICAR DATOS' style=\"width:122px;\" />
+						<input type='hidden' name='oculto2' value=1 />
+				</form>";
+	global $actionformb;
+	$actionformb = "<form name='modifica_img' action='Art_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=550px,height=400px')\"  style=\"display: inline-block;\">";
+	global $formbotonb;
+	$formbotonb = "	<input type='submit' value='MODIF IMG' style=\"width:122px;\" />
+					<input type='hidden' name='oculto2' value=1 />
+				</div>
+			</form>";
 
-	<input name='id' type='hidden' value='".$rowb['id']."' />
-	<input name='refuser' type='hidden' value='".$rowb['refuser']."' />
-	<input name='refart' type='hidden' value='".$rowb['refart']."' />
-							
-						<td class='BorderInfDch'>
-	<input name='tit' type='hidden' value='".$rowb['tit']."' />".$rowb['tit']."
-						</td>
+	require 'Inc_Art_While_Total.php';
 
-	<input name='titsub' type='hidden' value='".$rowb['titsub']."' />
-	<input name='datein' type='hidden' value='".$rowb['datein']."' />
-	<input name='timein' type='hidden' value='".$rowb['timein']."' />
-	<input name='datemod' type='hidden' value='".$rowb['datemod']."' />
-	<input name='timemod' type='hidden' value='".$rowb['timemod']."' />
+			} // FIN DEL WHILE
 
-						<td class='BorderInfDch'>
-	<input name='isla' type='hidden' value='".$rowb['refisla']."' />".$rowb['refisla']." / ".$islaname."
-						</td>
-
-						<td class='BorderInfDch'>
-	<input name='ayto' type='hidden' value='".$rowb['refayto']."' />".$rowb['refayto']." / ".$aytoname."
-						</td>
-
-						<td class='BorderInfDch' width='200px'align='left'>
-	<input name='conte' type='hidden' value='".$rowb['conte']."' />".$conte."
-						</td>
-
-						<td class='BorderInf' width='50px'>
-	<input name='myimg1' type='hidden' value='".$rowb['myimg1']."' />
-	<img src='../Gch.Img.Art/".$rowb['myimg1']."'  width='99%' height='auto' />
-						</td>
-	
-	<input name='tipo' type='hidden' value='".$rowb['reftipo']."' />
-	<input name='espec1' type='hidden' value='".$rowb['refespec1']."' />
-	<input name='espec2' type='hidden' value='".$rowb['refespec2']."' />
-	<input name='valora' type='hidden' value='".$rowb['ivalora']."' />
-	<input name='precio' type='hidden' value='".$rowb['iprecio']."' />
-	<input name='url' type='hidden' value='".$rowb['url']."' />
-	<input name='map' type='hidden' value='".$rowb['map']."' />
-	<input name='mapiframe' type='hidden' value='".$rowb['mapiframe']."' />
-	<input name='latitud' type='hidden' value='".$rowb['latitud']."' />
-	<input name='longitud' type='hidden' value='".$rowb['longitud']."' />
-	<input name='calle' type='hidden' value='".$rowb['calle']."' />
-	<input name='Email' type='hidden' value='".$rowb['Email']."' />
-	<input name='Tlf1' type='hidden' value='".$rowb['Tlf1']."' />
-	<input name='Tlf2' type='hidden' value='".$rowb['Tlf2']."' />
-
-		<tr>
-					<td colspan=2 class='BorderInf'>
-												&nbsp;
-					</td>
-					<td colspan=2 align='right' class='BorderInfDch'>
-							<input type='submit' value='MODIFICAR DATOS' />
-							<input type='hidden' name='oculto2' value=1 />
-			</form>
-					</td>
-
-				<td align='center' class='BorderInf'>
-						
-		<form name='modifica_img' action='Art_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=550px, height=400px')\">
-
-			<input name='id' type='hidden' value='".$rowb['id']."' />
-			<input name='refuser' type='hidden' value='".$rowb['refuser']."' />
-			<input name='refart' type='hidden' value='".$rowb['refart']."' />
-			<input name='tit' type='hidden' value='".$rowb['tit']."' />
-			<input name='titsub' type='hidden' value='".$rowb['titsub']."' />
-			<input name='isla' type='hidden' value='".$rowb['refisla']." / ".$islaname."'' />
-			<input name='ayto' type='hidden' value='".$rowb['refayto']." / ".$aytoname."' />
-			<input name='myimg1' type='hidden' value='".$rowb['myimg1']."' />
-			<input name='myimg2' type='hidden' value='".$rowb['myimg2']."' />
-			<input name='myimg3' type='hidden' value='".$rowb['myimg3']."' />
-			<input name='myimg4' type='hidden' value='".$rowb['myimg4']."' />
-
-			<input type='submit' value='MODIF IMG' />
-			<input type='hidden' name='oculto2' value=1 />
-			
-		</form>
-				</td>	
-			</tr>");
-					}
-
-		print("</table>");
+		print("</div>");
 		
 			} 
 		} 
@@ -395,9 +303,6 @@ function ver_todo(){
 
 	$sqlb =  "SELECT * FROM `$db_name`.$vname  ORDER BY `refart` ASC $limit";
 
-	/*
-	$sqlb =  "SELECT * FROM `gch_admin` WHERE `gch_admin`.`dni` <> '$_SESSION[mydni]' ORDER BY $orden ";
-	*/
 	$qb = mysqli_query($db, $sqlb);
 	if(!$qb){
 			print("<font color='#FF0000'>Consulte L.587: </font></br>".mysqli_error($db)."</br>");
@@ -414,131 +319,40 @@ function ver_todo(){
 										</tr>
 									</table>");
 									
-				} else { 	print ("<table align='center'>
-									<tr>
-										<th colspan=5 class='BorderInf'>
-					Restaurantes Todos: ".$nres." de ".$num_total_rows."
-										</th>
-									</tr>
-									
-									<tr>
-										<th class='BorderInfDch'>
-											Nombre
-										</th>
-										
-										<th class='BorderInfDch'>
-											Isla
-										</th>
-																				
-										<th class='BorderInfDch'>
-											Ayuntamiento
-										</th>
+				} else { 
 
-										<th class='BorderInfDch'>
-											Contenido
-										</th>
+	print ("<div class=\"juancentra col-xs-12 col-sm-12 col-lg-6\" style=\"	vertical-align: top !important; margin-top: 6px;\">
 
-										<th class='BorderInfDch'>
-											Imagen
-										</th>
-									</tr>");
-			
-			
+					RESTAURANTES ".$nres." de ".$num_total_rows."<br>");
+					
 	while($rowb = mysqli_fetch_assoc($qb)){
-				global $conte;
-				$conte = substr($rowb['conte'],0,70);
-				$conte = $conte." ...";	
 				
 	require 'Inclu_Name_Ref_to_Name.php';
 
-	print (	"<tr align='center'>
-									
-	<form name='ver' action='Art_Modificar_02.php' method='POST'>
+	global $actionforma;
+	$actionforma = "<form name='ver' action='Art_Modificar_02.php' method='POST'>";
+	global $formbotona;
+	$formbotona = "<div class='whiletotala' style=\"width:41% !important; min-width:124px !important; border: #fff solid 1px;\";>
+						<input type='submit' value='MODIFICAR DATOS' style=\"width:122px;\" />
+						<input type='hidden' name='oculto2' value=1 />
+				</form>";
+				
+	global $actionformb;
+	$actionformb = "<form name='modifica_img' action='Art_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=550px,height=400px')\"  style=\"display: inline-block;\">";
+	global $formbotonb;
+	$formbotonb = "	<input type='submit' value='MODIF IMG' style=\"width:122px;\" />
+					<input type='hidden' name='oculto2' value=1 />
+				</div>
+			</form>";
 
-	<input name='id' type='hidden' value='".$rowb['id']."' />
-	<input name='refuser' type='hidden' value='".$rowb['refuser']."' />
-	<input name='refart' type='hidden' value='".$rowb['refart']."' />
-							
-						<td class='BorderInfDch'>
-	<input name='tit' type='hidden' value='".$rowb['tit']."' />".$rowb['tit']."
-						</td>
+	require 'Inc_Art_While_Total.php';
 
-	<input name='titsub' type='hidden' value='".$rowb['titsub']."' />
-	<input name='datein' type='hidden' value='".$rowb['datein']."' />
-	<input name='timein' type='hidden' value='".$rowb['timein']."' />
-	<input name='datemod' type='hidden' value='".$rowb['datemod']."' />
-	<input name='timemod' type='hidden' value='".$rowb['timemod']."' />
+			} // FIN DEL WHILE
 
-						<td class='BorderInfDch'>
-	<input name='isla' type='hidden' value='".$rowb['refisla']."' />".$rowb['refisla']." / ".$islaname."
-						</td>
+		print("</div>");
 
-						<td class='BorderInfDch'>
-	<input name='ayto' type='hidden' value='".$rowb['refayto']."' />".$rowb['refayto']." / ".$aytoname."
-						</td>
-
-						<td class='BorderInfDch' width='200px'align='left'>
-	<input name='conte' type='hidden' value='".$rowb['conte']."' />".$conte."
-						</td>
-
-						<td class='BorderInf' width='50px'>
-	<input name='myimg1' type='hidden' value='".$rowb['myimg1']."' />
-	<img src='../Gch.Img.Art/".$rowb['myimg1']."'  width='60%' height='auto' />
-						</td>
-	
-	<input name='tipo' type='hidden' value='".$rowb['reftipo']."' />
-	<input name='espec1' type='hidden' value='".$rowb['refespec1']."' />
-	<input name='espec2' type='hidden' value='".$rowb['refespec2']."' />
-	<input name='valora' type='hidden' value='".$rowb['ivalora']."' />
-	<input name='precio' type='hidden' value='".$rowb['iprecio']."' />
-	<input name='url' type='hidden' value='".$rowb['url']."' />
-	<input name='map' type='hidden' value='".$rowb['map']."' />
-	<input name='mapiframe' type='hidden' value='".$rowb['mapiframe']."' />
-	<input name='latitud' type='hidden' value='".$rowb['latitud']."' />
-	<input name='longitud' type='hidden' value='".$rowb['longitud']."' />
-	<input name='calle' type='hidden' value='".$rowb['calle']."' />
-	<input name='Email' type='hidden' value='".$rowb['Email']."' />
-	<input name='Tlf1' type='hidden' value='".$rowb['Tlf1']."' />
-	<input name='Tlf2' type='hidden' value='".$rowb['Tlf2']."' />
-		</tr>
-						
-		<tr>
-					<td colspan=2 class='BorderInf'>
-												&nbsp;
-					</td>
-					<td colspan=2 align='right' class='BorderInfDch'>
-							<input type='submit' value='MODIFICAR DATOS' />
-							<input type='hidden' name='oculto2' value=1 />
-			</form>
-					</td>
-
-				<td align='center' class='BorderInf'>
-						
-		<form name='modifica_img' action='Art_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=550px,height=400px')\">
-
-		<input name='id' type='hidden' value='".$rowb['id']."' />
-		<input name='refuser' type='hidden' value='".$rowb['refuser']."' />
-		<input name='refart' type='hidden' value='".$rowb['refart']."' />
-		<input name='tit' type='hidden' value='".$rowb['tit']."' />
-		<input name='titsub' type='hidden' value='".$rowb['titsub']."' />
-		<input name='isla' type='hidden' value='".$rowb['refisla']." / ".$islaname."'' />
-		<input name='ayto' type='hidden' value='".$rowb['refayto']." / ".$aytoname."' />
-		<input name='myimg1' type='hidden' value='".$rowb['myimg1']."' />
-		<input name='myimg2' type='hidden' value='".$rowb['myimg2']."' />
-		<input name='myimg3' type='hidden' value='".$rowb['myimg3']."' />
-		<input name='myimg4' type='hidden' value='".$rowb['myimg4']."' />
-
-			<input type='submit' value='MODIF IMG' />
-			<input type='hidden' name='oculto2' value=1 />
-			
-		</form>
-				</td>	
-			</tr>");
-					}
-
-	print("</table>");
-						} 
 			} 
+		} 
 
     if ($total_pages > 1) {
         if ($page != 1) {

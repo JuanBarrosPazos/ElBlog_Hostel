@@ -315,7 +315,7 @@ function show_form($errors=''){
 						 '1' => '1 de 5 MUY MALOS',
 						 '25' => '2 de 5 MALOS',
 						 '50' => '3 de 5 NORMALES',
-						 '76' => '4 de 5 BUENOS',
+						 '75' => '4 de 5 BUENOS',
 						 '100' => '5 de 5 MUY BUENOS');														
 
 		$valora = array ('' => 'RELACIÓN ATENCIÓN / LOCAL',

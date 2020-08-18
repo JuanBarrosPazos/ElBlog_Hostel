@@ -185,7 +185,6 @@ function show_form(){
 		$_SESSION['Tlf1'] = $_POST['Tlf1'];
 		$_SESSION['Tlf2'] = $_POST['Tlf2'];
 		
-
 		}
 		
 	global $db;
@@ -201,27 +200,33 @@ function show_form(){
 
 		print("
 			<table align='center' style=\"border:0px;margin-top:4px\" width='400px'>
-				
 				<tr>
 					<th colspan='2'>
 						ELIMINAR EL RESTAURANTE ".strtoupper($_SESSION['tit'])."
 					</th>
 				</tr>		
-			
-			</table>				
-						");
+			</table>");
 				
-
 	if ((@$_POST['autor'] != '') || ($_SESSION['refuser'] != '')) { 
 		
 	print("<table align='center' style=\"margin-top:10px; text-align:left; width:96%; max-width:500px\" >
 				<tr>
 					<th colspan=3 class='BorderInf'>
-
-							SERÁ IMPOSIBLE RECUPERAR ESTE RESTAURANTE
+						<font color='#FF0000'>
+						SE BORRARÁN ESTOS DATOS DEL REGISTRO.
+						</br>
+						NO SE PODRÁN VOLVER A RECUPERAR.
+						</font>
 					</th>
 				</tr>
-				
+				<tr>
+					<td colspan=3 class='BorderInf' style=\"text-align:right\">
+							<a href='Art_Borrar_01.php' >
+													CANCELAR BORRAR
+							</a>
+					</td>
+				</tr>
+
 		<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' >
 						
 			<tr>								

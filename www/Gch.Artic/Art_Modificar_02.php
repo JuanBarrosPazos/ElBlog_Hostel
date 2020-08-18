@@ -66,14 +66,14 @@ function validate_form(){
 	elseif((strlen(trim($_POST['titulo'])) != 0)||(strlen(trim($_POST['refart'])) != 0)){	
 		$secc1 = "gch_art";
 		$secc1 = "`".$secc1."`";
-	$sqlc =  "SELECT * FROM `$db_name`.$secc1 WHERE `tit` = '$_POST[titulo]' OR `refart` = '$_POST[refart]'";
+	$sqlc =  "SELECT * FROM `$db_name`.$secc1 WHERE `tit` = '$_POST[titulo]'";
 		$qc = mysqli_query($db, $sqlc);
 		$rowres = mysqli_fetch_assoc($qc);
 		global $conutc;
 		$countc = mysqli_num_rows($qc);
 	if($countc > 0){
 		if (@$_SESSION['modid'] == $rowres['id']){}
-		else{$errors [] = "YA EXISTE ESTE RESTAURANTE";}
+		else{$errors [] = "YA EXISTE ESTE RESTAURANTE".$_SESSION['modid']." / ".$rowres['id'];}
 				}
 		}
 
@@ -212,23 +212,23 @@ function validate_form(){
 
 	if (@$_SESSION['modid'] == $rowml['id']){}
 	elseif(mysqli_num_rows($qml)!= 0){
-		$errors [] = "Mail: <font color='#FF0000'>Ya Existe.</font>";
+		$errors [] = "MAIL <font color='#FF0000'>Ya Existe.</font>";
 		}
 		
 	if(strlen(trim($_POST['Email'])) == 0){
-		$errors [] = "Mail: <font color='#FF0000'>Este campo es obligatorio.</font>";
+		$errors [] = "MAIL <font color='#FF0000'>Este campo es obligatorio.</font>";
 		}
 	
 	elseif (strlen(trim($_POST['Email'])) < 5 ){
-		$errors [] = "Mail: <font color='#FF0000'>Escriba más de cinco carácteres.</font>";
+		$errors [] = "MAIL <font color='#FF0000'>Escriba más de cinco carácteres.</font>";
 		}
 		
 	elseif (!preg_match('/^[^A-Z]+$/',$_POST['Email'])){
-		$errors [] = "Mail: <font color='#FF0000'>Solo Minusculas</font>";
+		$errors [] = "MAIL <font color='#FF0000'>Solo Minusculas</font>";
 		}
 
 	elseif (!preg_match('/^[^@´`\'áéíóú#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:*\s]+@([-a-z0-9]+\.)+[a-z]{2,}$/',$_POST['Email'])){
-		$errors [] = "Mail: <font color='#FF0000'>Esta dirección no es válida.</font>";
+		$errors [] = "MAIL <font color='#FF0000'>Esta dirección no es válida.</font>";
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////
@@ -242,23 +242,23 @@ function validate_form(){
 
 	if (@$_SESSION['modid'] == $rowtlf1['id']){}
 	elseif($countlf1 != 0){
-		$errors [] = "Teléfono 1: <font color='#FF0000'>YA EXISTE.</font>";
+		$errors [] = "TELEFONO 1: <font color='#FF0000'>YA EXISTE.</font>";
 		}
 
 	if(strlen(trim($_POST['Tlf1'])) == 0){
-		$errors [] = "Teléfono 1: <font color='#FF0000'>Este campo es obligatorio.</font>";
+		$errors [] = "TELEFONO 1: <font color='#FF0000'>Este campo es obligatorio.</font>";
 		}
 	
 	elseif ((trim($_POST['Tlf1'])) == (trim($_POST['Tlf2']))){
-					$errors [] = "Teléfono 1 y 2: <font color='#FF0000'>SON IGUALES</font>";
+		$errors [] = "TELEFONO 1 y 2: <font color='#FF0000'>SON IGUALES</font>";
 		}
 
 	elseif (!preg_match('/^[\d]+$/',$_POST['Tlf1'])){
-		$errors [] = "Teléfono 1: <font color='#FF0000'>Sólo se admiten números.</font>";
+		$errors [] = "TELEFONO 1: <font color='#FF0000'>Sólo se admiten números.</font>";
 		}
 
 	elseif (strlen(trim($_POST['Tlf1'])) < 9){
-		$errors [] = "Teléfono 1: <font color='#FF0000'>No menos de nueve números</font>";
+		$errors [] = "TELEFONO 1: <font color='#FF0000'>No menos de nueve números</font>";
 		}
 
 	if(strlen(trim($_POST['Tlf2'])) > 0){
@@ -268,11 +268,11 @@ function validate_form(){
 	$countlf2 = mysqli_num_rows($qtlf2);
 
 	if (!preg_match('/^[\d]+$/',$_POST['Tlf2'])){
-			$errors [] = "Teléfono 2: <font color='#FF0000'>Sólo se admiten números.</font>";
+			$errors [] = "TELEFONO 2: <font color='#FF0000'>Sólo se admiten números.</font>";
 			}
 	elseif (@$_SESSION['modid'] == $rowtlf2['id']){}
 	elseif($countlf2 != 0){
-			$errors [] = "Teléfono 2: <font color='#FF0000'>YA EXISTE.</font>";
+			$errors [] = "TELEFONO 2: <font color='#FF0000'>YA EXISTE.</font>";
 			}
 		}
 	
@@ -293,17 +293,9 @@ function validate_form(){
 		}
 
 	elseif ((trim($_POST['espec1'])) == (trim($_POST['espec2']))){
-					$errors [] = "ESPECIALIDADES <font color='#FF0000'>SON IGUALES</font>";
+		$errors [] = "ESPECIALIDADES <font color='#FF0000'>SON IGUALES</font>";
 		}
 	
-	if(strlen(trim($_POST['precio'])) == 0){
-		$errors [] = "PRECIOS <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
-		}
-
-	if(strlen(trim($_POST['valora'])) == 0){
-		$errors [] = "SERVICIOS <font color='#FF0000'>CAMPO OBLIGATORIO</font>";
-		}
-
 		///////////////////////////////////////////////////////////////////////////////////
 
 	if(strlen(trim($_POST['coment'])) == 0){
@@ -318,7 +310,6 @@ function validate_form(){
 		$errors [] = "DESCRIPCION <font color='#FF0000'>Excedió más de 400 carácteres.</font>";
 		}
 		
-
 	elseif (!preg_match('/^[^#$&<>\(\)\[\]\{\}]+$/',$_POST['coment'])){
 		$errors [] = "DESCRIPCION <font color='#FF0000'>No Permitidos #$&<>()[]{}</font>";
 		}
@@ -348,17 +339,14 @@ function process_form(){
 
 	require 'Inclu_Name_Ref_to_Name.php';
 
-	require 'Inclu_Valora_Calculos.php';
-
 	/* GRABAMOS LOS DATOS EN LA TABLA DE RESTAURANTES */
 	global $tablename;
 	$tablename = "gch_art";
 	$tablename = "`".$tablename."`";
-	$sqla = "UPDATE `$db_name`.$tablename SET `refuser` = '$_POST[autor]', `tit` = '$_POST[titulo]', `titsub` = '$_POST[subtitul]', `datemod` = '$_POST[datemod]', `timemod` = '$_POST[timemod]', `conte` = '$_POST[coment]', `refayto` = '$_POST[ayto]', `refisla` = '$_POST[isla]', `reftipo` = '$_POST[tipo]', `refespec1` = '$_POST[espec1]', `refespec2` = '$_POST[espec2]', `ivalora` = '$valmartx100', `iprecio` = '$valmart2x100', `url` = '$_POST[url]', `map` = '$_POST[map]', `mapiframe` = '$_POST[mapiframe]', `latitud` = '$_POST[latitud]', `longitud` = '$_POST[longitud]', `calle` = '$_POST[calle]', `Email` = '$_POST[Email]', `Tlf1` = '$_POST[Tlf1]', `Tlf2` = '$_POST[Tlf2]' WHERE $tablename.`refart` = '$_SESSION[refart]' LIMIT 1 ";
+	$sqla = "UPDATE `$db_name`.$tablename SET `refuser` = '$_POST[autor]', `tit` = '$_POST[titulo]', `titsub` = '$_POST[subtitul]', `datemod` = '$_POST[datemod]', `timemod` = '$_POST[timemod]', `conte` = '$_POST[coment]', `refayto` = '$_POST[ayto]', `refisla` = '$_POST[isla]', `reftipo` = '$_POST[tipo]', `refespec1` = '$_POST[espec1]', `refespec2` = '$_POST[espec2]', `url` = '$_POST[url]', `map` = '$_POST[map]', `mapiframe` = '$_POST[mapiframe]', `latitud` = '$_POST[latitud]', `longitud` = '$_POST[longitud]', `calle` = '$_POST[calle]', `Email` = '$_POST[Email]', `Tlf1` = '$_POST[Tlf1]', `Tlf2` = '$_POST[Tlf2]' WHERE $tablename.`refart` = '$_SESSION[refart]' LIMIT 1 ";
 	if(mysqli_query($db, $sqla)){
 
 		global $carpetaimg;
-		global $new_name;
 
 		print("<table align='center' style='margin-top:10px'>
 			<tr>
@@ -380,140 +368,80 @@ function process_form(){
 			</tr>
 				
 			<tr>
-				<td>
-					TITULO
-				</td>
-				<td>"
-					.$_POST['titulo'].
-				"</td>
+				<td>TITULO</td>
+				<td>".$_POST['titulo']."</td>
 			</tr>				
 				
 			<tr>
-				<td>	
-					SUBTITULO
-				</td>
-				<td>"
-					.$_POST['subtitul'].
-				"</td>
+				<td>SUBTITULO</td>
+				<td>".$_POST['subtitul']."</td>
 			</tr>
 				
 			<tr>
-				<td>	
-					DATE IN
-				</td>
-				<td>"
-					.$_POST['datein'].
-				"</td>
+				<td>DATE IN</td>
+				<td>".$_POST['datein']."</td>
 			</tr>
 				
 			<tr>
-				<td>	
-					TIME IN
-				</td>
-				<td>"
-					.$_POST['timein'].
-				"</td>
+				<td>TIME IN</td>
+				<td>".$_POST['timein']."</td>
 			</tr>
 				
 			<tr>
-				<td>	
-					ISLA
-				</td>
-				<td colspan=2>"
-					.$_POST['isla']." / ".$islaname.
-				"</td>
+				<td>ISLA</td>
+				<td colspan=2>".$_POST['isla']." / ".$islaname."</td>
 			</tr>
 				
 			<tr>
-				<td>	
-					AYUNTAMIENTO
-				</td>
-				<td colspan=2>"
-					.$_POST['ayto']." / ".$aytoname.
-				"</td>
+				<td>AYUNTAMIENTO</td>
+				<td colspan=2>".$_POST['ayto']." / ".$aytoname."</td>
 			</tr>
 				
 			<tr>
-				<td>	
-					TIPO
-				</td>
-				<td colspan=2>"
-					.$_POST['tipo']." / ".$tipname.
-				"</td>
+				<td>TIPO</td>
+				<td colspan=2>".$_POST['tipo']." / ".$tipname."</td>
 			</tr>
 				
 			<tr>
-				<td>	
-					ESPECIALIDAD 1
-				</td>
-				<td colspan=2>"
-					.$_POST['espec1']." / ".$espec1name.
-				"</td>
+				<td>ESPECIALIDAD 1</td>
+				<td colspan=2>".$_POST['espec1']." / ".$espec1name."</td>
 			</tr>
 				
 			<tr>
-				<td>	
-					ESPECIALIDAD 2
-				</td>
-				<td colspan=2>"
-					.$_POST['espec2']." / ".$espec1name.
-				"</td>
+				<td>ESPECIALIDAD 2</td>
+				<td colspan=2>".$_POST['espec2']." / ".$espec2name."</td>
 			</tr>
 				
 			<tr>
-				<td>	
-					URL WEB
-				</td>
-				<td colspan=2>"
-					.$_POST['url'].
-				"</td>
+				<td>URL WEB</td>
+				<td colspan=2>".$_POST['url']."</td>
 			</tr>
 				
 			<tr>
-				<td>	
-					CALLE
-				</td>
-				<td colspan=2>"
-					.$_POST['calle'].
-				"</td>
+				<td>CALLE</td>
+				<td colspan=2>".$_POST['calle']."</td>
 			</tr>
 				
 			<tr>
-				<td>	
-					EMAIL
-				</td>
-				<td colspan=2>"
-					.$_POST['Email'].
-				"</td>
+				<td>EMAIL</td>
+				<td colspan=2>".$_POST['Email']."</td>
 			</tr>
 				
 			<tr>
-				<td>	
-					TELEFONO 1
-				</td>
-				<td colspan=2>"
-					.$_POST['Tlf1'].
-				"</td>
+				<td>TELEFONO 1</td>
+				<td colspan=2>".$_POST['Tlf1']."</td>
 			</tr>
 				
 			<tr>
-				<td>	
-					TELEFONO 2
-				</td>
-				<td colspan=2>"
-					.$_POST['Tlf2'].
-				"</td>
+				<td>TELEFONO 2</td>
+				<td colspan=2>".$_POST['Tlf2']."</td>
 			</tr>
 				
 			<tr>
-				<td colspan=3  align='center'>
-					DESCRIPCION
-				</td>
+				<td colspan=3  align='center'>DESCRIPCION</td>
 			</tr>
 			<tr>
-				<td colspan=3>"
-					.$_POST['coment'].
-				"</td>
+				<td colspan=3>".$_POST['coment']."</td>
 			</tr>
 			<tr>
 				<th colspan=3 class='BorderSup'>
@@ -639,22 +567,8 @@ function show_form($errors=''){
 								   	'coment' => '',
 									'myimg' => '',	
 												);
-								   					}
-
-		$precio = array ('' => 'RELACIÓN EUROS / SERVICIO',
-						 '1' => '1 de 5 MUY MALOS',
-						 '25' => '2 de 5 MALOS',
-						 '50' => '3 de 5 NORMALES',
-						 '76' => '4 de 5 BUENOS',
-						 '100' => '5 de 5 MUY BUENOS');														
-
-		$valora = array ('' => 'RELACIÓN ATENCIÓN / LOCAL',
-						'1' => '1 de 5 MUY MALOS',
-						'25' => '2 de 5 MALOS',
-						'50' => '3 de 5 NORMALES',
-						'75' => '4 de 5 BUENOS',
-						'100' => '5 de 5 MUY BUENOS');														
-	
+										}
+													   
 	if ($errors){
 		print("	<table align='center'>
 					<th style='text-align:center'>
@@ -756,10 +670,17 @@ function show_form($errors=''){
 			<tr>
 				<th colspan=2 class='BorderInf'>
 
-						NUEVO RESTAURANTE EN ".strtoupper($_secis)."
+						MODIFICAR DATOS DE ".$_SESSION['tit']."
 				</th>
 			</tr>
-			
+			<tr>
+			<td colspan=3 class='BorderInf' style=\"text-align:right\">
+					<a href='Art_Modificar_01.php' >
+											CANCELAR MODIFICAR
+					</a>
+			</td>
+		</tr>
+	
 <form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
 					
 		<tr>								
@@ -933,7 +854,6 @@ if(!$qtipo){
 																							}
 								print ("> ".$rowtipo['tipo']."</option>");
 			}
-	
 		}  
 
 print ("	</select>
@@ -947,7 +867,7 @@ print ("	</select>
 			<td align='left'>
 
 	<select name='espec1'>
-	<option value=''>ESPECIALIDADES ...</option>");
+	<option value=''>ESPECIALIDADES...</option>");
 					
 /* SELECT ESPECIALIDAD 1 */	
 		
@@ -967,18 +887,14 @@ if(!$qespec){
 																							}
 								print ("> ".$rowespec1['espec']."</option>");
 			}
-	
 		}  
 
 print ("	</select>
 				</td>
 		</tr>
 
-
 		<tr>
-			<td align='right'>
-					ESPECIALIDAD 2
-			</td>
+			<td align='right'>ESPECIALIDAD 2</td>
 			<td align='left'>
 
 	<select name='espec2'>
@@ -995,65 +911,37 @@ if(!$qespec2){
 				
 	while($rowespec2 = mysqli_fetch_assoc($qespec2)){
 				
-				print ("<option value='".$rowespec2['refespec']."' ");
+		print ("<option value='".$rowespec2['refespec']."' ");
 				
-				if($rowespec2['refespec'] == @$defaults['espec2']){
-														print ("selected = 'selected'");
-																							}
+		if($rowespec2['refespec'] == @$defaults['espec2']){
+								print ("selected = 'selected'");
+																}
 								print ("> ".$rowespec2['espec']."</option>");
 			}
-	
 		}  
 
 print ("	</select>
 				</td>
 		</tr>
 
-			<tr>
-				<td align='right'>
-					PRECIOS
-				</td>
-				<td>
-	
-			<select name='precio'>");
-				foreach($precio as $optionp => $labelp){
-					print ("<option value='".$optionp."' ");
-					if($optionp == @$defaults['precio']){
-							print ("selected = 'selected'");
-												}
-							print ("> $labelp </option>");
-									}	
-	print ("</select>
-					</td>
-				</tr>
-			<tr>
+        <tr>
+			<td align='right'>SERVICIOS</td>
+			<td>".$_SESSION['valora']."</td>
+		</tr>
 
-			<tr>
-				<td align='right'>
-					SERVICIOS
-				</td>
-				<td>
-	
-			<select name='valora'>");
-				foreach($valora as $optionv => $labelv){
-					print ("<option value='".$optionv."' ");
-					if($optionv == @$defaults['valora']){
-							print ("selected = 'selected'");
-												}
-							print ("> $labelv </option>");
-									}	
-	print ("</select>
-				</td>
-			</tr>
+		<tr>
+			<td align='right'>PRECIOS</td>
+			<td>".$_SESSION['precio']."</td>
+		</tr>
 
-                <tr>
-					<td align='right'>						
-						REFERENCIA
-					</td>
-					<td>
+        <tr>
+			<td align='right'>						
+					REFERENCIA
+			</td>
+			<td>
 		<input type='hidden' name='refart' value='".$_SESSION['refart']."' />".$_SESSION['refart']."
-					</td>
-				</tr>
+			</td>
+		</tr>
 				<tr>
 					<td align='right'>						
 						DATE IN
@@ -1141,7 +1029,7 @@ print ("	</select>
 							
 			<tr>
 				<td colspan='2' align='right' valign='middle'  class='BorderSup'>
-					<input type='submit' value='CREAR RESTAURANTE' />
+					<input type='submit' value='MODIFICAR DATOS RESTAURANTE' />
 					<input type='hidden' name='oculto' value=1 />
 				</td>
 			</tr>

@@ -519,7 +519,7 @@ a:hover  img {
 	width: 120px;
 	padding: 1px 4px 1px 4px; 
 	margin: 0.4em 3px 1px 3px;
-	border: #93D7BF solid 1px; /**/
+	/*border: #93D7BF solid 1px; */
 }
 
 .whiletotala img {
@@ -531,6 +531,7 @@ a:hover  img {
 .conte {
 	width: 34%;
 	min-width: 320px;
+	text-align: left;
 }
 
 /* Creado por Juan Barros Pazos 2020 */

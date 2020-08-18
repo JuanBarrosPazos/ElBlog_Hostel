@@ -182,61 +182,22 @@ function process_form(){
 				$conte = $conte." ...";	
 
 	require 'Inclu_Name_Ref_to_Name.php';
-				
-	print (	"<div style=\"margin-top:8px; padding-top: 0px; border-top: #fff solid 1px; border-bottom: #fff solid 1px; \">
-									
-	<form name='ver' action='Art_Ver_02.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=520px,height=640px')\">
 
-	<input name='id' type='hidden' value='".$rowb['id']."' />
-	<input name='refuser' type='hidden' value='".$rowb['refuser']."' />
-	<input name='refart' type='hidden' value='".$rowb['refart']."' />
-							
-		<div class='whiletotala' >
-		NOMBRE<br>
-	<input name='tit' type='hidden' value='".$rowb['tit']."' />".strtoupper($rowb['tit'])."
-		</div>
+	global $actionforma;
+	$actionforma = "<form name='ver' action='../Gch.Artic/Art_Ver_02.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=520px,height=640px')\">";
+	global $formbotona;
+	$formbotona = "<div class='whiletotala'>
+						<input type='submit' value='VER DETALLES' />
+						<input type='hidden' name='oculto2' value=1 />
+					</div>
+				</form>";
+	global $actionformb;
+	$actionformb = "";
+	global $formbotonb;
+	$formbotonb = "";
 
-	<input name='titsub' type='hidden' value='".$rowb['titsub']."' />
-	<input name='datein' type='hidden' value='".$rowb['datein']."' />
-	<input name='timein' type='hidden' value='".$rowb['timein']."' />
-	<input name='datemod' type='hidden' value='".$rowb['datemod']."' />
-	<input name='timemod' type='hidden' value='".$rowb['timemod']."' />
+	require 'Inc_Art_While_Total.php';
 
-		<div class='whiletotala' >
-		ISLA<br>
-	<input name='isla' type='hidden' value='".$rowb['refisla']." / ".$islaname."' />".strtoupper($islaname)."
-		</div>
-
-		<div class='whiletotala' >
-		AYUNTAMIENTO<br>
-	<input name='ayto' type='hidden' value='".$rowb['refayto']." / ".$aytoname."' />".strtoupper($aytoname)."
-		</div>
-
-		<div  class='whiletotala conte' >
-		DESCRIPCION<br>
-	<input name='conte' type='hidden' value='".$rowb['conte']."' />".$conte."
-		</div>
-
-		<div class='whiletotala' >
-	<input name='myimg1' type='hidden' value='".$rowb['myimg1']."' />
-	<img src='../Gch.Img.Art/".$rowb['myimg1']."' />
-		</div>
-	
-	<input name='tipo' type='hidden' value='".$rowb['reftipo']." / ".$tipname."' />
-	<input name='espec1' type='hidden' value='".$rowb['refespec1']." / ".$espec1name."' />
-	<input name='espec2' type='hidden' value='".$rowb['refespec2']." / ".$espec2name."' />
-	<input name='url' type='hidden' value='".$rowb['url']."' />
-	<input name='calle' type='hidden' value='".$rowb['calle']."' />
-	<input name='Email' type='hidden' value='".$rowb['Email']."' />
-	<input name='Tlf1' type='hidden' value='".$rowb['Tlf1']."' />
-	<input name='Tlf2' type='hidden' value='".$rowb['Tlf2']."' />
-
-		<div class='whiletotala'>
-					<input type='submit' value='VER DETALLES' />
-					<input type='hidden' name='oculto2' value=1 />
-		</div>
-	</form>
-		</div>");
 			} // FIN WHILE
 
 		print("</div>");
@@ -362,71 +323,29 @@ function ver_todo(){
 									</table>");
 									
 				} else { 	
-		print ("<div class=\"juancentra col-xs-12 col-sm-12 col-lg-6\" style=\"	vertical-align: top !important; margin-top: 6px;\">
+	print ("<div class=\"juancentra col-xs-12 col-sm-12 col-lg-6\" style=\"	vertical-align: top !important; margin-top: 6px;\">
 
 					RESTAURANTES ".$nres." de ".$num_total_rows."<br>");
 					
 	while($rowb = mysqli_fetch_assoc($qb)){
-				global $conte;
-				$conte = substr($rowb['conte'],0,56);
-				$conte = $conte." ...";	
 
 	require 'Inclu_Name_Ref_to_Name.php';
-				
-	print (	"<div style=\"margin-top:8px; padding-top: 0px; border-top: #fff solid 1px; border-bottom: #fff solid 1px; \">
-									
-	<form name='ver' action='../Gch.Artic/Art_Ver_02.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=520px,height=640px')\">
-
-	<input name='id' type='hidden' value='".$rowb['id']."' />
-	<input name='refuser' type='hidden' value='".$rowb['refuser']."' />
-	<input name='refart' type='hidden' value='".$rowb['refart']."' />
-							
-		<div class='whiletotala'>
-		NOMBRE<br>
-	<input name='tit' type='hidden' value='".$rowb['tit']."' />".strtoupper($rowb['tit'])."
-		</div>
-
-	<input name='titsub' type='hidden' value='".$rowb['titsub']."' />
-	<input name='datein' type='hidden' value='".$rowb['datein']."' />
-	<input name='timein' type='hidden' value='".$rowb['timein']."' />
-	<input name='datemod' type='hidden' value='".$rowb['datemod']."' />
-	<input name='timemod' type='hidden' value='".$rowb['timemod']."' />
-
-		<div class='whiletotala'>
-		ISLA<br>
-	<input name='isla' type='hidden' value='".$rowb['refisla']." / ".$islaname."' />".strtoupper($rowb['refisla'])." / ".strtoupper($islaname)."
-		</div>
-
-		<div class='whiletotala'>
-		AYUNTAMIENTO<br>
-	<input name='ayto' type='hidden' value='".$rowb['refayto']." / ".$aytoname."' />".strtoupper($rowb['refayto'])." / ".strtoupper($aytoname)."
-		</div>
-
-		<div class='whiletotala conte'>
-		DESCRIPCION<br>
-	<input name='conte' type='hidden' value='".$rowb['conte']."' />".strtoupper($conte)."
-		</div>
-
-		<div class='whiletotala'>
-	<input name='myimg1' type='hidden' value='".$rowb['myimg1']."' />
-	<img src='../Gch.Img.Art/".$rowb['myimg1']."' />
-		</div>
 	
-	<input name='tipo' type='hidden' value='".$rowb['reftipo']." / ".$tipname."' />
-	<input name='espec1' type='hidden' value='".$rowb['refespec1']." / ".$espec1name."' />
-	<input name='espec2' type='hidden' value='".$rowb['refespec2']." / ".$espec2name."' />
-	<input name='url' type='hidden' value='".$rowb['url']."' />
-	<input name='calle' type='hidden' value='".$rowb['calle']."' />
-	<input name='Email' type='hidden' value='".$rowb['Email']."' />
-	<input name='Tlf1' type='hidden' value='".$rowb['Tlf1']."' />
-	<input name='Tlf2' type='hidden' value='".$rowb['Tlf2']."' />
-
-		<div class='whiletotala'>
-					<input type='submit' value='VER DETALLES' />
-					<input type='hidden' name='oculto2' value=1 />
-		</div>
-	</form>
-		</div>");
+	global $actionforma;
+	$actionforma = "<form name='ver' action='../Gch.Artic/Art_Ver_02.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=520px,height=640px')\">";
+	global $formbotona;
+	$formbotona = "<div class='whiletotala'>
+						<input type='submit' value='VER DETALLES' />
+						<input type='hidden' name='oculto2' value=1 />
+					</div>
+				</form>";
+	global $actionformb;
+	$actionformb = "";
+	global $formbotonb;
+	$formbotonb = "";
+	
+	require 'Inc_Art_While_Total.php';
+	
 			} // FIN WHILE
 
 		print("</div>");

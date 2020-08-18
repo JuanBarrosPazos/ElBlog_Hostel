@@ -256,7 +256,6 @@ function show_form(){
 							<a href='User_Modificar_01.php' >
 													CANCELAR
 							</a>
-						</font>
 					</td>
 				</tr>
 				
