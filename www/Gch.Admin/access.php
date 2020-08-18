@@ -883,34 +883,11 @@ function ver_todo(){
 										</tr>
 									</table>");
 									
-				} else { 	print ("<table align='center'>
-									<tr>
-										<th colspan=5 class='BorderInf'>
-					Restaurantes: ".$nres." de ".$num_total_rows."
-										</th>
-									</tr>
-									
-									<tr>
-										<th class='BorderInfDch'>
-											Nombre
-										</th>
-										
-										<th class='BorderInfDch'>
-											Isla
-										</th>
-																				
-										<th class='BorderInfDch'>
-											Ayuntamiento
-										</th>
+				} else { 	
+					
+	print ("<div class=\"juancentra col-xs-12 col-sm-12 col-lg-6\" style=\"	vertical-align: top !important; margin-top: 6px;\">
 
-										<th class='BorderInfDch'>
-											Contenido
-										</th>
-
-										<th class='BorderInfDch'>
-											Imagen
-										</th>
-									</tr>");
+			RESTAURANTES ".$nres." de ".$num_total_rows."<br>");
 			
 	while($rowb = mysqli_fetch_assoc($qb)){
 				global $conte;
@@ -919,7 +896,7 @@ function ver_todo(){
 
 	require '../Gch.Artic/Inclu_Name_Ref_to_Name.php';
 				
-	print (	"<tr align='center'>
+	print (	"<div style=\"margin-top:8px; padding-top: 0px; border-top: #fff solid 1px; border-bottom: #fff solid 1px; \">
 									
 	<form name='ver' action='../Gch.Artic/Art_Ver_02.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=520px,height=640px')\">
 
@@ -927,9 +904,10 @@ function ver_todo(){
 	<input name='refuser' type='hidden' value='".$rowb['refuser']."' />
 	<input name='refart' type='hidden' value='".$rowb['refart']."' />
 							
-						<td class='BorderInfDch'>
-	<input name='tit' type='hidden' value='".$rowb['tit']."' />".$rowb['tit']."
-						</td>
+			<div class='whiletotala'>
+			NOMBRE<br>
+	<input name='tit' type='hidden' value='".$rowb['tit']."' />".strtoupper($rowb['tit'])."
+			</div>
 
 	<input name='titsub' type='hidden' value='".$rowb['titsub']."' />
 	<input name='datein' type='hidden' value='".$rowb['datein']."' />
@@ -937,22 +915,25 @@ function ver_todo(){
 	<input name='datemod' type='hidden' value='".$rowb['datemod']."' />
 	<input name='timemod' type='hidden' value='".$rowb['timemod']."' />
 
-						<td class='BorderInfDch'>
-	<input name='isla' type='hidden' value='".$rowb['refisla']." / ".$islaname."' />".$rowb['refisla']." / ".$islaname."
-						</td>
+			<div class='whiletotala'>
+			ISLA<br>
+	<input name='isla' type='hidden' value='".$rowb['refisla']." / ".$islaname."' />".strtoupper($rowb['refisla'])." / ".strtoupper($islaname)."
+			</div>
 
-						<td class='BorderInfDch'>
-	<input name='ayto' type='hidden' value='".$rowb['refayto']." / ".$aytoname."' />".$rowb['refayto']." / ".$aytoname."
-						</td>
+			<div class='whiletotala'>
+			AYUNTAMIENTO<br>
+	<input name='ayto' type='hidden' value='".$rowb['refayto']." / ".$aytoname."' />".strtoupper($rowb['refayto'])." / ".strtoupper($aytoname)."
+			</div>
 
-						<td class='BorderInfDch' width='200px'align='left'>
+			<div class='whiletotala conte' >
+			DESCRIPCION<br>
 	<input name='conte' type='hidden' value='".$rowb['conte']."' />".$conte."
-						</td>
+			</div>
 
-						<td class='BorderInf' width='50px'>
+			<div class='whiletotala' >
 	<input name='myimg1' type='hidden' value='".$rowb['myimg1']."' />
-	<img src='../Gch.Img.Art/".$rowb['myimg1']."'  width='99%' height='auto' />
-						</td>
+	<img src='../Gch.Img.Art/".$rowb['myimg1']."' />
+			</div>
 	
 	<input name='tipo' type='hidden' value='".$rowb['reftipo']." / ".$tipname."' />
 	<input name='espec1' type='hidden' value='".$rowb['refespec1']." / ".$espec1name."' />
@@ -963,20 +944,16 @@ function ver_todo(){
 	<input name='Tlf1' type='hidden' value='".$rowb['Tlf1']."' />
 	<input name='Tlf2' type='hidden' value='".$rowb['Tlf2']."' />
 
-		</tr>
-		<tr>
-			<td colspan=3 class='BorderInf'>
-					&nbsp;
-			</td>
-			<td colspan=2 align='right' class='BorderInf'>
-					<input type='submit' value='VER DETALLES' />
-					<input type='hidden' name='oculto2' value=1 />
-			</td>
+		<div class='whiletotala'>
+			<input type='submit' value='VER DETALLES' />
+			<input type='hidden' name='oculto2' value=1 />
+		</div>
 	</form>
-		</tr>");
+		</div>
+		");
 			} // FIN WHILE
 
-		print("</table>");
+		print("</div>");
 
 		} 
 	} 

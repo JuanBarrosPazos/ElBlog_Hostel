@@ -31,7 +31,7 @@ function process_form(){
 	global $_sec;
 	$_sec = $rowautor['Nombre']." ".$rowautor['Apellidos'];
 	
-	print("<table align='center' style=\"text-align:left; width:96%; max-width:500px\" >
+	print("<table align='center' style=\"text-align:left; width:96%; min-width:340px\" >
 				<tr>
 					<th colspan=3  class='BorderInf'>
 						DETALLES DEL RESTAURANTE
@@ -42,7 +42,7 @@ function process_form(){
 					<td width=100px >
 						ID:
 					</td>
-					<td width=140px>"
+					<td>"
 						.$_POST['id'].
 					"</td>
 					<td rowspan='7' align='center' width='auto'>
@@ -61,7 +61,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						AUTOR NOMBRE
+						AUTOR
 					</td>
 					<td>"
 						.$_sec.
@@ -70,7 +70,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						REFERENCIA
+						ART REF
 					</td>
 					<td>"
 						.$_POST['refart'].
@@ -79,7 +79,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						RESTAURANTE
+						NAME
 					</td>
 					<td>"
 						.$_POST['tit'].
@@ -88,7 +88,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						SUBTITULO
+						SUBTIT
 					</td>
 					<td>"
 						.$_POST['titsub'].
@@ -106,7 +106,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						AYUNTAMIENTO
+						AYTO
 					</td>
 					<td colspan='2'>"
 						.$_POST['ayto'].
@@ -115,7 +115,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						TIPO DE LOCAL
+						LOCAL
 					</td>
 					<td colspan='2'>"
 						.$_POST['tipo'].
@@ -124,7 +124,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						ESPECIALIDADES
+						COCINA
 					</td>
 					<td colspan='2'>"
 						.$_POST['espec1']." / ".$_POST['espec2'].
@@ -142,7 +142,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						PAGINA WEB
+						WEB
 					</td>
 					<td colspan='2'>"
 						.$_POST['url'].
@@ -160,7 +160,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						TELEFONOS
+						TELEFONO
 					</td>
 					<td colspan='2'>"
 						.$_POST['Tlf1']." / ".$_POST['Tlf2'].
@@ -169,7 +169,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						DATE TIME IN
+						DATE IN
 					</td>
 					<td colspan='2'>"
 						.$_POST['datein']." / ".$_POST['timein'].
@@ -178,7 +178,7 @@ function process_form(){
 				
 				<tr>
 					<td>
-						DATE TIME MOD
+						DATE MOD
 					</td>
 					<td colspan='2'>"
 						.$_POST['datemod']." / ".$_POST['timemod'].

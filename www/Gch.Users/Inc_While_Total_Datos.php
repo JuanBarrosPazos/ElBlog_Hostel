@@ -1,6 +1,6 @@
 <?php
 
-	print (	"<div style=\"margin-top:12px;\">".$formularioh."
+	print (	"<div style=\"margin-top:10px;\">".$formularioh."
 
             <!-- AQUÍ VA LA CABECERA DEL FORMULARIO -->
 
@@ -26,7 +26,7 @@
 						
 				<div class='whiletotal' style=\"vertical-align: top;\">
 	<input name='myimg' type='hidden' value='".$rowb['myimg']."' />
-	<img src='../Gch.Img.User/".$rowb['myimg']."' style=\"height:40px; width:30px; margin-top:5px;\" />
+	<img src='../Gch.Img.User/".$rowb['myimg']."' style=\"height:40px; width:30px;\" />
 				</div>
 													
 				<div class='whiletotal'>

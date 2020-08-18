@@ -507,7 +507,30 @@ a:hover  img {
 
 .whiletotal {
 	display:inline-block; 
+	vertical-align: top !important;
+	width: 100px;
 	padding: 1px 4px 1px 4px; 
-	margin: 1px 3px 1px 3px;
+	margin: 0.4em 3px 1px 3px;
 }
+
+.whiletotala {
+	display:inline-block; 
+	vertical-align: top !important;
+	width: 120px;
+	padding: 1px 4px 1px 4px; 
+	margin: 0.4em 3px 1px 3px;
+	border: #93D7BF solid 1px; /**/
+}
+
+.whiletotala img {
+	width:auto;
+	max-width:120px;
+	height:54px;
+}
+
+.conte {
+	width: 34%;
+	min-width: 320px;
+}
+
 /* Creado por Juan Barros Pazos 2020 */
