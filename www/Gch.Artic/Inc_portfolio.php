@@ -85,26 +85,26 @@ function process_form(){
             // DEFINO LAS IMAGENES
             global $img1;
             $img1 = "<div class='protfolioimg'>
-                    <a href='../Gch.Img.Art/".$rowb['myimg1']."' rel=\"lightbox[juan]\" title='IMAGEN 1'>
-                        <img class='img-fluid' src='../Gch.Img.Art/".$rowb['myimg1']."' alt=''>
+                    <a style=\"width:100%; height:100%;\" href='../Gch.Img.Art/".$rowb['myimg1']."' rel=\"lightbox[juan]\" title='IMAGEN 1'>
+                        <img class='portf-img-fluid' src='../Gch.Img.Art/".$rowb['myimg1']."' alt=''>
                     </a>
                     </div>";
             global $img2;
             $img2 = "<div class='protfolioimg'>
                     <a href='../Gch.Img.Art/".$rowb['myimg2']."' rel='lightbox[juan]' title='IMAGEN 2'>
-                        <img class='img-fluid' src='../Gch.Img.Art/".$rowb['myimg2']."' alt=''>
+                        <img class='portf-img-fluid' src='../Gch.Img.Art/".$rowb['myimg2']."' alt=''>
                     </a>
                     </div>";
             global $img3;
             $img3 = "<div class='protfolioimg'>
                     <a href='../Gch.Img.Art/".$rowb['myimg3']."' rel='lightbox[juan]' title='IMAGEN 2'>
-                        <img class='img-fluid' src='../Gch.Img.Art/".$rowb['myimg3']."' alt=''>
+                        <img class='portf-img-fluid' src='../Gch.Img.Art/".$rowb['myimg3']."' alt=''>
                     </a>
                     </div>";
             global $img4;
             $img4 = "<div class='protfolioimg'>
                     <a href='../Gch.Img.Art/".$rowb['myimg4']."' rel='lightbox[juan]' title='IMAGEN 2'>
-                        <img class='img-fluid' src='../Gch.Img.Art/".$rowb['myimg4']."' alt=''>
+                        <img class='portf-img-fluid' src='../Gch.Img.Art/".$rowb['myimg4']."' alt=''>
                     </a>
                     </div>";
 

@@ -124,19 +124,19 @@ function MM_validateForm() {
 
       <div class="row">
 
-        <div class="col-md-3 col-sm-6 portfolio-item">
+        <div class="col-md-3 col-sm-6 portfolio-item" style="padding:0px 2px 0px 2px">
                 <?php echo $img1; ?>
         </div>
 
-        <div class="col-md-3 col-sm-6 portfolio-item">
+        <div class="col-md-3 col-sm-6 portfolio-item" style="padding:0px 2px 0px 2px">
                 <?php echo $img2; ?>
         </div>
 
-        <div class="col-md-3 col-sm-6 portfolio-item">
+        <div class="col-md-3 col-sm-6 portfolio-item" style="padding:0px 2px 0px 2px">
                 <?php echo $img3; ?>
         </div>
 
-        <div class="col-md-3 col-sm-6 portfolio-item">
+        <div class="col-md-3 col-sm-6 portfolio-item" style="padding:0px 2px 0px 2px">
                 <?php echo $img4; ?>
         </div>
 
