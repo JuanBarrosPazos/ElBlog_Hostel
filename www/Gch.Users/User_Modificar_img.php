@@ -50,7 +50,13 @@ function validate_form(){
 	$extension = substr($_FILES['myimg']['name'],-3);
 	$ext_correcta = in_array($extension, $ext_permitidas);
 
-		if($_FILES['myimg']['size'] == 0){
+	global $extension1;
+	$extension1 = strtolower($extension);
+	$extension1 = str_replace(".","",$extension1);
+	global $ctemp;
+	$ctemp = "../Gch.Temp";
+
+	if($_FILES['myimg']['size'] == 0){
 			$errors [] = "SELECCIONE UNA IMAGEN";
 			global $img2;
 			$img2 = 'untitled.png';
@@ -70,21 +76,22 @@ function validate_form(){
 			}
 
 		elseif ($_FILES['myimg']['size'] <= $limite){
+			copy($_FILES['myimg']['tmp_name'], $ctemp."/ini1v.".$extension1); 
 			global $ancho;
 			global $alto;
-			list($ancho, $alto, $tipo, $atributos) = getimagesize($_FILES['myimg']['name']);
+			list($ancho, $alto, $tipo, $atributos) = getimagesize($ctemp."/ini1v.".$extension1);
 
-			if($ancho < 200){
-				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ANCHURA MENOR DE 200 ".$ancho;
+			if($ancho < 100){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ANCHURA MENOR DE 100 * IMG = ".$ancho;
 			}
-			elseif($ancho > 400){
-				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ANCHURA MAYOR DE 400 ".$ancho;
+			elseif($ancho > 600){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ANCHURA MAYOR DE 600 * IMG = ".$ancho;
 			}
-			elseif(($ancho <= 400)&&($alto < 200)){
-				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ALTURA MENOR DE 200 ".$alto;
+			elseif(($ancho <= 600)&&($alto < 100)){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ALTURA MENOR DE 100 * IMG = ".$alto;
 			}
-			elseif(($ancho <= 400)&&($alto > 500)){
-				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ALTURA MAYOR DE 500 ".$alto;
+			elseif(($ancho <= 600)&&($alto > 700)){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ALTURA MAYOR DE 700 * IMG = ".$alto;
 			}
 		}
 

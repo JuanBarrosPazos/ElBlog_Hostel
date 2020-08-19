@@ -40,15 +40,17 @@ function validate_form(){
 	
 	$errors = array();
 
-	$limite = 500 * 1024;
+	$limite = 600 * 1024;
 	
 	$ext_permitidas = array('jpg','JPG','gif','GIF','png','PNG','bmp','BMP');
 	$extension = substr($_FILES['myimg']['name'],-3);
-	// print($extension);
-	// $extension = end(explode('.', $_FILES['myimg']['name']) );
 	$ext_correcta = in_array($extension, $ext_permitidas);
 
-	// $tipo_correcto = preg_match('/^image\/(gif|png|jpg|bmp)$/', $_FILES['myimg']['type']);
+	global $extension1;
+	$extension1 = strtolower($extension);
+	$extension1 = str_replace(".","",$extension1);
+	global $ctemp;
+	$ctemp = "../Gch.Temp";
 
 		if($_FILES['myimg']['size'] == 0){
 			$errors [] = "Ha de seleccionar una fotograf&iacute;a.";
@@ -70,27 +72,28 @@ function validate_form(){
 	*/
 		elseif ($_FILES['myimg']['size'] > $limite){
 		$tamanho = $_FILES['myimg']['size'] / 1024;
-		$errors [] = "El archivo".$_FILES['myimg']['name']." es mayor de 500 KBytes. ".$tamanho." KB";
+		$errors [] = "El archivo".$_FILES['myimg']['name']." es mayor de 60 KBytes. ".$tamanho." KB";
 		global $img2;
 		$img2 = 'untitled.png';
 			}
 			
 		elseif ($_FILES['myimg']['size'] <= $limite){
+			copy($_FILES['myimg']['tmp_name'], $ctemp."/ini1v.".$extension1);
 			global $ancho;
 			global $alto;
-			list($ancho, $alto, $tipo, $atributos) = getimagesize($_FILES['myimg']['name']);
+			list($ancho, $alto, $tipo, $atributos) = getimagesize($ctemp."/ini1v.".$extension1);
 
-			if($ancho < 200){
-				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ANCHURA MENOR DE 200 ".$ancho;
+			if($ancho < 100){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ANCHURA MENOR DE 100 * IMG = ".$ancho;
 			}
-			elseif($ancho > 400){
-				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ANCHURA MAYOR DE 400 ".$ancho;
+			elseif($ancho > 600){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ANCHURA MAYOR DE 600 * IMG = ".$ancho;
 			}
-			elseif(($ancho <= 400)&&($alto < 200)){
-				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ALTURA MENOR DE 200 ".$alto;
+			elseif(($ancho <= 600)&&($alto < 100)){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ALTURA MENOR DE 100 * IMG = ".$alto;
 			}
-			elseif(($ancho <= 400)&&($alto > 500)){
-				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ALTURA MAYOR DE 500 ".$alto;
+			elseif(($ancho <= 600)&&($alto > 700)){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ALTURA MAYOR DE 700 * IMG = ".$alto;
 			}
 		}
 		

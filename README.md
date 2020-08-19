@@ -9,6 +9,205 @@
 ----
 
 ### 2020.08.19
+## ElBlog_Hostel.F04.V28 ESTABLE
+
+* SE RECOMIENDA SOBREESCRIBIR Gch.Admin, Gch.Artic, Gch.Users
+
+* SE HA MODIFICADO LA VALIDACIÓN DE IMAGENES EN User_Modificar_img.php, Admin_Modificar_img.php, Art_Modificar_img.php, TAL QUE:
+
+```
+  <?PHP
+	global $extension1;
+	$extension1 = strtolower($extension);
+	$extension1 = str_replace(".","",$extension1);
+	global $ctemp;
+	$ctemp = "../Gch.Temp";
+
+		elseif ($_FILES['myimg']['size'] <= $limite){
+      // COPIAMOS LA IMAGEN AL DIRECTORIO TEMPORAL DESIGNADO ../Gch.Temp
+			copy($_FILES['myimg']['tmp_name'], $ctemp."/ini1v.".$extension1); 
+			global $ancho;
+			global $alto;
+      // EXTRAEMOS LOS VALORES DE LA IMAGEN COPIADA A NUESTRO TEMP DIR
+			list($ancho, $alto, $tipo, $atributos) = getimagesize($ctemp."/ini1v.".$extension1);
+      // VALIDAMOS LOS PARAMETROS SEGÚN NUESTRO INTERES
+
+			if($ancho < 100){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ANCHURA MENOR DE 100 * IMG = ".$ancho;
+			}
+			elseif($ancho > 600){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ANCHURA MAYOR DE 600 * IMG = ".$ancho;
+			}
+			elseif(($ancho <= 600)&&($alto < 100)){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ALTURA MENOR DE 100 * IMG = ".$alto;
+			}
+			elseif(($ancho <= 600)&&($alto > 700)){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ALTURA MAYOR DE 700 * IMG = ".$alto;
+			}
+		}
+
+  ?>
+```
+* Y TENIENDO EN CUENTA QUE EN Art_Modificar_img.php, SE REALIZARA LA REDUCCION DE LA IMAGEN UNA VEZ SUPERADA LA VALIDACIÓN DE LA SIGUIENTE MANERA:
+
+```
+// L.143
+require 'Inc_Modificar_Img.php';
+
+/* ***** */
+
+global $anchomax;
+$anchomax = 900;
+global $altomax;
+$altomax = 400;
+
+$safe_filename = trim(str_replace('/', '', $_FILES['myimg']['name']));
+$safe_filename = trim(str_replace('..', '', $safe_filename));
+global $nombre;
+$nombre = $_FILES['myimg']['name'];
+global $destination_file;
+$destination_file = $ruta.$safe_filename;	
+
+global $destination_file;
+$destination_file = $ruta.$safe_filename;
+
+if( file_exists($ruta.$nombre) ){
+    unlink($ruta.$nombre);
+    print("* ".$nombre." YA EXISTE, SELECCIONE OTRA IMAGEN.</br>");
+    
+} else {
+
+    // Eliminar el archivo antiguo untitled.png
+    if($_SESSION['myimg'] != 'untitled.png' ){
+        unlink($ruta.$_SESSION['myimg']);
+                                    }
+
+    global $extension;
+    global $ctemp;
+    $ctemp = "../Gch.Temp";
+    if (!file_exists($ctemp)) {
+      mkdir($ctemp, 0777, true);
+      copy($_FILES['myimg']['tmp_name'], $ctemp."/inim.".$extension); 
+    }else{
+      copy($_FILES['myimg']['tmp_name'], $ctemp."/inim.".$extension); 
+    }
+
+    global $ancho;
+    global $alto;
+    list($ancho, $alto, $tipo, $atributos) = getimagesize($_FILES['myimg']['tmp_name']);
+
+    if($ancho > $anchomax){   
+
+        global $extension;
+        global $destination_file; 
+        global $anchomax;
+        global $ancho;
+        global $anchodif;
+        $anchodif = ($ancho - $anchomax);
+        global $porcent;
+        $porcent = round((($anchodif * 100)/$ancho),2);
+        //echo " % ".$porcent;
+        global $anchonew;
+        $anchonew = ($ancho - $anchodif);
+        //echo " New Width: ".$anchonew;
+        global $altonew;
+        $altonew = ($alto - (($alto * $porcent)/100));
+        $altonew = round($altonew,0);
+  
+        // SE RECORTA EL ANCHO DE LA IMAGEN
+        if(($extension == 'jpg')||($extension == 'jpeg')||($extension == '')){
+          $img= imagecreatefromjpeg($ctemp."/inim.".$extension);
+        }elseif($extension == 'png'){ $img= imagecreatefrompng($ctemp."/inim.".$extension); }
+
+        $dst = ImageCreateTrueColor($anchonew, $altonew);
+        imagecopyresampled($dst, $img, 0, 0, 0, 0, $anchonew, $altonew, $ancho, $alto);
+
+        if(($extension == 'jpg')||($extension == 'jpeg')||($extension == '')){
+                  imagejpeg($dst, $destination_file);
+                  global $ruta;
+                  global $new_name;
+                  $rename_filename = $ruta.$new_name;								
+                  rename($destination_file, $rename_filename);
+                  $_SESSION['myimg'] = $new_name;
+                  print ($redir);
+                }
+          elseif($extension == 'png'){ 
+                imagepng($dst, $destination_file);
+                global $ruta;
+                global $new_name;
+                $rename_filename = $ruta.$new_name;								
+                rename($destination_file, $rename_filename);
+                $_SESSION['myimg'] = $new_name;
+                print ($redir);
+          }else{ }
+  
+      } // FIN RECORTA EL ANCHO
+
+      elseif($alto > $altomax){ 
+
+        global $extension;
+        global $destination_file; 
+        global $altomax;
+        global $alto;     
+        global $altodif;
+        $altodif = ($alto - $altomax);
+        global $porcent;
+        $porcent = round((($altodif * 100)/$alto),2);
+        global $altonew;
+        $altonew = ($alto - $altodif);
+    
+        global $anchonew;
+        $anchonew = ($ancho - (($ancho * $porcent)/100));
+        $anchonew = round($anchonew,0);
+    
+        // SE RECORTA EL ALTO DE LA IMAGEN
+        if(($extension == 'jpg')||($extension == 'jpeg')||($extension == '')){
+          $img= imagecreatefromjpeg($ctemp."/inim.".$extension);
+        }elseif($extension == 'png'){ $img= imagecreatefrompng($ctemp."/inim.".$extension); }
+
+        $dst = ImageCreateTrueColor($anchonew, $altonew);
+        imagecopyresampled($dst, $img, 0, 0, 0, 0, $anchonew, $altonew, $ancho, $alto);
+
+        if(($extension == 'jpg')||($extension == 'jpeg')||($extension == '')){
+                  imagejpeg($dst, $destination_file);
+                  global $ruta;
+                  global $new_name;
+                  $rename_filename = $ruta.$new_name;								
+                  rename($destination_file, $rename_filename);
+                  $_SESSION['myimg'] = $new_name;
+                  print ($redir);
+                }
+        elseif($extension == 'png'){ 
+            imagepng($dst, $destination_file);
+            global $ruta;
+            global $new_name;
+            $rename_filename = $ruta.$new_name;								
+            rename($destination_file, $rename_filename);
+            $_SESSION['myimg'] = $new_name;
+            print ($redir);
+        }else{ }
+      }
+      // FIN SI NO SE REDUCE LA IMAGEN
+      else {  global $destination_file;
+              move_uploaded_file($_FILES['myimg']['tmp_name'], $destination_file);
+              global $ruta;
+              global $new_name;
+              $rename_filename = $ruta.$new_name;								
+              rename($destination_file, $rename_filename);
+              $_SESSION['myimg'] = $new_name;
+              print ($redir);
+            } 
+
+} // FIN SI NO EXISTE LA IMAGEN
+
+```
+* EN CREAR Art_Crear.php SE REALIZA UNA REDUCCION DE LAS IMAGENES DE FORMA SIMILAR EN L.248 require 'Inc_Crea_Img.php';
+
+* SE RECOMIENDA SOBREESCRIBIR: Gch.Artic, Gch.Css, Gch.Www.
+
+----
+
+### 2020.08.19
 ## ElBlog_Hostel.F04.V27 ESTABLE
 
 * SE HAN MODIFICADO CUESTIONES DE MAQUETACIÓN ORIENTATAS A BACK END MOVIL FIRST
