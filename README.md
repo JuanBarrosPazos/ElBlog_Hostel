@@ -8,6 +8,12 @@
 
 ----
 
+## * REPOSITORIO MEGA NZ: 
+
+* https://mega.nz/folder/K8thzLTC#hGByFrZ83XqvY0U6b_w8eQ
+
+----
+
 ### 2020.08.19
 ## ElBlog_Hostel.F04.V28 ESTABLE
 
@@ -202,8 +208,6 @@ if( file_exists($ruta.$nombre) ){
 
 ```
 * EN CREAR Art_Crear.php SE REALIZA UNA REDUCCION DE LAS IMAGENES DE FORMA SIMILAR EN L.248 require 'Inc_Crea_Img.php';
-
-* SE RECOMIENDA SOBREESCRIBIR: Gch.Artic, Gch.Css, Gch.Www.
 
 ----
 
