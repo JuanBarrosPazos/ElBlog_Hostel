@@ -119,6 +119,37 @@
 					$table2 = "\t* NO OK TABLA ".$art.". ".mysqli_error($db)."\n";
 				}
 
+	/************** CREAMOS LA TABLA NEWS ***************/
+
+	$news = "gch_news";
+	$newss = "`".$news."`";
+	
+	$tnw = "CREATE TABLE IF NOT EXISTS `$db_name`.$news (
+  `id` int(6) NOT NULL auto_increment,
+  `refuser` varchar(22) collate utf8_spanish2_ci NOT NULL,
+  `refart` varchar(22) collate utf8_spanish2_ci NOT NULL,
+  `tit` varchar(22) collate utf8_spanish2_ci NOT NULL,
+  `titsub` varchar(22) collate utf8_spanish2_ci NOT NULL,
+  `datein` varchar(20) collate utf8_spanish2_ci NOT NULL default '0',
+  `timein` varchar(20) collate utf8_spanish2_ci NOT NULL default '0',
+  `datemod` varchar(20) collate utf8_spanish2_ci NOT NULL default '0',
+  `timemod` varchar(20) collate utf8_spanish2_ci NOT NULL default '0',
+  `conte` text(402) collate utf8_spanish2_ci NOT NULL,
+  `myimg` varchar(30) collate utf8_spanish2_ci NOT NULL default 'untitled.png',
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `refart` (`refart`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=1 ";
+		
+	if(mysqli_query($db, $tnw)){
+					global $nw;
+					$nw = "\t* OK TABLA ".$news."\n";
+				} else {
+					print( "* NO OK TABLA ".$news.". ".mysqli_error($db)."\n");
+					global $nw;
+					$nw = "\t* NO OK TABLA ".$news.". ".mysqli_error($db)."\n";
+				}
+
 	/************* CREAMOS LA TABLA ISLAS / PROVINCIAS ****************/
 
 	$islas = "CREATE TABLE IF NOT EXISTS `$db_name`.`gch_islas` (

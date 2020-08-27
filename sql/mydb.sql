@@ -115,13 +115,31 @@ INSERT INTO `gch_art` (`id`, `refuser`, `refart`, `tit`, `titsub`, `datein`, `ti
 (9, 'jbp55555555k', '2020.06.20.09.33.53', 'XESCA BARROS', 'MI AMORCITO', '2020-06-20', '09:33:53', '0000-00-00', '00:00:00', 'RESTAURANTE XESCA BARROS bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla BLE BLE BLE BLE BLE BLE', '2020.06.20.09.33.53a.jpg', '2020.06.20.09.33.53b.jpg', '2020.06.20.09.33.53c.jpg', '2020.06.20.09.33.53d.jpg', 'plma', 'mall', 'parr', 'carn', 'pesc', 63, 70, 'http://juanbarrospazos.blogspot.com.es/', 'https://goo.gl/maps/63M96me7YdBkhJLf7', 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3075.5997770189756!2d2.6670561!3d39.568631!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x55bc574de040df4a!2sCIFP%20Francesc%20de%20Borja%20Moll!5e0!3m2!1ses!2ses!4v1593844861566!5m2!1ses!2ses', 39.569065, 2.667335, 'otra callecita de palma', 'juanbarrospazos@gmail.com', '333333334', '333333335');
  
 
+CREATE TABLE IF NOT EXISTS `gch_news` (
+  `id` int(6) NOT NULL auto_increment,
+  `refuser` varchar(22) collate utf8_spanish2_ci NOT NULL,
+  `refnews` varchar(22) collate utf8_spanish2_ci NOT NULL,
+  `tit` varchar(22) collate utf8_spanish2_ci NOT NULL,
+  `titsub` varchar(22) collate utf8_spanish2_ci NOT NULL,
+  `datein` varchar(20) collate utf8_spanish2_ci NOT NULL default '0',
+  `timein` varchar(20) collate utf8_spanish2_ci NOT NULL default '0',
+  `datemod` varchar(20) collate utf8_spanish2_ci NOT NULL default '0',
+  `timemod` varchar(20) collate utf8_spanish2_ci NOT NULL default '0',
+  `conte` text(402) collate utf8_spanish2_ci NOT NULL,
+  `myimg` varchar(30) collate utf8_spanish2_ci NOT NULL default 'untitled.png',
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `refnews` (`refnews`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=1;
+		
+
 CREATE TABLE IF NOT EXISTS `gch_aytos` (
 	`id` int(3) NOT NULL auto_increment,
-		`ayto` varchar(26) collate utf8_spanish2_ci NOT NULL,
-		`refayto` varchar(4) collate utf8_spanish2_ci NOT NULL,
-		`refisla` varchar(4) collate utf8_spanish2_ci NOT NULL,
-		PRIMARY KEY  (`id`),
-		UNIQUE KEY `id` (`id`)
+	`ayto` varchar(26) collate utf8_spanish2_ci NOT NULL,
+	`refayto` varchar(4) collate utf8_spanish2_ci NOT NULL,
+	`refisla` varchar(4) collate utf8_spanish2_ci NOT NULL,
+	PRIMARY KEY  (`id`),
+	UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `gch_aytos` (`id`, `ayto`, `refayto`, `refisla`) VALUES
