@@ -140,6 +140,9 @@
          <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="services.php">SERVICIOS</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="news.php">NOTICIAS</a>
+        </li>
 
         <?php
             if((@$_SESSION['uNivel'] == 'useru')||(@$_SESSION['uNivel'] == 'adminu')){ 
@@ -150,7 +153,7 @@
                     </li>
               <form name='cerrar' action='$_SERVER[PHP_SELF]' method='POST'>
                   <input type='submit' value='CLOSE SESSION' class=\"btn btn-primary\" />
-                <input type='hidden' name='salir' value=1 />
+                  <input type='hidden' name='salir' value=1 />
               </form>
                 ");
             }
@@ -161,14 +164,7 @@
                </button>");
                 }
           ?>
-        <!--
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="portfolio.php">PORTFOLIO</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="clients.php">CLIENTES</a>
-          </li>
-        -->
+
         </ul>
       </div>
     </div>

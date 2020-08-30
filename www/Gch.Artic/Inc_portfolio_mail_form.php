@@ -154,9 +154,9 @@ function show_form($errors=''){
 	 
 print("<div class=\"row\">
             <div class=\"col-lg-12 text-center\" style=\"margin:0.6em 0em 2em 0em;\">
-  <h4 class=\"section-heading text-uppercase\" style=\"text-align: center; margin: -1.6em 0em 0.3em 0em\">
+  <h2 class=\"section-heading text-uppercase\" style=\"text-align: center; margin: -1.6em 0em 0.3em 0em\">
           FORMULARIO DE RESERVAS
-  </h4>
+  </h2>
 
     <div class=\"juancentramail\">
         <form name='contacto' method='post' action='$_SERVER[PHP_SELF]#anclaform'>

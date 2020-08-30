@@ -14,6 +14,38 @@
 
 ----
 
+### 2020.08.30
+## ElBlog_Hostel.F05.V30 ESTABLE
+
+* SE INTEGRA LA SECCIÓN NEWS PARA NOTICIAS DESTACADAS DE LA EMPRESA
+
+* SE MODIFICA LA BBDD
+```
+CREATE TABLE IF NOT EXISTS `gch_news` (
+  `id` int(6) NOT NULL auto_increment,
+  `refuser` varchar(22) collate utf8_spanish2_ci NOT NULL,
+  `refnews` varchar(22) collate utf8_spanish2_ci NOT NULL,
+  `tit` varchar(22) collate utf8_spanish2_ci NOT NULL,
+  `titsub` varchar(22) collate utf8_spanish2_ci NOT NULL,
+  `datein` varchar(20) collate utf8_spanish2_ci NOT NULL default '0',
+  `timein` varchar(20) collate utf8_spanish2_ci NOT NULL default '0',
+  `datemod` varchar(20) collate utf8_spanish2_ci NOT NULL default '0',
+  `timemod` varchar(20) collate utf8_spanish2_ci NOT NULL default '0',
+  `conte` text(402) collate utf8_spanish2_ci NOT NULL,
+  `myimg` varchar(30) collate utf8_spanish2_ci NOT NULL default 'untitled.png',
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `refnews` (`refnews`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+```
+
+* SE RECOMIENDA SOBREESCRIBIR Gch.Admin, Gch.Artic, Gch.Config, Gch.Inclu, Gch.Users, Gch.Www, sql/ .
+
+* MODIFICADO index_Play_System(Docker).php SOBREESCRIBIR Y RENOMBRAR A index.php.
+
+----
+
 ### 2020.08.19
 ## ElBlog_Hostel.F04.V28 ESTABLE
 

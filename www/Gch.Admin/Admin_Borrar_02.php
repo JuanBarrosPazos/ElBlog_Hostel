@@ -21,7 +21,7 @@ if /*(*/($_SESSION['Nivel'] == 'admin')/* || ($_SESSION['Nivel'] == 'plus'))*/{
 									}
 	elseif($_POST['borrar']){ process_form();
 							  global $refnorm;
-							  $refnorm = $_SESSION['iniref'];
+							  $refnorm = @$_SESSION['iniref'];
 							  info_02();
 	} else { show_form(); }
 		} else { require '../Gch.Inclu/table_permisos.php'; }
@@ -222,18 +222,27 @@ function process_form(){
 	global $tablenamea;
 	$tablenamea = "gch_art";
 	$tablenamea = "`".$tablenamea."`";
-	$sqla = "UPDATE `$db_name`.$tablenamea SET `refuser` = 'admindel' WHERE $tablenamea.`refart` = '$_SESSION[delrefart]' LIMIT 1 ";
+	$sqla = "UPDATE `$db_name`.$tablenamea SET `refuser` = 'admindel' WHERE $tablenamea.`refuser` = '$_SESSION[delrefart]' ";
 	if(mysqli_query($db, $sqla)){ 
-		print("<font color='#FF0000'>L225: </font></br>&nbsp;&nbsp;".mysqli_error($db))."</br>";
-	} else { }
+	} else { print("<font color='#FF0000'>L225: </font></br>&nbsp;&nbsp;".mysqli_error($db))."</br>"; }
+
 	/* CAMBIAMOS LA REFERENCIA DEL USUARIO BORRADO EN LA TABLA OPINIONES POR ADMINDEL */
 	global $tablenameb;
 	$tablenameb = "gch_opiniones";
 	$tablenameb = "`".$tablenameb."`";
-	$sqlab = "UPDATE `$db_name`.$tablenameb SET `refuser` = 'admindel' WHERE $tablenameb.`refart` = '$_SESSION[delrefart]' LIMIT 1 ";
+	$sqlab = "UPDATE `$db_name`.$tablenameb SET `refuser` = 'admindel' WHERE $tablenameb.`refuser` = '$_SESSION[delrefart]' ";
 	if(mysqli_query($db, $sqlab)){ 
-		print("<font color='#FF0000'>L233: </font></br>&nbsp;&nbsp;".mysqli_error($db))."</br>";
-	} else { }
+		
+	} else { print("<font color='#FF0000'>L241: </font></br>&nbsp;&nbsp;".mysqli_error($db))."</br>"; }
+
+	/* CAMBIAMOS LA REFERENCIA DEL USUARIO BORRADO EN LA TABLA NEWS POR ADMINDEL */
+	global $tablenamen;
+	$tablenamen = "gch_news";
+	$tablenamen = "`".$tablenamen."`";
+	$sqla = "UPDATE `$db_name`.$tablenamen SET `refuser` = 'admindel' WHERE $tablenamen.`refuser` = '$_SESSION[delrefart]' ";
+	if(mysqli_query($db, $sqla)){ 
+		
+	} else { print("<font color='#FF0000'>L233: </font></br>&nbsp;&nbsp;".mysqli_error($db))."</br>"; }
 
 	global $ctemp;
 	$ctemp = "../Gch.Temp";
@@ -255,7 +264,9 @@ function process_form(){
 	$sqlus = "DELETE FROM `$db_name`.`gch_user` WHERE `gch_user`.`ref` = '$_POST[ref]' LIMIT 1 ";
 	// SI SE CUMPLE EL QUERY
 	if(mysqli_query($db, $sqlus)){ 
-		unlink("../Gch.Img.User/".$_POST['myimg']);
+		if( file_exists( "../Gch.Img.User/".$_POST['myimg']) ){
+			unlink("../Gch.Img.User/".$_POST['myimg']);
+		}else{}
 	} else { }
 
 	// SE GRABAN LOS DATOS EN LOG DEL ADMIN

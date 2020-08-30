@@ -61,6 +61,9 @@
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="Gch.Www/services.php">SERVICIOS</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="Gch.Www/news.php">NOTICIAS</a>
+        </li>
 
         <?php
             if((@$_SESSION['uNivel'] == 'useru')||(@$_SESSION['uNivel'] == 'adminu')){ 
@@ -82,18 +85,6 @@
                </button>");
                 }
           ?>
-
-        <!--
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="Gch.Www/portfolio.php">PORTFOLIO</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="Gch.Www/news.php">NOTICIAS</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="Gch.Www/clients.php">CLIENTES</a>
-          </li>
-        -->
         </ul>
       </div>
     </div>

@@ -15,6 +15,13 @@ print("
 <ul>
 ");
 if ($_SESSION['dni'] == $_SESSION['mydni']) {
+
+	global $backup;
+	$backup = "	<li>
+					<a href='../Gch.upbbdd/export_bbdd_backups.php'>
+						<i class='ic ico22'></i>BACKUP bbdd
+					</a>
+				</li>";
 	
 print("
 		
@@ -22,8 +29,8 @@ print("
 		<a href='#'><i class='ic ico22'></i> <span>WEB MASTER</span></a>
 			<ul class='nav-flyout'>
 		<li>
-			<a href='../Gch.upbbdd/export_bbdd_backups.php'>
-				<i class='ic ico22'></i>BACKUP bbdd
+			<a href='../Gch.News/News_Modificar_01.php'>
+				<i class='ic ico22'></i>NEWS MODIF
 			</a>
 		</li>
 		<li>
@@ -59,6 +66,13 @@ print("
 			</ul>
 	</li>");
 					}else{
+
+	global $backup;
+	$backup = "	<li>
+					<a href='#'>
+						<i class='ic'></i>
+					</a>
+				</li>";
 	
 print("<li>
 			<a href='#'>	
@@ -149,10 +163,11 @@ print("
 		<a href='#'><i class='ic ico03'></i> <span>RESPALDO DATOS</span></a>
 			<ul class='nav-flyout'>
 				<li>
-					<a href='#' style='background-color: #343434; padding-top: 85px;'>
+					<a href='#' style='background-color: #343434; padding-top: 59px;'>
 						<i class='ic ico19b'></i>BACKUPS
 					</a>
 				</li>
+				".$backup."
 				<li>
 					<a href='../Gch.upbbdd/bbdd.php'>
 						<i class='ic ico02b'></i>TABLAS bbdd

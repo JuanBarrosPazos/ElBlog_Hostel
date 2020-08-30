@@ -7,6 +7,8 @@
 
 	require 'Gch.Users/Only.index.user.php';
 
+	ayear();
+	
 	if (isset($_POST['salir'])) { 
                     require 'Gch.Connet/conection.php';
                     require 'Gch.Connet/conect.php';
@@ -63,9 +65,62 @@
 			
 			show_form();
 			ver_todo();
-				}
+		}
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
-//////////////////////////////////////////////////////////////////////////////////////////////
+function modif(){
+									   							
+	$filename = "Gch.Config/ayear.php";
+	$fw1 = fopen($filename, 'r+');
+	$cyear = fread($fw1,filesize($filename));
+	fclose($fw1);
+	
+	$cyear = explode("\n",$cyear);
+	$cyear[2] = "'' => 'YEAR',\n'".date('y')."' => '".date('Y')."',";
+	$cyear = implode("\n",$cyear);
+	
+	//fseek($fw, 37);
+	$fw = fopen($filename, 'w+');
+	fwrite($fw, $cyear);
+	fclose($fw);
+	}
+
+function modif2(){
+	$filename = "Gch.Config/year.txt";
+	$fw2 = fopen($filename, 'w+');
+	$date = "".date('Y')."";
+	fwrite($fw2, $date);
+	fclose($fw2);
+	}
+
+
+function ayear(){
+	$filename = "Gch.Config/year.txt";
+	$fw2 = fopen($filename, 'r+');
+	$fget = fgets($fw2);
+	fclose($fw2);
+	
+	if($fget == date('Y')){
+		/*
+		print(" <div style='clear:both'></div>
+				<div style='width:200px'>* EL AÑO ES EL MISMO </div>".date('Y')." == ".$fget );
+		*/
+			}
+	elseif($fget != date('Y')){ 
+		/*
+		print(" <div style='clear:both'></div>
+				<div style='width:200px'>* EL AÑO HA CAMBIADO </div>".date('Y')." != ".$fget );
+		*/
+		modif();
+		modif2();
+		}
+	}
+
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
 function sale_usuario(){
 
@@ -259,7 +314,7 @@ function process_form(){
 		} else {
 			print ("<div class='row'> <!-- isla -->
 					<div class='col-lg-12 text-center'>
-					  <h4 class='section-heading text-uppercase'>Restaurantes</h4>
+					  <h2 class='section-heading text-uppercase'>Restaurantes</h2>
 					  <!--
 					  <h3 class='section-subheading text-muted'>Lorem ipsum dolor sit amet consectetur.</h3>
 					  -->
@@ -367,7 +422,7 @@ function show_form(){
 
 	/* SELECCIONO LA ISLA*/
 	if((isset($_POST['oculto1']))||(isset($_GET['inicio']))){	
-									$_SESSION['isla'] = $_POST['isla'];
+									$_SESSION['isla'] = @$_POST['isla'];
 									unset($_SESSION['ayto']);
 									unset($_SESSION['tipo']);
 									unset($_SESSION['espec1']);
@@ -634,7 +689,7 @@ function ver_todo(){
 
 	print ("<div class='row'> <!-- Titulo -->
 				<div class='col-lg-12 text-center'>
-				<h4 class='section-heading text-uppercase'>Restaurantes</h4>
+				<h2 class='section-heading text-uppercase'>Restaurantes</h2>
 				<!--
 				<h3 class='section-subheading text-muted'>Lorem ipsum dolor sit amet consectetur.</h3>
 				-->
@@ -667,7 +722,7 @@ function ver_todo(){
 	print ("
 	<li class='".$estilo[$estiloin]."'> <!-- Inicio Li contenedor -->
 			<div class='timeline-image'>
-			<img class='<!--rounded-circle--> img-fluid' src='Gch.Img.Art/".$rowb['myimg1']."' alt=''>
+			<img class='<!--rounded-circ-->le img-fluid' src='Gch.Img.Art/".$rowb['myimg1']."' alt=''>
 			</div>
 
 		<div class='timeline-panel'>

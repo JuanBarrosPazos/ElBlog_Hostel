@@ -61,6 +61,9 @@
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="Gch.Www/services.php">SERVICIOS</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="Gch.Www/news.php">NOTICIAS</a>
+        </li>
 
         <?php
             if((@$_SESSION['uNivel'] == 'useru')||(@$_SESSION['uNivel'] == 'adminu')){ 
@@ -71,7 +74,7 @@
                     </li>
               <form name='cerrar' action='$_SERVER[PHP_SELF]' method='POST'>
                   <input type='submit' value='CLOSE SESSION' class=\"btn btn-primary\" />
-                <input type='hidden' name='salir' value=1 />
+                  <input type='hidden' name='salir' value=1 />
               </form>
                 ");
             }
@@ -83,18 +86,6 @@
                 }
           ?>
 
-
-        <!--
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="Gch.Www/portfolio.php">PORTFOLIO</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="Gch.Www/news.php">NOTICIAS</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="Gch.Www/clients.php">CLIENTES</a>
-          </li>
-        -->
         </ul>
       </div>
     </div>

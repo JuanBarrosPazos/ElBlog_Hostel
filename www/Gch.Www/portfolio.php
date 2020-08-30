@@ -159,9 +159,9 @@ function MM_validateForm() {
 
     <div class="row">
         <div class="col-lg-12 text-center" style="margin:0.1em 0em 2em 0em;">
-            <h4 class="section-heading text-uppercase" style="text-align: center; margin: -1.6em 0em 0.3em 0em">
+            <h2 class="section-heading text-uppercase" style="text-align: center; margin: -1.6em 0em 0.3em 0em">
                 OPINIONES Y VALORACIONES
-            </h4>
+            </h2>
     <?php
 
      // DEFINO LAS OPINIONES QUE ESTAN VALIDADAS OK POR EL ADMINISTRADOR

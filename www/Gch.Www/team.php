@@ -24,9 +24,10 @@
 
       <div class="row">
         <div class="col-lg-12 text-center">
-          <h2 >
+        <h2 class="section-heading text-uppercase">QUIENES SOMOS</h2>
+          <h3 >
               DISEÑO, POSICIONAMIENTO Y PROGRAMACIÓN WEB
-          </h2>
+          </h3>
           <h6>
                   C/. UNA CALLE DE PALMA <br>
               <a href="contact.php#mapalink">IR AL MAPA DÓNDE ESTAMOS</a><br>
@@ -35,17 +36,17 @@
               <a href="contact.php#formlink">IR AL FORMULARIO DE CONTACTO</a>
           </h6>
 
-          <h2 class="section-heading text-uppercase">NUESTRA HISTORIA</h2>
+          <h3 class="section-heading text-uppercase">NUESTRA HISTORIA</h3>
           <h5 class="text-muted">Lorem ipsum dolor sit amet consectetur.</h5>
 
-          <h2 class="section-heading text-uppercase">NUESTROS VALORES</h2>
+          <h3 class="section-heading text-uppercase">NUESTROS VALORES</h3>
           <h5 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h5>
 
-          <h2 class="section-heading text-uppercase">NUESTRA VISIÓN</h2>
+          <h3 class="section-heading text-uppercase">NUESTRA VISIÓN</h3>
           <h5 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h5>
 
 
-          <h2 class="section-heading text-uppercase">NUESTRO EQUIPO</h2>
+          <h3 class="section-heading text-uppercase">NUESTRO EQUIPO</h3>
           <h5 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h5>
         </div>
       </div>

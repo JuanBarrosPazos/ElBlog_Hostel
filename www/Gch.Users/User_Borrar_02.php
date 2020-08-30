@@ -61,12 +61,8 @@ function process_form(){
 				</tr>
 				
 				<tr>
-					<td width=150px>
-						ID:
-					</td>
-					<td width=200px>"
-						.$_POST['id'].
-					"</td>
+					<td width=150px>ID</td>
+					<td width=200px>".$_POST['id']."</td>
 					
 					<td rowspan=5 align='center'>
 		<img src='../Gch.Temp/".$_POST['myimg']."' height='120px' width='90px' />
@@ -74,84 +70,48 @@ function process_form(){
 				</tr>
 				
 				<tr>
-					<td>
-						USER REF
-					</td>
-					<td>"
-						.$_POST['ref'].
-					"</td>
+					<td>USER REF</td>
+					<td>".$_POST['ref']."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						NIVEL
-					</td>
-					<td>"
-						.$_POST['Nivel'].
-					"</td>
+					<td>NIVEL</td>
+					<td>".$_POST['Nivel']."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						NOMBRE
-					</td>
-					<td>"
-						.$_POST['Nombre'].
-					"</td>
+					<td>NOMBRE</td>
+					<td>".$_POST['Nombre']."</td>
 				</tr>
 
 				<tr>
-					<td>
-						APELLIDO
-					</td>
-					<td>"
-						.$_POST['Apellidos'].
-					"</td>
+					<td>APELLIDO</td>
+					<td>".$_POST['Apellidos']."</td>
 				</tr>				
 				
 				<tr>
-					<td>
-						Mail:
-					</td>
-					<td colspan=2>"
-						.$_POST['Email'].
-					"</td>
+					<td>Mail</td>
+					<td colspan=2>".$_POST['Email']."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						Usuario:
-					</td>
-					<td colspan=2>"
-						.$_POST['Usuario'].
-					"</td>
+					<td>Usuario</td>
+					<td colspan=2>".$_POST['Usuario']."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						Password:
-					</td>
-					<td colspan=2>"
-						.$_POST['Password'].
-					"</td>
+					<td>Password</td>
+					<td colspan=2>".$_POST['Password']."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						Direcci&oacute;n:
-					</td>
-					<td colspan=2>"
-						.$_POST['Direccion'].
-					"</td>
+					<td>Direcci&oacute;n</td>
+					<td colspan=2>".$_POST['Direccion']."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						TELEFONO 1:
-					</td>
-					<td colspan=2>"
-						.$_POST['Tlf1'].
-					"</td>
+					<td>TELEFONO 1</td>
+					<td colspan=2>".$_POST['Tlf1']."</td>
 				</tr>
 				
 				<tr>
@@ -192,6 +152,14 @@ function process_form(){
 
 	unlink("../Gch.Img.User/".$_POST['myimg']);
 
+	/* CAMBIAMOS LA REFERENCIA DEL USUARIO BORRADO EN LA TABLA OPINIONES POR ADMINDEL */
+	global $tablenameb;
+	$tablenameb = "gch_opiniones";
+	$tablenameb = "`".$tablenameb."`";
+	$sqlab = "UPDATE `$db_name`.$tablenameb SET `refuser` = 'userdel' WHERE $tablenameb.`refuser` = '$_SESSION[delrefart]' ";
+	if(mysqli_query($db, $sqlab)){ 
+	} else { print("<font color='#FF0000'>L159: </font></br>&nbsp;&nbsp;".mysqli_error($db))."</br>"; }
+
 	// SE GRABAN LOS DATOS EN LOG DEL ADMIN
 	global $deletet2;
 	global $deletet;
@@ -213,6 +181,7 @@ function process_form(){
 function show_form(){
 
 	if($_POST['oculto2']){
+				$_SESSION['delrefart'] = $_POST['ref'];
 				$defaults = array ( 'id' => $_POST['id'],
 									'ref' => $_POST['ref'],
 									'Nivel' => $_POST['Nivel'],
