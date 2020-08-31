@@ -163,9 +163,7 @@ function process_form(){
 				</tr>
 				
 				<tr>
-					<td width=140px>
-					REFERENCIA
-					</td>
+					<td width=140px>REFERENCIA</td>
 					<td width=140px>"
 						.$_SESSION['srefnews'].
 					"</td>
@@ -175,66 +173,38 @@ function process_form(){
 				</tr>
 				
 				<tr>
-					<td>
-						TITULO
-					</td>
-					<td>"
-						.$_POST['tit'].
-					"</td>
+					<td>TITULO</td>
+					<td>".$_POST['tit']."</td>
 				</tr>				
 				
 				<tr>
-					<td>	
-						SUBTITULO
-					</td>
-					<td>"
-						.$_POST['titsub'].
-					"</td>
+					<td>SUBTITULO</td>
+					<td>".$_POST['titsub']."</td>
 				</tr>
 				
 				<tr>
-					<td>	
-						DATE IN
-					</td>
-					<td colspan>"
-						.$_POST['datein'].
-					"</td>
+					<td>DATE IN</td>
+					<td colspan>".$_POST['datein']."</td>
 				</tr>
 				
 				<tr>
-					<td>	
-						TIME IN
-					</td>
-					<td colspan=2>"
-						.$_POST['timein'].
-					"</td>
+					<td>TIME IN</td>
+					<td colspan=2>".$_POST['timein']."</td>
 				</tr>
 				
 				<tr>
-					<td>	
-						DATE MOD
-					</td>
-					<td colspan=2>"
-						.$_POST['datemod'].
-					"</td>
+					<td>DATE MOD</td>
+					<td colspan=2>".$_POST['datemod']."</td>
 				</tr>
 				
 				<tr>
-					<td>	
-						TIME MOD
-					</td>
-					<td colspan=2>"
-						.$_POST['timemod'].
-					"</td>
+					<td>TIME MOD</td>
+					<td colspan=2>".$_POST['timemod']."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						CONTENIDO
-					</td>
-					<td colspan=2>"
-						.$_POST['conte'].
-					"</td>
+					<td>CONTENIDO</td>
+					<td colspan=2>".$_POST['conte']."</td>
 				</tr>
 				<tr>
 					<td colspan=3 align='right' class='BorderSup'>

@@ -92,9 +92,9 @@
 											
 		$ordenar = array (	'`id` ASC' => 'ID Ascendente',
 							'`id` DESC' => 'ID Descendente',
-							'`Nombre` ASC' => 'Nombre Ascendente',
-							'`Nombre` DESC' => 'Nombre Descendente',
-																);
+							'`refnews` ASC' => 'REF Ascendente',
+							'`refnews` DESC' => 'REF Descendente',
+							);
 
 	if($defaults['autor'] == 'admindel'){ 
 						global $selc;
@@ -107,7 +107,7 @@
 	print("<table align='center' style=\"border:0px;margin-top:4px;width:auto\">
 				<tr>
 					<th colspan=2 width=100% class='BorderInf BorderSup'>
-						".$cnews." || ".$bnews."
+						".$cnews."
 					</th>
 				</tr>
 				

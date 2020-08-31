@@ -27,8 +27,13 @@ function process_form(){
 	$sqlx =  "SELECT * FROM `gch_admin` WHERE `ref` = '$_POST[refuser]'";
 	$q = mysqli_query($db, $sqlx);
 	$rowautor = mysqli_fetch_assoc($q);
+	if($rowautor['Nombre'] == ''){
+		global $_sec;
+		$_sec = "ANOMINO";
+	} else {
 	global $_sec;
 	$_sec = $rowautor['Nombre']." ".$rowautor['Apellidos'];
+	}
 	
 	print("<table align='center' style=\"text-align:left; width:96%; max-width:500px\" >
 				<tr>

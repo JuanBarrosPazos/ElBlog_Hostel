@@ -9,7 +9,7 @@ session_start();
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'plus')){ 
+if ((@$_SESSION['Nivel'] == 'admin') || (@$_SESSION['Nivel'] == 'user') || (@$_SESSION['Nivel'] == 'plus')){ 
 
 	master_index();
 
@@ -88,116 +88,20 @@ function process_form(){
 										</tr>
 									</table>");
 									
-				} else { 	print ("<table align='center'>
-									<tr>
-										<th colspan=6 class='BorderInf'>
-									Nº NOTICIAS ".mysqli_num_rows($qc).".
-										</th>
-									</tr>
-									
-									<tr>
-										<th class='BorderInfDch'>
-											Autor
-										</th>
+			} else { 
+	print ("<div class=\"juancentra col-xs-12 col-sm-12 col-lg-6\" style=\"	vertical-align: top !important; margin-top: 6px;\">
+				Nº NOTICIAS ".mysqli_num_rows($qc).".<br>");
 
-										<th class='BorderInfDch'>
-											Referencia
-										</th>
-										
-										<th class='BorderInfDch'>
-											Titulo
-										</th>
-										
-										<th class='BorderInfDch'>
-											Fecha In
-										</th>
-										
-										<th class='BorderInfDch'>
-											Contenido
-										</th>
-																				
-										<th class='BorderInfDch'>
-											Imagen
-										</th>
-									</tr>");
-			
-			while($rowc = mysqli_fetch_assoc($qc)){
+			while($rowb = mysqli_fetch_assoc($qc)){
 				global $conte;
-				$conte = substr($rowc['conte'],0,70);
+				$conte = substr($rowb['conte'],0,70);
 				$conte = $conte." ...";		
-	print (	"<tr align='center'>
-									
-	<form name='ver' action='News_Modificar_02.php' method='POST'>
 
-	<input name='id' type='hidden' value='".$rowc['id']."' />
-	<input name='dyt1' type='hidden' value='".$dyt1."' />
-							
-						<td class='BorderInfDch'>
-	<input name='refuser' type='hidden' value='".$rowc['refuser']."' />".$rowc['refuser']."
-						</td>
-							
-						<td class='BorderInfDch'>
-	<input name='refnews' type='hidden' value='".$rowc['refnews']."' />".$rowc['refnews']."
-						</td>
-							
-						<td class='BorderInfDch'>
-	<input name='tit' type='hidden' value='".$rowc['tit']."' />".$rowc['tit']."
-						</td>
-	<input name='titsub' type='hidden' value='".$rowc['titsub']."' />
-						
-						<td class='BorderInfDch'>
-	<input name='datein' type='hidden' value='".$rowc['datein']."' />".$rowc['datein']."
-						</td>
-	<input name='timein' type='hidden' value='".$rowc['timein']."' />
+		require 'Inc_News_While_Total.php';
 
-	<input name='datemod' type='hidden' value='".$rowc['datemod']."' />
-	<input name='timemod' type='hidden' value='".$rowc['timemod']."' />
+		} // FIN WHILE
 
-						<td class='BorderInfDch' width='250px'align='left'>
-	<input name='conte' type='hidden' value='".$rowc['conte']."' />".$conte."
-						</td>
-
-						<td class='BorderInf' width='80px'>
-	<input name='myimg' type='hidden' value='".$rowc['myimg']."' />
-	<img src='../Gch.Img.News/".$rowc['myimg']."'  width='70%' height='auto' />
-						</td>
-												
-						</tr>
-						<tr>
-							<td colspan=3 class='BorderInf'>
-												&nbsp;
-							</td>
-							<td colspan=2 align='right' class='BorderInfDch'>
-								<input type='submit' value='MODIFICAR DATOS' />
-							<input type='hidden' name='oculto2' value=1 />
-					</form>
-							</td>
-							<td align='center' class='BorderInf'>
-						
-	<form name='modifica_img' action='News_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=540px, height=auto')\">
-
-			<input name='id' type='hidden' value='".$rowc['id']."' />
-			<input name='dyt1' type='hidden' value='".$dyt1."' />
-			<input name='refuser' type='hidden' value='".$rowc['refuser']."' />
-			<input name='refnews' type='hidden' value='".$rowc['refnews']."' />
-			<input name='tit' type='hidden' value='".$rowc['tit']."' />
-			<input name='titsub' type='hidden' value='".$rowc['titsub']."' />
-			<input name='datein' type='hidden' value='".$rowc['datein']."' />
-			<input name='timein' type='hidden' value='".$rowc['timein']."' />
-			<input name='datemod' type='hidden' value='".$rowc['datemod']."' />
-			<input name='timemod' type='hidden' value='".$rowc['timemod']."' />
-			<input name='conte' type='hidden' value='".$rowc['conte']."' />						
-			<input name='myimg' type='hidden' value='".$rowc['myimg']."' />
-
-			<input type='submit' value='MODIFICAR IMAGEN' />
-			<input type='hidden' name='oculto2' value=1 />
-			
-			</form>
-				</td>	
-			</tr>");
-					}
-
-		print("</table>");
+		print("</div>");
 			
 						} 
 			} 
@@ -212,11 +116,6 @@ function show_form($errors=''){
 					<input type='submit' value='CREAR NUEVA NOTICIA' />
 					<input type='hidden' name='volver' value=1 />
 				</form>";
-	global $bnews;
-	$bnews = "<form name='borranews' action='News_Borrar_01.php' style=\"display:inline-block;\">
-					<input type='submit' value='BORRAR UNA NOTICIA' />
-					<input type='hidden' name='volver' value=1 />
-				</form>";
 	global $titulo;
 	$titulo = "MODIFICAR NOTICIAS";
 
@@ -227,7 +126,9 @@ function show_form($errors=''){
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 function ver_todo(){
-		
+	
+	unset($_SESSION['myvdo']);
+
 	global $db;
 	global $db_name;
 	$orden = $_POST['Orden'];
@@ -277,116 +178,20 @@ function ver_todo(){
 										</tr>
 									</table>");
 									
-				} else { 	print ("<table align='center'>
-									<tr>
-										<th colspan=6 class='BorderInf'>
-									Nº NOTICIAS ".mysqli_num_rows($qb).".
-										</th>
-									</tr>
-									
-									<tr>
-										<th class='BorderInfDch'>
-											Autor
-										</th>
-
-										<th class='BorderInfDch'>
-											Referencia
-										</th>
-										
-										<th class='BorderInfDch'>
-											Titulo
-										</th>
-										
-										<th class='BorderInfDch'>
-											Fecha In
-										</th>
-										
-										<th class='BorderInfDch'>
-											Contenido
-										</th>
-																				
-										<th class='BorderInf'>
-											Imagen
-										</th>
-									</tr>");
+				} else { 
+	print ("<div class=\"juancentra col-xs-12 col-sm-12 col-lg-6\" style=\"	vertical-align: top !important; margin-top: 6px;\">
+							Nº NOTICIAS ".mysqli_num_rows($qb).".<br>");
 			
 			while($rowb = mysqli_fetch_assoc($qb)){
 				global $conte;
 				$conte = substr($rowb['conte'],0,70);
-				$conte = $conte." ...";		
-	print (	"<tr align='center'>
-									
-	<form name='ver' action='News_Modificar_02.php' method='POST'>
+				$conte = $conte." ...";	
+				
+		require 'Inc_News_While_Total.php';
 
-	<input name='id' type='hidden' value='".$rowb['id']."' />
-	<input name='dyt1' type='hidden' value='".$dyt1."' />
+	} // FIN WHILE
 
-						<td class='BorderInfDch'>
-	<input name='refuser' type='hidden' value='".$rowb['refuser']."' />".$rowb['refuser']."
-						</td>
-							
-						<td class='BorderInfDch'>
-	<input name='refnews' type='hidden' value='".$rowb['refnews']."' />".$rowb['refnews']."
-						</td>
-							
-						<td class='BorderInfDch'>
-	<input name='tit' type='hidden' value='".$rowb['tit']."' />".$rowb['tit']."
-						</td>
-	<input name='titsub' type='hidden' value='".$rowb['titsub']."' />
-						
-						<td class='BorderInfDch'>
-	<input name='datein' type='hidden' value='".$rowb['datein']."' />".$rowb['datein']."
-						</td>
-	<input name='timein' type='hidden' value='".$rowb['timein']."' />
-
-	<input name='datemod' type='hidden' value='".$rowb['datemod']."' />
-	<input name='timemod' type='hidden' value='".$rowb['timemod']."' />
-
-						<td class='BorderInfDch' width='250px'align='left'>
-	<input name='conte' type='hidden' value='".$rowb['conte']."' />".$conte."
-						</td>
-
-						<td class='BorderInf' width='80px'>
-	<input name='myimg' type='hidden' value='".$rowb['myimg']."' />
-	<img src='../Gch.Img.News/".$rowb['myimg']."'  width='70%' height='auto' />
-						</td>
-												
-						</tr>
-						<tr>
-					<td colspan=3 class='BorderInf'>
-												&nbsp;
-					</td>
-					<td colspan=2 align='right' class='BorderInfDch'>
-							<input type='submit' value='MODIFICAR DATOS' />
-							<input type='hidden' name='oculto2' value=1 />
-			</form>
-					</td>
-				<td align='center' class='BorderInf'>
-						
-		<form name='modifica_img' action='News_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=540px, height=auto')\">
-
-			<input name='id' type='hidden' value='".$rowb['id']."' />
-			<input name='dyt1' type='hidden' value='".$dyt1."' />
-			<input name='refuser' type='hidden' value='".$rowb['refuser']."' />
-			<input name='refnews' type='hidden' value='".$rowb['refnews']."' />
-			<input name='tit' type='hidden' value='".$rowb['tit']."' />
-			<input name='titsub' type='hidden' value='".$rowb['titsub']."' />
-			<input name='datein' type='hidden' value='".$rowb['datein']."' />
-			<input name='timein' type='hidden' value='".$rowb['timein']."' />
-			<input name='datemod' type='hidden' value='".$rowb['datemod']."' />
-			<input name='timemod' type='hidden' value='".$rowb['timemod']."' />
-			<input name='conte' type='hidden' value='".$rowb['conte']."' />						
-			<input name='myimg' type='hidden' value='".$rowb['myimg']."' />
-
-			<input type='submit' value='MODIFICAR IMAGEN' />
-			<input type='hidden' name='oculto2' value=1 />
-			
-		</form>
-				</td>	
-			</tr>");
-					}
-
-	print("</table>");
+	print("</div>");
 			
 						} 
 
@@ -398,7 +203,7 @@ function ver_todo(){
 	
 	function master_index(){
 		
-				require '../Gch.Inclu/Master_Index_Artic.php';
+				require '../Gch.Inclu/Master_Index_News.php';
 		
 				} 
 

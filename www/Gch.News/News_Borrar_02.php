@@ -131,6 +131,7 @@ function show_form(){
 		$_SESSION['timemod'] = date('H:i:s');
 		$_SESSION['conte'] = $_POST['conte'];
 		$_SESSION['myimg'] = $_POST['myimg'];
+		$_SESSION['myvdo'] = $_POST['myvdo'];
 		
 		$defaults = array ( 'autor' => $_SESSION['refuser'],  // ref autor
 							'titulo' => $_SESSION['tit'], // Titulo
@@ -142,6 +143,7 @@ function show_form(){
 							'timemod' => $_SESSION['timemod'], // Sub Titulo
 							'coment' => $_SESSION['conte'],
 							'myimg' => $_SESSION['myimg'],	
+							'myvdo' => $_SESSION['myvdo'],	
 									);
 
 		} elseif(isset($_POST['oculto'])){
@@ -190,10 +192,19 @@ function show_form(){
 				<tr>
 					<th colspan=3 class='BorderInf'>
 
-							SERÁ IMPOSOBLE RECUPERAR ESTE ARTICULO
+							SERÁ IMPOSIBLE RECUPERAR ESTE ARTICULO
 					</th>
 				</tr>
-				
+
+				<tr>
+					<td colspan=3 align='center' class='BorderInf' >
+						<form name='fcancel' method='post' action='News_Modificar_01' >
+								<input type='submit' value='CANCELAR Y VOLVER' />
+								<input type='hidden' name='cancel' value=1 />
+						</form>
+					</td>
+				</tr>
+					
 		<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' >
 						
 			<tr>								
@@ -283,6 +294,7 @@ function show_form(){
 				</tr>
 								
 			<input name='myimg' type='hidden' value='".$_SESSION['myimg']."' />
+			<input name='myvdo' type='hidden' value='".$_SESSION['myvdo']."' />
 
 				<tr>
 					<td colspan=3 align='right' valign='middle'  class='BorderSup'>
@@ -290,11 +302,20 @@ function show_form(){
 						<input type='hidden' name='oculto' value=1 />
 					</td>
 				</tr>
-		</form>														
-			</table>"); 
-						}
+		</form>	
+
+		<tr>
+			<td colspan=3 align='center' class='BorderSup' >
+				<form name='fcancel' method='post' action='News_Modificar_01' >
+						<input type='submit' value='CANCELAR Y VOLVER' />
+						<input type='hidden' name='cancel' value=1 />
+				</form>
+			</td>
+		</tr>
+	</table>"); 
+	}
 	
-			}	
+}	
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -307,9 +328,17 @@ function deleteimg(){
 		$data1 = "\n \t UNLINK ".$ruta;}
 			else {print("ERROR UNLINK ".$ruta."</br>");
 					$data1 = "\n \t ERROR UNLINK ".$ruta;}
+
+	global $rutav;
+	$rutav = "../Gch.Vdo.News/".$_SESSION['myvdo'];
+
+	if(file_exists($rutav)){unlink($rutav);
+		$datav1 = "\n \t UNLINK ".$rutav;}
+			else {print("ERROR UNLINK ".$rutav."</br>");
+					$datav1 = "\n \t ERROR UNLINK ".$rutav;}
 					
 	global $ddr;
-	$ddr = "\t* ".$data1." \n";
+	$ddr = "\t* ".$data1." \n\t* ".$datav1." \n";
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -351,7 +380,7 @@ $text = "- PRODUCTO CREAR ".$ActionTime.". ".$secc.".\n\t Pro Name: ".$_POST['su
 	
 	function master_index(){
 		
-				require '../Gch.Inclu/Master_Index_Artic.php';
+				require '../Gch.Inclu/Master_Index_News.php';
 		
 				} 
 

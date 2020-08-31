@@ -467,7 +467,17 @@ function show_form($errors=''){
 					<input type='hidden' name='oculto' value=1 />
 				</td>
 			</tr>
-		</form>														
+		</form>	
+
+		<tr>
+			<td colspan=2 align='center' class='BorderSup' >
+				<form name='fcancel' method='post' action='News_Modificar_01' >
+							<input type='submit' value='CANCELAR Y VOLVER' />
+							<input type='hidden' name='cancel' value=1 />
+				</form>
+			</td>
+		</tr>
+												
 			</table>"); 
 		}
 	
@@ -511,7 +521,7 @@ $text = "- PRODUCTO CREAR ".$ActionTime.". ".$secc.".\n\t Pro Name: ".$_POST['su
 	
 	function master_index(){
 		
-				require '../Gch.Inclu/Master_Index_Artic.php';
+				require '../Gch.Inclu/Master_Index_News.php';
 		
 				} 
 

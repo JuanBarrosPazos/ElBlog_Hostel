@@ -18,6 +18,15 @@
 				$autor = "<h6>".$rowautor['Nombre']." ".$rowautor['Apellidos']."</h6>";
 				}
 			}
+	
+	if ($rowb['myvdo'] != ''){
+	global $vdonw;
+	$vdonw = "<video style=\" width:98%; max-width:600px !important; height:auto\" controls>
+		<source src='../Gch.Vdo.News/".@$_POST['myvdo']."' style=\" width:98%; height:auto\" />
+			  </video>";
+	}else{	global $vdonw;
+			$vdonw = '';
+			}
 
 	global $contem;
 	$contem = substr($rowb['conte'],0,100);
@@ -27,6 +36,7 @@
 				<input name='refnews' type='hidden' value='".$rowb['refnews']."' />
 				<input name='refuser' type='hidden' value='".$rowb['refuser']."' />
 				<input name='myimg' type='hidden' value='".$rowb['myimg']."' />
+				<input name='myvdo' type='hidden' value='".$rowb['myvdo']."' />
 				<input type='submit' value='LEER MÁS...' />
 				<input type='hidden' name='leermas' id=\"".$rowb['refnews']."\" value=1 />
 				".$pg."
@@ -35,13 +45,15 @@
     global $contep;
 	$contep = $rowb['conte'];
 	global $autor;
-	$contep = $autor.$contep."
+	$contep = $autor."
 	<img src='".$rut."Gch.Img.News/".@$_POST['myimg']."' style=\" width:98%; max-width:700px; height:auto\" />
-	<form name='ver' name='ver' action=\"news.php#".$rowb['refnews']."\" method='post' >
+	".$contep.$vdonw."
+			<form name='ver' name='ver' action=\"news.php#".$rowb['refnews']."\" method='post' >
 				<input type='hidden' name='id' value='".$rowb['id']."' />
 				<input type='hidden' name='refnews' value='".$rowb['refnews']."' />
 				<input name='refuser' type='hidden' value='".$rowb['refuser']."' />
 				<input type='hidden' name='myimg' value='".$rowb['myimg']."' />
+				<input name='myvdo' type='hidden' value='".$rowb['myvdo']."' />
 				<input type='hidden' name='leermenos' id=\"".$rowb['refnews']."\" value=1 />
 				<input type='submit' value='LEER MENOS' />
 				".$pg."
