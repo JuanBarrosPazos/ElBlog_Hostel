@@ -688,7 +688,7 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 
 	// VALIDAMOS LA IMAGEN DE USUARIO.
 
-	$limite = 500 * 1024;
+	$limite = 600 * 1024;
 	
 	$ext_permitidas = array('jpg','JPG','gif','GIF','png','PNG','bmp','BMP');
 	$extension = substr($_FILES['myimg']['name'],-3);
@@ -719,7 +719,7 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 	*/
 		elseif ($_FILES['myimg']['size'] > $limite){
 		$tamanho = $_FILES['myimg']['size'] / 1024;
-		$errors [] = "El archivo".$_FILES['myimg']['name']." es mayor de 500 KBytes. ".$tamanho." KB";
+		$errors [] = "El archivo".$_FILES['myimg']['name']." es mayor de 60 KBytes. ".$tamanho." KB";
 		global $img2;
 		$img2 = 'untitled.png';
 			}

@@ -6,7 +6,7 @@ global $altomax;
 $altomax = 400;
 
 global $ruta;
-$ruta = "../Gch.Img.Art/";
+$ruta = "../Gch.Img.News/";
 $_SESSION['ruta'] = $ruta;
 
 $safe_filename = trim(str_replace('/', '', $_FILES['myimg']['name']));
@@ -19,16 +19,18 @@ $destination_file = $ruta.$safe_filename;
 global $destination_file;
 $destination_file = $ruta.$safe_filename;
 
-if( file_exists($ruta.$nombre) ){
+if( file_exists($ruta.$nombre)){
     unlink($ruta.$nombre);
     print("* ".$nombre." YA EXISTE, SELECCIONE OTRA IMAGEN.</br>");
     
 } else {
 
     // Eliminar el archivo antiguo untitled.png
-    if($_SESSION['myimg'] != 'untitled.png' ){
-        unlink($ruta.$_SESSION['myimg']);
-                                    }
+    if($_SESSION['smyimg'] != 'untitled.png' ){
+      if( file_exists($ruta.$_SESSION['smyimg'])){
+            unlink($ruta.$_SESSION['smyimg']);
+              } else {}
+            }
 
     global $extension;
     global $ctemp;
@@ -77,7 +79,7 @@ if( file_exists($ruta.$nombre) ){
                   $rename_filename = $ruta.$new_name;								
                   rename($destination_file, $rename_filename);
                   $_SESSION['myimg'] = $new_name;
-                  print (@$redir);
+                  //print (@$redir);
                 }
           elseif($extension == 'png'){ 
                 imagepng($dst, $destination_file);
@@ -86,7 +88,7 @@ if( file_exists($ruta.$nombre) ){
                 $rename_filename = $ruta.$new_name;								
                 rename($destination_file, $rename_filename);
                 $_SESSION['myimg'] = $new_name;
-                print (@$redir);
+                //print (@$redir);
           }else{ }
   
       } // FIN RECORTA EL ANCHO

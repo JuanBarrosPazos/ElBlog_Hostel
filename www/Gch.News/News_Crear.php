@@ -9,22 +9,19 @@ session_start();
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'userpro')){
+	if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'userpro')){
 
-					master_index();
+		master_index();
 
-						if(isset($_POST['oculto'])){
-							
-								if($form_errors = validate_form()){
-									show_form($form_errors);
-										} else {
-											process_form();
-											//accion_Log();
-											}
-							} else {
-										show_form();
-								}
-} else { require '../Gch.Inclu/table_permisos.php'; } 
+		if(isset($_POST['oculto'])){
+			if($form_errors = validate_form()){
+				show_form($form_errors);
+			} else { process_form();
+					//accion_Log();
+						}
+		} else { show_form(); }
+		
+	} else { require '../Gch.Inclu/table_permisos.php'; } 
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -39,68 +36,17 @@ function validate_form(){
 	$errors = array();
 
 	if(strlen(trim($_POST['refnews'])) != 0){	
-			$secc1 = "gch_".date('Y')."_news";
+			$secc1 = "gch_news";
 			$secc1 = "`".$secc1."`";
 			$sqlc =  "SELECT * FROM `$db_name`.$secc1 WHERE `refnews` = '$_POST[refnews]'";
 			$qc = mysqli_query($db, $sqlc);
 			global $conutc;
-			$countc = mysqli_num_rows($qc);
+			@$countc = mysqli_num_rows($qc);
 			if($countc > 0){
-				$errors [] = "YA EXISTE EL ARTICULO.";
+				$errors [] = "YA EXISTE LA NOTICIA.";
 				}
 		}
 
-	if($_FILES['myimg']['size'] == 0){
-		$errors [] = "Seleccione una fotograf&iacute;a.";
-		global $img2;
-		$img2 = 'untitled.png';
-		}
-	
-	else{
-			
-	$limite = 500 * 1024;
-	
-	$ext_permitidas = array('jpg','JPG','gif','GIF','png','PNG','bmp','BMP');
-	$extension = substr($_FILES['myimg']['name'],-3);
-	// print($extension);
-	// $extension = end(explode('.', $_FILES['myimg']['name']) );
-	$ext_correcta = in_array($extension, $ext_permitidas);
-
-	// $tipo_correcto = preg_match('/^image\/(gif|png|jpg|bmp)$/', $_FILES['myimg']['type']);
-
-		 
-		if(!$ext_correcta){
-			$errors [] = "La extension no esta admitida: ".$_FILES['myimg']['name'];
-			global $img2;
-			$img2 = 'untitled.png';
-			}
-	/*
-		elseif(!$tipo_correcto){
-			$errors [] = "Este tipo de archivo no esta admitido: ".$_FILES['myimg']['name'];
-			global $img2;
-			$img2 = 'untitled.png';
-			}
-	*/
-		elseif ($_FILES['myimg']['size'] > $limite){
-		$tamanho = $_FILES['myimg']['size'] / 1024;
-		$errors [] = "El archivo".$_FILES['myimg']['name']." es mayor de 500 KBytes. ".$tamanho." KB";
-		global $img2;
-		$img2 = 'untitled.png';
-			}
-		
-			elseif ($_FILES['myimg']['error'] == UPLOAD_ERR_PARTIAL){
-				$errors [] = "La carga del archivo se ha interrumpido.";
-				global $img2;
-				$img2 = 'untitled.png';
-				}
-				
-				elseif ($_FILES['myimg']['error'] == UPLOAD_ERR_NO_FILE){
-					$errors [] = "Es archivo no se ha cargado.";
-					global $img2;
-					$img2 = 'untitled.png';
-					}
-		}
-	
 		///////////////////////////////////////////////////////////////////////////////////
 
 	if(strlen(trim($_POST['titulo'])) == 0){
@@ -120,12 +66,12 @@ function validate_form(){
 		}
 	
 	elseif(strlen(trim($_POST['titulo'])) != 0){	
-			$secc1 = "gch_".date('Y')."_news";
+			$secc1 = "gch_news";
 			$secc1 = "`".$secc1."`";
 			$sqlc =  "SELECT * FROM `$db_name`.$secc1 WHERE `tit` = '$_POST[titulo]'";
 			$qc = mysqli_query($db, $sqlc);
 			global $conutc;
-			$countc = mysqli_num_rows($qc);
+			@$countc = mysqli_num_rows($qc);
 			if($countc > 0){
 			$errors [] = "YA EXISTE ESTE TITULO";
 				}
@@ -148,44 +94,118 @@ function validate_form(){
 		}
 	
 	elseif(strlen(trim($_POST['subtitul'])) != 0){	
-			$secc1 = "gch_".date('Y')."_news";
+			$secc1 = "gch_news";
 			$secc1 = "`".$secc1."`";
 			$sqlc =  "SELECT * FROM `$db_name`.$secc1 WHERE `titsub` = '$_POST[subtitul]'";
 			$qc = mysqli_query($db, $sqlc);
 			global $conutc;
-			$countc = mysqli_num_rows($qc);
+			@$countc = mysqli_num_rows($qc);
 			if($countc > 0){
 			$errors [] = "YA EXISTE ESTE SUBTITULO";
 				}
 		}
 	
 	if(strlen(trim($_POST['coment'])) == 0){
-		$errors [] = "ARTICULO <font color='#FF0000'>Campo obligatorio.</font>";
+		$errors [] = "NOTICIA <font color='#FF0000'>Campo obligatorio.</font>";
 		}
 
 	elseif(strlen(trim($_POST['coment'])) <= 50){
-		$errors [] = "ARTICULO <font color='#FF0000'>Mas de 50 carácteres.</font>";
+		$errors [] = "NOTICIA <font color='#FF0000'>Mas de 50 carácteres.</font>";
 		}
 
 	elseif(strlen(trim($_POST['coment'])) >= 402){
-		$errors [] = "ARTICULO <font color='#FF0000'>Excedió más de 400 carácteres.</font>";
+		$errors [] = "NOTICIA <font color='#FF0000'>Excedió más de 400 carácteres.</font>";
 		}
 		
 
-	elseif (!preg_match('/^[a-z A-Z 0-9 \s ,.;:\'-()¡!¿?@ áéíóúñ €]+$/',$_POST['coment'])){
-			$errors [] = "ARTICULO  <font color='#FF0000'>Caracteres no permitidos. { } [ ] $ < >  # ...</font>";
+	elseif (!preg_match('/^[^#$&<>:´"·\(\)=¿?!¡\[\]\{\}\*\']+$/',$_POST['coment'])){
+			$errors [] = "NOTICIA  <font color='#FF0000'>Caracteres no permitidos. { } [ ] $ < >  # ...</font>";
 			}
+
+		///////////////////////////////////////////////////////////////////////////////////
+
+	if($_FILES['myimg']['size'] == 0){
+				$errors [] = "Seleccione una fotograf&iacute;a.";
+				global $img2;
+				$img2 = 'untitled.png';
+			}
+	
+	else{
+			
+		$limite = 1400 * 1024;
+		
+		$ext_permitidas = array('.jpg','.JPG','.gif','.GIF','.png','.PNG', 'jpeg', 'JPEG');
+		$extension = substr($_FILES['myimg']['name'],-4);
+		// print($extension);
+		$ext_correcta = in_array($extension, $ext_permitidas);
+	
+		global $extension1;
+		$extension1 = strtolower($extension);
+		$extension1 = str_replace(".","",$extension1);
+		global $ctemp;
+		$ctemp = "../Gch.Temp";
+	
+		if(!$ext_correcta){
+			$errors [] = "La extension no esta admitida: ".$_FILES['myimg']['name'];
+			global $img2;
+			$img2 = 'untitled.png';
+			}
+	/*
+		elseif(!$tipo_correcto){
+			$errors [] = "Este tipo de archivo no esta admitido: ".$_FILES['myimg']['name'];
+			global $img2;
+			$img2 = 'untitled.png';
+			}
+	*/
+		elseif ($_FILES['myimg']['size'] > $limite){
+		$tamanho = $_FILES['myimg']['size'] / 1024;
+		$errors [] = "El archivo".$_FILES['myimg']['name']." es mayor de 140 KBytes. ".$tamanho." KB";
+		global $img2;
+		$img2 = 'untitled.png';
+			}
+
+		elseif ($_FILES['myimg']['size'] <= $limite){
+			copy($_FILES['myimg']['tmp_name'], $ctemp."/ini1v.".$extension1); 
+			global $ancho;
+			global $alto;
+			list($ancho, $alto, $tipo, $atributos) = getimagesize($ctemp."/ini1v.".$extension1);
+
+			if($ancho < 400){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ANCHURA MENOR DE 400 * IMG = ".$ancho;
+			}
+			/*
+			elseif(($ancho > 900)&&($alto < 400)){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ALTURA MENOR DE 400 ".$alto;
+			}
+			*/
+			elseif(($ancho >= 400)&&($alto < 400)){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ALTURA MENOR DE 400 * IMG = ".$alto;
+			}
+		}
+			elseif ($_FILES['myimg']['error'] == UPLOAD_ERR_PARTIAL){
+				$errors [] = "LA CARGA DEL ARCHIVO SE HA INTERRUMPIDO";
+				global $img2;
+				$img2 = 'untitled.png';
+				}
+				
+				elseif ($_FILES['myimg']['error'] == UPLOAD_ERR_NO_FILE){
+					$errors [] = "EL ARCHIVO NO SE HA CARGADO";
+					global $img2;
+					$img2 = 'untitled.png';
+					}
+				}
 
 	return $errors;
 
-		} 
+	} 
 		
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 function process_form(){
 	
 	global $db;
-	global $db_name;	
+	global $db_name;
+
 	global $secc;	
 	global $_sec;
 	$secc = $_POST['autor'];
@@ -209,7 +229,7 @@ function process_form(){
 		global $db_name;
 
 		global $tablename;
-		$tablename = "gch_".date('Y')."_news";
+		$tablename = "gch_news";
 		$tablename = "`".$tablename."`";
 		global $titulo;
 		$titulo = strtoupper($_POST['titulo']);
@@ -223,124 +243,68 @@ function process_form(){
 			global $carpetaimg;
 			global $new_name;
 
-			print("<table align='center' style='margin-top:10px'>
+			global $ruta;
+			$ruta = "../Gch.Img.News/";
+			$_SESSION['ruta'] = $ruta;
+
+			global $redir;
+			$redir = "";
+	
+			require 'Inc_Modificar_Img.php';
+
+			print("<table align='center' style='margin-top:10px; width:360px;'>
 				<tr>
-					<th colspan=3 class='BorderInf'>
+					<th colspan=2 class='BorderInf'>
 						CREADO POR ".strtoupper($_sec)."
 					</th>
 				</tr>
-												
+				
 				<tr>
-					<td width=120px>
-						REFERENCIA
+					<td colspan=2 align='center' >
+				<img src='".$carpetaimg."/".$new_name."'  width='98%' height='auto' />
 					</td>
-					<td width=100px>"
-						.$_POST['refnews'].
-					"</td>
-					<td rowspan='4' align='center' width='120px'>
-				<img src='".$carpetaimg."/".$new_name."' height='120px' width='90px' />
-					</td>
+				</tr>
+
+				<tr>
+					<td>REFERENCIA</td>
+					<td>".$_POST['refnews']."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						TITULO
-					</td>
-					<td>"
-						.$_POST['titulo'].
-					"</td>
+					<td>TITULO</td>
+					<td>".$_POST['titulo']."</td>
 				</tr>				
 				
 				<tr>
-					<td>	
-						SUBTITULO
-					</td>
-					<td>"
-						.$_POST['subtitul'].
-					"</td>
+					<td>SUBTITULO</td>
+					<td>".$_POST['subtitul']."</td>
 				</tr>
 				
 				<tr>
-					<td>	
-						DATE IN
-					</td>
-					<td>"
-						.$_POST['datein'].
-					"</td>
+					<td>DATE IN</td>
+					<td>".$_POST['datein']."</td>
 				</tr>
 				
 				<tr>
-					<td>	
-						TIME IN
-					</td>
-					<td>"
-						.$_POST['timein'].
-					"</td>
+					<td>TIME IN</td>
+					<td>".$_POST['timein']."</td>
 				</tr>
 				
 				<tr>
-					<td colspan=3  align='center'>
-						ARTICULO
-					</td>
+					<td colspan=2  align='center'>NOTICIA</td>
 				</tr>
 				<tr>
-					<td colspan=3>"
-						.$_POST['coment'].
-					"</td>
+					<td colspan=2>".$_POST['coment']."</td>
 				</tr>
 				<tr>
-					<th colspan=3 class='BorderSup'>
-						<a href=News_Crear.php>CREAR UN NUEVO ARTICULO</a>
+					<th colspan=2 class='BorderSup'>
+						<a href=News_Crear.php>CREAR UNA NUEVA NOTICIA</a>
 					</th>
 				</tr>
 			</table>");
 			
-		/************* CREAMOS LAS IMAGENES DEL ARTICULO EN EL DIRECTORIO Gch.Img.News ***************/
-
-	if($_FILES['myimg']['size'] == 0){
-				global $carpetaimg;
-				global $new_name;
-				copy("../Gch.Img.Sys/untitled.png", $carpetaimg."/".$new_name);
-		} 	
-		else{	$safe_filename = trim(str_replace('/', '', $_FILES['myimg']['name']));
-				$safe_filename = trim(str_replace('..', '', $safe_filename));
-
-				$nombre = $_FILES['myimg']['name'];
-				$nombre_tmp = $_FILES['myimg']['tmp_name'];
-				$tipo = $_FILES['myimg']['type'];
-				$tamano = $_FILES['myimg']['size'];
-			
-				$destination_file = $carpetaimg.'/'.$safe_filename;
-
-	 if( file_exists( $carpetaimg.'/'.$nombre) ){
-			unlink($carpetaimg."/".$nombre);
-		//	print("* El archivo ".$nombre." ya existe, seleccione otra imagen.</br>");
-												}
-			
-	elseif (move_uploaded_file($_FILES['myimg']['tmp_name'], $destination_file)){
-			
-			// Renombrar el archivo:
-			$extension = substr($_FILES['myimg']['name'],-3);
-			// print($extension);
-			// $extension = end(explode('.', $_FILES['myimg']['name']) );
-			global $carpetaimg;
-			global $new_name;
-			$new_name = $_POST['refnews'].".".$extension;
-			$rename_filename = $carpetaimg."/".$new_name;								
-			rename($destination_file, $rename_filename);
-
-			// print("El archivo se ha guardado en: ".$destination_file);
-	
-			}
-			
-		else {print("NO SE HA PODIDO GUARDAR EN ".$destination_file);}
-
-		}
-
-	} 	else {print("* MODIFIQUE LA ENTRADA L.207: ".mysqli_error($db));
+		} else { print("* MODIFIQUE LA ENTRADA L.246: ".mysqli_error($db));
 						show_form ();
-						//global $texerror;
-						//$texerror = "\n\t ".mysqli_error($db);
 					}
 		
 	}	/* FINAL process_form(); */
@@ -349,6 +313,17 @@ function process_form(){
 
 function show_form($errors=''){
 	
+	unset($_SESSION['myimg']);
+	
+	$ctemp = "../Gch.Temp";
+	if(file_exists($ctemp)){$dir1 = $ctemp."/";
+							$handle1 = opendir($dir1);
+							while ($file1 = readdir($handle1))
+									{if (is_file($dir1.$file1))
+										{unlink($dir1.$file1);}
+										}	
+								} else {}
+
 	if(isset($_POST['oculto1'])){
 		$defaults = $_POST;
 		$_SESSION['refnews'] = date('Y.m.d.H.i.s');
@@ -361,7 +336,7 @@ function show_form($errors=''){
 				$defaults = array ( 'autor' => isset($_POST['autor']),  // ref autor
 									'titulo' => '', // Titulo
 								   	'subtitul' => '', // Sub Titulo
-								   	//'refnews' => @$_SESSION['refnews'],  Referencia articulo
+								   	//'refnews' => @$_SESSION['refnews'],
 								   	'coment' => '',
 									'myimg' => '',	
 												);
@@ -396,28 +371,21 @@ function show_form($errors=''){
 	$_sec = @$rowautor['Nombre'];
 
 	global $modifnews;
-	$mnews = "<form name='creanews' action='News_Modificar_01.php' style=\"display:inline-block;\">
+	$mnews = "<form name='creanews' method='post' action='News_Modificar_01.php' style=\"display:inline-block;\">
 					<input type='submit' value='MODIFICAR UNA NOTICIA' />
 					<input type='hidden' name='volver' value=1 />
 				</form>";
-	global $bnews;
-	$bnews = "<form name='borranews' action='News_Borrar_01.php' style=\"display:inline-block;\">
-					<input type='submit' value='BORRAR UNA NOTICIA' />
-					<input type='hidden' name='volver' value=1 />
-				</form>";
-
-	print("
-			<table align='center' style=\"border:0px;margin-top:4px\" width='400px'>
+	print("<table align='center' style=\"border:0px;margin-top:4px\" width='400px'>
 				<tr>
 					<th colspan=2 width=100% class='BorderInf BorderSup'>
-						".$mnews." || ".$bnews."
+						".$mnews."
 					</th>
 				</tr>
 				
 			<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
 				<tr>
 					<th colspan='2'>
-						CREAR ARTICULO DE ".strtoupper($_sec)."
+						CREAR NOTICIA DE ".strtoupper($_sec)."
 					</th>
 				</tr>		
 				<tr>
@@ -439,25 +407,19 @@ function show_form($errors=''){
 	} else {
 					
 		while($rows = mysqli_fetch_assoc($qb)){
-					
 					print ("<option value='".$rows['ref']."' ");
-					
 					if($rows['ref'] == $defaults['autor']){
-															print ("selected = 'selected'");
-																								}
-									print ("> ".$rows['Apellidos']." ".$rows['Nombre']."</option>");
-				}
-		
-			}  
+										print ("selected = 'selected'");
+																}
+				print ("> ".$rows['Apellidos']." ".$rows['Nombre']."</option>");
+			}
+		}  
 
-	print ("	</select>
-					</td>
+	print ("</select>
+				</td>
 			</tr>
-	
 		</form>	
-			
-			</table>				
-						");
+			</table>");
 				
 	if (isset($_POST['oculto1']) || isset($_POST['oculto'])) {
 	if ($_POST['autor'] == '0') { 
@@ -494,7 +456,7 @@ function show_form($errors=''){
 				<tr>
 					<th colspan=2 class='BorderInf'>
 
-							NUEVO ARTICULO DE ".strtoupper($_sec)."
+							NUEVA NOTICIA DE ".strtoupper($_sec)."
 					</th>
 				</tr>
 				
@@ -557,7 +519,7 @@ function show_form($errors=''){
 					
 				<tr>
 					<td colspan=2 align='center'>
-						ARTICULO
+						NOTICIA
 					</td>
 				</tr>
 				<tr>
@@ -583,7 +545,7 @@ function show_form($errors=''){
 
 				<tr>
 					<td colspan='2' align='right' valign='middle'  class='BorderSup'>
-						<input type='submit' value='CREAR ARTICULO' />
+						<input type='submit' value='CREAR NOTICIA' />
 						<input type='hidden' name='oculto' value=1 />
 					</td>
 				</tr>
@@ -645,22 +607,6 @@ $text = "- PRODUCTO CREAR ".$ActionTime.". ".$secc.".\n\t Pro Name: ".$_POST['su
 		
 				} 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	function desconexion(){
-
-			print("<form name='cerrar' action='../Admin/mcgexit.php' method='post'>
-							<tr>
-								<td valign='bottom' align='right' colspan='8'>
-											<input type='submit' value='Cerrar Sesion' />
-								</td>
-							</tr>								
-											<input type='hidden' name='cerrar' value=1 />
-					</form>	
-							");
-	
-			} 
-	
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 	require '../Gch.Inclu/Admin_Inclu_02.php';

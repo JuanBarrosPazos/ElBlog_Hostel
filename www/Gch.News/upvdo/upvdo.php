@@ -2,16 +2,18 @@
 session_start();
 
 	//require_once '../../Gch.Inclu/error_hidden.php';
-	  require_once 'upvdo_head.php';
+	require_once 'upvdo_head.php';
 
 	require_once '../../Gch.Connet/conection.php';
 	require_once '../../Gch.Connet/conect.php';
+
+	///////////////////////////////////////////////////////////////////////////////////////
 
 	if (($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'plus')){
 
 		if (isset($_POST['oculto2'])){
 			$_SESSION['myvdo'] = $_POST['refnews'];
-			echo $_POST['refnews']."<br>".$_SESSION['myvdo'];
+			echo "REFERENCIA ARTICULO ".$_SESSION['myvdo'];
 			show_form();
 		}
 		else{	global $a;
@@ -19,8 +21,8 @@ session_start();
 	
 	} else { require '../../Gch.Inclu/table_permisos.php'; }
 
+	///////////////////////////////////////////////////////////////////////////////////////
 
-	
 function show_form(){
 
 	print("<!-- Begin page content -->
@@ -86,10 +88,7 @@ function show_form(){
 	");
 } // FIN FUNCTION SHOWFORM
   
-?>
-
-
-<?php
+	///////////////////////////////////////////////////////////////////////////////////////
 
 	require 'upvdo_footer.php';
 

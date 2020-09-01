@@ -1,9 +1,10 @@
 <?php
 
-    if(isset($_POST['todo'])){ show_form();							
-                               ver_todo();
-                               //info();
-                            }
+    if((isset($_POST['todo']))||(isset($_POST['volver']))){ 
+                        show_form();							
+                        ver_todo();
+                        //info();
+                    }
 
     elseif(isset($_POST['oculto'])){
 
@@ -13,6 +14,8 @@
                          //info();
                             }
                             
-    } else { show_form(); }
+    } else { show_form();
+             ver_todo(); 
+                }
 
 ?>

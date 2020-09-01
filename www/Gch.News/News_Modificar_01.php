@@ -31,6 +31,11 @@ function validate_form(){
 
 function process_form(){
 	
+	unset($_SESSION['nid']);
+	unset($_SESSION['myvdo']);
+	unset($_SESSION['refuser']);
+	unset($_SESSION['refnews']);
+
 	global $db;
 	global $db_name;
 	
@@ -74,19 +79,19 @@ function process_form(){
 	$qc = mysqli_query($db, $sqlc);
 
 	if(!$qc){
-			print("<font color='#FF0000'>Consulte L.587: </font></br>".mysqli_error($db)."</br>");
+			print("<font color='#FF0000'>Consulte L.77: </font></br>".mysqli_error($db)."</br>");
 			
 		} else {
 			if(mysqli_num_rows($qc)== 0){
-							print ("<table align='center'>
-										<tr>
-											<td>
-												<font color='#FF0000'>
-													NO HAY DATOS
-												</font>
-											</td>
-										</tr>
-									</table>");
+					print ("<table align='center'>
+								<tr>
+									<td>
+										<font color='#FF0000'>
+											NO HAY DATOS
+										</font>
+									</td>
+								</tr>
+							</table>");
 									
 			} else { 
 	print ("<div class=\"juancentra col-xs-12 col-sm-12 col-lg-6\" style=\"	vertical-align: top !important; margin-top: 6px;\">
@@ -112,7 +117,7 @@ function process_form(){
 function show_form($errors=''){
 	
 	global $cnews;
-	$cnews = "<form name='creanews' action='News_Crear.php' style=\"display:inline-block;\">
+	$cnews = "<form name='creanews' method='post' action='News_Crear.php' style=\"display:inline-block;\">
 					<input type='submit' value='CREAR NUEVA NOTICIA' />
 					<input type='hidden' name='volver' value=1 />
 				</form>";
@@ -127,35 +132,40 @@ function show_form($errors=''){
 
 function ver_todo(){
 	
+	unset($_SESSION['myimg']);
+	unset($_SESSION['nid']);
 	unset($_SESSION['myvdo']);
+	unset($_SESSION['refuser']);
+	unset($_SESSION['refnews']);
 
 	global $db;
 	global $db_name;
-	$orden = $_POST['Orden'];
+	if (isset($_POST['Orden'])){ $orden = $_POST['Orden']; }
+	else { $orden = '`id` ASC'; }
+	
 
 	global $dyt1;
 	global $dm1;
 	global $dd1;
 	
-	if ($_POST['dy'] == ''){ $dy1 = date('Y');
+	if (@$_POST['dy'] == ''){ $dy1 = date('Y');
 							 $dyt1 = date('Y');} 
-							 				else {	$dy1 = "20".$_POST['dy'];
-													$dyt1 = "20".$_POST['dy'];
-													}
-	if ($_POST['dm'] == ''){ $dm1 = '';} 
-							 				else {	$dm1 = "-".$_POST['dm']."-";
-													}
-	if ($_POST['dd'] == ''){ $dd1 = '';} else {	$dd1 = $_POST['dd'];}
-	
-	/**/
-	if (($_POST['dm'] == '')&&($_POST['dd'] != '')){//$dm1 = date('m');
-													$dm1 = '';
-													$dd1 = $_POST['dd'];
-													global $fil;
-													$fil = $dy1."-%".$dm1."%-".$dd1."%";
-																					}
-												else{ global $fil;												  $fil = $dy1.$dm1.$dd1."%";
-														}
+		else {	$dy1 = "20".$_POST['dy'];
+				$dyt1 = "20".$_POST['dy'];}
+	if (@$_POST['dm'] == ''){ $dm1 = '';} 
+		else { $dm1 = "-".$_POST['dm']."-"; }
+	if (@$_POST['dd'] == ''){ $dd1 = '';} else { $dd1 = $_POST['dd'];}
+	if ((@$_POST['dm'] == '')&&(@$_POST['dd'] != '')){
+				//$dm1 = date('m');
+				$dm1 = '';
+				$dd1 = $_POST['dd'];
+				global $fil;
+				$fil = $dy1."-%".$dm1."%-".$dd1."%";
+					}
+		else{ 	global $fil;
+				$fil = $dy1.$dm1.$dd1."%";
+					}
+					
 	global $vname;
 	$vname = "gch_news";
 	$vname = "`".$vname."`";
@@ -164,25 +174,25 @@ function ver_todo(){
 
 	$qb = mysqli_query($db, $sqlb);
 	if(!$qb){
-			print("<font color='#FF0000'>Consulte L.587: </font></br>".mysqli_error($db)."</br>");
+			print("<font color='#FF0000'>Consulte L.171: </font></br>".mysqli_error($db)."</br>");
 			
-		} else {
-			if(mysqli_num_rows($qb)== 0){
-							print ("<table align='center'>
-										<tr>
-											<td>
-												<font color='#FF0000'>
-													NO HAY DATOS
-												</font>
-											</td>
-										</tr>
-									</table>");
+	} else {
+		if(mysqli_num_rows($qb)== 0){
+			print ("<table align='center'>
+						<tr>
+							<td>
+								<font color='#FF0000'>
+									NO HAY DATOS
+								</font>
+							</td>
+						</tr>
+					</table>");
 									
-				} else { 
+	} else { 
 	print ("<div class=\"juancentra col-xs-12 col-sm-12 col-lg-6\" style=\"	vertical-align: top !important; margin-top: 6px;\">
-							Nº NOTICIAS ".mysqli_num_rows($qb).".<br>");
+			Nº NOTICIAS ".mysqli_num_rows($qb).".<br>");
 			
-			while($rowb = mysqli_fetch_assoc($qb)){
+		while($rowb = mysqli_fetch_assoc($qb)){
 				global $conte;
 				$conte = substr($rowb['conte'],0,70);
 				$conte = $conte." ...";	
@@ -193,9 +203,8 @@ function ver_todo(){
 
 	print("</div>");
 			
-						} 
-
 			} 
+		} 
 		
 	}
 

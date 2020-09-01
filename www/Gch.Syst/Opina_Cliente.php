@@ -456,22 +456,6 @@ function show_form($errors=''){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	function desconexion(){
-
-			print("<form name='cerrar' action='../Admin/mcgexit.php' method='post'>
-							<tr>
-								<td valign='bottom' align='right' colspan='8'>
-											<input type='submit' value='Cerrar Sesion' />
-								</td>
-							</tr>								
-											<input type='hidden' name='cerrar' value=1 />
-					</form>	
-							");
-	
-			} 
-	
-/////////////////////////////////////////////////////////////////////////////////////////////////
-
 require '../Gch.Users/Inc_Footer.php';
 
 require '../Gch.Www/Inc_Jquery_Boots_Foot.php';

@@ -175,17 +175,13 @@ function show_form(){
 
 		print("
 			<table align='center' style=\"border:0px;margin-top:4px\" width='400px'>
-				
 				<tr>
 					<th colspan='2'>
 						ELIMINAR ARTICULO DE ".strtoupper($_sec)."
 					</th>
 				</tr>		
-			
-			</table>				
-						");
+			</table>");
 				
-
 	if ((@$_POST['autor'] != '') || ($_SESSION['refuser'] != '')) { 
 		
 	print("<table align='center' style=\"margin-top:10px; text-align:left; width:96%; max-width:500px\" >
@@ -384,22 +380,6 @@ $text = "- PRODUCTO CREAR ".$ActionTime.". ".$secc.".\n\t Pro Name: ".$_POST['su
 		
 				} 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	function desconexion(){
-
-			print("<form name='cerrar' action='../Admin/mcgexit.php' method='post'>
-							<tr>
-								<td valign='bottom' align='right' colspan='8'>
-											<input type='submit' value='Cerrar Sesion' />
-								</td>
-							</tr>								
-											<input type='hidden' name='cerrar' value=1 />
-					</form>	
-							");
-	
-			} 
-	
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 	require '../Gch.Inclu/Admin_Inclu_02.php';

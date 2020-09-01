@@ -16,18 +16,29 @@
 
 ----
 
+### 2020.09.01
+## ElBlog_Hostel.F05.V32 ESTABLE
+
+* SE MODIFICA LA VISUALIZACIÓN DE NEWS EN EL BACKEND
+
+* SE INTEGRA EL RECORTE DE IMAGENES AUTOMÁTICO EN LA SECCIÓN NEWS
+
+* SE CREA LA ELIMINACIÓN DE VIDEOS DE LA SECCIÓN NEWS
+
+----
+
 ### 2020.08.31
 ## ElBlog_Hostel.F05.V31 ESTABLE
 
-* SE INTEGRA CARGA Y VISUALIZACIÓN DE VIDEO EN LA SECCIÓN NEWS PARA NOTICIAS DESTACADAS DE LA EMPRESA
+* SE INTEGRA LA VISUALIZACIÓN DE VIDEO EN LA SECCIÓN NEWS FRONTEND
 
 * SE MODIFICA LA TABLA gch_news   
 
 ```
-`myvdo` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
-```
 
-* SE RECOMIENDA SOBREESCRIBIR Gch.Config, Gch.Css, Gch.Inclu, Gch.News, Gch.Www, sql/
+`myvdo` varchar(30) collate utf8_spanish2_ci DEFAULT NULL,
+
+```
 
 * SE CREA EL DIRECTORIO Gch.Vdo.News/ PARA LOS VIDEOS DE LA SECCION NEWS
 
@@ -59,16 +70,12 @@ CREATE TABLE IF NOT EXISTS `gch_news` (
 
 ```
 
-* SE RECOMIENDA SOBREESCRIBIR Gch.Admin, Gch.Artic, Gch.Config, Gch.Inclu, Gch.Users, Gch.Www, sql/
-
 * MODIFICADO index_Play_System(Docker).php SOBREESCRIBIR Y RENOMBRAR A index.php.
 
 ----
 
 ### 2020.08.19
 ## ElBlog_Hostel.F04.V28 ESTABLE
-
-* SE RECOMIENDA SOBREESCRIBIR Gch.Admin, Gch.Artic, Gch.Users
 
 * SE HA MODIFICADO LA VALIDACIÓN DE IMAGENES EN User_Modificar_img.php, Admin_Modificar_img.php, Art_Modificar_img.php, TAL QUE:
 

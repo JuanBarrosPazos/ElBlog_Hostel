@@ -527,6 +527,7 @@ function show_form($errors=''){
 		} elseif(isset($_POST['oculto1'])){
 				//$defaults = $_POST;
 				//$_SESSION['refuser'] = $_POST['autor'];
+				$_SESSION['isla'] = $_POST['isla'];
 				$_SESSION['datemod'] = date('Y-m-d');
 				$_SESSION['timemod'] = date('H:i:s');
 				$defaults = array ( 'autor' => $_SESSION['refuser'],  // ref autor
@@ -1083,22 +1084,6 @@ $text = "- PRODUCTO CREAR ".$ActionTime.". ".$secc.".\n\t Pro Name: ".$_POST['su
 		
 				} 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	function desconexion(){
-
-			print("<form name='cerrar' action='../Admin/mcgexit.php' method='post'>
-							<tr>
-								<td valign='bottom' align='right' colspan='8'>
-											<input type='submit' value='Cerrar Sesion' />
-								</td>
-							</tr>								
-											<input type='hidden' name='cerrar' value=1 />
-					</form>	
-							");
-	
-			} 
-	
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 	require '../Gch.Inclu/Admin_Inclu_02.php';

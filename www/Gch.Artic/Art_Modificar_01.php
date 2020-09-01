@@ -184,7 +184,7 @@ function process_form(){
 	global $actionforma;
 	$actionforma = "<form name='ver' action='Art_Modificar_02.php' method='POST'>";
 	global $formbotona;
-	$formbotona = "<div class='whiletotala' style=\"width:41% !important; min-width:124px !important; border: #fff solid 1px;\";>
+	$formbotona = "<div class='whiletotala' style=\"width:41% !important; min-width:124px !important;\";>
 						<input type='submit' value='MODIFICAR DATOS' style=\"width:122px;\" />
 						<input type='hidden' name='oculto2' value=1 />
 				</form>";
@@ -332,7 +332,7 @@ function ver_todo(){
 	global $actionforma;
 	$actionforma = "<form name='ver' action='Art_Modificar_02.php' method='POST'>";
 	global $formbotona;
-	$formbotona = "<div class='whiletotala' style=\"width:41% !important; min-width:124px !important; border: #fff solid 1px;\";>
+	$formbotona = "<div class='whiletotala' style=\"width:41% !important; min-width:124px !important;\";>
 						<input type='submit' value='MODIFICAR DATOS' style=\"width:122px;\" />
 						<input type='hidden' name='oculto2' value=1 />
 				</form>";

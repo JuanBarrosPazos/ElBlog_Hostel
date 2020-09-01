@@ -32,6 +32,9 @@
             <li class="list-inline-item">
               <a href="#">Terms of Use</a>
             </li>
+            <li class="list-inline-item">
+              <a href="../Gch.Admin/access.php" target="_blank">Admin Access</a>
+            </li>
           </ul>
         </div>
       </div>

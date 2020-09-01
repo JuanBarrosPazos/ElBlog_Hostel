@@ -13,19 +13,16 @@ session_start();
 
 if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'userpro')){
 
-					master_index();
+	master_index();
 
-						if(isset($_POST['oculto'])){
-							
-								if($form_errors = validate_form()){
-									show_form($form_errors);
-										} else {
-											process_form();
-											//accion_Log();
-											}
-							} else {
-										show_form();
+	if(isset($_POST['oculto'])){
+		if($form_errors = validate_form()){
+				show_form($form_errors);
+		} else { process_form();
+				 //accion_Log();
 								}
+	} else { show_form();}
+
 } else { require '../Gch.Inclu/table_permisos.php'; } 
 
 				   ////////////////////				   ////////////////////
@@ -57,8 +54,11 @@ function process_form(){
 	global $db;
 	global $db_name;	
 	global $secc;
-	
-	global $_sec;
+
+	global $redir;
+	$redir = "";
+
+global $_sec;
 	$secc = $_POST['autor'];
 	$sqlx =  "SELECT * FROM `gch_admin` WHERE `ref` = '$_POST[autor]'";
 	$q = mysqli_query($db, $sqlx);
@@ -143,6 +143,12 @@ function process_form(){
 		global $carpetaimg;
 		global $new_name1;
 
+	/************* CREAMOS LAS IMAGENES DEL RESTAURANTE EN EL DIRECTORIO Gch.Img.Art ***************/
+
+		require 'Inc_Crea_Img.php';
+
+	/* FIN CREAMOS IMAGENES */
+
 		print("<table align='center' style='margin-top:10px'>
 			<tr>
 				<th colspan=3 class='BorderInf'>
@@ -184,9 +190,7 @@ function process_form(){
 			</tr>
 				
 			<tr>
-				<td>	
-					AYUNTAMIENTO
-				</td>
+				<td>AYUNTAMIENTO</td>
 				<td colspan=2>".$_POST['ayto']." / ".$aytoname."</td>
 			</tr>
 				
@@ -243,17 +247,9 @@ function process_form(){
 			</tr>
 		</table>");
 			
-	/************* CREAMOS LAS IMAGENES DEL RESTAURANTE EN EL DIRECTORIO Gch.Img.Art ***************/
-
-		require 'Inc_Crea_Img.php';
-
-	/* FIN CREAMOS IMAGENES */
-
 	} 	// NO SE CUMPLE EL QUERY
-	else {print("* MODIFIQUE LA ENTRADA L.512: ".mysqli_error($db));
+	else {print("* MODIFIQUE LA ENTRADA L.147: ".mysqli_error($db));
 						show_form ();
-						//global $texerror;
-						//$texerror = "\n\t ".mysqli_error($db);
 					}
 		
 	}	/* FINAL process_form(); */
@@ -264,7 +260,17 @@ function process_form(){
 
 function show_form($errors=''){
 
-	
+	unset($_SESSION['myimg']);
+
+	$ctemp = "../Gch.Temp";
+	if(file_exists($ctemp)){$dir1 = $ctemp."/";
+							$handle1 = opendir($dir1);
+							while ($file1 = readdir($handle1))
+									{if (is_file($dir1.$file1))
+										{unlink($dir1.$file1);}
+										}	
+						} else {}
+
 	if(isset($_POST['oculto1'])){
 		$defaults = $_POST;
 		$_SESSION['refart'] = date('Y.m.d.H.i.s');
@@ -904,24 +910,6 @@ $text = "- PRODUCTO CREAR ".$ActionTime.". ".$secc.".\n\t Pro Name: ".$_POST['su
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 	
-	function desconexion(){
-
-			print("<form name='cerrar' action='../Admin/mcgexit.php' method='post'>
-							<tr>
-								<td valign='bottom' align='right' colspan='8'>
-											<input type='submit' value='Cerrar Sesion' />
-								</td>
-							</tr>								
-											<input type='hidden' name='cerrar' value=1 />
-					</form>	
-							");
-	
-			} 
-	
-				   ////////////////////				   ////////////////////
-////////////////////				////////////////////				////////////////////
-				 ////////////////////				  ///////////////////
-
 	require '../Gch.Inclu/Admin_Inclu_02.php';
 
 ?>

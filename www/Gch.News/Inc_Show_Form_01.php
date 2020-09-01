@@ -8,17 +8,25 @@
 								   'Orden' => $_POST['Orden'],
 								   'dy' => $_POST['dy'],
 								   'dm' => $_POST['dm'],
-                                   'dd' => $_POST['dd'],
-                                );
-		} else {
-				$defaults = array ('titulo' => '',
-								   'autor' => '',
-								   'Orden' => '',
-								   'dy' => '',
-								   'dm' => '',
-                                   'dd' => '',
-                                );
-					}
+                                   'dd' => $_POST['dd'],);
+							} 
+		
+	elseif(isset($_POST['volver'])){
+				$defaults = array (	'titulo' => '',
+									'autor' => '',
+									'Orden' => '',
+									'dy' => '',
+									'dm' => '',
+									'dd' => '',);
+							}	
+
+	else {$defaults = array ('titulo' => '',
+							 'autor' => '',
+							 'Orden' => '',
+							 'dy' => '',
+							 'dm' => '',
+                             'dd' => '',);
+							}
 	
 	if ($errors){
         print("<table align='center'>
@@ -211,7 +219,6 @@
 		</form>	
 
         <form name='todo' method='post' action='$_SERVER[PHP_SELF]' >
-		
 			<tr>
 				<td align='center' class='BorderInf'>
 					<input type='submit' value='NOTICIAS TODOS' />
@@ -227,7 +234,6 @@
 									print ("selected = 'selected'");}
 									print ("> $label </option>");
 								}	
-						
 	print ("</select>
 				</div>
 				<div style='float:left'>

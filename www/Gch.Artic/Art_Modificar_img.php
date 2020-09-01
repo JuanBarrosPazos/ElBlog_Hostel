@@ -13,14 +13,14 @@ session_start();
 
 if (($_SESSION['Nivel'] == 'admin')|| ($_SESSION['Nivel'] == 'plus')){
 
-		if($_POST['oculto2']){ process_form(); } 
+		if(@$_POST['oculto2']){ process_form(); } 
 								
-		elseif(($_POST['mimg1'])||($_POST['mimg2'])||($_POST['mimg3'])||($_POST['mimg4'])){
+		elseif((@$_POST['mimg1'])||(@$_POST['mimg2'])||(@$_POST['mimg3'])||(@$_POST['mimg4'])){
 									process_form();
 								} 
 
-		elseif($_POST['imagenmodif']){ process_form(); } 
-		elseif(($_POST['cero'])||($_GET['cero'])){ process_form(); } 
+		elseif(@$_POST['imagenmodif']){ process_form(); } 
+		elseif((@$_POST['cero'])||(@$_GET['cero'])){ process_form(); } 
 
 	} else { require '../Gch.Inclu/table_permisos.php'; }
 
@@ -37,7 +37,7 @@ function validate_form(){
 
 	$errors = array();
 
-	$limite = 1000 * 1024;
+	$limite = 1400 * 1024;
 	
 	$ext_permitidas = array('.jpg','.JPG','.gif','.GIF','.png','.PNG', 'jpeg', 'JPEG');
 	$extension = substr($_FILES['myimg']['name'],-4);
@@ -61,7 +61,7 @@ function validate_form(){
 
 	elseif ($_FILES['myimg']['size'] > $limite){
 	$tamanho = $_FILES['myimg']['size'] / 1024;
-	$errors [] = "IMAGEN ".$_FILES['myimg']['name']." MAYOR DE 100 KBytes. ".$tamanho." KB";
+	$errors [] = "IMAGEN ".$_FILES['myimg']['name']." MAYOR DE 140 KBytes. ".$tamanho." KB";
 			}
 		
 		elseif ($_FILES['myimg']['size'] <= $limite){
@@ -101,14 +101,6 @@ function modifica_form(){
 		global $db;
 		global $db_name;
 		
-		global $redir;
-		$redir = "<script type='text/javascript'>
-						function redir(){
-						window.location.href='Art_Modificar_img.php?cero=1';
-					}
-					setTimeout('redir()',1000);
-					</script>";
-
 		// RENOMBRAR ARCHIVO
 			global $extension;
 			$extension = substr($_FILES['myimg']['name'],-4);
@@ -140,7 +132,15 @@ $sqla = "UPDATE `$db_name`.$vname SET $imgcamp = '$new_name'  WHERE $vname.`refa
 		
 		if(mysqli_query($db, $sqla)){
 
-			require 'Inc_Modificar_Img.php';
+		global $redir;
+		$redir = "<script type='text/javascript'>
+						function redir(){
+						window.location.href='Art_Modificar_img.php?cero=1';
+					}
+					setTimeout('redir()',14000);
+					</script>";
+
+		require 'Inc_Modificar_Img.php';
 
 		} // FIN SI SE CUMPLE EL QUERY
 
@@ -159,7 +159,7 @@ function process_form(){
 	global $db;
 	global $db_name;
 
-	if($_POST['oculto2']){
+	if(@$_POST['oculto2']){
 		
 /*
 				unset($_SESSION['myimg']);	
@@ -288,14 +288,13 @@ $printimg =	"<div id='foto1A' class='img2'>
 				<img src='".$ruta.$myimg4."' /> 
 			</div>";
 			
-	if(($_POST['mimg1'])||($_POST['mimg2'])||($_POST['mimg3'])||($_POST['mimg4'])){
+	if((@$_POST['mimg1'])||(@$_POST['mimg2'])||(@$_POST['mimg3'])||(@$_POST['mimg4'])){
 					show_form();
-	} elseif($_POST['imagenmodif']){
+	} elseif(@$_POST['imagenmodif']){
 		if($form_errors = validate_form()){
 						show_form($form_errors);
 							} else { modifica_form();
 									 show_form();
-									 info();
 										}
 									}
 	//elseif($_POST['cero']){ print($printimg); } 
@@ -317,7 +316,7 @@ $printimg =	"<div id='foto1A' class='img2'>
 	<div style='clear:both'></div>
 	
 	<!-- Inicio footer -->
-	<div id='footer' >&copy; Juan Barr&oacute;s Pazos 2020.</div>
+	<div id='footer' style=\"text-align:center;\">&copy; Juan Barr&oacute;s Pazos 2020.</div>
 	<!-- Fin footer -->
 	</div>
 	
@@ -336,16 +335,16 @@ function show_form($errors=''){
 	$ruta = "../Gch.Img.Art/";
 	$_SESSION['ruta'] = $ruta;
 
-	if($_POST['mimg1']){$_SESSION['myimg'] = $_SESSION['myimg1'];
+	if(@$_POST['mimg1']){$_SESSION['myimg'] = $_SESSION['myimg1'];
 						$_SESSION['imgcamp'] = "myimg1";}
-	if($_POST['mimg2']){$_SESSION['myimg'] = $_SESSION['myimg2'];
+	if(@$_POST['mimg2']){$_SESSION['myimg'] = $_SESSION['myimg2'];
 						$_SESSION['imgcamp'] = "myimg2";}
-	if($_POST['mimg3']){$_SESSION['myimg'] = $_SESSION['myimg3'];
+	if(@$_POST['mimg3']){$_SESSION['myimg'] = $_SESSION['myimg3'];
 						$_SESSION['imgcamp'] = "myimg3";}
-	if($_POST['mimg4']){$_SESSION['myimg'] = $_SESSION['myimg4'];
+	if(@$_POST['mimg4']){$_SESSION['myimg'] = $_SESSION['myimg4'];
 						$_SESSION['imgcamp'] = "myimg4";}
 
-	if($_POST['oculto2']){
+	if(@$_POST['oculto2']){
 				$defaults = array ( 'id' => '',
 									'valor' => '',
 									'nombre' => '',
@@ -363,7 +362,7 @@ function show_form($errors=''){
 							} else {}
 		}
 								   
-	elseif(($_POST['mimg1'])||($_POST['mimg2'])||($_POST['mimg3'])||($_POST['mimg4'])){
+	elseif((@$_POST['mimg1'])||(@$_POST['mimg2'])||(@$_POST['mimg3'])||(@$_POST['mimg4'])){
 				$defaults = array ( 'id' => $_SESSION['miid'],
 									'valor' => $_SESSION['refart'],
 									'myimg' => $_SESSION['myimg'],
@@ -434,17 +433,14 @@ function show_form($errors=''){
 						<input type='submit' value='MODIFICAR IMAGEN' />
 						<input type='hidden' name='imagenmodif' value=1 />
 			</form>														
-						
 					</td>
-					
 				</tr>
 				
 				<tr>
 					<td class='BorderInf' colspan=4>
 					</td>
 				</tr>
-
-				</table>
+			</table>
 				");
 	
 		}	

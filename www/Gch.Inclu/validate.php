@@ -6,7 +6,7 @@ $errors = array();
 
 	/* VALIDAMOS EL CAMPO my_img */
 
-	$limite = 500 * 1024;
+	$limite = 1400 * 1024;
 	
 	$ext_permitidas = array('jpg','JPG','gif','GIF','png','PNG','bmp','BMP');
 	$extension = substr($_FILES['myimg1']['name'],-3);

@@ -14,21 +14,31 @@ session_start();
 if (($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'plus')){
 
 	if (isset($_POST['oculto2'])){
-								show_form();
-								//info_01();
-								}
-							elseif($_POST['imagenmodif']){
-								
-									if($form_errors = validate_form()){
-										show_form($form_errors);
-											} else {
-												process_form();
-												//info_02();
-												}
-								
-								} else {
-											show_form();
-									}
+				show_form();
+				//info_01();
+	} elseif($_POST['imagenmodif']){
+			if($form_errors = validate_form()){
+						show_form($form_errors);
+			} else { process_form();
+					 //info_02();
+					 $ctemp = "../Gch.Temp";
+					 if(file_exists($ctemp)){$dir1 = $ctemp."/";
+											 $handle1 = opendir($dir1);
+											 while ($file1 = readdir($handle1))
+													 {if (is_file($dir1.$file1))
+														 {unlink($dir1.$file1);}
+														 }	
+												 } else {}
+					global $redir;
+					$redir = "<script type='text/javascript'>
+								function redir(){
+									window.close();
+										}
+								setTimeout('redir()',8000);
+							</script>";
+					print ($redir);
+						}
+	} else { show_form(); }
 
 } else { require '../Gch.Inclu/table_permisos.php'; }
 
@@ -38,15 +48,19 @@ function validate_form(){
 	
 	$errors = array();
 
-	$limite = 500 * 1024;
+	$limite = 1400 * 1024;
 	
-	$ext_permitidas = array('jpg','JPG','gif','GIF','png','PNG','bmp','BMP');
-	$extension = substr($_FILES['myimg']['name'],-3);
+
+	$ext_permitidas = array('.jpg','.JPG','.gif','.GIF','.png','.PNG', 'jpeg', 'JPEG');
+	$extension = substr($_FILES['myimg']['name'],-4);
 	// print($extension);
-	// $extension = end(explode('.', $_FILES['myimg']['name']) );
 	$ext_correcta = in_array($extension, $ext_permitidas);
 
-	// $tipo_correcto = preg_match('/^image\/(gif|png|jpg|bmp)$/', $_FILES['myimg']['type']);
+	global $extension1;
+	$extension1 = strtolower($extension);
+	$extension1 = str_replace(".","",$extension1);
+	global $ctemp;
+	$ctemp = "../Gch.Temp";
 
 		if($_FILES['myimg']['size'] == 0){
 			$errors [] = "Ha de seleccionar una fotograf&iacute;a.";
@@ -68,22 +82,32 @@ function validate_form(){
 	*/
 		elseif ($_FILES['myimg']['size'] > $limite){
 		$tamanho = $_FILES['myimg']['size'] / 1024;
-		$errors [] = "El archivo".$_FILES['myimg']['name']." es mayor de 500 KBytes. ".$tamanho." KB";
+		$errors [] = "El archivo".$_FILES['myimg']['name']." es mayor de 140 KBytes. ".$tamanho." KB";
 		global $img2;
 		$img2 = 'untitled.png';
 			}
-		
+
+		elseif ($_FILES['myimg']['size'] <= $limite){
+			copy($_FILES['myimg']['tmp_name'], $ctemp."/ini1v.".$extension1); 
+			global $ancho;
+			global $alto;
+			list($ancho, $alto, $tipo, $atributos) = getimagesize($ctemp."/ini1v.".$extension1);
+
+			if($ancho < 400){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ANCHURA MENOR DE 400 ".$ancho;
+			}
+			elseif(($ancho > 400)&&($alto < 400)){
+				$errors [] = "IMAGEN ".$_FILES['myimg']['name']." ALTURA MENOR DE 400 ".$alto;
+			}
+		}
+
 			elseif ($_FILES['myimg']['error'] == UPLOAD_ERR_PARTIAL){
-				$errors [] = "La carga del archivo se ha interrumpido.";
-				global $img2;
-				$img2 = 'untitled.png';
+				$errors [] = "LA CARGA DEL ARCHIVO SE HA INTERRUMPIDO";
 				}
 				
 				elseif ($_FILES['myimg']['error'] == UPLOAD_ERR_NO_FILE){
-					$errors [] = "Es archivo no se ha cargado.";
-					global $img2;
-					$img2 = 'untitled.png';
-					}
+					$errors [] = "EL ARCHIVO NO SE HA CARGADO";
+                    }
 					
 		return $errors;
 
@@ -105,46 +129,19 @@ function process_form(){
 	$_sec = $rowautor['Nombre']." ".$rowautor['Apellidos'];
 	//echo $rowautor['Nombre']." ".$rowautor['Apellidos']."</br>";
 
-	$_SESSION['dt'] = date('is');
-	$extension = substr($_FILES['myimg']['name'],-3);
-	// print($extension);
-	global $new_name;
-	$new_name = $_SESSION['srefnews']."_".$_SESSION['dt'].".".$extension;
-
-	global $safe_filename;
-	$safe_filename = trim(str_replace('/', '', $_FILES['myimg']['name']));
-	$safe_filename = trim(str_replace('..', '', $safe_filename));
-
-	$nombre = $_FILES['myimg']['name'];
-	$nombre_tmp = $_FILES['myimg']['tmp_name'];
-	$tipo = $_FILES['myimg']['type'];
-	$tamano = $_FILES['myimg']['size'];
-		  
-	global $destination_file;
-	$destination_file = '../Gch.Img.News/'.$safe_filename;
-	
-
-	if( file_exists( '../Gch.Img.News/'.$safe_filename) ){
-		unlink('../Gch.Img.News/'.$safe_filename);
-			}
-			
-	elseif (move_uploaded_file($_FILES['myimg']['tmp_name'], $destination_file)){
-		
-		unlink('../Gch.Img.News/'.$_SESSION['smyimg']);
-		
-		// Renombrar el archivo:
-		$extension = substr($_FILES['myimg']['name'],-3);
+		// RENOMBRAR ARCHIVO
+		global $extension;
+		$extension = substr($_FILES['myimg']['name'],-4);
+		$extension = strtolower($extension);
+		global $extension;
+		$extension = str_replace(".","",$extension);
+		// print($extension);
+		date('H:i:s');
+		date('Y_m_d');
+		$dt = date('is');
 		global $new_name;
-		global $rename_filename;
-		$rename_filename = "../Gch.Img.News/".$new_name;	
-		rename($destination_file, $rename_filename);
-		$_SESSION['new_name'] = $new_name;
+		$new_name = $_SESSION['srefnews']."_".$dt.".".$extension;
 
-	global $db;
-	global $db_name;
-	
-	global $dyt1;
-	$dyt1 = trim($_POST['dyt1']);
 	global $tablename;
 	$tablename = "gch_news";
 	$tablename = "`".$tablename."`";
@@ -152,88 +149,58 @@ function process_form(){
 	$sqlc = "UPDATE `$db_name`.$tablename SET `myimg` = '$new_name' WHERE $tablename.`refnews` = '$_SESSION[srefnews]' LIMIT 1 ";
 
 	if(mysqli_query($db, $sqlc)){
-			global $new_name;
-			print("</br>
-					MODIFICADO CORRECTAMENT");
-	print( "<table align='center' style=\"margin-top:20px; text-align:left; width:96%; max-width:500px\" >
+
+		global $redir;
+		$redir = "";
+
+		require 'Inc_Modificar_Img.php';
+
+	print("MODIFICADO CORRECTAMENTE");
+	print( "<table align='center' style=\"margin-top:20px; width:96%; max-width:500px\" >
 				<tr>
-					<th colspan=3 class='BorderInf'>
+					<td colspan=2 class='BorderInf' style=\"text-align:center;\">
 						ARTICULO CREADO POR ".strtoupper($_sec)."
-					</th>
-				</tr>
-				
-				<tr>
-					<td width=140px>REFERENCIA</td>
-					<td width=140px>"
-						.$_SESSION['srefnews'].
-					"</td>
-					<td rowspan='4' align='center' width='auto'>
-	<img src='../Gch.Img.News/".$new_name."' width='98%' height='auto' />
 					</td>
 				</tr>
 				
 				<tr>
-					<td>TITULO</td>
+					<td colspan=2 style=\"text-align:center;\" width='auto'>
+			<img src='../Gch.Img.News/".$new_name."'' width='98%' height='auto' />
+					</td>
+				</tr>
+
+				<tr>
+					<td style=\"text-align:right;\">REFERENCIA</td>
+					<td>".$_SESSION['srefnews']."</td>
+				</tr>
+				
+				<tr>
+					<td style=\"text-align:right;\">TITULO</td>
 					<td>".$_POST['tit']."</td>
 				</tr>				
 				
 				<tr>
-					<td>SUBTITULO</td>
+					<td style=\"text-align:right;\">SUBTITULO</td>
 					<td>".$_POST['titsub']."</td>
 				</tr>
 				
 				<tr>
-					<td>DATE IN</td>
-					<td colspan>".$_POST['datein']."</td>
-				</tr>
-				
-				<tr>
-					<td>TIME IN</td>
-					<td colspan=2>".$_POST['timein']."</td>
-				</tr>
-				
-				<tr>
-					<td>DATE MOD</td>
-					<td colspan=2>".$_POST['datemod']."</td>
-				</tr>
-				
-				<tr>
-					<td>TIME MOD</td>
-					<td colspan=2>".$_POST['timemod']."</td>
-				</tr>
-				
-				<tr>
-					<td>CONTENIDO</td>
-					<td colspan=2>".$_POST['conte']."</td>
-				</tr>
-				<tr>
-					<td colspan=3 align='right' class='BorderSup'>
-	<form name='closewindow' action='$_SERVER[PHP_SELF]'  onsubmit=\"window.close()\">
+					<td colspan=2 style=\"text-align:right;\" class='BorderSup'>
+			<form name='closewindow' action='$_SERVER[PHP_SELF]'  onsubmit=\"window.close()\">
 						<input type='submit' value='CERRAR VENTANA' />
 						<input type='hidden' name='oculto2' value=1 />
-	</form>
+			</form>
 					</td>
 				</tr>
-			</table>");
-				}// FIN CONDICIONAL SE CUMPLE EL QUERY
-				 else {
-				print("<font color='#FF0000'>
+		</table>");
+	}// FIN CONDICIONAL SE CUMPLE EL QUERY
+		else { print("<font color='#FF0000'>
 						* ESTOS DATOS NO SON VALIDOS, MODIFIQUE ESTA ENTRADA: </font>
 						</br>
 						&nbsp;&nbsp;&nbsp;".mysqli_error($db))."
 						</br>";
 						show_form ();
-						
-							} // FIN ELSE SI NO SE CUMPLE EL QUERY
-
-					// print("El archivo se ha guardado en: ".$destination_file);
-
-
-			} 
-			
-			else {
-					print("No se ha podido guardar el archivo en el direcctorio Gch.Img.News/");
-			}
+				} // FIN ELSE SI NO SE CUMPLE EL QUERY
 
 	}
 
@@ -243,6 +210,13 @@ function show_form($errors=''){
 	
 	global $db; 	
 	global $db_name;
+
+	unset($_SESSION['smyimg']);
+	unset($_SESSION['myimg']);
+	
+	global $ruta;
+	$ruta = "../Gch.Img.News/";
+	$_SESSION['ruta'] = $ruta;
 
 	global $id;
 	$id = $_POST['id'];
@@ -258,14 +232,9 @@ function show_form($errors=''){
 				$defaults = array ( 'id' => $_POST['id'],
 									'dyt1' => $_POST['dyt1'],
 									'refuser' => $_SESSION['refuser'],
-									'refnews' =>  $_SESSION['refnews'],
+									'refnews' =>  $_SESSION['srefnews'],
 									'tit' => $_POST['tit'],
 								    'titsub' => $_POST['titsub'],
-									'datein' => $_POST['datein'],
-									'timein' => $_POST['timein'],
-									'datemod' => $_POST['datemod'],
-									'timemod' => $_POST['timemod'],
-									'conte' => $_POST['conte'],
 									'myimg' => $img,
 									);
 								   		}
@@ -275,22 +244,16 @@ function show_form($errors=''){
 				$defaults = array ( 'id' => $_POST['id'],
 									'dyt1' => $_POST['dyt1'],
 									'refuser' => $_SESSION['refuser'],
-									'refnews' =>  $_SESSION['refnews'],
+									'refnews' =>  $_SESSION['srefnews'],
 									'tit' => $_POST['tit'],
 								    'titsub' => $_POST['titsub'],
-									'datein' => $_POST['datein'],
-									'timein' => $_POST['timein'],
-									'datemod' => $_POST['datemod'],
-									'timemod' => $_POST['timemod'],
-									'conte' => $_POST['conte'],
 									'myimg' => $_POST['myimg'],
 									 );
 										}
 								   
 	if ($errors){
-		print("	<div  class='errorsimg'>
-					<table align='left' style='border:none'>
-					<th style='text-align:left'>
+		print("<table align='center' style=\"margin-top:12px;\">
+					<th style='text-align:center'>
 					<font color='#FF0000'>* SOLUCIONE ESTOS ERRORES:</font><br/>
 					</th>
 					<tr>
@@ -301,15 +264,12 @@ function show_form($errors=''){
 			}
 		print("</td>
 				</tr>
-				</table>
-				</div>
-				<div style='clear:both'></div>");
+				</table>");
 		}
 		
-	print("<table align='center' style=\"margin-top:90px; text-align:left; width:96%; max-width:500px\"  border=0>
-			
+	print("<table align='center' style=\"margin-top:12px; text-align:left; width:96%; max-width:500px;\">
 				<tr>
-					<th colspan=2 class='BorderInf'>
+					<th class='BorderInf'>
 						SELECCIONE UNA NUEVA IMAGEN.
 					</th>
 				</tr>
@@ -318,39 +278,30 @@ function show_form($errors=''){
 					<td class='BorderInf' align='center'>
 				<img src='../Gch.Img.News/".$_SESSION['smyimg']."' width='98%' height='auto' />
 					</td>
+				</tr>
+				<tr>
 					<td class='BorderInf'>
-							LA IMAGEN ACTUAL DEL ARTICULO : </br></br>
-							REFERENCIA: ".$_SESSION['srefnews']."</br>
-							TITULO: ".$_POST['tit'].".
+						REFERENCIA: ".$_SESSION['srefnews']."</br>
+						TITULO: ".$_POST['tit'].".
 					</td>
 				</tr>
 				
 				<tr>
 					<td>
-							Seleccione una Fotografía:	
-					</td>
-					<td>
-					<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'  enctype='multipart/form-data'>
-						<input type='file' name='myimg' value='".$defaults['myimg']."' />						
+	<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'  enctype='multipart/form-data'>
+			<input type='file' name='myimg' value='".$defaults['myimg']."' />						
 					</td>
 				</tr>
 
 				<tr align='center' height=30px>
-					<td>
-					</td>
 					<td >
 
 						<input name='id' type='hidden' value='".$defaults['id']."' />
 						<input name='dyt1' type='hidden' value='".$defaults['dyt1']."' />
 						<input name='refuser' type='hidden' value='".$_SESSION['refuser']."' />
-						<input name='refnews' type='hidden' value='".$_SESSION['refnews']."' />
+						<input name='refnews' type='hidden' value='".$_SESSION['srefnews']."' />
 						<input name='tit' type='hidden' value='".$defaults['tit']."' />
 						<input name='titsub' type='hidden' value='".$defaults['titsub']."' />
-						<input name='datein' type='hidden' value='".$defaults['datein']."' />
-						<input name='timein' type='hidden' value='".$defaults['timein']."' />
-						<input name='datemod' type='hidden' value='".$defaults['datemod']."' />
-						<input name='timemod' type='hidden' value='".$defaults['timemod']."' />
-						<input name='conte' type='hidden' value='".$defaults['conte']."' />		
 						<input name='myimg' type='hidden' value='".$defaults['myimg']."' />
 			
 						<input type='submit' value='MODIFICAR IMAGEN' />
@@ -360,15 +311,6 @@ function show_form($errors=''){
 				</tr>
 			
 				<tr>
-					<td class='BorderSup'>
-					</td>
-					<td align='right' class='BorderSup'>
-					</td>
-				</tr>
-				
-				<tr>
-					<td class='BorderSup'>
-					</td>
 					<td align='right' class='BorderSup'>
 			<form name='closewindow' action='$_SERVER[PHP_SELF]'  onsubmit=\"window.close()\">
 											<input type='submit' value='CERRAR VENTANA' />

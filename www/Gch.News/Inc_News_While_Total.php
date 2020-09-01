@@ -1,5 +1,22 @@
 <?php
 
+	if(strlen(trim($rowb['myvdo'])) > 0){
+		global $visual;
+		$visual = "<video controls width='98%' height='auto'>
+						<source src='../Gch.Vdo.News/".$rowb['myvdo']."' />
+					</video>";
+		global $delvdo;
+		$delvdo = "<input type='submit' value='BORRAR VIDEO' />";
+		global $upvdo;
+		$upvdo = "<input type='submit' value='MODIFICA VIDEO' />";
+	} else { global $visual;
+			 $visual = "<img src='../Gch.Img.News/untitled.png' width='92%' height='auto' />";
+			 global $delvdo;
+			 $delvdo = "";
+			 global $upvdo;
+			 $upvdo = "<input type='submit' value='CREAR VIDEO' />";
+				}
+
 	print (	"<div class=\"BorderSup\" style=\"text-align:center; display:block; margin-top: 4px;\">
 
 		<div  class='whiletotala'>
@@ -30,9 +47,7 @@
 		</div>
 												
 		<div class='whiletotala'>
-			<video controls width='98%' height='auto'>
-				<source src='../Gch.Vdo.News/".$rowb['myvdo']."' />
-			</video>
+			".$visual."
 		</div>
 
 		</div>
@@ -53,6 +68,7 @@
 			<input name='timemod' type='hidden' value='".$rowb['timemod']."' />
 			<input name='conte' type='hidden' value='".$rowb['conte']."' />						
 			<input name='myimg' type='hidden' value='".$rowb['myimg']."' />
+			<input name='myvdo' type='hidden' value='".$rowb['myvdo']."' />
 
 			<input type='submit' value='VER DETALLES' />
 			<input type='hidden' name='oculto2' value=1 />
@@ -98,7 +114,7 @@
 			<input type='hidden' name='oculto2' value=1 />
 		</form>
 						
-		<form name='modifica_img' action='News_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=540px, height=auto')\" class='whiletotala' >
+		<form name='modifica_img' action='News_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=540px,height=auto')\" class='whiletotala' >
 
 			<input name='id' type='hidden' value='".$rowb['id']."' />
 			<input name='dyt1' type='hidden' value='".$dyt1."' />
@@ -106,11 +122,6 @@
 			<input name='refnews' type='hidden' value='".$rowb['refnews']."' />
 			<input name='tit' type='hidden' value='".$rowb['tit']."' />
 			<input name='titsub' type='hidden' value='".$rowb['titsub']."' />
-			<input name='datein' type='hidden' value='".$rowb['datein']."' />
-			<input name='timein' type='hidden' value='".$rowb['timein']."' />
-			<input name='datemod' type='hidden' value='".$rowb['datemod']."' />
-			<input name='timemod' type='hidden' value='".$rowb['timemod']."' />
-			<input name='conte' type='hidden' value='".$rowb['conte']."' />						
 			<input name='myimg' type='hidden' value='".$rowb['myimg']."' />
 
 			<input type='submit' value='MODIFICA IMAGEN' />
@@ -125,7 +136,17 @@
 			<input name='refnews' type='hidden' value='".$rowb['refnews']."' />
 			<input name='myvdo' type='hidden' value='".$rowb['myvdo']."' />
 
-			<input type='submit' value='MODIFICA VIDEO' />
+			".$upvdo."
+			<input type='hidden' name='oculto2' value=1 />
+		</form>
+
+		<form name='videonews' action='News_Vdo_Borrar.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=400px,height=560px')\" class='whiletotala'>
+			<input name='id' type='hidden' value='".$rowb['id']."' />
+			<input name='refuser' type='hidden' value='".$rowb['refuser']."' />
+			<input name='refnews' type='hidden' value='".$rowb['refnews']."' />
+			<input name='myvdo' type='hidden' value='".$rowb['myvdo']."' />
+
+			".$delvdo."
 			<input type='hidden' name='oculto2' value=1 />
 		</form>
 

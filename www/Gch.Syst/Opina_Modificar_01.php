@@ -307,11 +307,12 @@ function opina_modera(){
 	if(mysqli_query($db, $sqld)){
 
 	print("<table align='center' style=\"margin-top:10px\">
-		<tr>
-			<th colspan=3 class='BorderInf'>
-						HA PERMITIDO LA OPINION ID ".strtoupper($refmodera)."
-			</th>
-		</tr>");
+			<tr>
+				<th colspan=3 class='BorderInf'>
+							HA PERMITIDO LA OPINION ID ".strtoupper($refmodera)."
+				</th>
+			</tr>
+		</table>");
 		global $redir;
 		$redir = "<script type='text/javascript'>
 						function redir(){

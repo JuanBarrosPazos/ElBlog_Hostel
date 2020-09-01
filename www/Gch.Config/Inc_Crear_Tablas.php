@@ -136,7 +136,7 @@
   `timemod` varchar(20) collate utf8_spanish2_ci NOT NULL default '0',
   `conte` text(402) collate utf8_spanish2_ci NOT NULL,
   `myimg` varchar(30) collate utf8_spanish2_ci NOT NULL default 'untitled.png',
-  `myvdo` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `myvdo` varchar(30) collate utf8_spanish2_ci DEFAULT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `id` (`id`),
   UNIQUE KEY `refnews` (`refnews`)

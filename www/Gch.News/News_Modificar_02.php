@@ -41,14 +41,14 @@ function validate_form(){
 
 /*
 	if(strlen(trim($_POST['refnews'])) != 0){	
-			$secc1 = "gch_".date('Y')."_news";
+			$secc1 = "gch_news";
 			$secc1 = "`".$secc1."`";
 			$sqlc =  "SELECT * FROM `$db_name`.$secc1 WHERE `refnews` = '$_POST[refnews]'";
 			$qc = mysqli_query($db, $sqlc);
 			global $conutc;
 			$countc = mysqli_num_rows($qc);
 			if($countc > 0){
-				$errors [] = "YA EXISTE EL ARTICULO.";
+				$errors [] = "YA EXISTE EL NOTICIA.";
 				}
 		}
 */
@@ -88,20 +88,20 @@ function validate_form(){
 	
 	
 	if(strlen(trim($_POST['coment'])) == 0){
-		$errors [] = "ARTICULO <font color='#FF0000'>Campo obligatorio.</font>";
+		$errors [] = "NOTICIA <font color='#FF0000'>Campo obligatorio.</font>";
 		}
 
 	elseif(strlen(trim($_POST['coment'])) <= 50){
-		$errors [] = "ARTICULO <font color='#FF0000'>Mas de 50 carácteres.</font>";
+		$errors [] = "NOTICIA <font color='#FF0000'>Mas de 50 carácteres.</font>";
 		}
 
 	elseif(strlen(trim($_POST['coment'])) >= 402){
-		$errors [] = "ARTICULO <font color='#FF0000'>Excedió más de 400 carácteres.</font>";
+		$errors [] = "NOTICIA <font color='#FF0000'>Excedió más de 400 carácteres.</font>";
 		}
 		
 
 	elseif (!preg_match('/^[a-z A-Z 0-9 \s ,.;:\'-()¡!¿?@ áéíóúñ €]+$/',$_POST['coment'])){
-			$errors [] = "ARTICULO  <font color='#FF0000'>Caracteres no permitidos. { } [ ] $ < >  # ...</font>";
+			$errors [] = "NOTICIA  <font color='#FF0000'>Caracteres no permitidos. { } [ ] $ < >  # ...</font>";
 			}
 
 	return $errors;
@@ -150,65 +150,41 @@ function process_form(){
 				</tr>
 												
 				<tr>
-					<td width=100px>
-						REFERENCIA
-					</td>
-					<td width=140px>"
-						.$_SESSION['refnews'].
-					"</td>
+					<td width=100px>REFERENCIA</td>
+					<td width=140px>".$_SESSION['refnews']."</td>
 					<td rowspan='4' align='center' width='auto'>
 				<img src='".$carpetaimg."/".$_SESSION['myimg']."' width='98% height='auto' />
 					</td>
 				</tr>
 				
 				<tr>
-					<td>
-						TITULO
-					</td>
-					<td>"
-						.$_POST['titulo'].
-					"</td>
+					<td>TITULO</td>
+					<td>".$_POST['titulo']."</td>
 				</tr>				
 				
 				<tr>
-					<td>	
-						SUBTITULO
-					</td>
-					<td>"
-						.$_POST['subtitul'].
-					"</td>
+					<td>SUBTITULO</td>
+					<td>".$_POST['subtitul']."</td>
 				</tr>
 				
 				<tr>
-					<td>	
-						DATE IN
-					</td>
-					<td>"
-						.$_POST['datein'].
-					"</td>
+					<td>DATE IN</td>
+					<td>".$_POST['datein']."</td>
 				</tr>
 				
 				<tr>
-					<td>	
-						TIME IN
-					</td>
-					<td>"
-						.$_POST['timein'].
-					"</td>
+					<td>TIME IN</td>
+					<td>".$_POST['timein']."</td>
 				</tr>
 				
 				<tr>
-					<td colspan=3 align='center'>
-						ARTICULO
-					</td>
+					<td colspan=3 align='center'>NOTICIA</td>
 				</tr>
-					<td colspan=3 align='left'>"
-						.$_POST['coment'].
-					"</td>
+					<td colspan=3 align='left'>".$_POST['coment']."</td>
 				</tr>
 				<tr>
 					<th colspan=3 class='BorderSup'>
-						<a href=News_Modificar_01.php>MODIFICAR OTRO ARTICULO</a>
+						<a href=News_Modificar_01.php>MODIFICAR OTRO NOTICIA</a>
 					</th>
 				</tr>
 			</table>");
@@ -243,7 +219,7 @@ function show_form($errors=''){
 		$defaults = array ( 'autor' => $_SESSION['refuser'],  // ref autor
 							'titulo' => $_SESSION['tit'], // Titulo
 							'subtitul' => $_SESSION['titsub'], // Sub Titulo
-							'refnews' => $_SESSION['refnews'], // Referencia articulo
+							'refnews' => $_SESSION['refnews'], 
 							'datein' => $_SESSION['datein'], // Sub Titulo
 							'timein' => $_SESSION['timein'], // Sub Titulo
 							'datemod' => $_SESSION['datemod'], // Sub Titulo
@@ -260,7 +236,7 @@ function show_form($errors=''){
 				$defaults = array ( 'autor' => $_POST['autor'],  // ref autor
 									'titulo' => $_SESSION['tit'], // Titulo
 									'subtitul' => $_SESSION['titsub'], // Sub Titulo
-									'refnews' => $_SESSION['refnews'], // Referencia articulo
+									'refnews' => $_SESSION['refnews'], 
 									'datein' => $_SESSION['datein'], // Sub Titulo
 									'timein' => $_SESSION['timein'], // Sub Titulo
 									'datemod' => $_SESSION['datemod'], // Sub Titulo
@@ -277,7 +253,7 @@ function show_form($errors=''){
 				$defaults = array ( 'autor' => isset($_POST['autor']),  // ref autor
 									'titulo' => '', // Titulo
 								   	'subtitul' => '', // Sub Titulo
-								   	//'refnews' => @$_SESSION['refnews'],  Referencia articulo
+								   	//'refnews' => @$_SESSION['refnews'],
 								   	'coment' => '',
 									'myimg' => '',	
 												);
@@ -319,7 +295,7 @@ function show_form($errors=''){
 			<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
 				<tr>
 					<th colspan='2'>
-						MODIFICAR ARTICULO DE ".strtoupper($_sec)."
+						MODIFICAR NOTICIA DE ".strtoupper($_sec)."
 					</th>
 				</tr>		
 				<tr>
@@ -380,7 +356,7 @@ function show_form($errors=''){
 			<table align='center' style=\"margin-top:10px\">
 				<tr>
 					<th colspan=2 class='BorderInf'>
-							NUEVO ARTICULO DE ".strtoupper($_sec)."
+							NUEVO NOTICIA DE ".strtoupper($_sec)."
 					</th>
 				</tr>
 				
@@ -445,7 +421,7 @@ function show_form($errors=''){
 
 			<tr>
 				<td colspan=2 align='center'>
-					ARTICULO
+					NOTICIA
 				</td>
 			</tr>
 			<tr>
@@ -463,7 +439,7 @@ function show_form($errors=''){
 
 			<tr>
 				<td colspan='2' align='right' valign='middle'  class='BorderSup'>
-					<input type='submit' value='MODIFICAR ARTICULO' />
+					<input type='submit' value='MODIFICAR NOTICIA' />
 					<input type='hidden' name='oculto' value=1 />
 				</td>
 			</tr>
@@ -477,7 +453,6 @@ function show_form($errors=''){
 				</form>
 			</td>
 		</tr>
-												
 			</table>"); 
 		}
 	
@@ -527,22 +502,6 @@ $text = "- PRODUCTO CREAR ".$ActionTime.". ".$secc.".\n\t Pro Name: ".$_POST['su
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	function desconexion(){
-
-			print("<form name='cerrar' action='../Admin/mcgexit.php' method='post'>
-							<tr>
-								<td valign='bottom' align='right' colspan='8'>
-											<input type='submit' value='Cerrar Sesion' />
-								</td>
-							</tr>								
-											<input type='hidden' name='cerrar' value=1 />
-					</form>	
-							");
-	
-			} 
-	
-/////////////////////////////////////////////////////////////////////////////////////////////////
-
 	require '../Gch.Inclu/Admin_Inclu_02.php';
 
 ?>

@@ -1,8 +1,8 @@
 <?php
 
 // DEFINO LAS VALORACIONES Y LOS CALCULOS.
-	if(!$rowb['refart']){ global $refartval;
-						  $refartval = $_SESSION['refart'];
+	if(!isset($rowb['refart'])){ global $refartval;
+						  		 $refartval = $_SESSION['refart'];
 								}
 	else { global $refartval;
 			$refartval = $rowb['refart'];

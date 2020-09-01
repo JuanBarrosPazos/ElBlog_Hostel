@@ -34,7 +34,16 @@ function process_form(){
 	global $_sec;
 	$_sec = $rowautor['Nombre']." ".$rowautor['Apellidos'];
 	}
-	
+
+	if(strlen(trim($_POST['myvdo'])) > 0){
+		global $visual;
+		$visual = "<video controls width='98%' height='auto'>
+						<source src='../Gch.Vdo.News/".$_POST['myvdo']."' />
+					</video>";
+	} else { global $visual;
+			 $visual = "<img src='../Gch.Img.News/untitled.png' width='92%' height='auto' />";
+				}
+
 	print("<table align='center' style=\"text-align:left; width:96%; max-width:500px\" >
 				<tr>
 					<th colspan=3  class='BorderInf'>
@@ -43,121 +52,80 @@ function process_form(){
 				</tr>
 				
 				<tr>
-					<td width=100px >
-						ID:
-					</td>
-					<td width=140px>"
-						.$_POST['id'].
-					"</td>
+					<td width=100px >ID</td>
+					<td width=140px>".$_POST['id']."</td>
 					<td rowspan='5' align='center' width='auto'>
 	<img src='../Gch.Img.News/".$_POST['myimg']."'  width='90%' height='auto' />
 					</td>
 				</tr>
 				
 				<tr>
-					<td>
-						AUTOR REF:
-					</td>
-					<td>"
-						.$_POST['refuser'].
-					"</td>
+					<td>AUTOR REF</td>
+					<td>".$_POST['refuser']."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						AUTOR NAME:
-					</td>
-					<td>"
-					.$_sec.
-					"</td>
+					<td>AUTOR NAME</td>
+					<td>".$_sec."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						REFERENCIA
-					</td>
-					<td>"
-						.$_POST['refnews'].
-					"</td>
+					<td>REFERENCIA</td>
+					<td>".$_POST['refnews']."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						TITULO
-					</td>
-					<td>"
-						.$_POST['tit'].
-					"</td>
+					<td>TITULO</td>
+					<td>".$_POST['tit']."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						SUBTITULO
+					<td>SUBTITULO</td>
+					<td>".$_POST['titsub']."</td>
+					<td rowspan='5' align='center' width='auto'>
+						".$visual."
 					</td>
-					<td>"
-						.$_POST['titsub'].
-					"</td>
 				</tr>				
 				
 				<tr>
-					<td>
-						DATE IN
-					</td>
-					<td>"
-						.$_POST['datein'].
-					"</td>
+					<td>DATE IN</td>
+					<td>".$_POST['datein']."</td>
 				</tr>				
 				
 				<tr>
-					<td>
-						TIME IN
-					</td>
-					<td colspan='2'>"
-						.$_POST['timein'].
-					"</td>
+					<td>TIME IN</td>
+					<td colspan='2'>".$_POST['timein']."</td>
 				</tr>				
 				
 				<tr>
-					<td>
-						DATE MOD
-					</td>
-					<td colspan='2'>"
-						.$_POST['datemod'].
-					"</td>
+					<td>DATE MOD</td>
+					<td colspan='2'>".$_POST['datemod']."</td>
 				</tr>				
 				
 				<tr>
-					<td>
-						TIME MOD
-					</td>
-					<td colspan='2'>"
-						.$_POST['timemod'].
-					"</td>
+					<td>TIME MOD</td>
+					<td colspan='2'>".$_POST['timemod']."</td>
 				</tr>
 				
 				<tr>
-					<td colspan='3' align='center'>
-						ARTICULO
-					</td>
+					<td colspan='3' align='center'>ARTICULO</td>
 				</tr>
 				<tr>
-					<td colspan='3' align='left'>"
-						.$_POST['conte'].
-					"</td>
+					<td colspan='3' align='left'>".$_POST['conte']."</td>
 				</tr>
 				
 				<tr>
 					<td colspan=3 align='right' class='BorderSup'>
-	<form name='closewindow' action='$_SERVER[PHP_SELF]'  onsubmit=\"window.close()\">
-											<input type='submit' value='CERRAR VENTANA' />
-											<input type='hidden' name='oculto2' value=1 />
-			</form>
+						<form name='closewindow' action='$_SERVER[PHP_SELF]'  onsubmit=\"window.close()\">
+								<input type='submit' value='CERRAR VENTANA' />
+								<input type='hidden' name='oculto2' value=1 />
+						</form>
 					</td>
 				</tr>
 								
 			</table>"); 
 
-			}
+	}
 			
 /////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -315,7 +315,7 @@
 				 ////////////////////				  ///////////////////
 
     global $limite;
-    $limite = 900 * 1024;
+    $limite = 1400 * 1024;
 
 	/* VALIDO IMAGEN 1 */
 	if($_FILES['myimg1']['size'] == 0){
@@ -348,15 +348,14 @@
 	*/
 		elseif ($_FILES['myimg1']['size'] > $limite){
 		$tamanho = $_FILES['myimg1']['size'] / 1024;
-		$errors [] = "IMAGEN ".$_FILES['myimg1']['name']." MAYOR DE 90 KBytes. ".$tamanho." KB";
+		$errors [] = "IMAGEN ".$_FILES['myimg1']['name']." MAYOR DE 140 KBytes. ".$tamanho." KB";
 			}
 
 		elseif ($_FILES['myimg1']['size'] <= $limite){
-			//copy($_FILES['myimg1']['tmp_name'], $ctemp."/ini1v.".$extension1); 
+			copy($_FILES['myimg1']['tmp_name'], $ctemp."/ini1v.".$extension1); 
 			global $ancho;
 			global $alto;
-			//list($ancho, $alto, $tipo, $atributos) = getimagesize($ctemp."/ini1v.".$extension1);
-			list($ancho, $alto, $tipo, $atributos) = getimagesize($_FILES['myimg1']['name']);
+			list($ancho, $alto, $tipo, $atributos) = getimagesize($ctemp."/ini1v.".$extension1);
 
 			if($ancho < 400){
 				$errors [] = "IMAGEN ".$_FILES['myimg1']['name']." ANCHURA MENOR DE 400 ".$ancho;
@@ -394,15 +393,15 @@
 			}
 		elseif ($_FILES['myimg2']['size'] > $limite){
 		$tamanho = $_FILES['myimg2']['size'] / 1024;
-		$errors [] = "IMAGEN ".$_FILES['myimg2']['name']." MAYOR DE 90 KBytes. ".$tamanho." KB";
+		$errors [] = "IMAGEN ".$_FILES['myimg2']['name']." MAYOR DE 140 KBytes. ".$tamanho." KB";
 			}
 		
 		elseif ($_FILES['myimg2']['size'] <= $limite){
-			//copy($_FILES['myimg2']['tmp_name'], $ctemp."/ini2v.".$extension2); 
+			copy($_FILES['myimg2']['tmp_name'], $ctemp."/ini2v.".$extension2); 
 			global $ancho;
 			global $alto;
-			//list($ancho, $alto, $tipo, $atributos) = getimagesize($ctemp."/ini2v.".$extension2);
-			list($ancho, $alto, $tipo, $atributos) = getimagesize($_FILES['myimg2']['name']);
+			list($ancho, $alto, $tipo, $atributos) = getimagesize($ctemp."/ini2v.".$extension2);
+			//list($ancho, $alto, $tipo, $atributos) = getimagesize($_FILES['myimg2']['name']);
 
 			if($ancho < 400){
 				$errors [] = "IMAGEN ".$_FILES['myimg2']['name']." ANCHURA MENOR DE 400 ".$ancho;
@@ -445,15 +444,15 @@
 			}
 		elseif ($_FILES['myimg3']['size'] > $limite){
 		$tamanho = $_FILES['myimg3']['size'] / 1024;
-		$errors [] = "IMAGEN ".$_FILES['myimg3']['name']." MAYOR DE 90 KBytes. ".$tamanho." KB";
+		$errors [] = "IMAGEN ".$_FILES['myimg3']['name']." MAYOR DE 140 KBytes. ".$tamanho." KB";
 			}
 		
 		elseif ($_FILES['myimg3']['size'] <= $limite){
-			//copy($_FILES['myimg3']['tmp_name'], $ctemp."/ini3v.".$extension3); 
+			copy($_FILES['myimg3']['tmp_name'], $ctemp."/ini3v.".$extension3); 
 			global $ancho;
 			global $alto;
-			//list($ancho, $alto, $tipo, $atributos) = getimagesize($ctemp."/ini3v.".$extension3);
-			list($ancho, $alto, $tipo, $atributos) = getimagesize($_FILES['myimg3']['name']);
+			list($ancho, $alto, $tipo, $atributos) = getimagesize($ctemp."/ini3v.".$extension3);
+			//list($ancho, $alto, $tipo, $atributos) = getimagesize($_FILES['myimg3']['name']);
 
 			if($ancho < 400){
 				$errors [] = "IMAGEN ".$_FILES['myimg3']['name']." ANCHURA MENOR DE 400 ".$ancho;
@@ -500,15 +499,15 @@
 	*/
 		elseif ($_FILES['myimg4']['size'] > $limite){
 		$tamanho = $_FILES['myimg4']['size'] / 1024;
-		$errors [] = "IMAGEN ".$_FILES['myimg4']['name']." MAYOR DE 90 KBytes. ".$tamanho." KB";
+		$errors [] = "IMAGEN ".$_FILES['myimg4']['name']." MAYOR DE 140 KBytes. ".$tamanho." KB";
 			}
 		
 		elseif ($_FILES['myimg4']['size'] <= $limite){
-			//copy($_FILES['myimg1']['tmp_name'], $ctemp."/ini4v.".$extension4); 
+			copy($_FILES['myimg1']['tmp_name'], $ctemp."/ini4v.".$extension4); 
 			global $ancho;
 			global $alto;
-			//list($ancho, $alto, $tipo, $atributos) = getimagesize($ctemp."/ini4v.".$extension4);
-			list($ancho, $alto, $tipo, $atributos) = getimagesize($_FILES['myimg4']['name']);
+			list($ancho, $alto, $tipo, $atributos) = getimagesize($ctemp."/ini4v.".$extension4);
+			//list($ancho, $alto, $tipo, $atributos) = getimagesize($_FILES['myimg4']['name']);
 
 			if($ancho < 400){
 				$errors [] = "IMAGEN ".$_FILES['myimg4']['name']." ANCHURA MENOR DE 400 ".$ancho;
