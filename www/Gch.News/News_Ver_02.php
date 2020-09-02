@@ -94,17 +94,17 @@ function process_form(){
 				
 				<tr>
 					<td>TIME IN</td>
-					<td colspan='2'>".$_POST['timein']."</td>
+					<td>".$_POST['timein']."</td>
 				</tr>				
 				
 				<tr>
 					<td>DATE MOD</td>
-					<td colspan='2'>".$_POST['datemod']."</td>
+					<td>".$_POST['datemod']."</td>
 				</tr>				
 				
 				<tr>
 					<td>TIME MOD</td>
-					<td colspan='2'>".$_POST['timemod']."</td>
+					<td>".$_POST['timemod']."</td>
 				</tr>
 				
 				<tr>

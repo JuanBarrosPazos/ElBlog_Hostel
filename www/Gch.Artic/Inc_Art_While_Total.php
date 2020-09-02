@@ -4,83 +4,109 @@
 		$conte = substr($rowb['conte'],0,56);
 		$conte = $conte." ...";	
 		
-		global $actionforma;
-		global $formbotona;
-		global $actionformb;
-		global $formbotonb;
+	if(strlen(trim($rowb['myvdo'])) > 0){
+		global $visual;
+		$visual = "<video controls width='98%' height='auto'>
+						<source src='../Gch.Vdo.Art/".$rowb['myvdo']."' />
+					</video>";
+		global $delvdo;
+		$delvdo = "<input type='submit' value='BORRAR VIDEO' />";
+		global $upvdo;
+		$upvdo = "<input type='submit' value='MODIFICA VIDEO' />";
+	} else { global $visual;
+			 $visual = "<img src='../Gch.Img.Art/untitled.png' width='92%' height='auto' />";
+			 global $delvdo;
+			 $delvdo = "";
+			 global $upvdo;
+			 $upvdo = "<input type='submit' value='CREAR VIDEO' />";
+				}
 
-	print (	"<div style=\"margin-top:8px; padding-top: 0px; border-top: #fff solid 1px; border-bottom: #fff solid 1px; \">
-									
-	".$actionforma."
-
-	<input name='id' type='hidden' value='".$rowb['id']."' />
-	<input name='refuser' type='hidden' value='".$rowb['refuser']."' />
-	<input name='refart' type='hidden' value='".$rowb['refart']."' />
-							
-		<div class='whiletotala'>
-			NOMBRE<br>
-	<input name='tit' type='hidden' value='".$rowb['tit']."' />".strtoupper($rowb['tit'])."
-		</div>
-
-	<input name='titsub' type='hidden' value='".$rowb['titsub']."' />
-	<input name='datein' type='hidden' value='".$rowb['datein']."' />
-	<input name='timein' type='hidden' value='".$rowb['timein']."' />
-	<input name='datemod' type='hidden' value='".$rowb['datemod']."' />
-	<input name='timemod' type='hidden' value='".$rowb['timemod']."' />
+	print (	"<div class=\"BorderSup\" style=\"text-align:center; display:block; margin-top:8px; padding-top: 0px; border-top: #fff solid 1px;\">
 
 		<div class='whiletotala'>
-			ISLA<br>
-	<input name='isla' type='hidden' value='".$rowb['refisla']."' />".strtoupper($rowb['refisla'])." / ".strtoupper($islaname)."
+			NOMBRE<br>".strtoupper($rowb['tit'])."
 		</div>
 
 		<div class='whiletotala'>
-			AYUNTAMIENTO<br>
-	<input name='ayto' type='hidden' value='".$rowb['refayto']."' />".strtoupper($rowb['refayto'])." / ".strtoupper($aytoname)."
+			ISLA<br>".strtoupper($rowb['refisla'])." / ".strtoupper($islaname)."
 		</div>
 
-		<div class='whiletotala conte'>
+		<div class='whiletotala'>
+			AYUNTAMIENTO<br>".strtoupper($rowb['refayto'])." / ".strtoupper($aytoname)."
+		</div>
+
+		<div class='whiletotala' style=\"width:180px !important; text-align:left;\">
 			<span style=\"display:block; text-align:center;\">
 				DESCRIPCION
-			</span>
-	<input name='conte' type='hidden' value='".$rowb['conte']."' />".strtoupper($conte)."
+			</span>".strtoupper($conte)."
 		</div>
 
 		<div class='whiletotala'>
-			<input name='myimg1' type='hidden' value='".$rowb['myimg1']."' />
-			<img src='../Gch.Img.Art/".$rowb['myimg1']."' />
+			<img src='../Gch.Img.Art/".$rowb['myimg1']."' width='92%' height='auto' />
 		</div>
+
+		<div class='whiletotala'>
+			".$visual."
+		</div>
+
+		</div>
+
+		<div class=\"BorderInf\" style=\"text-align:center; display:block;\">
 		
-	<input name='tipo' type='hidden' value='".$rowb['reftipo']."' />
-	<input name='espec1' type='hidden' value='".$rowb['refespec1']."' />
-	<input name='espec2' type='hidden' value='".$rowb['refespec2']."' />
-	<input name='valora' type='hidden' value='".$rowb['ivalora']."' />
-	<input name='precio' type='hidden' value='".$rowb['iprecio']."' />
-	<input name='url' type='hidden' value='".$rowb['url']."' />
-	<input name='map' type='hidden' value='".$rowb['map']."' />
-	<input name='mapiframe' type='hidden' value='".$rowb['mapiframe']."' />
-	<input name='latitud' type='hidden' value='".$rowb['latitud']."' />
-	<input name='longitud' type='hidden' value='".$rowb['longitud']."' />
-	<input name='calle' type='hidden' value='".$rowb['calle']."' />
-	<input name='Email' type='hidden' value='".$rowb['Email']."' />
-	<input name='Tlf1' type='hidden' value='".$rowb['Tlf1']."' />
-	<input name='Tlf2' type='hidden' value='".$rowb['Tlf2']."' />
+	<form name='ver' action='../Gch.Artic/Art_Ver_02.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=520px,height=640px')\" class='whiletotala'>
+		");
 
-	".$formbotona.$actionformb."
-	
-	<input name='id' type='hidden' value='".$rowb['id']."' />
-	<input name='refuser' type='hidden' value='".$rowb['refuser']."' />
-	<input name='refart' type='hidden' value='".$rowb['refart']."' />
-	<input name='tit' type='hidden' value='".$rowb['tit']."' />
-	<input name='titsub' type='hidden' value='".$rowb['titsub']."' />
-	<input name='isla' type='hidden' value='".$rowb['refisla']." / ".$islaname."'' />
-	<input name='ayto' type='hidden' value='".$rowb['refayto']." / ".$aytoname."' />
-	<input name='myimg1' type='hidden' value='".$rowb['myimg1']."' />
-	<input name='myimg2' type='hidden' value='".$rowb['myimg2']."' />
-	<input name='myimg3' type='hidden' value='".$rowb['myimg3']."' />
-	<input name='myimg4' type='hidden' value='".$rowb['myimg4']."' />
+			require 'Inc_Art_While_Total_Rows.php';
 
-	".$formbotonb."
+		print(" <input type='submit' value='VER DETALLES' />
+				<input type='hidden' name='oculto2' value=1 />
+			</form>
 
+			<form name='ver' action='Art_Modificar_02.php' method='POST' class='whiletotala'>
+			");
+
+			require 'Inc_Art_While_Total_Rows.php';
+
+		print("	<input type='submit' value='MODIFICA DATOS' />
+				<input type='hidden' name='oculto2' value=1 />
+			</form>
+
+			<form name='ver' action='Art_Borrar_02.php' method='POST' class='whiletotala'>
+			");
+
+			require 'Inc_Art_While_Total_Rows.php';
+
+		print("	<input type='submit' value='BORRA DATOS' />
+				<input type='hidden' name='oculto2' value=1 />
+			</form>
+
+
+	<form name='modifica_img' action='Art_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=550px,height=400px')\" class='whiletotala' >
+			");
+			
+			require 'Inc_Art_While_Total_Rows.php';
+
+		print(" <input type='submit' value='MODIFICA IMAGEN' />
+				<input type='hidden' name='oculto2' value=1 />
+	</form>
+
+		<form name='videonews' action='upvdo/upvdo.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=400px,height=560px')\" class='whiletotala'>
+			");
+
+			require 'Inc_Art_While_Total_Rows.php';
+			
+	print( $upvdo."
+			<input type='hidden' name='oculto2' value=1 />
+		</form>
+
+		<form name='videonews' action='Art_Vdo_Borrar.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=400px,height=560px')\" class='whiletotala'>
+			");
+
+			require 'Inc_Art_While_Total_Rows.php';
+			
+	print( $delvdo."
+			<input type='hidden' name='oculto2' value=1 />
+		</form>	
 	</div>");
 
 

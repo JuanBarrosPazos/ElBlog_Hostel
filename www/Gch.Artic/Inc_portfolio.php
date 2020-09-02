@@ -59,13 +59,14 @@ function process_form(){
             // DEFINO EL BOTON DE VALORACIONES
             global $opina;
             $opina = "<form style=\"display: block; margin:0.4em 0em -4em 0em;\" name='creaopina' action='../Gch.Syst/Opina_Cliente.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=440px, height=580px')\">
-                <input name='id' type='hidden' value='".$rowb['id']."' />
-                <input name='refart' type='hidden' value='".$rowb['refart']."' />
-                <input name='tit' type='hidden' value='".$rowb['tit']."' />
-                <input name='titsub' type='hidden' value='".$rowb['titsub']."' />
-                <input name='isla' type='hidden' value='".$rowb['refisla']."' />
-                <input name='ayto' type='hidden' value='".$rowb['refayto']."' />
-                <input name='myimg1' type='hidden' value='".$rowb['myimg1']."' />
+                <input type='hidden' name='id' value='".$rowb['id']."' />
+                <input type='hidden' name='refart' value='".$rowb['refart']."' />
+                <input type='hidden' name='tit' value='".$rowb['tit']."' />
+                <input type='hidden' name='titsub' value='".$rowb['titsub']."' />
+                <input type='hidden' name='isla' value='".$rowb['refisla']."' />
+                <input type='hidden' name='ayto' value='".$rowb['refayto']."' />
+                <input type='hidden' name='myimg1' value='".$rowb['myimg1']."' />
+				<input type='hidden' name='myvdo' value='".$rowb['myvdo']."' />
                 <input type='submit' value='VALORAR ESTE RESTAURANTE' />
                 <input type='hidden' name='oculto2' value=1 />
             </form>";
@@ -74,7 +75,7 @@ function process_form(){
             else {
             global $opina;
             $opina = "<br>
-             <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\" style=\"margin: 0.6em 0em -3.0em -0em;\">
+             <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\" style=\"margin: 0.6em 0em -3.0em 0em;\">
                       PARA OPINAR SOBRE ESTE LOCAL INICIAR SESION 
              </button>";
               }
@@ -82,6 +83,18 @@ function process_form(){
             global $nombrerest;
             $nombrerest = $rowb['tit'];
 
+            // DEFINO EL VIDEO
+            if ($rowb['myvdo'] != ''){
+                global $vdonw;
+                $vdonw = "<div class=\"col-lg-12  text-center\" style=\"margin: -1.3em 0px 0.4em 0px;\">
+                            <video style=\" width:99%; max-width:600px !important; height:auto\" controls>
+                    <source src='../Gch.Vdo.Art/".$rowb['myvdo']."' style=\" width:99%; height:auto\" />
+                            </video>
+                        </div>";
+                }else{	global $vdonw;
+                        $vdonw = '';
+                        }
+        
             // DEFINO LAS IMAGENES
             global $img1;
             $img1 = "<div class='protfolioimg'>
@@ -130,7 +143,6 @@ function process_form(){
             $tlf = "Tfl1: ".$rowb['Tlf1']." / Tlf2".$rowb['Tlf2']."&nbsp;&nbsp;";
             } // FIN WHILE MASTER
         } // FIN ELSE WHILE MASTER
-
 
 } // FIN PROCESS_FOMR()
 

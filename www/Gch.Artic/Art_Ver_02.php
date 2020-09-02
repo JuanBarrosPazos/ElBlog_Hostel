@@ -31,6 +31,15 @@ function process_form(){
 	global $_sec;
 	$_sec = $rowautor['Nombre']." ".$rowautor['Apellidos'];
 	
+	if(strlen(trim($_POST['myvdo'])) > 0){
+		global $visual;
+		$visual = "<video controls width='98%' height='auto'>
+						<source src='../Gch.Vdo.Art/".$_POST['myvdo']."' />
+					</video>";
+	} else { global $visual;
+			 $visual = "<img src='../Gch.Img.Art/untitled.png' width='92%' height='auto' />";
+				}
+
 	print("<table align='center' style=\"text-align:left; width:96%; min-width:340px\" >
 				<tr>
 					<th colspan=3  class='BorderInf'>
@@ -39,161 +48,96 @@ function process_form(){
 				</tr>
 				
 				<tr>
-					<td width=100px >
-						ID:
-					</td>
-					<td>"
-						.$_POST['id'].
-					"</td>
-					<td rowspan='7' align='center' width='auto'>
+					<td width=100px >ID</td>
+					<td>".$_POST['id']."</td>
+					<td rowspan='5' align='center' width='auto'>
 	<img src='../Gch.Img.Art/".$_POST['myimg1']."'  width='90%' height='auto' />
 					</td>
 				</tr>
 				
 				<tr>
-					<td>
-						AUTOR REF
-					</td>
-					<td>"
-						.$_POST['refuser'].
-					"</td>
+					<td>AUTOR REF</td>
+					<td>".$_POST['refuser']."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						AUTOR
-					</td>
-					<td>"
-						.$_sec.
-					"</td>
+					<td>AUTOR</td>
+					<td>".$_sec."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						ART REF
-					</td>
-					<td>"
-						.$_POST['refart'].
-					"</td>
+					<td>ART REF</td>
+					<td>".$_POST['refart']."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						NAME
-					</td>
-					<td>"
-						.$_POST['tit'].
-					"</td>
+					<td>NAME</td>
+					<td>".$_POST['tit']."</td>
 				</tr>
 				
 				<tr>
-					<td>
-						SUBTIT
+					<td>SUBTIT</td>
+					<td>".$_POST['titsub']."</td>
+					<td rowspan='5' align='center' width='auto'>
+						".$visual."
 					</td>
-					<td>"
-						.$_POST['titsub'].
-					"</td>
 				</tr>				
 				
 				<tr>
-					<td>
-						ISLA
-					</td>
-					<td>"
-						.$_POST['isla'].
-					"</td>
+					<td>ISLA</td>
+					<td>".$_POST['isla']."</td>
 				</tr>				
 				
 				<tr>
-					<td>
-						AYTO
-					</td>
-					<td colspan='2'>"
-						.$_POST['ayto'].
-					"</td>
+					<td>AYTO</td>
+					<td>".$_POST['ayto']."</td>
 				</tr>				
 				
 				<tr>
-					<td>
-						LOCAL
-					</td>
-					<td colspan='2'>"
-						.$_POST['tipo'].
-					"</td>
+					<td>LOCAL</td>
+					<td>".$_POST['tipo']."</td>
 				</tr>				
 				
 				<tr>
-					<td>
-						COCINA
-					</td>
-					<td colspan='2'>"
-						.$_POST['espec1']." / ".$_POST['espec2'].
-					"</td>
+					<td>COCINA</td>
+					<td>".$_POST['espec1']." / ".$_POST['espec2']."</td>
 				</tr>				
 				
 				<tr>
-					<td>
-						DIRECCION
-					</td>
-					<td colspan='2'>"
-						.$_POST['calle'].
-					"</td>
+					<td>DIRECCION</td>
+					<td colspan='2'>".$_POST['calle']."</td>
 				</tr>				
 				
 				<tr>
-					<td>
-						WEB
-					</td>
-					<td colspan='2'>"
-						.$_POST['url'].
-					"</td>
+					<td>WEB</td>
+					<td colspan='2'>".$_POST['url']."</td>
 				</tr>				
 				
 				<tr>
-					<td>
-						EMAIL
-					</td>
-					<td colspan='2'>"
-						.$_POST['Email'].
-					"</td>
+					<td>EMAIL</td>
+					<td colspan='2'>".$_POST['Email']."</td>
 				</tr>				
 				
 				<tr>
-					<td>
-						TELEFONO
-					</td>
-					<td colspan='2'>"
-						.$_POST['Tlf1']." / ".$_POST['Tlf2'].
-					"</td>
+					<td>TELEFONO</td>
+					<td colspan='2'>".$_POST['Tlf1']." / ".$_POST['Tlf2']."</td>
 				</tr>				
 				
 				<tr>
-					<td>
-						DATE IN
-					</td>
-					<td colspan='2'>"
-						.$_POST['datein']." / ".$_POST['timein'].
-					"</td>
+					<td>DATE IN</td>
+					<td colspan='2'>".$_POST['datein']." / ".$_POST['timein']."</td>
 				</tr>				
 				
 				<tr>
-					<td>
-						DATE MOD
-					</td>
-					<td colspan='2'>"
-						.$_POST['datemod']." / ".$_POST['timemod'].
-					"</td>
+					<td>DATE MOD</td>
+					<td colspan='2'>".$_POST['datemod']." / ".$_POST['timemod']."</td>
 				</tr>				
 				
 				<tr>
-					<td colspan='3' align='center'>
-						ARTICULO
-					</td>
+					<td colspan='3' align='center'>ARTICULO</td>
 				</tr>
 				<tr>
-					<td colspan='3' align='left'>"
-						.$_POST['conte'].
-					"</td>
+					<td colspan='3' align='left'>".$_POST['conte']."</td>
 				</tr>
 				
 				<tr>

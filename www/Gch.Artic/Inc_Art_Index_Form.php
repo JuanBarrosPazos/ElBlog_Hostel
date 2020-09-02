@@ -57,6 +57,7 @@
 		<input name='isla' type='hidden' value='".$rowb['refisla']."' />
 		<input name='ayto' type='hidden' value='".$rowb['refayto']."' />
 		<input name='myimg1' type='hidden' value='".$rowb['myimg1']."' />
+		<input type='hidden' name='myvdo' value='".$rowb['myvdo']."' />
 		<input type='submit' value='VALORAR ESTE RESTAURANTE' />
 		<input type='hidden' name='oculto2' value=1 />
 	</form>";
@@ -70,16 +71,25 @@
 	}
 	/*	*/
 
-
+	if ($rowb['myvdo'] != ''){
+		global $vdonw;
+		$vdonw = "<video style=\" width:98%; max-width:600px !important; height:auto\" controls>
+			<source src='Gch.Vdo.Art/".@$_POST['myvdo']."' style=\" width:98%; height:auto\" />
+				  </video>";
+		}else{	global $vdonw;
+				$vdonw = '';
+				}
+	
 	global $contem;
 	//$contem = substr($rowb['conte'],0,100);
 	$contem = "";
 	$contem = $contem."<!-- ...&nbsp; -->
 	".$opina.$veropina."<form style=\"display: inline-block;\" name='ver' name='ver' action=\"index.php#".$rowb['refart']."\" method='post' >
-				<input name='id' type='hidden' value='".$rowb['id']."' />
-				<input name='refart' type='hidden' value='".$rowb['refart']."' />
-				<input name='refuser' type='hidden' value='".$rowb['refuser']."' />
-				<input name='myimg1' type='hidden' value='".$rowb['myimg1']."' />
+				<input type='hidden' name='id' value='".$rowb['id']."' />
+				<input type='hidden' name='refart' value='".$rowb['refart']."' />
+				<input type='hidden' name='refuser' value='".$rowb['refuser']."' />
+				<input type='hidden' name='myimg1' value='".$rowb['myimg1']."' />
+				<input type='hidden' name='myvdo' value='".$rowb['myvdo']."' />
 				<input type='submit' value='LEER MÁS...' />
 				<input type='hidden' name='leermas' id=\"".$rowb['refart']."\" value=1 />
 				".$pg."
@@ -87,13 +97,14 @@
 
     global $contep;
 	$contep = $rowb['conte'];
-	$contep = /*$autor.*/$calle.$url.$email.$tlf.$contep."
+	$contep = /*$autor.*/$calle.$url.$email.$tlf.$vdonw.$contep."
 	<img src='".$rut."Gch.Img.Art/".@$_POST['myimg1']."' style=\"width:98%; max-width:700px; height:auto; max-height:260px;\" />
 	".$opina.$veropina."<form style=\"display: inline-block;\" name='ver' name='ver' action=\"index.php#".$rowb['refart']."\" method='post' >
 				<input type='hidden' name='id' value='".$rowb['id']."' />
 				<input type='hidden' name='refart' value='".$rowb['refart']."' />
-				<input name='refuser' type='hidden' value='".$rowb['refuser']."' />
+				<input type='hidden' name='refuser' value='".$rowb['refuser']."' />
 				<input type='hidden' name='myimg1' value='".$rowb['myimg1']."' />
+				<input type='hidden' name='myvdo' value='".$rowb['myvdo']."' />
 				<input type='hidden' name='leermenos' id=\"".$rowb['refart']."\" value=1 />
 				<input type='submit' value='LEER MENOS' />
 				".$pg."

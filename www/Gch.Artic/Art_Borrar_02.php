@@ -63,86 +63,53 @@ function process_form(){
 			</th>
 		</tr>
 		<tr>								
-				<td width=100px>
-						REF AUTOR
-				</td>
-				<td width=140px>
-					".$_SESSION['refuser']."
-				</td>
-				<td rowspan='7' align='right' width='120px'>
-					<img src='../Gch.Img.Art/".$_SESSION['myimg1']."' height='180px' width='auto' />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					RESTAURANTE
-				</td>
-				<td>
-					".$_SESSION['tit']."
-				</td>
-			</tr>
-			<tr>
-				<td>						
-					SUBTITULO
-				</td>
-				<td>
-					".$_SESSION['titsub']."
-				</td>
-			</tr>
-			<tr>
-				<td>						
-					REFERENCIA
-				</td>
-				<td>
-					".$_SESSION['refart']."
-				</td>
-			</tr>
-			<tr>
-				<td>						
-					ISLA
-				</td>
-				<td>
-					".$_SESSION['isla']."
-				</td>
-			</tr>
-			<tr>
-				<td>						
-					AYUNTAMIENTO
-				</td>
-				<td>
-					".$_SESSION['ayto']."
-				</td>
-			</tr>
-			<tr>
-				<td>						
-					DATE IN
-				</td>
-				<td>
-					".$_SESSION['datein']."
-				</td>
-			</tr>
-			<tr>
-				<td colspan=3  align='center'>
-					ARTICULO
-				</td>
-			</tr>
-			<tr>
-				<td colspan=3>
-					".$_SESSION['conte']."
-				</td>
-			</tr>
-			<tr>
-			<th colspan=3 class='BorderSup'>
-				<a href=Art_Borrar_01.php>ELIMINAR OTRO RESTAURANTE</a>
-			</th>
+			<td width=100px>
+					REF AUTOR
+			</td>
+			<td width=140px>".$_SESSION['refuser']."</td>
+			<td rowspan='7' align='right' width='120px'>
+				<img src='../Gch.Img.Art/".$_SESSION['myimg1']."' height='180px' width='auto' />
+			</td>
 		</tr>
-
-		</table>"); 
+		<tr>
+			<td>RESTAURANTE</td>
+			<td>".$_SESSION['tit']."</td>
+		</tr>
+		<tr>
+			<td>SUBTITULO</td>
+			<td>".$_SESSION['titsub']."</td>
+		</tr>
+		<tr>
+			<td>REFERENCIA</td>
+			<td>".$_SESSION['refart']."</td>
+			</tr>
+		<tr>
+			<td>ISLA</td>
+			<td>".$_SESSION['isla']."</td>
+		</tr>
+		<tr>
+			<td>AYUNTAMIENTO</td>
+			<td>".$_SESSION['ayto']."</td>
+		</tr>
+		<tr>
+			<td>DATE IN</td>
+			<td>".$_SESSION['datein']."</td>
+		</tr>
+		<tr>
+			<td colspan=3  align='center'>ARTICULO</td>
+		</tr>
+		<tr>
+			<td colspan=3>".$_SESSION['conte']."</td>
+		</tr>
+		<tr>
+			<td colspan=3 class='BorderSup'>
+				<a href=Art_Borrar_01.php>ELIMINAR OTRO RESTAURANTE</a>
+			</td>
+		</tr>
+	</table>"); 
 			
-	} 	else {print("* MODIFIQUE LA ENTRADA L.53: ".mysqli_error($db));
+	} 	else {print("* MODIFIQUE LA ENTRADA L.52: ".mysqli_error($db));
 						show_form ();
-						//global $texerror;
-						//$texerror = "\n\t ".mysqli_error($db);
 					}
 		
 	}	/* FINAL process_form(); */
@@ -176,8 +143,8 @@ function show_form(){
 		$_SESSION['tipo'] = $_POST['tipo'];
 		$_SESSION['espec1'] = $_POST['espec1'];
 		$_SESSION['espec2'] = $_POST['espec2'];
-		$_SESSION['iprecio'] = $_POST['iprecio'];
-		$_SESSION['ivalora'] = $_POST['ivalora'];
+		$_SESSION['iprecio'] = $_POST['precio'];
+		$_SESSION['ivalora'] = $_POST['valora'];
 		$_SESSION['url'] = $_POST['url'];
 		$_SESSION['map'] = $_POST['map'];
 		$_SESSION['calle'] = $_POST['calle'];
@@ -220,19 +187,18 @@ function show_form(){
 					</th>
 				</tr>
 				<tr>
-					<td colspan=3 class='BorderInf' style=\"text-align:right\">
-							<a href='Art_Borrar_01.php' >
-													CANCELAR BORRAR
-							</a>
-					</td>
-				</tr>
-
+				<td colspan=3 align='center' class='BorderInf' >
+					<form name='fcancel' method='post' action='Art_Modificar_01' >
+							<input type='submit' value='CANCELAR Y VOLVER' />
+							<input type='hidden' name='cancel' value=1 />
+					</form>
+				</td>
+			</tr>
+	
 		<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' >
 						
 			<tr>								
-				<td width=100px>
-							REF AUTOR
-				</td>
+				<td width=100px>REF AUTOR</td>
 				<td width=140px>
 			<input name='autor' type='hidden' value='".$_SESSION['refuser']."' />".$_SESSION['refuser']."
 				</td>
@@ -242,63 +208,49 @@ function show_form(){
 			</tr>
 
 			<tr>
-				<td>
-					RESTAURANTE
-				</td>
+				<td>RESTAURANTE</td>
 				<td>
 		<input type='hidden' name='titulo' value='".$_SESSION['tit']."' />".$_SESSION['tit']."
 				</td>
 			</tr>
 									
 			<tr>
-				<td>						
-					SUBTITULO
-				</td>
+				<td>SUBTITULO</td>
 				<td>
 		<input type='hidden' name='subtitul' value='".$_SESSION['titsub']."' />".$_SESSION['titsub']."
 				</td>
 			</tr>
 									
 			<tr>
-				<td>						
-					REFERENCIA
-				</td>
+				<td>REFERENCIA</td>
 				<td>
 		<input type='hidden' name='refart' value='".$_SESSION['refart']."' />".$_SESSION['refart']."
 				</td>
 			</tr>
 
 			<tr>
-				<td>						
-					ISLA
-				</td>
+				<td>ISLA</td>
 				<td>
 		<input type='hidden' name='refart' value='".$_SESSION['isla']."' />".$_SESSION['isla']."
 				</td>
 			</tr>
 
 			<tr>
-				<td>						
-					AYUNTAMIENTO
-				</td>
+				<td>AYUNTAMIENTO</td>
 				<td>
 		<input type='hidden' name='refart' value='".$_SESSION['ayto']."' />".$_SESSION['ayto']."
 				</td>
 			</tr>
 
 			<tr>
-				<td>						
-					DATE IN
-				</td>
+				<td>DATE IN</td>
 				<td>
 		<input type='hidden' name='datein' value='".$_SESSION['datein']."' />".$_SESSION['datein']."
 				</td>
 			</tr>
 
 			<tr>
-				<td colspan=3  align='center'>
-					ARTICULO
-				</td>
+				<td colspan=3  align='center'>ARTICULO</td>
 			</tr>
 
 			<tr>
@@ -316,10 +268,18 @@ function show_form(){
 				</td>
 			</tr>
 		</form>														
-			</table>"); 
-						}
+		<tr>
+			<td colspan=3 align='center' class='BorderSup' >
+				<form name='fcancel' method='post' action='Art_Modificar_01' >
+							<input type='submit' value='CANCELAR Y VOLVER' />
+							<input type='hidden' name='cancel' value=1 />
+				</form>
+			</td>
+		</tr>
+	</table>"); 
+	}
 	
-			}	
+}	
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 

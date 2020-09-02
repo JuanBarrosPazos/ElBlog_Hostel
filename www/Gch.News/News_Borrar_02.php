@@ -187,7 +187,6 @@ function show_form(){
 	print("<table align='center' style=\"margin-top:10px; text-align:left; width:96%; max-width:500px\" >
 				<tr>
 					<th colspan=3 class='BorderInf'>
-
 							SERÁ IMPOSIBLE RECUPERAR ESTE ARTICULO
 					</th>
 				</tr>
@@ -204,10 +203,8 @@ function show_form(){
 		<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' >
 						
 			<tr>								
-						<td width=100px>
-							REF AUTOR
-						</td>
-						<td width=140px>
+				<td width=100px>REF AUTOR</td>
+				<td width=140px>
 			<input name='autor' type='hidden' value='".$_SESSION['refuser']."' />".$_SESSION['refuser']."
 						</td>
 					<td rowspan='5' align='right' width='auto'>
@@ -215,72 +212,54 @@ function show_form(){
 					</td>
 			</tr>
 
-				<tr>
-					<td>
-						TITULO
-					</td>
-					<td>
-
+			<tr>
+				<td>TITULO</td>
+				<td>
 		<input type='hidden' name='titulo' value='".$_SESSION['tit']."' />".$_SESSION['tit']."
-
 					</td>
 				</tr>
 									
 				<tr>
-					<td>						
-						SUBTITULO
-					</td>
+					<td>SUBTITULO</td>
 					<td>
 		<input type='hidden' name='subtitul' value='".$_SESSION['titsub']."' />".$_SESSION['titsub']."
 					</td>
 				</tr>
 									
 				<tr>
-					<td>						
-						REFERENCIA
-					</td>
+					<td>REFERENCIA</td>
 					<td>
 		<input type='hidden' name='refnews' value='".$_SESSION['refnews']."' />".$_SESSION['refnews']."
 					</td>
 				</tr>
 				<tr>
-					<td>						
-						DATE IN
-					</td>
+					<td>DATE IN</td>
 					<td>
 		<input type='hidden' name='datein' value='".$_SESSION['datein']."' />".$_SESSION['datein']."
 					</td>
 				</tr>
 				<tr>
-					<td>						
-						TIME IN
-					</td>
+					<td>TIME IN</td>
 					<td>
 		<input type='hidden' name='timein' value='".$_SESSION['timein']."' />".$_SESSION['timein']."
 					</td>
 				</tr>
 					
 				<tr>
-					<td>						
-						DATE MOD
-					</td>
+					<td>DATE MOD</td>
 					<td>
 		<input type='hidden' name='datemod' value='".$_SESSION['datemod']."' />".$_SESSION['datemod']."
 					</td>
 				</tr>
 				<tr>
-					<td>						
-						TIME MOD
-					</td>
+					<td>TIME MOD</td>
 					<td>
 		<input type='hidden' name='timemod' value='".$_SESSION['timemod']."' />".$_SESSION['timemod']."
 					</td>
 				</tr>
 
 				<tr>
-					<td colspan=3  align='center'>
-						ARTICULO
-					</td>
+					<td colspan=3  align='center'>ARTICULO</td>
 				</tr>
 
 				<tr>
@@ -300,16 +279,16 @@ function show_form(){
 				</tr>
 		</form>	
 
-		<tr>
-			<td colspan=3 align='center' class='BorderSup' >
-				<form name='fcancel' method='post' action='News_Modificar_01' >
-						<input type='submit' value='CANCELAR Y VOLVER' />
-						<input type='hidden' name='cancel' value=1 />
-				</form>
-			</td>
-		</tr>
-	</table>"); 
-	}
+				<tr>
+					<td colspan=3 align='center' class='BorderSup' >
+						<form name='fcancel' method='post' action='News_Modificar_01' >
+								<input type='submit' value='CANCELAR Y VOLVER' />
+								<input type='hidden' name='cancel' value=1 />
+						</form>
+					</td>
+				</tr>
+			</table>"); 
+			}
 	
 }	
 

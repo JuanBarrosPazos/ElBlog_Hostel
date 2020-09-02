@@ -122,6 +122,9 @@ function MM_validateForm() {
         </div>
       </div>
 
+          <!-- DEFINO EL VIDEO SI EXISTE -->
+          <?php echo $vdonw; ?>
+
       <div class="row">
 
         <div class="col-md-3 col-sm-6 portfolio-item" style="padding:0px 2px 0px 2px">

@@ -670,34 +670,33 @@ function show_form($errors=''){
 		<table align='center' style=\"margin-top:10px\">
 			<tr>
 				<th colspan=2 class='BorderInf'>
-
 						MODIFICAR DATOS DE ".$_SESSION['tit']."
 				</th>
 			</tr>
 			<tr>
-			<td colspan=3 class='BorderInf' style=\"text-align:right\">
-					<a href='Art_Modificar_01.php' >
-											CANCELAR MODIFICAR
-					</a>
-			</td>
-		</tr>
+				<td colspan=2 class='BorderInf' style=\"text-align:right\">
+						<a href='Art_Modificar_01.php' >
+								CANCELAR Y VOLVER
+						</a>
+				</td>
+			</tr>
 	
 <form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
 					
 		<tr>								
-					<td align='right' width=100px>
+			<td align='right' width=100px>
 						REF ISLA
-					</td>
-					<td>
+			</td>
+			<td>
 <input name='isla' type='hidden' value='".$defaults['isla']."' />".$defaults['isla']." / ".$_secis."
-					</td>
+			</td>
 		</tr>
 
-			<tr>
-				<td align='right'>
-					AYUNTAMIENTO
-				</td>
-				<td align='left'>
+		<tr>
+			<td align='right'>
+				AYUNTAMIENTO
+			</td>
+			<td align='left'>
 
 	<select name='ayto'>
 	<option value=''>AYUNTAMIENTOS</option>");
@@ -710,155 +709,145 @@ $qayt = mysqli_query($db, $sqlayt);
 if(!$qayt){
 		print("* ".mysqli_error($db)."</br>");
 } else {
-				
 	while($rowsayt = mysqli_fetch_assoc($qayt)){
-				
 				print ("<option value='".$rowsayt['refayto']."' ");
-				
 				if($rowsayt['refayto'] == @$defaults['ayto']){
-														print ("selected = 'selected'");
-																							}
-								print ("> ".$rowsayt['ayto']."</option>");
+									print ("selected = 'selected'");
+																		}
+					print ("> ".$rowsayt['ayto']."</option>");
 			}
-	
 		}  
 
-print ("	</select>
-				</td>
+print ("</select>
+			</td>
 		</tr>
-			<tr>
-
-				<td align='right'>
-					RESTAURANTE
-				</td>
-				<td>
-
+		<tr>
+			<td align='right'>
+				RESTAURANTE
+			</td>
+			<td>
 	<input type='text' name='titulo' size=20 maxlength=20 value='".@$defaults['titulo']."' />
-
-				</td>
-			</tr>
+			</td>
+		</tr>
 								
-			<tr>
-				<td align='right'>						
-					SUBTITULO
-				</td>
-				<td>
+		<tr>
+			<td align='right'>						
+				SUBTITULO
+			</td>
+			<td>
 	<input type='text' name='subtitul' size=20 maxlength=20 value='".@$defaults['subtitul']."' />
-				</td>
-			</tr>
+			</td>
+		</tr>
 								
-			<tr>
-				<td align='right'>						
-					PAGINA WEB
-				</td>
-				<td>
+		<tr>
+			<td align='right'>						
+				PAGINA WEB
+			</td>
+			<td>
 	<input type='text' name='url' size=40 maxlength=40 value='".@$defaults['url']."' />
-				</td>
-			</tr>
-
-				<tr>
-					<td align='right'>						
-						MAPA WEB
-					</td>
-					<td>
-		<input type='text' name='map' size=50 maxlength=49 value='".@$defaults['map']."' placeholder='MAP SHORT URL' />
-					</td>
-				</tr>
-
-				<tr>
-					<td align='right'>						
-						MAPA IFRAME
-					</td>
-					<td>
-		<input type='text' name='mapiframe' size=50 maxlength=340 value='".@$defaults['mapiframe']."' placeholder='MAP IFRAME URL' />
-					</td>
-				</tr>
-
-				<tr>
-					<td align='right'>						
-						LATITUD
-					</td>
-					<td>
-		<input type='text' name='latitud' size=18 maxlength=10 value='".@$defaults['latitud']."' placeholder='MAP LATITUD' />
-					</td>
-				</tr>
-
-				<tr>
-					<td align='right'>						
-						LONGITUD
-					</td>
-					<td>
-		<input type='text' name='longitud' size=18 maxlength=10 value='".@$defaults['longitud']."' placeholder='MAP LONGITUD' />
-					</td>
-				</tr>
+			</td>
+		</tr>
 
 			<tr>
 				<td align='right'>						
-					CALLE
+					MAPA WEB
 				</td>
 				<td>
+	<input type='text' name='map' size=50 maxlength=49 value='".@$defaults['map']."' placeholder='MAP SHORT URL' />
+			</td>
+		</tr>
+
+		<tr>
+			<td align='right'>						
+				MAPA IFRAME
+			</td>
+			<td>
+	<input type='text' name='mapiframe' size=50 maxlength=340 value='".@$defaults['mapiframe']."' placeholder='MAP IFRAME URL' />
+			</td>
+		</tr>
+
+		<tr>
+			<td align='right'>						
+				LATITUD
+			</td>
+			<td>
+	<input type='text' name='latitud' size=18 maxlength=10 value='".@$defaults['latitud']."' placeholder='MAP LATITUD' />
+			</td>
+		</tr>
+
+		<tr>
+			<td align='right'>						
+				LONGITUD
+			</td>
+			<td>
+	<input type='text' name='longitud' size=18 maxlength=10 value='".@$defaults['longitud']."' placeholder='MAP LONGITUD' />
+			</td>
+		</tr>
+
+		<tr>
+			<td align='right'>						
+				CALLE
+			</td>
+			<td>
 	<input type='text' name='calle' size=40 maxlength=40 value='".@$defaults['calle']."' />
-				</td>
-			</tr>
+			</td>
+		</tr>
 
-			<tr>
-				<td align='right'>
-					Mail:
-				</td>
-				<td>
+		<tr>
+			<td align='right'>
+				Mail:
+			</td>
+			<td>
 	<input type='text' name='Email' size=52 maxlength=50 value='".@$defaults['Email']."' />
-				</td>
-			</tr>	
+			</td>
+		</tr>	
 
-			<tr>
-				<td align='right'>
-					Teléfono 1:
-				</td>
-				<td>
+		<tr>
+			<td align='right'>
+				Teléfono 1:
+			</td>
+			<td>
 	<input type='text' name='Tlf1' size=12 maxlength=9 value='".@$defaults['Tlf1']."' />
-				</td>
-			</tr>
+			</td>
+		</tr>
 			
-			<tr>
-				<td align='right'>
-					Teléfono 2:
-				</td>
-				<td>
+		<tr>
+			<td align='right'>
+				Teléfono 2:
+			</td>
+			<td>
 	<input type='text' name='Tlf2' size=12 maxlength=9 value='".@$defaults['Tlf2']."' />
-				</td>
-			</tr>
+			</td>
+		</tr>
 
-			<tr>
-				<td align='right'>
-					CATEGORIA
-				</td>
-				<td align='left'>
+		<tr>
+			<td align='right'>
+				CATEGORIA
+			</td>
+			<td align='left'>
 
 	<select name='tipo'>
 	<option value=''>CATEGORIAS ...</option>");
 					
-/* SELECT CATEGORIA DE LOCAL */	
-		
-global $db;
-$sqltipo =  "SELECT * FROM `gch_tipologia` ORDER BY `tipo` ASC ";
-$qtipo = mysqli_query($db, $sqltipo);
-if(!$qtipo){
-		print("* ".mysqli_error($db)."</br>");
-} else {
+	/* SELECT CATEGORIA DE LOCAL */	
+	global $db;
+	$sqltipo =  "SELECT * FROM `gch_tipologia` ORDER BY `tipo` ASC ";
+	$qtipo = mysqli_query($db, $sqltipo);
+	if(!$qtipo){
+			print("* ".mysqli_error($db)."</br>");
+	} else {
 				
 	while($rowtipo = mysqli_fetch_assoc($qtipo)){
-				
 				print ("<option value='".$rowtipo['reftipo']."' ");
-				
 				if($rowtipo['reftipo'] == @$defaults['tipo']){
-														print ("selected = 'selected'");
-																							}
-								print ("> ".$rowtipo['tipo']."</option>");
+								print ("selected = 'selected'");
+																}
+				print ("> ".$rowtipo['tipo']."</option>");
 			}
 		}  
 
-print ("	</select>
-				</td>
+print ("</select>
+			</td>
 		</tr>
 
 		<tr>
@@ -870,27 +859,23 @@ print ("	</select>
 	<select name='espec1'>
 	<option value=''>ESPECIALIDADES...</option>");
 					
-/* SELECT ESPECIALIDAD 1 */	
-		
-global $db;
-$sqlespec =  "SELECT * FROM `gch_especialidad` ORDER BY `espec` ASC ";
-$qespec = mysqli_query($db, $sqlespec);
-if(!$qespec){
-		print("* ".mysqli_error($db)."</br>");
-} else {
-				
+	/* SELECT ESPECIALIDAD 1 */	
+	global $db;
+	$sqlespec =  "SELECT * FROM `gch_especialidad` ORDER BY `espec` ASC ";
+	$qespec = mysqli_query($db, $sqlespec);
+	if(!$qespec){
+			print("* ".mysqli_error($db)."</br>");
+	} else {
 	while($rowespec1 = mysqli_fetch_assoc($qespec)){
-				
 				print ("<option value='".$rowespec1['refespec']."' ");
-				
 				if($rowespec1['refespec'] == @$defaults['espec1']){
-														print ("selected = 'selected'");
-																							}
-								print ("> ".$rowespec1['espec']."</option>");
+								print ("selected = 'selected'");
+																	}
+				print ("> ".$rowespec1['espec']."</option>");
 			}
 		}  
 
-print ("	</select>
+print ("</select>
 				</td>
 		</tr>
 
@@ -901,27 +886,23 @@ print ("	</select>
 	<select name='espec2'>
 	<option value=''>ESPECIALIDADES ...</option>");
 					
-/* SELECT ESPECIALIDAD */	
-
-global $db;
-$sqlespec2 =  "SELECT * FROM `gch_especialidad` ORDER BY `espec` ASC ";
-$qespec2 = mysqli_query($db, $sqlespec2);
-if(!$qespec2){
-		print("* ".mysqli_error($db)."</br>");
-} else {
-				
+	/* SELECT ESPECIALIDAD */	
+	global $db;
+	$sqlespec2 =  "SELECT * FROM `gch_especialidad` ORDER BY `espec` ASC ";
+	$qespec2 = mysqli_query($db, $sqlespec2);
+	if(!$qespec2){
+			print("* ".mysqli_error($db)."</br>");
+	} else {
 	while($rowespec2 = mysqli_fetch_assoc($qespec2)){
-				
 		print ("<option value='".$rowespec2['refespec']."' ");
-				
 		if($rowespec2['refespec'] == @$defaults['espec2']){
-								print ("selected = 'selected'");
-																}
-								print ("> ".$rowespec2['espec']."</option>");
+				print ("selected = 'selected'");
+										}
+				print ("> ".$rowespec2['espec']."</option>");
 			}
 		}  
 
-print ("	</select>
+print ("</select>
 				</td>
 		</tr>
 
@@ -936,87 +917,68 @@ print ("	</select>
 		</tr>
 
         <tr>
-			<td align='right'>						
-					REFERENCIA
-			</td>
+			<td align='right'>REFERENCIA</td>
 			<td>
 		<input type='hidden' name='refart' value='".$_SESSION['refart']."' />".$_SESSION['refart']."
 			</td>
 		</tr>
-				<tr>
-					<td align='right'>						
-						DATE IN
-					</td>
-					<td>
+		<tr>
+			<td align='right'>DATE IN</td>
+			<td>
 		<input type='hidden' name='datein' value='".$_SESSION['datein']."' />".$_SESSION['datein']."
-					</td>
-				</tr>
-				<tr>
-					<td align='right'>						
-						TIME IN
-					</td>
-					<td>
-		<input type='hidden' name='timein' value='".$_SESSION['timein']."' />".$_SESSION['timein']."
-					</td>
-				</tr>
-					
-				<tr>
-					<td align='right'>						
-						DATE MOD
-					</td>
-					<td>
-		<input type='hidden' name='datemod' value='".$defaults['datemod']."' />".$defaults['datemod']."
-					</td>
-				</tr>
-				<tr>
-					<td align='right'>						
-						TIME MOD
-					</td>
-					<td>
-		<input type='hidden' name='timemod' value='".$defaults['timemod']."' />".$defaults['timemod']."
-					</td>
-				</tr>
-				
-			<tr>
-				<td align='right'>
-					AUTOR
-				</td>
-				<td align='left'>
-
+			</td>
+		</tr>
+		<tr>
+			<td align='right'>TIME IN</td>
+			<td>
+	<input type='hidden' name='timein' value='".$_SESSION['timein']."' />".$_SESSION['timein']."
+			</td>
+		</tr>
+		<tr>
+			<td align='right'>DATE MOD</td>
+			<td>
+	<input type='hidden' name='datemod' value='".$defaults['datemod']."' />".$defaults['datemod']."
+			</td>
+		</tr>
+		<tr>
+			<td align='right'>TIME MOD</td>
+			<td>
+	<input type='hidden' name='timemod' value='".$defaults['timemod']."' />".$defaults['timemod']."
+			</td>
+		</tr>
+		<tr>
+			<td align='right'>AUTOR</td>
+			<td align='left'>
 		<select name='autor'>
 		<option value=''>POSIBLES AUTORES</option>");
 					
-/* SELECT AUTOR DE LA ENTRADA */	
-		
-global $db;
-$sqlb =  "SELECT * FROM `gch_admin` ORDER BY `Apellidos` ASC ";
-$qb = mysqli_query($db, $sqlb);
-if(!$qb){
-		print("* ".mysqli_error($db)."</br>");
-} else {
-				
+	/* SELECT AUTOR DE LA ENTRADA */	
+			
+	global $db;
+	$sqlb =  "SELECT * FROM `gch_admin` ORDER BY `Apellidos` ASC ";
+	$qb = mysqli_query($db, $sqlb);
+	if(!$qb){
+			print("* ".mysqli_error($db)."</br>");
+	} else {
 	while($rows = mysqli_fetch_assoc($qb)){
-				
 				print ("<option value='".$rows['ref']."' ");
-				
 				if($rows['ref'] == @$defaults['autor']){
-														print ("selected = 'selected'");
-																							}
-								print ("> ".$rows['Apellidos']." ".$rows['Nombre']."</option>");
+								print ("selected = 'selected'");
+																	}
+				print ("> ".$rows['Apellidos']." ".$rows['Nombre']."</option>");
 			}
-	
 		}  
 
-print ("	</select>
+print ("</select>
 				</td>
 		</tr>
 
-			<tr>
-				<td colspan=2 align='center'>
-					DESCRIPCION DEL RESTAURANTE
-				</td>
-			</tr>
-			<tr>
+		<tr>
+			<td colspan=2 align='center'>
+				DESCRIPCION DEL RESTAURANTE
+			</td>
+		</tr>
+		<tr>
 				<td colspan=2 align='center'>
 <textarea cols='41' rows='9' onkeypress='return limitac(event, 400);' onkeyup='actualizaInfoc(400)' name='coment' id='coment'>".@$defaults['coment']."</textarea>
 
@@ -1025,22 +987,28 @@ print ("	</select>
 						Maximum 400 characters            
 			</div>
 
-				</td>
-			</tr>
-							
-			<tr>
-				<td colspan='2' align='right' valign='middle'  class='BorderSup'>
-					<input type='submit' value='MODIFICAR DATOS RESTAURANTE' />
-					<input type='hidden' name='oculto' value=1 />
-				</td>
-			</tr>
-			
-	</form>														
-		</table>				
-					"); 
-										}
+			</td>
+		</tr>
+		<tr>
+			<td colspan='2' align='right' valign='middle'  class='BorderSup'>
+				<input type='submit' value='MODIFICAR DATOS RESTAURANTE' />
+				<input type='hidden' name='oculto' value=1 />
+			</td>
+		</tr>
+	</form>
+		<tr>
+			<td colspan=2 align='center' class='BorderSup' >
+				<form name='fcancel' method='post' action='Art_Modificar_01' >
+							<input type='submit' value='CANCELAR Y VOLVER' />
+							<input type='hidden' name='cancel' value=1 />
+				</form>
+			</td>
+		</tr>
+													
+		</table>"); 
+			}
 	
-			}	
+	}	
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 /*

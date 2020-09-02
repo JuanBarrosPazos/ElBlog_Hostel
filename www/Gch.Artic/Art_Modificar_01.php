@@ -240,9 +240,16 @@ function process_form(){
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 function show_form(){
-	
+
+	global $cart;
+	$cart = "<form name='creanews' method='post' action='Art_Crear.php' style=\"display:inline-block;\">
+					<input type='submit' value='CREAR NUEVO RESTAURANTE' />
+					<input type='hidden' name='volver' value=1 />
+				</form>";
 	global $titulo;
-	$titulo = "MODIFICAR RESTAURANTE";
+
+	global $titulo;
+	$titulo = "MODIFICAR RESTAURANTES";
 
 	require 'Inc_Show_Form_01.php';
 	
@@ -254,7 +261,32 @@ function ver_todo(){
 		
 	global $db;
 	global $db_name;
+
+	if (isset($_POST['Orden'])){ $orden = $_POST['Orden']; }
+	else { $orden = '`id` ASC'; }
+
+	global $dyt1;
+	global $dm1;
+	global $dd1;
 	
+	if (@$_POST['dy'] == ''){ $dy1 = date('Y');
+							 $dyt1 = date('Y');} 
+		else {	$dy1 = "20".$_POST['dy'];
+				$dyt1 = "20".$_POST['dy'];}
+	if (@$_POST['dm'] == ''){ $dm1 = '';} 
+		else { $dm1 = "-".$_POST['dm']."-"; }
+	if (@$_POST['dd'] == ''){ $dd1 = '';} else { $dd1 = $_POST['dd'];}
+	if ((@$_POST['dm'] == '')&&(@$_POST['dd'] != '')){
+				//$dm1 = date('m');
+				$dm1 = '';
+				$dd1 = $_POST['dd'];
+				global $fil;
+				$fil = $dy1."-%".$dm1."%-".$dd1."%";
+					}
+		else{ 	global $fil;
+				$fil = $dy1.$dm1.$dd1."%";
+					}
+
 	global $vname;
 	$vname = "gch_art";
 	$vname = "`".$vname."`";
@@ -301,58 +333,42 @@ function ver_todo(){
 	global $limit;
 	$limit = " LIMIT ".$start.", ".$nitem;
 
-	$sqlb =  "SELECT * FROM `$db_name`.$vname  ORDER BY `refart` ASC $limit";
+	$sqlb =  "SELECT * FROM `$db_name`.$vname WHERE `datein` LIKE '$fil' ORDER BY $orden $limit ";
+	//$sqlb =  "SELECT * FROM `$db_name`.$vname  ORDER BY `refart` ASC $limit";
 
 	$qb = mysqli_query($db, $sqlb);
 	if(!$qb){
 			print("<font color='#FF0000'>Consulte L.587: </font></br>".mysqli_error($db)."</br>");
 			
-		} else {
-			if(mysqli_num_rows($qb)== 0){
-							print ("<table align='center'>
-										<tr>
-											<td>
-												<font color='#FF0000'>
-													NO HAY DATOS
-												</font>
-											</td>
-										</tr>
-									</table>");
-									
-				} else { 
+	} else {
+		if(mysqli_num_rows($qb)== 0){
+			print ("<table align='center'>
+						<tr>
+							<td>
+								<font color='#FF0000'>
+									NO HAY DATOS
+								</font>
+							</td>
+						</tr>
+					</table>");
+		} else { 
 
 	print ("<div class=\"juancentra col-xs-12 col-sm-12 col-lg-6\" style=\"	vertical-align: top !important; margin-top: 6px;\">
 
-					RESTAURANTES ".$nres." de ".$num_total_rows."<br>");
+		RESTAURANTES ".$nres." de ".$num_total_rows."<br>");
 					
 	while($rowb = mysqli_fetch_assoc($qb)){
 				
-	require 'Inclu_Name_Ref_to_Name.php';
+				require 'Inclu_Name_Ref_to_Name.php';
 
-	global $actionforma;
-	$actionforma = "<form name='ver' action='Art_Modificar_02.php' method='POST'>";
-	global $formbotona;
-	$formbotona = "<div class='whiletotala' style=\"width:41% !important; min-width:124px !important;\";>
-						<input type='submit' value='MODIFICAR DATOS' style=\"width:122px;\" />
-						<input type='hidden' name='oculto2' value=1 />
-				</form>";
-				
-	global $actionformb;
-	$actionformb = "<form name='modifica_img' action='Art_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=550px,height=400px')\"  style=\"display: inline-block;\">";
-	global $formbotonb;
-	$formbotonb = "	<input type='submit' value='MODIF IMG' style=\"width:122px;\" />
-					<input type='hidden' name='oculto2' value=1 />
-				</div>
-			</form>";
+				require 'Inc_Art_While_Total.php';
 
-	require 'Inc_Art_While_Total.php';
-
-			} // FIN DEL WHILE
+		} // FIN DEL WHILE
 
 		print("</div>");
 
-			} 
 		} 
+	} 
 
     if ($total_pages > 1) {
         if ($page != 1) {
