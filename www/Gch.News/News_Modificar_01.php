@@ -212,9 +212,10 @@ function ver_todo(){
 	
 	function master_index(){
 		
-				require '../Gch.Inclu/Master_Index_News.php';
+		require '../Gch.Inclu/Master_Index_News_Var.php';
+		require '../Gch.Inclu/Master_Index_Total.php';
 		
-				} 
+		} 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 

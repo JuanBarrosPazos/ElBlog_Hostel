@@ -177,10 +177,10 @@ function delete(){unlink($_POST['ruta']);}
 	
 	function master_index(){
 		
-				require '../Gch.Inclu/Master_Index_bbdd.php';
-		
-				} /* Fin funcion master_index.*/
+		require '../Gch.Inclu/Master_Index_bbdd_Var.php';
+		require '../Gch.Inclu/Master_Index_Total.php';
 
+		}
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////

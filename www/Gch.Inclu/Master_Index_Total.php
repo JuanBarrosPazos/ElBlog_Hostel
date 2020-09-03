@@ -1,13 +1,13 @@
 ﻿<?php
 
-	//require '../Gch.Inclu/error_hidden.php';
-	require '../Gch.Inclu/mydni.php';
+	//require $req.'Gch.Inclu/error_hidden.php';
+	require $req.'Gch.Inclu/mydni.php';
 
 	global $db_name;
 
 	if ($_SESSION['Nivel'] == 'admin') {	
 		
-	require '../Gch.Inclu/Master_Index_Header.php';
+	require $req.'Gch.Inclu/Master_Index_Header.php';
 
 print("
 <nav class='sidebar-nav'>
@@ -18,43 +18,43 @@ if ($_SESSION['dni'] == $_SESSION['mydni']) {
 
 	global $backup;
 	$backup = "	<li>
-					<a href='export_bbdd_backups.php'>
+					<a href= '".$rtbbdd."export_bbdd_backups.php'>
 						<i class='ic ico22'></i>BACKUP bbdd
 					</a>
 				</li>";
-
+	
 print("
 		
 	<li>
 		<a href='#'><i class='ic ico22'></i> <span>WEB MASTER</span></a>
 			<ul class='nav-flyout'>
-			<li>
-				<a href='../Gch.News/News_Modificar_01.php'>
-					<i class='ic ico22'></i>NEWS MODIF
-				</a>
-			</li>
-			<li>
-			<a href='../Gch.Admin/cnemp.php'>
+		<li>
+			<a href='".$rtnews."News_Modificar_01.php'>
+				<i class='ic ico22'></i>NEWS MODIF
+			</a>
+		</li>
+		<li>
+			<a href='".$rtadmin."cnemp.php'>
 				<i class='ic ico22'></i>N. ADMIN
 			</a>
 		</li>
 		<li>
-			<a href='../Gch.Syst/Tipo_Modificar_01.php'>
+			<a href='".$rtsyst."Tipo_Modificar_01.php'>
 				<i class='ic ico22'></i>CATEGORIA
 			</a>
 		</li>
 		<li>
-			<a href='../Gch.Syst/Espec_Modificar_01.php'>
+			<a href='".$rtsyst."Espec_Modificar_01.php'>
 				<i class='ic ico22'></i>PLATOS
 			</a>
 		</li>
 		<li>
-			<a href='../Gch.Syst/Isla_Modificar_01.php'>
-				<i class='ic ico22'></i>ISLAS
+			<a href='".$rtsyst."Isla_Modificar_01.php'>
+				<i class='ic ico22'></i>PROVINCIAS
 			</a>
 		</li>
 		<li>
-			<a href='../Gch.Syst/Ayto_Modificar_01.php'>
+			<a href='".$rtsyst."Ayto_Modificar_01.php'>
 				<i class='ic ico22'></i>MUNICIPIOS
 			</a>
 		</li>
@@ -92,22 +92,22 @@ print("
 					</a>
 				</li>
 				<li>
-					<a href='../Gch.Admin/Admin_Ver.php'>
+					<a href= '".$rtadmin."Admin_Ver.php'>
 						<i class='ic ico15b'></i>CONSULTAR
 					</a>
 				</li>
 				<li>
-					<a href='../Gch.Admin/Admin_Crear.php'>
+					<a href= '".$rtadmin."Admin_Crear.php'>
 						<i class='ic ico14b'></i>CREAR
 					</a>
 				</li>
 				<li>
-					<a href='../Gch.Admin/Admin_Modificar_01.php'>
+					<a href= '".$rtadmin."Admin_Modificar_01.php'>
 						<i class='ic ico02b'></i>MODIFICAR
 					</a>
 				</li>
 				<li>
-					<a href='../Gch.Admin/Admin_Borrar_01.php'>
+					<a href= '".$rtadmin."Admin_Borrar_01.php'>
 						<i class='ic ico19b'></i>BORRAR
 					</a>
 				</li>
@@ -128,27 +128,27 @@ print("
 					</a>
 				</li>
 				<li>
-					<a href='../Gch.Artic/Art_Ver.php'>
+					<a href='".$rtartic."Art_Ver.php'>
 						<i class='ic ico15b'></i>CONSULTAR
 					</a>
 				</li>
 				<li>
-					<a href='../Gch.Artic/Art_Crear.php'>
+					<a href='".$rtartic."Art_Crear.php'>
 						<i class='ic ico14b'></i>CREAR
 					</a>
 				</li>
 				<li>
-					<a href='../Gch.Artic/Art_Modificar_01.php'>
+					<a href='".$rtartic."Art_Modificar_01.php'>
 						<i class='ic ico02b'></i>MODIFICAR
 					</a>
 				</li>
 				<li>
-					<a href='../Gch.Artic/Art_Borrar_01.php'>
+					<a href='".$rtartic."Art_Borrar_01.php'>
 						<i class='ic ico19b'></i>BORRAR
 					</a>
 				</li>
 				<li>
-					<a href='../Gch.Syst/Opina_Modificar_01.php'>
+					<a href='".$rtsyst."Opina_Modificar_01.php'>
 						<i class='ic ico19b'></i>OPINIONES</a>
 				</li>
 				<li>
@@ -169,12 +169,12 @@ print("
 				</li>
 				".$backup."
 				<li>
-					<a href='bbdd.php'>
+					<a href='".$rtbbdd."bbdd.php'>
 						<i class='ic ico02b'></i>TABLAS bbdd
 					</a>
 				</li>
 				<li>
-					<a href='export_log.php'>
+					<a href='".$rtbbdd."export_log.php'>
 						<i class='ic ico02b'></i>SYSTEM .log
 					</a>
 				</li>
@@ -187,14 +187,14 @@ print("
 	</li>
 	
 	<li>
-		<a href='../Gch.Mail/index.php'  target='_blank'>	
+		<a href='".$req."Gch.Mail/index.php'  target='_blank'>	
 		<i class='ic ico16'></i>NOTIFICACIONES
 		</a>
 	</li>
 	
 	<li>
 		<a href='#'>
-		<form name='cerrar' action='../Gch.Admin/mcgexit.php' method='post'>
+		<form name='cerrar' action='".$rtadmin."mcgexit.php' method='post'>
 		<i class='ic ico01'></i>
 					<input type='submit' value='CLOSE SESSION'  style='margin-top:-2px; margin-left:2px;' />
 					<input type='hidden' name='cerrar' value=1 />
@@ -266,7 +266,7 @@ print("
 <ul>
 	
 			<li>
-				<a href='../Gch.Admin/Admin_Modificar_01.php'><i class='ic ico13'></i>MIS DATOS</a>
+				<a href= '".$rtadmin."Admin_Modificar_01.php'><i class='ic ico13'></i>MIS DATOS</a>
 			</li>
 	
 			<li>
@@ -278,27 +278,27 @@ print("
 						</a>
 					</li>
 					<li>
-						<a href='../Gch.Artic/Art_Ver.php'>
+						<a href='".$rtartic."Art_Ver.php'>
 							<i class='ic ico15b'></i>CONSULTAR
 						</a>
 					</li>
 					<li>
-						<a href='../Gch.Artic/Art_Crear.php'>
+						<a href='".$rtartic."Art_Crear.php'>
 							<i class='ic ico14b'></i>CREAR
 						</a>
 					</li>
 					<li>
-						<a href='../Gch.Artic/Art_Modificar_01.php'>
+						<a href='".$rtartic."Art_Modificar_01.php'>
 							<i class='ic ico02b'></i>MODIFICAR
 						</a>
 					</li>
 					<li>
-						<a href='../Gch.Artic/Art_Borrar_01.php'>
+						<a href='".$rtartic."Art_Borrar_01.php'>
 							<i class='ic ico19b'></i>BORRAR
 						</a>
 					</li>
 					<li>
-						<a href='../Gch.Syst/Opina_Modificar_01.php'>
+						<a href='".$rtsyst."Opina_Modificar_01.php'>
 							<i class='ic ico19b'></i>OPINIONES</a>
 					</li>
 					<li>
@@ -310,14 +310,14 @@ print("
 		</li>
 			
 	<li>
-		<a href='../Gch.Mail/index.php'  target='_blank'>	
+		<a href='".$req."Gch.Mail/index.php'  target='_blank'>	
 		<i class='ic ico16'></i>NOTIFICACIONES
 		</a>
 	</li>
 	
 	<li>
 		<a href='#'>
-		<form name='cerrar' action='../Gch.Admin/mcgexit.php' method='post'>
+		<form name='cerrar' action='".$rtadmin."mcgexit.php' method='post'>
 		<i class='ic ico01'></i>
 				<input type='submit' value='CLOSE SESSION'  style='margin-top:-2px; margin-left:2px;' />
 				<input type='hidden' name='cerrar' value=1 />
@@ -389,7 +389,7 @@ print("
 <ul>
 	
 			<li>
-				<a href='../Gch.Admin/Admin_Modificar_01.php'><i class='ic ico13'></i>MIS DATOS</a>
+				<a href= '".$rtadmin."Admin_Modificar_01.php'><i class='ic ico13'></i>MIS DATOS</a>
 			</li>
 	
 	<li>
@@ -401,12 +401,12 @@ print("
 					</a>
 				</li>
 				<li>
-					<a href='../Gch.Artic/Art_Ver.php'>
+					<a href='".$rtartic."Art_Ver.php'>
 						<i class='ic ico15b'></i>CONSULTAR
 					</a>
 				</li>
 				<li>
-					<a href='../Gch.Artic/Art_Crear.php'>
+					<a href='".$rtartic."Art_Crear.php'>
 						<i class='ic ico14b'></i>CREAR
 					</a>
 				</li>
@@ -419,14 +419,14 @@ print("
 	</li>
 
 	<li>
-		<a href='../Gch.Mail/index.php'  target='_blank'>	
+		<a href='".$req."Gch.Mail/index.php'  target='_blank'>	
 		<i class='ic ico16'></i>NOTIFICACIONES
 		</a>
 	</li>
 	
 	<li>
 		<a href='#'>
-		<form name='cerrar' action='../Gch.Admin/mcgexit.php' method='post'>
+		<form name='cerrar' action='".$rtadmin."mcgexit.php' method='post'>
 		<i class='ic ico01'></i>
 				<input type='submit' value='CLOSE SESSION'  style='margin-top:-2px; margin-left:2px;' />
 				<input type='hidden' name='cerrar' value=1 />
@@ -458,7 +458,7 @@ print("
 
 ");
 	
-	}
+	} 
 	
 /* Creado por Juan Barros Pazos 2020*/
 ?>

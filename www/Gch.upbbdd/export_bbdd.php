@@ -116,8 +116,8 @@ if (trim($_POST['tabla']) == "gch_user" ){
 // EXPORTA LA TABLA RESTAURANTES //
 
 if (trim($_POST['tabla']) == "gch_art" ){
-$campo = 'id,refuser,refart,tit,titsub,datein,timein,datemod,timemod,conte,myimg1,myimg2,myimg3,myimg4,refayto,refisla,reftipo,refespec1,refespec2,iprecio,ivalora,url,map,mapiframe,latitud,longitud,calle,Email,Tlf1,Tlf2';
-$texc = '`id`, `refuser`, `refart`, `tit`, `titsub`, `datein`, `timein`, `datemod`, `timemod`, `conte`, `myimg1`, `myimg2`, `myimg3`, `myimg4`, `refayto`, `refisla`, `reftipo`, `refespec1`, `refespec2`, `iprecio`, `ivalora`, `url`, `map`, `mapiframe`, `latitud`, `longitud`, `calle`, `Email`, `Tlf1`, `Tlf2`';
+$campo = 'id,refuser,refart,tit,titsub,datein,timein,datemod,timemod,conte,myimg1,myimg2,myimg3,myimg4,myvdo,refayto,refisla,reftipo,refespec1,refespec2,iprecio,ivalora,url,map,mapiframe,latitud,longitud,calle,Email,Tlf1,Tlf2';
+$texc = '`id`, `refuser`, `refart`, `tit`, `titsub`, `datein`, `timein`, `datemod`, `timemod`, `conte`, `myimg1`, `myimg2`, `myimg3`, `myimg4`, `myvdo`, `refayto`, `refisla`, `reftipo`, `refespec1`, `refespec2`, `iprecio`, `ivalora`, `url`, `map`, `mapiframe`, `latitud`, `longitud`, `calle`, `Email`, `Tlf1`, `Tlf2`';
 		$id = "`id`";
 $c3 = "\n\t`id` int(6) NOT NULL auto_increment,
 \t`refuser` varchar(22) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
@@ -133,6 +133,7 @@ $c3 = "\n\t`id` int(6) NOT NULL auto_increment,
 \t`myimg2` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'untitled.png',
 \t`myimg3` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'untitled.png',
 \t`myimg4` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'untitled.png',
+\t`myvdo` varchar(30) collate utf8_spanish2_ci DEFAULT NULL,
 \t`refayto` varchar(4) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
 \t`refisla` varchar(4) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
 \t`reftipo` varchar(4) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
@@ -160,6 +161,39 @@ $c3 = "\n\t`id` int(6) NOT NULL auto_increment,
 $c4 = "\nENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=".$numr;
 }
 
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
+
+// EXPORTA LA TABLA NEWS //
+
+if (trim($_POST['tabla']) == "gch_news" ){
+	$campo = 'id,refuser,refnews,tit,titsub,datein,timein,datemod,timemod,conte,myimg,myvdo';
+	$texc = '`id`, `refuser`, `refnews`, `tit`, `titsub`, `datein`, `timein`, `datemod`, `timemod`, `conte`, `myimg`, `myvdo`';
+			$id = "`id`";
+	$c3 = "\n\t`id` int(6) NOT NULL auto_increment,
+	\t`refuser` varchar(22) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+	\t`refnews` varchar(22) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+	\t`tit` varchar(22) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+	\t`titsub` varchar(22) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+	\t`datein` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT '0',
+	\t`timein` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT '0',
+	\t`datemod` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT '0',
+	\t`timemod` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT '0',
+	\t`conte` text CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+	\t`myimg` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'untitled.png',
+	\t`myvdo` varchar(30) collate utf8_spanish2_ci DEFAULT NULL,
+	\tPRIMARY KEY  (`id`),
+	\tUNIQUE KEY `id` (`id`),
+	\tUNIQUE KEY `refnews` (`refnews`)";
+		$sqlc =  "SELECT * FROM $valort ORDER BY $id ASC";
+		$qc = mysqli_query($db, $sqlc);
+				while($rowc = mysqli_fetch_row($qc)){
+					global $numr;
+					$numr = ($rowc[0]+1);}
+	$c4 = "\nENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=".$numr;
+	}
+	
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
@@ -332,9 +366,9 @@ $filename = "bbdd/TBL_".$valor."_DT_".$datein.".sql";
 						</tr>
 						<tr>");
 						
-				print("<td>* Nº Campos:".$count.".<br/>||  ");
+			print("<td>* Nº Campos:".$count/*.".<br/>||  "*/);
 				for($a=0; $c=$count, $a<$c; $a++){
-				print($campos[$a]." || ");
+				//print($campos[$a]." || ");
 					}
 				print("<br/>* Nº Entradas: ".$nentradas." &nbsp; * Nº Id. Max: ".($numr-1)."
 				<br/>* Ruta Documento: ".$filename."</td>");

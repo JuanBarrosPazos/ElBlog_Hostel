@@ -406,9 +406,10 @@ function ver_todo(){
 	
 	function master_index(){
 		
-				require '../Gch.Inclu/Master_Index_Artic.php';
+		require '../Gch.Inclu/Master_Index_Artic_Var.php';
+		require '../Gch.Inclu/Master_Index_Total.php';
 		
-				} 
+		} 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 

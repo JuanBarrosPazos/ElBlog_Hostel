@@ -122,7 +122,7 @@ function ver_todo(){
 	$vname = "gch_especialidad";
 	$vname = "`".$vname."`";
 
-	$result =  "SELECT * FROM $vname";
+	$result =  "SELECT * FROM $vname WHERE `refespec` <> 'otrs'";
 	$q = mysqli_query($db, $result);
 	$row = mysqli_fetch_assoc($q);
 	$num_total_rows = mysqli_num_rows($q);
@@ -303,8 +303,9 @@ function ver_todo(){
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 	function master_index(){
-		
-				require '../Gch.Inclu/Master_Index_Syst.php';
+
+		require '../Gch.Inclu/Master_Index_Syst_Var.php';
+		require '../Gch.Inclu/Master_Index_Total.php';
 		
 				} 
 

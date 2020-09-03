@@ -14,20 +14,18 @@ if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){
 
 	master_index();
 
-	/*	*/
-
 	if(isset($_POST['tipoborra'])){ cancel_volver();
 									tipo_borra();
 									ver_todo();
-					global $redir;
-					 $redir = "<script type='text/javascript'>
-									function redir(){
-								window.location.href='Tipo_Modificar_01.php?pagem=1';
-									}
-								 setTimeout('redir()',4000);
-								</script>";
-					print ($redir);
-										}	
+		global $redir;
+		$redir = "<script type='text/javascript'>
+						function redir(){
+					window.location.href='Tipo_Modificar_01.php?pagem=1';
+						}
+				 setTimeout('redir()',4000);
+					</script>";
+		print ($redir);
+						}	
 
 	elseif (isset($_GET['page'])) { show_form();
 									ver_todo(); 
@@ -118,7 +116,7 @@ function ver_todo(){
 	$vname = "gch_tipologia";
 	$vname = "`".$vname."`";
 
-	$result =  "SELECT * FROM $vname";
+	$result =  "SELECT * FROM $vname WHERE `reftipo` <> 'otrs'";
 	$q = mysqli_query($db, $result);
 	$row = mysqli_fetch_assoc($q);
 	$num_total_rows = mysqli_num_rows($q);
@@ -299,8 +297,9 @@ function ver_todo(){
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 	function master_index(){
-		
-				require '../Gch.Inclu/Master_Index_Syst.php';
+
+		require '../Gch.Inclu/Master_Index_Syst_Var.php';
+		require '../Gch.Inclu/Master_Index_Total.php';
 		
 				} 
 

@@ -717,11 +717,12 @@ function ver_todo(){
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 	function master_index(){
-		
-				require '../Gch.Inclu/Master_Index_Syst.php';
+
+		require '../Gch.Inclu/Master_Index_Syst_Var.php';
+		require '../Gch.Inclu/Master_Index_Total.php';
 		
 				} 
-
+				
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 	require '../Gch.Inclu/Admin_Inclu_02.php';

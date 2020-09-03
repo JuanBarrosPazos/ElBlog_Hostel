@@ -167,7 +167,8 @@ function show_form($errors=''){
 	function master_index(){
 		
 		
-		require '../Gch.Inclu/Master_Index_Admin.php';
+		require '../Gch.Inclu/Master_Index_Admin_Var.php';
+		require '../Gch.Inclu/Master_Index_Total.php';
 		
 		
 				} 

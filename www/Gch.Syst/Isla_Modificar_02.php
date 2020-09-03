@@ -239,8 +239,9 @@ $text = "- PRODUCTO CREAR ".$ActionTime.". ".$secc.".\n\t Pro Name: ".$_POST['su
 /////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	function master_index(){
-		
-				require '../Gch.Inclu/Master_Index_Artic.php';
+
+		require '../Gch.Inclu/Master_Index_Syst_Var.php';
+		require '../Gch.Inclu/Master_Index_Total.php';
 		
 				} 
 

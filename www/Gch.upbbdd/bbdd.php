@@ -50,8 +50,8 @@ function show_form(){
 			////////////////////		**********  		////////////////////
 
 	global $nom;
-	$nom = strtolower($_SESSION['tablas']);
-	if (strtolower($_SESSION['tablas']) == 'admin'){$nom = $nom;}
+	$nom = strtolower(@$_SESSION['tablas']);
+	if (strtolower(@$_SESSION['tablas']) == 'admin'){$nom = $nom;}
 	else{$nom = $nom."%";}
 	$nom = "LIKE '$nom'";
 	
@@ -79,7 +79,7 @@ function show_form(){
 							</td>
 							<td class='BorderInf'>
 				<form name='exporta' action='$_SERVER[PHP_SELF]' method='POST'>
-					<input type='hidden' name='tablas' value='".$defaults['tablas']."' />
+					<input type='hidden' name='tablas' value='".@$defaults['tablas']."' />
 					<input name='tabla' type='hidden' value='".$fila[0]."' />
 					<input type='submit' value='EXPORTA TABLA ".strtoupper($fila[0])."' />
 					<input type='hidden' name='oculto2' value=1 />
@@ -156,9 +156,10 @@ function delete(){unlink($_POST['ruta']);}
 	
 	function master_index(){
 		
-				require '../Gch.Inclu/Master_Index_bbdd.php';
-		
-				} /* Fin funcion master_index.*/
+		require '../Gch.Inclu/Master_Index_bbdd_Var.php';
+		require '../Gch.Inclu/Master_Index_Total.php';
+
+		}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

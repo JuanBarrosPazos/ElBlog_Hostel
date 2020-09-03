@@ -1056,8 +1056,9 @@ function ver_modera(){
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 	function master_index(){
-		
-				require '../Gch.Inclu/Master_Index_Syst.php';
+
+		require '../Gch.Inclu/Master_Index_Syst_Var.php';
+		require '../Gch.Inclu/Master_Index_Total.php';
 		
 				} 
 
