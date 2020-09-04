@@ -29,8 +29,8 @@ print("
 		<a href='#'><i class='ic ico22'></i> <span>WEB MASTER</span></a>
 			<ul class='nav-flyout'>
 		<li>
-			<a href='".$rtnews."News_Modificar_01.php'>
-				<i class='ic ico22'></i>NEWS MODIF
+			<a href='#'>
+				<i class='ic ico22'></i>WEB MASTER
 			</a>
 		</li>
 		<li>
@@ -120,31 +120,16 @@ print("
 	</li>
 	
 	<li>
-		<a href='#'><i class='ic ico02'></i> <span>RESTAURANTES</span></a>
+		<a href='#'><i class='ic ico02'></i> <span>CONTENIDOS</span></a>
 			<ul class='nav-flyout'>
 				<li>
-					<a href='#' style='background-color: #343434;'>
-						<i class='ic ico19b'></i>LOCALES
-					</a>
-				</li>
-				<li>
-					<a href='".$rtartic."Art_Ver.php'>
-						<i class='ic ico15b'></i>CONSULTAR
-					</a>
-				</li>
-				<li>
-					<a href='".$rtartic."Art_Crear.php'>
-						<i class='ic ico14b'></i>CREAR
+					<a href='".$rtnews."News_Modificar_01.php'>
+						<i class='ic ico22'></i>NEWS MODIF
 					</a>
 				</li>
 				<li>
 					<a href='".$rtartic."Art_Modificar_01.php'>
 						<i class='ic ico02b'></i>MODIFICAR
-					</a>
-				</li>
-				<li>
-					<a href='".$rtartic."Art_Borrar_01.php'>
-						<i class='ic ico19b'></i>BORRAR
 					</a>
 				</li>
 				<li>
@@ -270,7 +255,7 @@ print("
 			</li>
 	
 			<li>
-			<a href='#'><i class='ic ico02'></i> <span>RESTAURANTES</span></a>
+			<a href='#'><i class='ic ico02'></i> <span>CONTENIDOS</span></a>
 				<ul class='nav-flyout'>
 					<li>
 						<a href='#' style='background-color: #343434;'>
@@ -278,23 +263,13 @@ print("
 						</a>
 					</li>
 					<li>
-						<a href='".$rtartic."Art_Ver.php'>
-							<i class='ic ico15b'></i>CONSULTAR
-						</a>
-					</li>
-					<li>
-						<a href='".$rtartic."Art_Crear.php'>
-							<i class='ic ico14b'></i>CREAR
+						<a href='".$rtnews."News_Modificar_01.php'>
+							<i class='ic ico22'></i>NEWS MODIF
 						</a>
 					</li>
 					<li>
 						<a href='".$rtartic."Art_Modificar_01.php'>
 							<i class='ic ico02b'></i>MODIFICAR
-						</a>
-					</li>
-					<li>
-						<a href='".$rtartic."Art_Borrar_01.php'>
-							<i class='ic ico19b'></i>BORRAR
 						</a>
 					</li>
 					<li>
@@ -393,7 +368,7 @@ print("
 			</li>
 	
 	<li>
-		<a href='#'><i class='ic ico02'></i> <span>RESTAURANTES</span></a>
+		<a href='#'><i class='ic ico02'></i> <span>CONTENIDOS</span></a>
 			<ul class='nav-flyout'>
 				<li>
 					<a href='#' style='background-color: #343434;'>

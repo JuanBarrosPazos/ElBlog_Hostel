@@ -30,20 +30,34 @@
     global $alto;
     list($ancho, $alto, $tipo, $atributos) = getimagesize("Gch.Img.Art/".$rowb['myimg1']);
 
+	if(!isset($_GET['ancho'])) {
+		echo "<script language=\"JavaScript\">
+		<!-- 
+		document.location=\"$_SERVER[PHP_SELF]?ancho=\"+screen.width;
+		-->
+		</script>";
+		} else { if(isset($_GET['ancho'])) { } else { } }
+
+	global $z;
+	if ($_GET['ancho'] >= 992) { $z = 170; }
+	elseif (($_GET['ancho'] > 766) && ($_GET['ancho'] < 992)) { $z = 94; }
+	elseif ($_GET['ancho'] <= 766) { $z = 80; }
+	else { $z = 9000; }
+
 	if ($alto > $ancho){
 				// ME CENTRA LA IMAGEN VERTICALMENTE
 				// PORCENTAJE DE REDUCCIÓN DEL ALTURA IMAGEN
-				$porcenth = round((8000 / $ancho),2);
+				$porcenth = round((($z * 100) / $ancho),2);
 				$newalto = round((($alto * $porcenth) / 100),2);
-				$mrgtop = round((($newalto - 80) / 2),2); // para px
+				$mrgtop = round((($newalto - $z) / 2),2); // para px
 				$mrgtop = str_replace("-","",$mrgtop);
 	$centra = "style=\"width: 100% !important; height: auto !important; margin-top: -".$mrgtop."px;\" ";
 
 	} else { 	// ME CENTRA LA IMAGEN HORIZONTALMENTE
 				// PORCENTAJE DE REDUCCIÓN DE ANCHURA IMAGEN
-				$porcentw = round((8000 / $alto),2);
+				$porcentw = round((($z * 100) / $alto),2);
 				$newancho = round((($ancho * $porcentw) / 100),2);
-				$mrgleft = round((($newancho - 80) / 2),2); // para px
+				$mrgleft = round((($newancho - $z) / 2),2); // para px
 				$mrgleft = str_replace("-","",$mrgleft);
 				$centra = "style=\"margin-left: -".$mrgleft."px;\" ";
 		}
