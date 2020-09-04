@@ -179,12 +179,15 @@ function process_form(){
 
 	require '../Gch.News/Inc_News_Form.php';
 
-		print ("
-			<li  class='".$estilo[$estiloin]."'> <!-- Inicio Li contenedor -->
+	require '../Gch.News/Inc_Centra_Img.php';
+
+	print ("
+		<li  class='".$estilo[$estiloin]."'> <!-- Inicio Li contenedor -->
 			<div class='timeline-image'>
-			<img class='<!--rounded-circle--> img-fluid' src='../Gch.Img.News/".$rowb['myimg']."' alt=''>
+	<img class='<!--rounded-circle--> img-fluid' ".$centra."  src='../Gch.Img.News/".$rowb['myimg']."' alt=''>
 			</div>
-			<div class='timeline-panel'>
+
+		<div class='timeline-panel'>
 			<div class='timeline-heading'>
 				<h6>".$rowb['datein']."</h6>
 				<h5>".$rowb['tit']."</h5>
@@ -506,12 +509,15 @@ function ver_todo(){
 
 	require '../Gch.News/Inc_News_Form.php';
 
-		print ("
-			<li  class='".$estilo[$estiloin]."'> <!-- Inicio Li contenedor -->
+	require '../Gch.News/Inc_Centra_Img.php';
+
+	print ("
+		<li  class='".$estilo[$estiloin]."'> <!-- Inicio Li contenedor -->
 			<div class='timeline-image'>
-			<img class='<!--rounded-circle--> img-fluid' src='../Gch.Img.News/".$rowb['myimg']."' alt=''>
+	<img class='<!--rounded-circle--> img-fluid' ".$centra." src='../Gch.Img.News/".$rowb['myimg']."' alt=''>
 			</div>
-			<div class='timeline-panel'>
+
+		<div class='timeline-panel'>
 			<div class='timeline-heading'>
 				<h6>".$rowb['datein']."</h6>
 				<h5>".$rowb['tit']."</h5>

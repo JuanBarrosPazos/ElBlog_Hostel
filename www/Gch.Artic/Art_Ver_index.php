@@ -343,12 +343,15 @@ function process_form(){
 
 	require 'Gch.Artic/Inc_Art_Index_Form.php';
 
-		print ("
-			<li  class='".$estilo[$estiloin]."'> <!-- Inicio Li contenedor -->
+	require 'Gch.Artic/Inc_Centra_Img.php';
+
+	print ("
+		<li  class='".$estilo[$estiloin]."'> <!-- Inicio Li contenedor -->
 			<div class='timeline-image'>
-			<img class='<!--rounded-circle--> img-fluid' src='Gch.Img.Art/".$rowb['myimg1']."' alt=''>
+		<img class='<!--rounded-circle--> img-fluid' ".$centra." src='Gch.Img.Art/".$rowb['myimg1']."' alt=''>
 			</div>
-			<div class='timeline-panel'>
+
+		<div class='timeline-panel'>
 			<div class='timeline-heading'>
 						<h6>
 				<a href=\"Gch.Www/portfolio.php?portfolio=".$rowb['refart']."\">".$rowb['tit']."</a>
@@ -719,10 +722,12 @@ function ver_todo(){
 
 	require 'Gch.Artic/Inc_Art_Index_Form.php';
 
+	require 'Gch.Artic/Inc_Centra_Img.php';
+
 	print ("
 	<li class='".$estilo[$estiloin]."'> <!-- Inicio Li contenedor -->
 			<div class='timeline-image'>
-			<img class='<!--rounded-circ-->le img-fluid' src='Gch.Img.Art/".$rowb['myimg1']."' alt=''>
+		<img class='<!--rounded-circle--> img-fluid' ".$centra." src='Gch.Img.Art/".$rowb['myimg1']."' alt=''>
 			</div>
 
 		<div class='timeline-panel'>
