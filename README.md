@@ -20,6 +20,13 @@
 
 ----
 
+### 2020.09.05
+## ElBlog_Hostel.F6.V36 ESTABLE
+
+* SE MODIFICA EL MENU BACKEND
+
+----
+
 ### 2020.09.04
 ## ElBlog_Hostel.F6.V35 ESTABLE
 

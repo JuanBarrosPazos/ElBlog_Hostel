@@ -15,9 +15,9 @@
 
 	} else { 	// ME CENTRA LA IMAGEN HORIZONTALMENTE
 				// PORCENTAJE DE REDUCCIÓN DE ANCHURA IMAGEN
-				$porcentw = round((11000 / $alto),2);
+				$porcentw = round((9800 / $alto),2);
 				$newancho = round((($ancho * $porcentw) / 100),2);
-				$mrgleft = round((($newancho - 110) / 2),2); // para px
+				$mrgleft = round((($newancho - 98) / 2),2); // para px
 				$mrgleft = str_replace("-","",$mrgleft);
 				$centra = "style=\"margin-left: -".$mrgleft."px;\" ";
 		}

@@ -30,7 +30,7 @@ print("
 			<ul class='nav-flyout'>
 		<li>
 			<a href='#'>
-				<i class='ic ico22'></i>WEB MASTER
+				<i class='ic ico19b'></i>WEB MASTER
 			</a>
 		</li>
 		<li>
@@ -84,62 +84,35 @@ print("<li>
 print("
 	
 	<li>
-		<a href='#'><i class='ic ico13'></i> <span>ADMIN SYSTM</span></a>
-			<ul class='nav-flyout'>
-				<li>
-					<a href='#' style='background-color: #343434; padding-top: 31px'>
-						<i class='ic ico19b'></i>ADMIN SYST
-					</a>
-				</li>
-				<li>
-					<a href= '".$rtadmin."Admin_Ver.php'>
-						<i class='ic ico15b'></i>CONSULTAR
-					</a>
-				</li>
-				<li>
-					<a href= '".$rtadmin."Admin_Crear.php'>
-						<i class='ic ico14b'></i>CREAR
-					</a>
-				</li>
-				<li>
-					<a href= '".$rtadmin."Admin_Modificar_01.php'>
-						<i class='ic ico02b'></i>MODIFICAR
-					</a>
-				</li>
-				<li>
-					<a href= '".$rtadmin."Admin_Borrar_01.php'>
-						<i class='ic ico19b'></i>BORRAR
-					</a>
-				</li>
-				<li>
-					<a href='#' style='background-color: #343434;padding-bottom: 4px;'>
-						<i class='ic'></i>
-					</a>
-				</li>
-			</ul>
+		<a href='Admin_Modificar_01.php'><i class='ic ico13'></i> <span>ADMIN SYSTM</span></a>
 	</li>
 	
 	<li>
 		<a href='#'><i class='ic ico02'></i> <span>CONTENIDOS</span></a>
 			<ul class='nav-flyout'>
 				<li>
+					<a href='#' style='background-color: #343434;padding-top: 32px;'>
+						<i class='ic'></i>
+					</a>
+				</li>
+				<li>
+					<a href='#'>
+						<i class='ic ico19b'></i>CONTENIDOS
+					</a>
+				</li>
+				<li>
 					<a href='".$rtnews."News_Modificar_01.php'>
-						<i class='ic ico22'></i>NEWS MODIF
+						<i class='ic ico02b'></i>NOTICIAS
 					</a>
 				</li>
 				<li>
 					<a href='".$rtartic."Art_Modificar_01.php'>
-						<i class='ic ico02b'></i>MODIFICAR
+						<i class='ic ico02b'></i>LOCALES
 					</a>
 				</li>
 				<li>
 					<a href='".$rtsyst."Opina_Modificar_01.php'>
-						<i class='ic ico19b'></i>OPINIONES</a>
-				</li>
-				<li>
-					<a href='#' style='background-color: #343434;padding-bottom: 4px;'>
-						<i class='ic'></i>
-					</a>
+						<i class='ic ico02b'></i>OPINIONES</a>
 				</li>
 			</ul>
 	</li>
@@ -147,11 +120,6 @@ print("
 	<li>
 		<a href='#'><i class='ic ico03'></i> <span>RESPALDO DATOS</span></a>
 			<ul class='nav-flyout'>
-				<li>
-					<a href='#' style='background-color: #343434; padding-top: 59px;'>
-						<i class='ic ico19b'></i>BACKUPS
-					</a>
-				</li>
 				".$backup."
 				<li>
 					<a href='".$rtbbdd."bbdd.php'>
@@ -164,7 +132,12 @@ print("
 					</a>
 				</li>
 				<li>
-					<a href='#' style='background-color: #343434;'>
+					<a href='#' padding-bottom: 62px;'>
+						<i class='ic ico19b'></i>BACKUPS
+					</a>
+				</li>
+				<li>
+					<a href='#' style='background-color: #343434; padding-bottom: 34px;'>
 						<i class='ic'></i>
 					</a>
 				</li>
@@ -264,12 +237,12 @@ print("
 					</li>
 					<li>
 						<a href='".$rtnews."News_Modificar_01.php'>
-							<i class='ic ico22'></i>NEWS MODIF
+							<i class='ic ico22'></i>NOTICIAS
 						</a>
 					</li>
 					<li>
 						<a href='".$rtartic."Art_Modificar_01.php'>
-							<i class='ic ico02b'></i>MODIFICAR
+							<i class='ic ico02b'></i>LOCALES
 						</a>
 					</li>
 					<li>
