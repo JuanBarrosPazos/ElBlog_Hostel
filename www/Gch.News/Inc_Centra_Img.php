@@ -11,7 +11,7 @@
 		global $redir;
 		$redir = "<script type='text/javascript'>
 						function redir(){
-						window.location.href='News.php?wancho='+screen.width;
+						window.location.href='news.php?wancho='+screen.width;
 					}
 					setTimeout('redir()',1);
 					</script>";
