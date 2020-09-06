@@ -78,8 +78,8 @@ function user_entrada(){
 	//echo 	$_SESSION['ref'];
 	global $logtext;
 	$logtext = PHP_EOL."** INICIO SESION => ".$datein;
-	$logtext = $logtext.PHP_EOL.".\t User Ref: ".$_SESSION['ref'];
-	$logtext = $logtext.PHP_EOL.".\t User Name: ".$_SESSION['Nombre']." ".$_SESSION['Apellidos'];
+	$logtext = $logtext.PHP_EOL.".\t User Ref: ".$_SESSION['uref'];
+	$logtext = $logtext.PHP_EOL.".\t User Name: ".$_SESSION['uNombre']." ".$_SESSION['uApellidos'];
 	$logtext = $logtext.PHP_EOL.$datos;
 
 	global $filename;

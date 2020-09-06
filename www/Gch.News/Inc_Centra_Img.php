@@ -2,7 +2,7 @@
 
 	global $ancho;
     global $alto;
-    list($ancho, $alto, $tipo, $atributos) = getimagesize("../Gch.Img.News/".$rowb['myimg1']);
+    list($ancho, $alto, $tipo, $atributos) = getimagesize("../Gch.Img.News/".$rowb['myimg']);
 
 	global $wwref;
 	global $wancho;
@@ -11,7 +11,7 @@
 		global $redir;
 		$redir = "<script type='text/javascript'>
 						function redir(){
-						window.location.href='index.php?wancho='+screen.width;
+						window.location.href='News.php?wancho='+screen.width;
 					}
 					setTimeout('redir()',1);
 					</script>";
