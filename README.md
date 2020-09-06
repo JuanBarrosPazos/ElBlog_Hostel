@@ -20,6 +20,13 @@
 
 ----
 
+### 2020.09.06
+## ElBlog_Hostel.F6.V37 ESTABLE
+
+* SE MODIFICA EL CENTRADO DE IMAGENES
+
+----
+
 ### 2020.09.05
 ## ElBlog_Hostel.F6.V36 ESTABLE
 
