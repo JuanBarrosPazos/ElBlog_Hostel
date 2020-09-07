@@ -27,10 +27,29 @@
   <link href="css/agency.min.css" rel="stylesheet">
 
   <meta name="google-site-verification" content="mOfK4hpECAN7aBamd4ARwyO6Ap2UWpNwlFALRwbC9kk" />
-  
+
+<?php
+
+    // GENERO LA COOKIE POR SI QUIERO UTILIZARLA EN EL INC_CENTRA.PHP
+  	$wcook = "<script type='text/javascript'>
+                function setCookie() {
+                    var cname = 'wancho';
+                    var cvalue = screen.width;
+                    var d = new Date();
+                    // EXPIRA EN CUATRO HORAS
+                    d.setTime(d.getTime() + (4*60*60*1000));
+                    var expires = 'expires='+d.toUTCString();
+                    document.cookie = cname + '=' + cvalue + '; '+expires+';path=/';
+        }
+               
+                    //setCookie();
+              </script>";
+    print ($wcook);
+?>
+
 </head>
 
-<body id="page-top">
+<body id="page-top" onresize="setCookie()">
 
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
@@ -73,8 +92,8 @@
                       </a>
                     </li>
               <form name='cerrar' action='$_SERVER[PHP_SELF]' method='POST'>
-                  <input type='submit' value='CLOSE SESSION' class=\"btn btn-primary\" />
-                  <input type='hidden' name='salir' value=1 />
+                <input type='submit' value='CLOSE SESSION' class=\"btn btn-primary\" />
+                <input type='hidden' name='salir' value=1 />
               </form>
                 ");
             }
@@ -85,7 +104,6 @@
                </button>");
                 }
           ?>
-
         </ul>
       </div>
     </div>
@@ -137,7 +155,7 @@
           <span class="copyright">Copyright &copy; Juan Barros Pazos 2020</span>
         </div>
         <div class="col-md-4">
-        <ul class="list-inline social-buttons">
+          <ul class="list-inline social-buttons">
             <li class="list-inline-item">
               <a href="https://twitter.com/JuanBarrosPazos" target="_blank">
                 <i class="fab fa-twitter"></i>
