@@ -1,7 +1,7 @@
 <?php
 
 	/* METODO 01 EN BASE A GET Y SCREEN.WIDTH	*/
-	
+
 	global $ancho;
     global $alto;
     list($ancho, $alto, $tipo, $atributos) = getimagesize("../Gch.Img.News/".$rowb['myimg']);
@@ -26,8 +26,6 @@
 						 $wancho = $_SESSION['wancho'];
 							}
 						}
-	/* 		
-	*/
 
 	if ($wancho >= 992){ $wwref = 170; }
 	elseif (($wancho < 992)&&($wancho >= 768)){ $wwref = 94; }

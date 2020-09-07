@@ -8,7 +8,7 @@
 	require 'Gch.Users/Only.index.user.php';
 
 	ayear();
-	
+
 	if (isset($_POST['salir'])) { 
                     require 'Gch.Connet/conection.php';
                     require 'Gch.Connet/conect.php';

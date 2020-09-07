@@ -1,33 +1,19 @@
 <?php
 
-	/* METODO 01 EN BASE A GET Y SCREEN.WIDTH	*/
+	global $wancho;
+
+	/*	METODO 02 SE CREA UNA JS COOKIE AL CARGAR EL INDEX CON EL VALOR DEL SCREEN.W */
+	
+		if (isset($_COOKIE['wancho'])){
+			// echo 'COOKIE: '. $_COOKIE['wancho'];
+			$wancho = $_COOKIE['wancho'];
+		}else{ $wancho = 100; }
 	
 	global $ancho;
     global $alto;
     list($ancho, $alto, $tipo, $atributos) = getimagesize("../Gch.Img.News/".$rowb['myimg']);
 
 	global $wwref;
-	global $wancho;
-	if((!isset($_GET['wancho']))&&(!isset($_POST['leermas']))&&(!isset($_POST['leermenos']))&&(!isset($_POST['login']))&&(!isset($_GET['page']))&&(!isset($_GET['pagef']))&&(!isset($_POST['pagef']))&&(!isset($_POST['oculto1']))&&(!isset($_POST['oculto']))){
-
-		global $redir;
-		$redir = "<script type='text/javascript'>
-						function redir(){
-						window.location.href='news.php?wancho='+screen.width;
-					}
-					setTimeout('redir()',1);
-					</script>";
-				print ($redir);
-				$wancho = $_SESSION['wancho'];
-		} else { if(isset($_GET['wancho'])) { // echo "ANCHO: ".$_GET['ancho'];
-			$wancho = $_GET['wancho'];
-			$_SESSION['wancho'] = $_GET['wancho'];
-				} else { // echo "NO SE HA DETECTADO";
-						 $wancho = $_SESSION['wancho'];
-							}
-						}
-	/* 		
-	*/
 
 	if ($wancho >= 992){ $wwref = 170; }
 	elseif (($wancho < 992)&&($wancho >= 768)){ $wwref = 94; }

@@ -16,8 +16,26 @@
   <!-- Custom styles for this template -->
   <link href="../css/agency.min.css" rel="stylesheet">
 
-</head>
+<?php
 
+    // GENERO LA COOKIE POR SI QUIERO UTILIZARLA EN EL INC_CENTRA.PHP
+  	$wcook = "<script type='text/javascript'>
+                function setCookie() {
+                    var cname = 'wancho';
+                    var cvalue = screen.width;
+                    var d = new Date();
+                    // EXPIRA EN CUATRO HORAS
+                    d.setTime(d.getTime() + (4*60*60*1000));
+                    var expires = 'expires='+d.toUTCString();
+                    document.cookie = cname + '=' + cvalue + '; '+expires+';path=/';
+        }
+               
+                    //setCookie();
+              </script>";
+    print ($wcook);
+?>
+
+</head>
 
 <?php
     require '../Gch.Users/Only.index.user.php';
@@ -108,7 +126,7 @@
 
 ?>
 
-<body id="page-top">
+<body id="page-top" onresize="setCookie()">
 
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
