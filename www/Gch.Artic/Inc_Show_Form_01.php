@@ -98,7 +98,7 @@ else {	$defaults = array (	'isla' => @$_SESSION['isla'],
 						<!--	**********		**********	-->
 				<tr>
 					<td align='center' class='BorderInf'>
-				<div  style='width:auto; text-align:center; border: solid #34aaff 1px;'>
+				<div  style='width:auto; text-align:center;'>
 		<form name='vertodo' method='post' action='$_SERVER[PHP_SELF]' style=\"display:inline-block;\">
 						<input type='submit' value='RESTAURANTES VER TODOS' />
 						<input type='hidden' name='todo' value=1 />
@@ -152,7 +152,7 @@ else {	$defaults = array (	'isla' => @$_SESSION['isla'],
 			<tr>
 				<td class='BorderInf BorderSup'>
 				
-				<div style='width:auto; text-align:center; border: solid #34aaff 1px;'>
+				<div style='width:auto; text-align:center;'>
 				<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
 					<input type='submit' value='SELECCIONE UNA ISLA' />
 					<input type='hidden' name='oculto1' value=1 />
@@ -193,7 +193,7 @@ else {	$defaults = array (	'isla' => @$_SESSION['isla'],
 								
 	elseif ((@$_POST['isla'] != '')||($_SESSION['isla'] != '')) { 
 		
-	print("<div style='width:auto; text-align:center; border: solid #34aaff 1px;'>
+	print("<div style='width:auto; text-align:center;'>
 				
 <form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
 						

@@ -334,17 +334,15 @@ function show_form($errors=''){
 			$selc = "";
 			}
 
-	print("<table align='center' style=\"border:0px;margin-top:4px;width:auto\">
+	print("<div style='width:auto; text-align:center; padding: 8px 0px 8px 0px;'>
 				
-			<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
 						
-				<tr>
-					<td align='right'>
-						<input type='submit' value='FILTRO NOTICIAS' />
-						<input type='hidden' name='oculto' value=1 />
-		<!-- --> 
-	<input type='hidden' name='titulo' size=20 maxlenth=10 value='".$defaults['titulo']."' />
-		
+		<div style='display:inline-block;'>
+			<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
+					<input type='submit' value='FILTRO NOTICIAS' />
+					<input type='hidden' name='oculto' value=1 />
+
+		<input type='hidden' name='titulo' size=20 maxlenth=10 value='".$defaults['titulo']."' />
 
 		<select name='autor'>
 			
@@ -376,7 +374,9 @@ function show_form($errors=''){
 		} // FIN QUERY
 
 	print ("	</select>
+		</div>
 
+		<div style='display:inline-block;'>
 				<select name='dy'>"
 				);
 							
@@ -402,11 +402,9 @@ function show_form($errors=''){
 												}	
 																
 		print ("</select>
-				
-				</td>
-			</tr>
-		</form>	
-			</table>
+			</form>	
+					</div>
+				</div>
 			");
 	
 	}	

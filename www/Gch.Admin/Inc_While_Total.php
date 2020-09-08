@@ -1,147 +1,121 @@
 <?php
 
 	if(!$qb){
-			print("<font color='#FF0000'>
-					Se ha producido un error: </font>".mysqli_error($db)."</br></br>");
+		print("<font color='#FF0000'>
+				* ERROR: </font>".mysqli_error($db)."</br></br>");
 					
-			show_form();	
+		//show_form();	
 			
 		} else {
 			
-			if(mysqli_num_rows($qb)== 0){
-							print ("<table align='center' style=\"border:0px\">
-										<tr>
-											<td align='center'>
-												<font color='#FF0000'>
-													NO HAY DATOS
-												</font>
-											</td>
-										</tr>
-									</table>");
+		if(mysqli_num_rows($qb)== 0){
+			print ("<table align='center' style=\"border:0px\">
+						<tr>
+							<td align='center'>
+								<font color='#FF0000'>
+									NO HAY DATOS
+								</font>
+							</td>
+						</tr>
+					</table>");
+		} else { 
+			print ("<div class=\"BorderSup\" style=\"text-align:center; display:block; margin-top:8px; padding: 10px 0px 10px 0px; border-top: #fff solid 1px;\">
 
-				} else { 	print ("<table align='center'>
-									<tr>
-										<th colspan=7 class='BorderInf'>
-					".$twhile.": ".mysqli_num_rows($qb).".
-										</th>
-									</tr>
-									
-									<tr>
-										<th class='BorderInfDch'>
-											Nivel
-										</th>
-										
-										<th class='BorderInfDch'>
-											Referencia
-										</th>
-										
-										<th class='BorderInfDch'>
-											Nombre
-										</th>
-										
-										<th class='BorderInfDch'>
-											Apellidos
-										</th>
-										
-										<th class='BorderInfDch'>
-											
-										</th>
-										
-										<th class='BorderInfDch'>
-											Usuario
-										</th>
-										
-										<th class='BorderInfDch'>
-											Password
-										</th>
-										
-                                    </tr>");
+			<div style=\"text-align:center; display:block;\">
+					".$twhile." ".mysqli_num_rows($qb).".
+			</div>");
                                     
 	while($rowb = mysqli_fetch_assoc($qb)){
     
-    global $formularioh;
-    global $formulariof;
-	global $formulariohi;
-	global $formulariofi;
+		global $formularioh;
+		global $formulariof;
+		global $formulariohi;
+		global $formulariofi;
 
-	print (	"<tr align='center'>".$formularioh."
+	print (	"<div class=\"BorderSup\" style=\"text-align:center; display:block; margin-top:8px; padding-top: 0px; border-top: #fff solid 1px;\">
 
             <!-- AQUÍ VA LA CABECERA DEL FORMULARIO -->
 
-	<input name='id' type='hidden' value='".$rowb['id']."' />
+				<div class='whiletotala'>
+						NIVEL<br>".strtoupper($rowb['Nivel'])."
+				</div>
+							
+				<div class='whiletotala'>
+						REF<br>".strtoupper($rowb['ref'])."
+				</div>
+							
+				<div class='whiletotala'>
+						NOMBRE<br>".strtoupper($rowb['Nombre'])."
+				</div>
+							
+				<div class='whiletotala'>
+						APELLIDOS<br>".strtoupper($rowb['Apellidos'])."
+				</div>
 						
-				<td class='BorderInfDch'>
-	<input name='Nivel' type='hidden' value='".$rowb['Nivel']."' />".$rowb['Nivel']."
-				</td>
-							
-				<td class='BorderInfDch'>
-	<input name='ref' type='hidden' value='".$rowb['ref']."' />".$rowb['ref']."
-				</td>
-							
-				<td class='BorderInfDch'>
-	<input name='Nombre' type='hidden' value='".$rowb['Nombre']."' />".$rowb['Nombre']."
-				</td>
-							
-				<td class='BorderInfDch'>
-	<input name='Apellidos' type='hidden' value='".$rowb['Apellidos']."' />".$rowb['Apellidos']."
-				</td>
-						
-				<td class='BorderInfDch'>
-	<input name='myimg' type='hidden' value='".$rowb['myimg']."' />
+				<div class='whiletotala'>
 	<img src='../Gch.Img.Admin/".$rowb['myimg']."' height='40px' width='30px' />
-				</td>
+				</div>
 												
-	<input name='doc' type='hidden' value='".$rowb['doc']."' />
-	<input name='dni' type='hidden' value='".$rowb['dni']."' />
-	<input name='ldni' type='hidden' value='".$rowb['ldni']."' />
-	<input name='Email' type='hidden' value='".$rowb['Email']."' />
-													
-				<td class='BorderInfDch'>
-	<input name='Usuario' type='hidden' value='".$rowb['Usuario']."' />".$rowb['Usuario']."
-				</td>
+				<div class='whiletotala '>
+						USUARIO<br>".$rowb['Usuario']."
+				</div>
 						
-				<td class='BorderInfDch'>
-	<input name='Password' type='hidden' value='".$rowb['Password']."' />".$rowb['Password']."
-				</td>
-						
-	<input name='Direccion' type='hidden' value='".$rowb['Direccion']."' />
-	<input name='Tlf1' type='hidden' value='".$rowb['Tlf1']."' />
-	<input name='Tlf2' type='hidden' value='".$rowb['Tlf2']."' />
-	<input name='lastin' type='hidden' value='".$rowb['lastin']."' />
-	<input name='lastout' type='hidden' value='".$rowb['lastout']."' />
-	<input name='visitadmin' type='hidden' value='".$rowb['visitadmin']."' />
-			</tr>
-					
-            <tr>".$formulariof.$formulariohi."
+				<div class='whiletotala '>
+						PASSWORD<br>".$rowb['Password']."
+				</div>
+		</div>
+		
+		<div class=\"BorderInf\" style=\"text-align:center; display:block;\">
+
+		<form name='ver' action='Admin_Ver_02.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=340px,height=620px')\" class='whiletotala'>
+
+		");
+
+			require 'Inc_Admin_While_Total_Rows.php';
+	
+		print("	<input type='submit' value='VER DETALLES' />
+				<input type='hidden' name='oculto2' value=1 />
+			</form>
+
+		<form name='modifica' action='Admin_Modificar_02.php' method='POST' class='whiletotala'>
+
+		");
+
+			require 'Inc_Admin_While_Total_Rows.php';
+	
+		print("	<input type='submit' value='MODIFICA DATOS' />
+				<input type='hidden' name='oculto2' value=1 />
+		</form>
+
+		<form name='borra' action='Admin_Borrar_02.php' method='POST' class='whiletotala'>
+			
+		");
+
+			require 'Inc_Admin_While_Total_Rows.php';
+	
+		print(" <input type='submit' value='BORRAR DATOS' />
+				<input type='hidden' name='oculto2' value=1 />
+		</form>
+
+	<form name='modifica_img' action='Admin_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=540px,height=370px')\" class='whiletotala'>
 
                 <!-- AQUÍ VA LA BOTONERA -->
 
-	<input name='id' type='hidden' value='".$rowb['id']."' />
-	<input name='ref' type='hidden' value='".$rowb['ref']."' />
-	<input name='Nivel' type='hidden' value='".$rowb['Nivel']."' />
-	<input name='Nombre' type='hidden' value='".$rowb['Nombre']."' />
-	<input name='Apellidos' type='hidden' value='".$rowb['Apellidos']."' />
-	<input name='myimg' type='hidden' value='".$rowb['myimg']."' />
-	<input name='doc' type='hidden' value='".$rowb['doc']."' />
-	<input name='dni' type='hidden' value='".$rowb['dni']."' />
-	<input name='ldni' type='hidden' value='".$rowb['ldni']."' />
-	<input name='Email' type='hidden' value='".$rowb['Email']."' />
-	<input name='Usuario' type='hidden' value='".$rowb['Usuario']."' />
-	<input name='Password' type='hidden' value='".$rowb['Password']."' />						
-	<input name='Direccion' type='hidden' value='".$rowb['Direccion']."' />
-	<input name='Tlf1' type='hidden' value='".$rowb['Tlf1']."' />
-	<input name='Tlf2' type='hidden' value='".$rowb['Tlf2']."' />
-	<input name='lastin' type='hidden' value='".$rowb['lastin']."' />
-	<input name='lastout' type='hidden' value='".$rowb['lastout']."' />
-	<input name='visitadmin' type='hidden' value='".$rowb['visitadmin']."' />
-                                     
-        ".$formulariofi."</tr>");
-                    
-	 }  // FIN DEL WHILE
+		");
 
-	    print("</table>");
+			require 'Inc_Admin_While_Total_Rows.php';
+	
+		print("	<input type='submit' value='MODIFICA IMAGEN' />
+				<input type='hidden' name='oculto2' value=1 />
+			</form>
+
+		</div>");
+                    
+	}  // FIN DEL WHILE
+
+	    print("</div>");
 			
-			} 
 		} 
+	} 
 
 ?>

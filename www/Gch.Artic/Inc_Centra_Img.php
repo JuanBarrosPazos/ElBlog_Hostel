@@ -14,16 +14,18 @@
 		$redir = "<script type='text/javascript'>
 						function redir(){
 						window.location.href='index.php?wancho='+screen.width;
-					}
-					setTimeout('redir()',1);
+							}
+						redir();
+						//setTimeout('redir()',10);
 					</script>";
 				print ($redir);
 				$wancho = $_SESSION['wancho'];
-		} else { if(isset($_GET['wancho'])) { // echo "ANCHO: ".$_GET['ancho'];
-			$wancho = $_GET['wancho'];
-			$_SESSION['wancho'] = $_GET['wancho'];
+		} else { if(isset($_GET['wancho'])) { 
+							// echo "ANCHO: ".$_GET['ancho'];
+							$wancho = $_GET['wancho'];
+							$_SESSION['wancho'] = $_GET['wancho'];
 				} else { // echo "NO SE HA DETECTADO";
-						 $wancho = $_SESSION['wancho'];
+						 $wancho = 900;
 							}
 						}
 

@@ -9,7 +9,7 @@ if(isset($_POST['oculto'])){
                 $defaults = array (	'Nombre' => '',
                                     'Apellidos' => '',
                                     'Orden' => isset($ordenar));
-                                                        }
+                             }
 
 if ($errors){
     print("	<table align='center'>
@@ -29,66 +29,40 @@ if ($errors){
             </table>");
                 }
     
-$ordenar = array (	'`id` ASC' => 'ID Ascendente',
-                    '`id` DESC' => 'ID Descendente',
-                    '`Nombre` ASC' => 'Nombre Ascendente',
-                    '`Nombre` DESC' => 'Nombre Descendente',
-                    '`Apellidos` ASC' => 'Apellidos Ascenedente',
-                    '`Apellidos` DESC' => 'Apellidos Descendente',
-                    '`Email` ASC' => 'Dirección de Email Ascendente',
-                    '`Email` DESC' => 'Dirección de Email Descendente',
-                    '`Tlf1` ASC' => 'Teléfono 1 Ascendente',
-                    '`Tlf1` DESC' => 'Teléfono 1 Descendente',
-                    '`Tlf2` ASC' => 'Teléfono 2 Ascendente',
-                    '`Tlf2` DESC' => 'Teléfono 2 Descendente',
-                                                            );
+$ordenar = array (	'`id` ASC' => 'ID ASC',
+                    '`id` DESC' => 'ID DSC',
+                    '`Nombre` ASC' => 'NOMBRE ASC',
+                    '`Nombre` DESC' => 'NOMBRE DSC',
+                    '`Apellidos` ASC' => 'APELLIDO ASC',
+                    '`Apellidos` DESC' => 'APELLIDO DSC',
+                        );
 
 if (($_SESSION['Nivel'] == 'admin')){ 
 
-print(" <table align='center' style=\"border:0px;margin-top:4px\">
-            <tr>
-                <th colspan=3 width=100%>
-                        ".$titulo."
-                </th>
-            </tr>
-            
-    <form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
-                    
-            <tr>
-                <td align='right'>
-                    <input type='submit' value='USER CONSULTA' />
-                    <input type='hidden' name='oculto' value=1 />
-                </td>
-                <td>	
-                    Nombre:
-                </td>
-                <td>
-        <input type='text' name='Nombre' size=20 maxlenth=10 value='".@$defaults['Nombre']."' />
-                </td>
-            </tr>
+print(" <div class=\"BorderSup\" style=\"text-align:center; display:block; margin-top:8px; border-top: #fff solid 1px;\">
 
-            <tr>
-                <td>
-                </td>
-                <td>	
-                    Apellido:
-                </td>
-                <td>
-<input type='text' name='Apellidos' size=20 maxlenth=10 value='".@$defaults['Apellidos']."' />
-                </td>
-            </tr>
-    </form>	
+            <div class=\"BorderInf\" style=\"text-align:center; display:block; padding: 8px 0px 8px 0px;\">
+                        ".$titulo."
+            </div>
             
+    <div  style='width:auto; text-align:center; padding: 8px 0px 8px 0px;'>
+        <form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
+            <div style='display:inline-block;'>
+                        <input type='submit' value='USER CONSULTA' />
+                        <input type='hidden' name='oculto' value=1 />
+            </div>
+            <div style='display:inline-block;'>
+                <input type='text' name='Nombre' size=20 maxlenth=10 value='".@$defaults['Nombre']."'placeholder='NOMBRE' />
+                <input type='text' name='Apellidos' size=20 maxlenth=10 value='".@$defaults['Apellidos']."'placeholder='APELLIDO' />
+            </div>
+        </form>	
+    </div>
+
+        <div  style='width:auto; text-align:center;'>
     <form name='todo' method='post' action='$_SERVER[PHP_SELF]' >
-            <tr>
-                <td align='right'>
                     <input type='submit' value='USER TODOS' />
                     <input type='hidden' name='todo' value=1 />
-                </td>
-                <td>	
-                    Ordenar Por:
-                </td>
-                <td>
+
                     <select name='Orden'>");
                     
             foreach($ordenar as $option => $label){
@@ -99,10 +73,9 @@ print(" <table align='center' style=\"border:0px;margin-top:4px\">
                                                 print ("> $label </option>");
                                             }	
         print ("	</select>
-                        </td>
-                    </tr>
             </form>														
-        </table>");
+                    </div>
+        </div>");
                 }	// CONDICIONAL NIVEL ADMIN
 
 ?>

@@ -18,6 +18,16 @@
 
 * https://mega.nz/folder/K8thzLTC#hGByFrZ83XqvY0U6b_w8eQ
 
+
+----
+
+### 2020.09.08
+## ElBlog_Hostel.F6.V39 ESTABLE
+
+* SE MODIFICA EL MENU BACKEND
+
+* SE MODIFICA LA GESTION DE ADMIN
+
 ----
 
 ### 2020.09.07
@@ -39,7 +49,6 @@
                     var expires = 'expires='+d.toUTCString();
                     document.cookie = cname + '=' + cvalue + '; '+expires+';path=/';
         }
-               
                     //setCookie();
               </script>";
     print ($wcook);
@@ -112,7 +121,8 @@
 						function redir(){
 						window.location.href='index.php?wancho='+screen.width;
 					}
-					setTimeout('redir()',1);
+					redir();
+					//setTimeout('redir()',10);
 					</script>";
 				print ($redir);
 				$wancho = $_SESSION['wancho'];
@@ -123,8 +133,6 @@
 						 $wancho = $_SESSION['wancho'];
 							}
 						}
-	/* 		
-	*/
 
 	if ($wancho >= 992){ $wwref = 170; }
 	elseif (($wancho < 992)&&($wancho >= 768)){ $wwref = 94; }

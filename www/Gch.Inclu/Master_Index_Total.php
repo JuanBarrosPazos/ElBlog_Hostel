@@ -40,7 +40,7 @@ print("
 		</li>
 		<li>
 			<a href='".$rtsyst."Tipo_Modificar_01.php'>
-				<i class='ic ico22'></i>CATEGORIA
+				<i class='ic ico22'></i>CATEGORIAS
 			</a>
 		</li>
 		<li>
@@ -84,25 +84,20 @@ print("<li>
 print("
 	
 	<li>
-		<a href='Admin_Modificar_01.php'><i class='ic ico13'></i> <span>ADMIN SYSTM</span></a>
+		<a href='".$rtadmin."Admin_Modificar_01.php'><i class='ic ico13'></i> <span>ADMIN SYSTM</span></a>
 	</li>
 	
 	<li>
 		<a href='#'><i class='ic ico02'></i> <span>CONTENIDOS</span></a>
 			<ul class='nav-flyout'>
 				<li>
-					<a href='#' style='background-color: #343434;padding-top: 32px;'>
+					<a href='#' style='background-color: #343434;padding-top: 31px;'>
 						<i class='ic'></i>
 					</a>
 				</li>
 				<li>
 					<a href='#'>
 						<i class='ic ico19b'></i>CONTENIDOS
-					</a>
-				</li>
-				<li>
-					<a href='".$rtnews."News_Modificar_01.php'>
-						<i class='ic ico02b'></i>NOTICIAS
 					</a>
 				</li>
 				<li>
@@ -113,6 +108,11 @@ print("
 				<li>
 					<a href='".$rtsyst."Opina_Modificar_01.php'>
 						<i class='ic ico02b'></i>OPINIONES</a>
+				</li>
+				<li>
+					<a href='".$rtnews."News_Modificar_01.php' style='padding-bottom: 6px;'>
+						<i class='ic ico02b'></i>NOTICIAS
+					</a>
 				</li>
 			</ul>
 	</li>

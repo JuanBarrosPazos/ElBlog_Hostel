@@ -48,6 +48,7 @@ function process_form(){
 	
 	global $nombre;
 	global $apellido;
+	
 	$nombre = $_POST['Nombre'];
 	$apellido = $_POST['Apellidos'];
 	
@@ -74,29 +75,8 @@ function process_form(){
 			////////////////////		**********  		////////////////////
 
 	global $twhile;
-	$twhile = "FILTRO USUARIOS MODIFICAR";
+	$twhile = "FILTRO USUARIOS ";
 	
-	global $formularioh;
-	$formularioh = "<form name='modifica' action='Admin_Modificar_02.php' method='POST'>";
-						
-	global $formulariof;
-	$formulariof = "<td align='right' colspan=3 class='BorderInf'></td>
-					<td colspan=2 align='center' class='BorderInfDch'>
-						<input type='submit' value='MODIFICAR ESTOS DATOS' />
-						<input type='hidden' name='oculto2' value=1 />
-				</form>
-					</td>";
-		
-	global $formulariohi;
-	$formulariohi = "<td colspan=2 align='center' class='BorderInf'>
-	<form name='modifica_img' action='Admin_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=540px,height=370px')\">";
-
-	global $formulariofi;
-	$formulariofi = "<input type='submit' value='MODIFICAR IMAGEN' />
-					 <input type='hidden' name='oculto2' value=1 />
-						</form>
-					</td>";
-
 	require 'Inc_While_Total.php';
 		
 			////////////////////		**********  		////////////////////
@@ -125,6 +105,10 @@ function ver_todo(){
 	global $db;
 	global $db_name;
 
+	global $orden;
+	if (!isset($_POST['Orden'])){ $orden = '`id` ASC'; }
+	else { $orden = $_POST['Orden']; }
+
 	if (($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'plus')){ 
 				$ref = $_SESSION['ref'];
 				$sqlb =  "SELECT * FROM `gch_admin` WHERE `ref` = '$ref'";
@@ -132,12 +116,12 @@ function ver_todo(){
 	}
 	
 	elseif (($_SESSION['Nivel'] == 'admin') && ($_SESSION['dni'] == $_SESSION['mydni'])) { 
-				$orden = @$_POST['Orden'];
+				//$orden = @$_POST['Orden'];
 				$sqlb =  "SELECT * FROM `gch_admin` ORDER BY $orden ";
 				$qb = mysqli_query($db, $sqlb);
 				}
 	elseif (($_SESSION['Nivel'] == 'admin') && ($_SESSION['dni'] != $_SESSION['mydni'])){ 
-				$orden = $_POST['Orden'];
+				//$orden = $_POST['Orden'];
 				$sqlb =  "SELECT * FROM `gch_admin` WHERE `gch_admin`.`dni` <> '$_SESSION[mydni]' ORDER BY $orden ";
 				$qb = mysqli_query($db, $sqlb);
 				}
@@ -145,29 +129,8 @@ function ver_todo(){
 			////////////////////		**********  		////////////////////
 	
 	global $twhile;
-	$twhile = "TODOS USUARIOS MODIFICAR";
+	$twhile = "TODOS USUARIOS";
 	
-	global $formularioh;
-	$formularioh = "<form name='modifica' action='Admin_Modificar_02.php' method='POST'>";
-	
-	global $formulariof;
-	$formulariof = "<td align='right' colspan=3 class='BorderInf'></td>
-					<td colspan=2 align='center' class='BorderInfDch'>
-						<input type='submit' value='MODIFICAR ESTOS DATOS' />
-						<input type='hidden' name='oculto2' value=1 />
-				</form>
-					</td>";
-
-	global $formulariohi;
-	$formulariohi = "<td colspan=2 align='center' class='BorderInf'>
-	<form name='modifica_img' action='Admin_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=540px,height=370px')\">";
-
-	global $formulariofi;
-	$formulariofi = "<input type='submit' value='MODIFICAR IMAGEN' />
-					 <input type='hidden' name='oculto2' value=1 />
-						</form>
-					</td>";
-
 	require 'Inc_While_Total.php';
 
 			////////////////////		**********  		////////////////////
@@ -197,7 +160,7 @@ function info(){
 	
 	$orden = isset($_POST['Orden']);
 	
-	if (isset($_POST['todo'])){$nombre = "TODOS LOS USUARIOS. OREDEN: ".$orden;
+	if (isset($_POST['todo'])){$nombre = "TODOS LOS USUARIOS. ORDEN: ".$orden;
 						$apellido ="";	}	
 
 	$rf = isset($_POST['ref']);
