@@ -18,6 +18,12 @@
 
 * https://mega.nz/folder/K8thzLTC#hGByFrZ83XqvY0U6b_w8eQ
 
+----
+
+### 2020.09.15
+## ElBlog_Hostel.F6.V40 ESTABLE
+
+* AJUSTES GENERALES DE CODIGO
 
 ----
 

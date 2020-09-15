@@ -40,7 +40,7 @@ $ordenar = array (	'`id` ASC' => 'ID ASC',
 if (($_SESSION['Nivel'] == 'admin')){ 
 
 print(" <div class=\"BorderSup\" style=\"text-align:center; display:block; margin-top:8px; border-top: #fff solid 1px;\">
-
+                        ".$uptitulo."
             <div class=\"BorderInf\" style=\"text-align:center; display:block; padding: 8px 0px 8px 0px;\">
                         ".$titulo."
             </div>

@@ -10,7 +10,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if((@$_SESSION['uNivel'] == 'useru')||(@$_SESSION['uNivel'] == 'adminu')){ 
+if((@$_SESSION['uNivel'] == 'useru')||(@$_SESSION['uNivel'] == 'adminu')||($_SESSION['Nivel'] == 'admin')){ 
 		if (isset($_POST['oculto2'])){
 			show_form();
 			info_01();
@@ -133,7 +133,7 @@ function process_form(){
 				</tr>
 			</table>"; 
 
-	if (($_SESSION['uNivel'] == 'adminu')||($_SESSION['uNivel'] == 'useru')) {
+	if (($_SESSION['uNivel'] == 'adminu')||($_SESSION['uNivel'] == 'useru')||($_SESSION['Nivel'] == 'admin')) {
 		
 	$sqlc = "UPDATE `$db_name`.`gch_user` SET `Nombre` = '$_POST[Nombre]', `Apellidos` = '$_POST[Apellidos]', `Email` = '$_POST[Email]', `Usuario` = '$_POST[Usuario]', `Password` = '$_POST[Password]', `Direccion` = '$_POST[Direccion]', `Tlf1` = '$_POST[Tlf1]' WHERE `gch_user`.`id` = '$_POST[id]' LIMIT 1 ";
 
@@ -169,9 +169,6 @@ function show_form($errors=''){
 		$_SESSION['refcl'] = $_POST['ref'];
 		$_SESSION['myimgcl'] = $_POST['myimg'];
 			
-		global $dt;
-		$dt = $_POST['doc'];
-		
 		$defaults = array ( 'id' => $_POST['id'],
 							'ref' => $_POST['ref'],
 							'Nombre' => $_POST['Nombre'],
@@ -222,9 +219,16 @@ function show_form($errors=''){
 				</table>");
 					}
 		
-	if(($_SESSION['uNivel'] == 'adminu')||($_SESSION['uNivel'] == 'useru')){
+	if((@$_SESSION['uNivel'] == 'adminu')||(@$_SESSION['uNivel'] == 'useru')||(@$_SESSION['Nivel'] == 'admin')){
 	
 	print("<div class=\"juancentramail\" style=\"margin-top:4px; width: 70vw !important; max-width: 440px\">
+	
+			<div align='right' class='BorderSup BorderInf'>
+				<form name='closewindow' action='User_Modificar_01.php'>
+					<input type='submit' value='CANCELAR Y VOLVER' />
+					<input type='hidden' name='volver' value=1 />
+				</form>
+			</div>
 
 		<div class='BorderInf' align='center'>
 			<img src='../Gch.Img.User/".$_POST['myimg']."' height='44px' width='33px' />
@@ -281,14 +285,14 @@ function show_form($errors=''){
 		<label style=\"width:90px;\">TELEFONO</label>
 	<input type='text' name='Tlf1' size=12 maxlength=9 value='".$defaults['Tlf1']."' />
 
-			<div align='right'>
+			<div align='right' class='BorderSup'>
 				<input type='submit' value='MODIFICAR DATOS' />
 				<input type='hidden' name='modifica' value=1 />
 			</div>
 		</form>														
 		
-			<div align='right' class='BorderSup'>
-				<form name='closewindow' action='User_Modificar_01.php'  \">
+			<div align='right' class='BorderSup BorderInf'>
+				<form name='closewindow' action='User_Modificar_01.php'>
 					<input type='submit' value='CANCELAR Y VOLVER' />
 					<input type='hidden' name='volver' value=1 />
 				</form>
@@ -347,7 +351,7 @@ function info_01(){
 	$dir = "../Gch.Log";
 	
 	global $text;
-	$text = PHP_EOL."- USER MODIFICAR SELECCIONADO ".$ActionTime.PHP_EOL."\t ID:".$_POST['id'].PHP_EOL."\t Nombre: ".$_POST['Nombre']." ".$_POST['Apellidos'].PHP_EOL."\t Ref: ".$_POST['ref'].PHP_EOL."\t Nivel: ".$_POST['Nivel'].PHP_EOL."\t User: ".$_POST['Usuario'].".\n\t Pass: ".$_POST['Password'].".\n\t ".$_POST['doc'].": ".$_POST['dni'].$_POST['ldni'].".\n\t Email: ".$_POST['Email'].PHP_EOL."\t Direccion: ".$_POST['Direccion'].PHP_EOL."\t Telefono 1: ".$_POST['Tlf1'].PHP_EOL."\t Telefono 2: ".$_POST['Tlf2'].PHP_EOL."\t Imagen: ".$_POST['myimg'];
+	$text = PHP_EOL."- USER MODIFICAR SELECCIONADO ".$ActionTime.PHP_EOL."\t ID:".$_POST['id'].PHP_EOL."\t Nombre: ".$_POST['Nombre']." ".$_POST['Apellidos'].PHP_EOL."\t Ref: ".$_POST['ref'].PHP_EOL."\t Nivel: ".$_POST['Nivel'].PHP_EOL."\t User: ".$_POST['Usuario'].".\n\t Pass: ".$_POST['Password'].".\n\t Email: ".$_POST['Email'].PHP_EOL."\t Direccion: ".$_POST['Direccion'].PHP_EOL."\t Telefono 1: ".$_POST['Tlf1'].PHP_EOL."\t Imagen: ".$_POST['myimg'];
 
 	$logdocu = $_SESSION['uref'];
 	$logdate = date('Y_m_d');

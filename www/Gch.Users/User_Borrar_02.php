@@ -11,7 +11,7 @@ session_start();
 				 ////////////////////				  ///////////////////
 
 // NIVEL PLUS NO TIENE PERMITIDO BORRAR OTROS USUARIOS NI EL MISMO
-if (($_SESSION['uNivel'] == 'adminu') || ($_SESSION['uNivel'] == 'useru')){
+if ((@$_SESSION['uNivel'] == 'adminu')||(@$_SESSION['uNivel'] == 'useru')||(@$_SESSION['Nivel'] == 'admin')){
 
 	if (isset($_POST['oculto2'])){	show_form();
 									info_01();
@@ -221,10 +221,11 @@ function show_form(){
 					</td>
 				</tr>
 				<tr>
-					<td colspan=3 class='BorderInf' style=\"text-align:right\">
-							<a href='User_Modificar_01.php' >
-													CANCELAR
-							</a>
+					<td colspan=3 align='right' class='BorderInf'>
+						<form name='closewindow' action='User_Modificar_01.php'>
+							<input type='submit' value='CANCELAR Y VOLVER' />
+							<input type='hidden' name='volver' value=1 />
+						</form>
 					</td>
 				</tr>
 				
@@ -325,6 +326,14 @@ function show_form(){
 			</td>
 		</tr>
 	</form>														
+				<tr>
+					<td colspan=3 align='right' class='BorderSup'>
+						<form name='closewindow' action='User_Modificar_01.php'>
+							<input type='submit' value='CANCELAR Y VOLVER' />
+							<input type='hidden' name='volver' value=1 />
+						</form>
+					</td>
+				</tr>
 		</table>"); 
 	
 	}	

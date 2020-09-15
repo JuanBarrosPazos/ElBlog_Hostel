@@ -181,12 +181,12 @@ print("<div class=\"row\">
         <input name='mailto' type='hidden' id='portfolio' value='".$_SESSION['mailto']."'/>
 		      
         <div style=\"display: block; text-align: left;\">
-            <label for='fecha'>FECHA </label>
+            <label style=\"display: inline-block; text-align: right; width: 53px;\" for='fecha'>FECHA </label>
             <input id='fecha' name='fecha' type='date' value='".$defaults['fecha']."'>
         </div>
 
         <div style=\"display: inline-block; text-align: left;\">
-            <label for='hora'>HORA </label>
+            <label style=\"display: inline-block; text-align: right; width: 53px;\" for='hora'>HORA </label>
             <input id='hora' name='hora' type='time' value='".$defaults['hora']."'>
         </div>
 

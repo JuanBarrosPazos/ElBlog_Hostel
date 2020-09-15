@@ -10,7 +10,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if (($_SESSION['uNivel'] == 'adminu')||($_SESSION['uNivel'] == 'useru') || ($_SESSION['uNivel'] == 'plusu')){
+if (($_SESSION['uNivel'] == 'adminu')||($_SESSION['uNivel'] == 'useru') || ($_SESSION['uNivel'] == 'plusu')||($_SESSION['Nivel'] == 'admin')){
 				
 	global $nombre;
 	global $apellido;

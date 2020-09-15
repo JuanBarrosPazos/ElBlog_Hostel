@@ -2,7 +2,21 @@
 session_start();
 
 	//require '../Gch.Inclu/error_hidden.php';
-	require 'Inc_Header_Nav_Head.php';
+	if (@$_SESSION['Nivel'] == 'admin'){ 
+		  	require 'Inc_Header_Nav_Headu.php'; 
+			global $winclose;
+			$winclose = "<div align='right' class='BorderSup BorderInf'>
+			<form name='closewindow' action='$_SERVER[PHP_SELF]'  onsubmit=\"window.close()\">
+							<input type='submit' value='CERRAR VENTANA' />
+							<input type='hidden' name='oculto2' value=1 />
+			</form>
+				</div>";
+					}
+	else{ 	require 'Inc_Header_Nav_Head.php';
+			global $winclose;
+			$winclose = ""; 
+				}
+	
 	require '../Gch.Connet/conection.php';
 	require '../Gch.Connet/conect.php';
 
@@ -10,9 +24,9 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if ($_SESSION['uNivel'] == 'useru'){ ver_todo(); } 
+if (@$_SESSION['uNivel'] == 'useru'){ ver_todo(); } 
 
-	elseif ($_SESSION['uNivel'] == 'adminu'){ 
+	elseif ((@$_SESSION['uNivel'] == 'adminu')||(@$_SESSION['Nivel'] == 'admin')){ 
 		
 			if(isset($_POST['todo'])){  
 				show_form();							
@@ -70,12 +84,12 @@ function process_form(){
 	if (strlen(trim($_POST['Apellidos'])) == 0){$ape = $nom;}
 	if (strlen(trim($_POST['Nombre'])) == 0){ $nom = $ape;}
 	
-	if ($_SESSION['uNivel'] == 'useru'){ 
+	if (@$_SESSION['uNivel'] == 'useru'){ 
 	$sqlb =  "SELECT * FROM `gch_user` WHERE `ref` = '$_SESSION[uref]' LIMIT 1  ";
 	$qb = mysqli_query($db, $sqlb);
 				}
 
-	if ($_SESSION['uNivel'] == 'adminu') { 
+	if ((@$_SESSION['uNivel'] == 'adminu')||(@$_SESSION['Nivel'] == 'admin')) { 
 		global $orden;
 		if(@$_POST['Orden'] == ''){ $orden = '`id` ASC'; }
 		else {$orden = @$_POST['Orden'];}
@@ -100,6 +114,9 @@ function process_form(){
 
 function show_form($errors=''){
 	
+	//global $winclose;
+	//echo "$winclose";
+
 	global $titulo;
 	$titulo = "CONSULTA MODIFICAR USUARIOS";
 
@@ -116,13 +133,13 @@ function ver_todo(){
 	global $db;
 	global $db_name;
 
-	if ($_SESSION['uNivel'] == 'useru'){ 
+	if (@$_SESSION['uNivel'] == 'useru'){ 
 				$ref = $_SESSION['uref'];
 				$sqlb =  "SELECT * FROM `gch_user` WHERE `ref` = '$ref'";
 				$qb = mysqli_query($db, $sqlb);
 	}
 	
-	elseif ($_SESSION['uNivel'] == 'adminu') { 
+	elseif ((@$_SESSION['uNivel'] == 'adminu')||(@$_SESSION['Nivel'] == 'admin')) { 
 				global $orden;
 				if(@$_POST['Orden'] == ''){ $orden = '`id` ASC'; }
 				else {$orden = @$_POST['Orden'];}

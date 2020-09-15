@@ -38,7 +38,7 @@ $ordenar = array (	'' => 'ORDENAR POR',
                     '`Apellidos` DESC' => 'Apellido Descen',
                                                             );
 
-if (($_SESSION['uNivel'] == 'adminu')){ 
+if ((@$_SESSION['uNivel'] == 'adminu')||($_SESSION['Nivel'] == 'admin')){ 
 
 print(" <div class=\"juancentramail col-xs-12 col-sm-12 col-lg-6\" >
             <div style=\"text-align:center;\">

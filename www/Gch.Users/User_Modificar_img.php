@@ -10,7 +10,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if (($_SESSION['uNivel'] == 'adminu')||($_SESSION['uNivel'] == 'useru')){
+if ((@$_SESSION['uNivel'] == 'adminu')||(@$_SESSION['uNivel'] == 'useru')||(@$_SESSION['Nivel'] == 'admin')){
 
 	if (isset($_POST['oculto2'])){ show_form();
 								   info_01();
@@ -225,6 +225,14 @@ function process_form(){
 		</form>
 					</td>
 				</tr>
+				<tr>
+					<td colspan=3 align='right' class='BorderSup'>
+						<form name='closewindow' action='User_Modificar_01.php'  \">
+							<input type='submit' value='VOLVER A GESTION USUARIOS' />
+							<input type='hidden' name='volver' value=1 />
+						</form>
+					</td>
+				</tr>
 			</table>" );
 				} else {
 				print("<font color='#FF0000'>
@@ -310,6 +318,13 @@ function show_form($errors=''){
 		
 	print("<div class=\"juancentra\" style=\"margin-top:20px; width:98vw !important;\">
 
+			<div align='right' class='BorderSup BorderInf'>
+				<form name='closewindow' action='User_Modificar_01.php'>
+					<input type='submit' value='CANCELAR Y VOLVER' />
+					<input type='hidden' name='volver' value=1 />
+				</form>
+			</div>
+			
 			<div class='BorderInf' align='center'>
 				SELECCIONE UNA NUEVA IMAGEN.<br>
 				IMAGEN ACTUAL DE : </br>".$defaults['Nombre']." ".$defaults['Apellidos'].".
@@ -340,11 +355,19 @@ function show_form($errors=''){
 		<div class='BorderSup'></div>
 				
 				<div align='right' class='BorderSup'>
+			<form name='closewindow' action='User_Modificar_01.php'  \">
+					<input type='submit' value='CANCELAR Y VOLVER' />
+					<input type='hidden' name='volver' value=1 />
+			</form>
+				</div>
+
+				<div align='right' class='BorderSup BorderInf'>
 			<form name='closewindow' action='$_SERVER[PHP_SELF]'  onsubmit=\"window.close()\">
 											<input type='submit' value='CERRAR VENTANA' />
 											<input type='hidden' name='oculto2' value=1 />
 			</form>
 				</div>
+
 			</div>");
 		}
 

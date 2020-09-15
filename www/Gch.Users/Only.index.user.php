@@ -1,13 +1,13 @@
 
 <?php
-
+global $db;
 if((isset($_POST['Usuario'])&&(isset($_POST['Password'])))){
 	$sql =  "SELECT * FROM `gch_user` WHERE `Usuario` = '$_POST[Usuario]' AND `Password` = '$_POST[Password]'";
-	$q = mysqli_query($db, $sql);
+	@$q = mysqli_query($db, $sql);
 	global $row;
-	$row = mysqli_fetch_assoc($q);
+	@$row = mysqli_fetch_assoc($q);
 	global $countq;
-	$countq = mysqli_num_rows($q);
+	@$countq = mysqli_num_rows($q);
 	global $userid;
 	global $uservisita;
 

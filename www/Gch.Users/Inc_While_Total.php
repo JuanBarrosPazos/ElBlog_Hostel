@@ -20,8 +20,8 @@ $text = "<table align='center' style=\"margin-top:-16px;\">
 	} else {
 			
 		if(mysqli_num_rows($qb)== 0){
-			if($_SESSION['uNivel'] == 'adminu'){ global $text;
-												 echo $text;		
+			if(@$_SESSION['uNivel'] == 'adminu'){ global $text;
+												  echo $text;		
 			} else { }
 
 			print ("<table align='center' style=\"border:0px\">
@@ -34,8 +34,11 @@ $text = "<table align='center' style=\"margin-top:-16px;\">
 						</tr>
 					</table>");
 
+			global $winclose;
+			echo "$winclose";
+
 		} else {
-			if($_SESSION['uNivel'] == 'adminu'){  global $text;
+			if(@$_SESSION['uNivel'] == 'adminu'){ global $text;
 												  echo $text;
 
 			echo "<div class=\"juancentra col-xs-12 col-sm-12 col-lg-6\" style=\"margin-bottom: 12px;\">
@@ -43,6 +46,9 @@ $text = "<table align='center' style=\"margin-top:-16px;\">
 							".$twhile.": ".mysqli_num_rows($qb).".
 						</div>";												 		
 			} else { 
+				global $winclose;
+				echo "$winclose";
+			
 				print ("<div class=\"juancentra col-xs-12 col-sm-12 col-lg-6\" style=\"border: solid 1px #343434;\">"); 
 				}	
                                     
@@ -59,7 +65,11 @@ $text = "<table align='center' style=\"margin-top:-16px;\">
 
 	 }  // FIN DEL WHILE
 
-	    print("</div>");
+		print("</div>");
+		
+	 global $winclose;
+	 echo "$winclose";
+ 
 			
 			} 
 		} 
