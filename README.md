@@ -20,6 +20,50 @@
 
 ----
 
+### 2020.09.18
+## ElBlog_Hostel.F6.V41 ESTABLE
+
+* AJUSTES GENERALES DE CODIGO
+* SE CENTRAN LAS IMAGENES EN PORTFOLIO TAL QUE:
+
+```
+	/*
+		METODO CON LA SUPER GLOBAL Y EL VALOR GET DEL SCREEN.W
+		SE APROXIMA PARA AJUSTARSE A LA PANTALLA Y COMPENSAR EL GIRO, Y FLEX
+	*/
+
+	global $wancho;
+	$wancho = $_SESSION['wancho'];
+
+	global $wwref;
+
+	if ($wancho >= 1200){ $wwref = 280; }
+	elseif (($wancho < 1200)&&($wancho >= 992)){ $wwref = 230; }
+	elseif (($wancho < 992)&&($wancho >= 768)){ $wwref = 170; }
+	elseif (($wancho < 768)&&($wancho >= 576)){ $wwref = 260; }
+	elseif (($wancho < 576)&&($wancho > 360)){ $wwref = 540; }
+	elseif ($wancho <= 360){ $wwref = 310; }
+	else { $wwref = 260; }
+
+		////////////////////		**********  		////////////////////
+	
+	global $ancho1;
+    global $alto1;
+    list($ancho1, $alto1, $tipo1, $atributos1) = getimagesize("../Gch.Img.Art/".$rowb['myimg1']);
+
+			// ME CENTRA LA IMAGEN VERTICALMENTE
+			// PORCENTAJE DE REDUCCIÓN DEL ALTURA IMAGEN
+			$porcenth1 = round((($wwref * 100) / $ancho1),2);
+			$newalto1 = round((($alto1 * $porcenth1) / 100),2);
+			$mrgtop1 = round((($newalto1 - 160) / 2),2); // para px
+			$mrgtop1 = str_replace("-","",$mrgtop1);
+			$centra1 = "style=\" margin-top: -".$mrgtop1."px;\" ";
+
+      ...
+```
+
+----
+
 ### 2020.09.15
 ## ElBlog_Hostel.F6.V40 ESTABLE
 

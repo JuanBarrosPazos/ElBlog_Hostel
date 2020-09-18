@@ -36,6 +36,8 @@ function process_form(){
     elseif ((isset($_POST['salir']))||(isset($_POST['login']))) { 
                             global $refrest;
                             $refrest = $_SESSION['a']; 
+            global $sqla;
+            $sqla =  " SELECT * FROM `$db_name`.`gch_art` WHERE `refart` = '$refrest' LIMIT 1 ";
                         }
 
     else {  global $sqla;

@@ -36,6 +36,8 @@ function process_form(){
     elseif ((isset($_POST['salir']))||(isset($_POST['login']))) { 
                             global $refrest;
                             $refrest = $_SESSION['a']; 
+            global $sqla;
+            $sqla =  " SELECT * FROM `$db_name`.`gch_art` WHERE `refart` = '$refrest' LIMIT 1 ";
                         }
 
     else {  global $sqla;
@@ -94,30 +96,33 @@ function process_form(){
                 }else{	global $vdonw;
                         $vdonw = '';
                         }
-        
+
+            // CENTRO IMAGEN VERTICAL
+            require '../Gch.Artic/Inc_portfolio_Centra_Img.php';
+
             // DEFINO LAS IMAGENES
             global $img1;
             $img1 = "<div class='protfolioimg'>
-                    <a style=\"width:100%; height:100%;\" href='../Gch.Img.Art/".$rowb['myimg1']."' rel=\"lightbox[juan]\" title='IMAGEN 1'>
-                        <img class='portf-img-fluid' src='../Gch.Img.Art/".$rowb['myimg1']."' alt=''>
+                    <a href='../Gch.Img.Art/".$rowb['myimg1']."' rel=\"lightbox[juan]\" title='IMAGEN 1'>
+                <img ".$centra1." class='portf-img-fluid' src='../Gch.Img.Art/".$rowb['myimg1']."' alt=''>
                     </a>
                     </div>";
             global $img2;
             $img2 = "<div class='protfolioimg'>
                     <a href='../Gch.Img.Art/".$rowb['myimg2']."' rel='lightbox[juan]' title='IMAGEN 2'>
-                        <img class='portf-img-fluid' src='../Gch.Img.Art/".$rowb['myimg2']."' alt=''>
+                <img ".$centra2." class='portf-img-fluid' src='../Gch.Img.Art/".$rowb['myimg2']."' alt=''>
                     </a>
                     </div>";
             global $img3;
             $img3 = "<div class='protfolioimg'>
-                    <a href='../Gch.Img.Art/".$rowb['myimg3']."' rel='lightbox[juan]' title='IMAGEN 2'>
-                        <img class='portf-img-fluid' src='../Gch.Img.Art/".$rowb['myimg3']."' alt=''>
+                    <a href='../Gch.Img.Art/".$rowb['myimg3']."' rel='lightbox[juan]' title='IMAGEN 3'>
+                <img ".$centra3." class='portf-img-fluid' src='../Gch.Img.Art/".$rowb['myimg3']."' alt=''>
                     </a>
                     </div>";
             global $img4;
             $img4 = "<div class='protfolioimg'>
-                    <a href='../Gch.Img.Art/".$rowb['myimg4']."' rel='lightbox[juan]' title='IMAGEN 2'>
-                        <img class='portf-img-fluid' src='../Gch.Img.Art/".$rowb['myimg4']."' alt=''>
+                    <a href='../Gch.Img.Art/".$rowb['myimg4']."' rel='lightbox[juan]' title='IMAGEN 4'>
+                <img ".$centra4." class='portf-img-fluid' src='../Gch.Img.Art/".$rowb['myimg4']."' alt=''>
                     </a>
                     </div>";
 

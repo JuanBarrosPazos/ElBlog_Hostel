@@ -74,7 +74,7 @@
                   }
     global $dir;
     $dir = "../Gch.Log";
-    $text = PHP_EOL."** FIN DE SESION ".$_SESSION['Nombre']." ".$_SESSION['Apellidos']." => ".$dateadout;
+    $text = PHP_EOL."** FIN DE SESION ".$_SESSION['uNombre']." ".$_SESSION['uApellidos']." => ".$dateadout;
     $logdocu = $_SESSION['uref'];
     $logdate = date('Y_m_d');
     $logtext = PHP_EOL.$text.PHP_EOL.PHP_EOL;
