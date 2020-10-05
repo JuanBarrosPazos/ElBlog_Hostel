@@ -25,11 +25,20 @@ session_start();
 
 function show_form(){
 
+	global $aext;
+	$aext = substr($_POST['myvdo'],-4);
+	$_SESSION['extdelvdo'] = str_replace(".","",$aext);
+
+	/*
+	echo "<br>*** ".$_POST['myvdo']."<br>";
+	echo "<br>*** ".$_SESSION['extdelvdo']."<br>";
+	*/
+
 	print("<!-- Begin page content -->
 
 	<div class=\"container\">
 	
-	  <h5 class=\"mt-5\">SOLO SE ADMINTEN VIDEOS INFERIORES A 50MG CON FORMATO MKV MP4 AVI WEBM</h5>
+	  <h5 class=\"mt-5\">SOLO SE ADMINTEN VIDEOS INFERIORES A 50MG CON FORMATO MP4 AVI WEBM</h5>
 	  <hr>
 	
 	  <div class=\"row\">
@@ -46,7 +55,7 @@ function show_form(){
 		</div>
 	
 		<button id=\"submitButton\" type=\"submit\" class=\"btn btn-primary mb-2\" name='btnSubmit'>
-		  CARGAR VIDEO MKV MP4 AVI WEBM
+		  CARGAR VIDEO MP4 AVI WEBM
 		</button>
 		<button id=\"borrar\" type=\"reset\" class=\"btn btn-primary mb-2\">BORRAR FORMULARIO</button>
 	  </form>

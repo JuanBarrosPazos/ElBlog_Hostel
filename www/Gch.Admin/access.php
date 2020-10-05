@@ -905,7 +905,10 @@ function ver_todo(){
 	$actionformb = "";
 	global $formbotonb;
 	$formbotonb = "";
-	
+
+	global $rut;
+	$rut = "../Gch.Artic/";
+
 	require '../Gch.Artic/Inc_Art_While_Total.php';
 
 	} // FIN WHILE

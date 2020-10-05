@@ -45,9 +45,9 @@
     global $contep;
 	$contep = $rowb['conte'];
 	global $autor;
-	$contep = $autor."
+	$contep = $autor.$vdonw.$contep."
 	<img src='".$rut."Gch.Img.News/".@$_POST['myimg']."' style=\" width:98%; max-width:700px; height:auto\" />
-	".$contep.$vdonw."
+	
 			<form name='ver' name='ver' action=\"news.php#".$rowb['refnews']."\" method='post' >
 				<input type='hidden' name='id' value='".$rowb['id']."' />
 				<input type='hidden' name='refnews' value='".$rowb['refnews']."' />

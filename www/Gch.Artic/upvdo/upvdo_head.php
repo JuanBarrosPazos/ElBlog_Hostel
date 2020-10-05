@@ -76,8 +76,8 @@ $(document).ready(function () {
 				} // FIN LIMITE SERVIDOR
 				else{
 				// 0 GENERAL INICIO VALIDACION EXTENSION ARCHIVO
-				//ext_ok = new Array(".gif", ".jpg", ".png", ".jpeg", ".mkv", ".mp4", ".avi", ".webm");
-				ext_ok = new Array(".mkv", ".mp4", ".avi", ".webm");
+				//ext_ok = new Array(".gif", ".jpg", ".png", ".jpeg", ".mp4", ".avi", ".webm");
+				ext_ok = new Array(".mp4", ".avi", ".webm");
 				var archivo = $("#uploadImage").val();
 				//RECUPERO LA EXTENSION DEL ARCHIVO
 				var ext = (archivo.substring(archivo.lastIndexOf("."))).toLowerCase();
@@ -106,7 +106,7 @@ $(document).ready(function () {
 	/*
 	$("#salidaImagen").html("<div class='error'>IMAGEN DOC SIZE "+docsize+" > "+limitimg+"</div>");
 	*/
-	$("#salidaImagen").html("<div class='error'>SOLO VIDEO MKV MP4 AVI WEBM</div>");
+	$("#salidaImagen").html("<div class='error'>SOLO VIDEO MP4 AVI WEBM</div>");
 								return false;
 							} // 3 FIN IMAGEN LIMITE SIZE
 							else{}
@@ -115,7 +115,7 @@ $(document).ready(function () {
 					// 2 NO ES IMAGEN
 					if(!ext_img.includes(ext)){
 						// 4 COMPROBAMOS SI ES VIDEO
-						ext_vid = new Array(".mkv", ".mp4", ".avi", ".webm");
+						ext_vid = new Array(".mp4", ".avi", ".webm");
 						console.info(ext_vid.includes(ext));
 						if(ext_vid.includes(ext)){
 							// 4 SI ES VIDEO SE VALIDA EL SIZE PERMITIDO

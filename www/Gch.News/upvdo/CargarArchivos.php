@@ -54,7 +54,7 @@ if (isset($_POST['btnSubmit'])) {
 
     //$ext_img = array('.jpg','.gif','.png','.bmp','jpeg');
     //$ext_imgok = in_array($extension, $ext_img);
-    $ext_vid = array('.mp4','.avi','.mkv','webm');
+    $ext_vid = array('.mp4','.avi','webm');
     $ext_vidok = in_array($extension, $ext_vid);
 
     
@@ -141,6 +141,14 @@ if (isset($_POST['btnSubmit'])) {
     elseif (move_uploaded_file($_FILES["uploadImage"]["tmp_name"], $folderRuta.$myimg)) {
 
         rename($folderRuta.$myimg, $folderRuta.$new_name);
+
+        // SI LA EXTENSION ES DISTINTA BORRO EL ANTIGUO
+        global $zvdo;
+        $zvdo = $folderRuta.$_SESSION['myvdo'].".".$_SESSION['extdelvdo'];
+        //echo "<br>*** ".$zvdo."<br>";
+        if (($_SESSION['extdelvdo'] != $extvdo)&&(file_exists($zvdo))){
+                unlink($zvdo);
+        }else{}
 
         /*
         if($ext_imgok){

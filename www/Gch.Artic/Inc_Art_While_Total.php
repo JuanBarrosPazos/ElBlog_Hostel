@@ -53,7 +53,7 @@
 
 		<div class=\"BorderInf\" style=\"text-align:center; display:block;\">
 		
-	<form name='ver' action='../Gch.Artic/Art_Ver_02.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=520px,height=640px')\" class='whiletotala'>
+	<form name='ver' action='".$rut."Art_Ver_02.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=520px,height=640px')\" class='whiletotala'>
 		");
 
 			require 'Inc_Art_While_Total_Rows.php';
@@ -62,7 +62,7 @@
 				<input type='hidden' name='oculto2' value=1 />
 			</form>
 
-			<form name='ver' action='Art_Modificar_02.php' method='POST' class='whiletotala'>
+			<form name='ver' action='".$rut."Art_Modificar_02.php' method='POST' class='whiletotala'>
 			");
 
 			require 'Inc_Art_While_Total_Rows.php';
@@ -71,7 +71,7 @@
 				<input type='hidden' name='oculto2' value=1 />
 			</form>
 
-			<form name='ver' action='Art_Borrar_02.php' method='POST' class='whiletotala'>
+			<form name='ver' action='".$rut."Art_Borrar_02.php' method='POST' class='whiletotala'>
 			");
 
 			require 'Inc_Art_While_Total_Rows.php';
@@ -81,7 +81,7 @@
 			</form>
 
 
-	<form name='modifica_img' action='Art_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=550px,height=400px')\" class='whiletotala' >
+	<form name='modifica_img' action='".$rut."Art_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=550px,height=400px')\" class='whiletotala' >
 			");
 			
 			require 'Inc_Art_While_Total_Rows.php';
@@ -90,7 +90,7 @@
 				<input type='hidden' name='oculto2' value=1 />
 	</form>
 
-		<form name='videonews' action='upvdo/upvdo.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=400px,height=560px')\" class='whiletotala'>
+		<form name='videonews' action='".$rut."upvdo/upvdo.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=400px,height=560px')\" class='whiletotala'>
 			");
 
 			require 'Inc_Art_While_Total_Rows.php';
@@ -99,7 +99,7 @@
 			<input type='hidden' name='oculto2' value=1 />
 		</form>
 
-		<form name='videonews' action='Art_Vdo_Borrar.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=400px,height=560px')\" class='whiletotala'>
+		<form name='videonews' action='".$rut."Art_Vdo_Borrar.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=400px,height=560px')\" class='whiletotala'>
 			");
 
 			require 'Inc_Art_While_Total_Rows.php';

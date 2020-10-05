@@ -196,6 +196,9 @@ function process_form(){
 				</div>
 			</form>";
 
+	global $rut;
+	$rut = "";
+
 	require 'Inc_Art_While_Total.php';
 
 			} // FIN DEL WHILE
@@ -359,9 +362,12 @@ function ver_todo(){
 					
 	while($rowb = mysqli_fetch_assoc($qb)){
 				
-				require 'Inclu_Name_Ref_to_Name.php';
+			require 'Inclu_Name_Ref_to_Name.php';
 
-				require 'Inc_Art_While_Total.php';
+			global $rut;
+			$rut = "";
+
+			require 'Inc_Art_While_Total.php';
 
 		} // FIN DEL WHILE
 
