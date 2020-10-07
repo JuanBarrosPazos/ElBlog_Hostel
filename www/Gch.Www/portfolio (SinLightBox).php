@@ -71,11 +71,16 @@ function MM_validateForm() {
       require '../Gch.Connet/conection.php';
       require '../Gch.Connet/conect.php';
 
+      global $inforut;
+      $inforut = "../";
       require '../Gch.Users/Only.index.user.php';
 
       require '../Gch.Artic/Inc_portfolio.php';
 
-      require 'Inc_Header_Nav_Headp.php'; 
+      global $head;
+      $head = "headp";
+      require 'Inc_Header_Nav_Head_Total.php'; 
+      //require 'Inc_Header_Nav_Headp.php'; 
 
     /*
       if((@$_SESSION['uNivel'] == 'useru')||(@$_SESSION['uNivel'] == 'adminu')){ }

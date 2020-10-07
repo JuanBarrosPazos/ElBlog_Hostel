@@ -60,7 +60,7 @@ function process_form(){
 
             // DEFINO EL BOTON DE VALORACIONES
             global $opina;
-            $opina = "<form style=\"display: block; margin:0.4em 0em -4em 0em;\" name='creaopina' action='../Gch.Syst/Opina_Cliente.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=440px, height=580px')\">
+            $opina = "<form style=\"display: block; margin: 0.6em 0em -2.6em 0em;\" name='creaopina' action='../Gch.Syst/Opina_Cliente.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=440px, height=580px')\">
                 <input type='hidden' name='id' value='".$rowb['id']."' />
                 <input type='hidden' name='refart' value='".$rowb['refart']."' />
                 <input type='hidden' name='tit' value='".$rowb['tit']."' />
@@ -77,7 +77,7 @@ function process_form(){
             else {
             global $opina;
             $opina = "<br>
-             <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\" style=\"margin: 0.6em 0em -3.0em 0em;\">
+             <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\" style=\"margin: 0.6em 0em -2.6em 0em;\">
                       PARA OPINAR SOBRE ESTE LOCAL INICIAR SESION 
              </button>";
               }

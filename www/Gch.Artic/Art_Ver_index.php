@@ -5,6 +5,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
+	global $inforut;
+	$inforut = "";
 	require 'Gch.Users/Only.index.user.php';
 
 	ayear();
@@ -12,9 +14,10 @@
 	if (isset($_POST['salir'])) { 
                     require 'Gch.Connet/conection.php';
                     require 'Gch.Connet/conect.php';
-                    sale_usuario();
+					infoout();
+					sale_usuario();
+					salirf();
 					//session_destroy();
-					//salirf();
 					global $redir;
 					$redir = "<script type='text/javascript'>
 								function redir(){
@@ -43,7 +46,6 @@
 	if ((isset($_POST['oculto'])) || (isset($_POST['oculto1']))) {
 													show_form();
 													process_form();
-													//info();
 													} 
 	elseif (isset($_GET['pagef'])) { show_form();
 									 process_form();
@@ -122,6 +124,23 @@ function ayear(){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
+function infoout() {
+
+    global $dateadout;
+    $dateadout = date('Y-m-d/H:i:s');
+
+	global $logtext;
+    $logtext = PHP_EOL.PHP_EOL."** FIN DE SESION ".$_SESSION['uNombre']." ".$_SESSION['uApellidos']." => ".$dateadout.PHP_EOL.PHP_EOL;
+	
+	global $logdate;
+	$logdate = date('Y_m_d');
+	global $filename;
+    $filename = "Gch.Log/".$logdate."_".$_SESSION['uref'].".log";
+    $log = fopen($filename, 'ab+');
+    fwrite($log, $logtext);
+    fclose($log);
+}
+
 function sale_usuario(){
 
     global $db;
@@ -141,20 +160,10 @@ function sale_usuario(){
             * FATAL ERROR funcion sale_usuario(): ".mysqli_error($db))."</font>
                 </br>";
                   }
-    global $dir;
-    $dir = "../Gch.Log";
-    $text = PHP_EOL."** FIN DE SESION ".$_SESSION['Nombre']." ".$_SESSION['Apellidos']." => ".$dateadout;
-    $logdocu = $_SESSION['uref'];
-    $logdate = date('Y_m_d');
-    $logtext = PHP_EOL.$text.PHP_EOL.PHP_EOL;
-    $filename = $dir."/".$logdate."_".$logdocu.".log";
-    $log = fopen($filename, 'ab+');
-    fwrite($log, $logtext);
-    fclose($log);
 
-	salirf();
+	//salirf();
 
-          }
+		  }
 
 function salirf() {	unset($_SESSION['uid']);
                     unset($_SESSION['uNivel']);

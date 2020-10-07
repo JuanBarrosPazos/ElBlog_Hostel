@@ -1,5 +1,6 @@
 
 <?php
+
 global $db;
 if((isset($_POST['Usuario'])&&(isset($_POST['Password'])))){
 	$sql =  "SELECT * FROM `gch_user` WHERE `Usuario` = '$_POST[Usuario]' AND `Password` = '$_POST[Password]'";
@@ -33,10 +34,10 @@ if((isset($_POST['Usuario'])&&(isset($_POST['Password'])))){
 	$uservisita = $_SESSION['uvisituser'];
 
 	user_entrada();
+	infoin();
 
 		}
 	}
-
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -66,30 +67,28 @@ function user_entrada(){
 		* FATAL ERROR funcion admin_entrada(): </font></br> ".mysqli_error($db))."
 				</br>";
 							}
-					
-	global $dir;
-	$dir = "../Gch.Log";
+	}
 
-	global $datos;
-	global $logdocu;
-	$logdocu = $_SESSION['uref'];
-	global $logdate;
-	$logdate = date('Y_m_d');
-	//echo 	$_SESSION['ref'];
-	global $logtext;
-	$logtext = PHP_EOL."** INICIO SESION => ".$datein;
-	$logtext = $logtext.PHP_EOL.".\t User Ref: ".$_SESSION['uref'];
-	$logtext = $logtext.PHP_EOL.".\t User Name: ".$_SESSION['uNombre']." ".$_SESSION['uApellidos'];
-	$logtext = $logtext.PHP_EOL.$datos;
+	function infoin() {
 
-	global $filename;
-	global $log;
-	$filename = $dir."/".$logdate."_".$logdocu.".log";
-	//echo $filename;
-	$log = fopen($filename, 'ab+');
-	fwrite($log, $logtext);
-	fclose($log);
+		global $datein;
+		$datein = date('Y-m-d/H:i:s');
 
+		//echo 	$_SESSION['ref'];
+		global $logtext;
+		$logtext = PHP_EOL."** INICIO SESION => ".$datein.PHP_EOL.".\t User Ref: ".$_SESSION['uref'].PHP_EOL.".\t User Name: ".$_SESSION['uNombre']." ".$_SESSION['uApellidos'].PHP_EOL;
+	
+		global $inforut;
+		global $logdate;
+		$logdate = date('Y_m_d');
+		global $filename;
+		$filename = $inforut."Gch.Log/".$logdate."_".$_SESSION['uref'].".log";
+		//echo $filename;
+		global $log;
+		$log = fopen($filename, 'ab+');
+		fwrite($log, $logtext);
+		fclose($log);
+	
 	}
 
 				   ////////////////////				   ////////////////////

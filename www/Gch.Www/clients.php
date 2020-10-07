@@ -14,7 +14,10 @@
 	require '../Gch.Connet/conection.php';
 	require '../Gch.Connet/conect.php';
 
-  require 'Inc_Header_Nav_Head2.php'; 
+  global $head;
+  $head = "head2";
+  require 'Inc_Header_Nav_Head_Total.php'; 
+  //require 'Inc_Header_Nav_Head2.php'; 
   
   ?>
 

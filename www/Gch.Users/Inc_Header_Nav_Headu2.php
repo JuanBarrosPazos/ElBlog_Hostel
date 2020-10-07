@@ -30,13 +30,25 @@
 </head>
 
 <?php
+      global $inforut;
+      $inforut = "../";
       require 'Only.index.user.php';
 
       if (isset($_POST['salir'])) { 
                       require '../Gch.Connet/conection.php';
                       require '../Gch.Connet/conect.php';
+                      infoout();
                       sale_usuario();
+                      salirf();
                       //session_destroy();
+                      global $redir;
+                      $redir = "<script type='text/javascript'>
+                          function redir(){
+                          window.location.href='../index.php';
+                        }
+                        setTimeout('redir()',1);
+                        </script>";
+                      print ($redir);
                   }
 
       if(isset($_POST['login'])){
@@ -56,6 +68,23 @@
                     ////////////////////				   ////////////////////
       ////////////////////				////////////////////				////////////////////
                 ////////////////////				  ///////////////////
+  
+ function infoout() {
+
+    global $dateadout;
+    $dateadout = date('Y-m-d/H:i:s');
+
+    global $logtext;
+    $logtext = PHP_EOL.PHP_EOL."** FIN DE SESION ".$_SESSION['uNombre']." ".$_SESSION['uApellidos']." => ".$dateadout.PHP_EOL.PHP_EOL;
+    global $logdate;
+    $logdate = date('Y_m_d');
+    global $filename;
+    $filename = "../Gch.Log/".$logdate."_".$_SESSION['uref'].".log";
+    $log = fopen($filename, 'ab+');
+    fwrite($log, $logtext);
+    fclose($log);
+
+ }
 
  function sale_usuario(){
 
@@ -76,29 +105,7 @@
             * FATAL ERROR funcion sale_usuario(): ".mysqli_error($db))."</font>
                 </br>";
                   }
-    global $dir;
-    $dir = "../Gch.Log";
-    $text = PHP_EOL."** FIN DE SESION ".$_SESSION['Nombre']." ".$_SESSION['Apellidos']." => ".$dateadout;
-    $logdocu = $_SESSION['uref'];
-    $logdate = date('Y_m_d');
-    $logtext = PHP_EOL.$text.PHP_EOL.PHP_EOL;
-    $filename = $dir."/".$logdate."_".$logdocu.".log";
-    $log = fopen($filename, 'ab+');
-    fwrite($log, $logtext);
-    fclose($log);
-
-	  salirf();
-
-    global $redir;
-    $redir = "<script type='text/javascript'>
-        function redir(){
-        window.location.href='../index.php';
-      }
-      setTimeout('redir()',1);
-      </script>";
-    print ($redir);
-
-          }
+    }
 
     function salirf() {	unset($_SESSION['uid']);
                         unset($_SESSION['uNivel']);

@@ -16,94 +16,93 @@
   <!-- Custom styles for this template -->
   <link href="../css/agency.min.css" rel="stylesheet">
 
-<?php
-
-    // GENERO LA COOKIE POR SI QUIERO UTILIZARLA EN EL INC_CENTRA.PHP
-  	$wcook = "<script type='text/javascript'>
-                function setCookie() {
-                    var cname = 'wancho';
-                    var cvalue = screen.width;
-                    var d = new Date();
-                    // EXPIRA EN CUATRO HORAS
-                    d.setTime(d.getTime() + (4*60*60*1000));
-                    var expires = 'expires='+d.toUTCString();
-                    document.cookie = cname + '=' + cvalue + '; '+expires+';path=/';
-        }
-               
-                    //setCookie();
-              </script>";
-    print ($wcook);
-?>
-
 </head>
 
+
 <?php
-    require '../Gch.Users/Only.index.user.php';
+
+    if ($head == "headp") {  /*require '../Gch.Users/Only.index.user.php';*/ 
+                            global $redir;
+                            $redir = "<script type='text/javascript'>
+                                function redir(){
+                                window.location.href='portfolio.php?portfolio=".$_SESSION['a']."';
+                            }
+                            setTimeout('redir()',1);
+                            </script>";
+    } elseif ($head == "head2") { 
+                            global $inforut;
+                            $inforut = "../";
+                            require '../Gch.Users/Only.index.user.php'; 
+                            global $redir;
+                            $redir = "<script type='text/javascript'>
+                                function redir(){
+                                window.location.href='#';
+                            }
+                            setTimeout('redir()',1);
+                            </script>";
+    } else { }
+
+    //echo $_SESSION['a'];
 
     if (isset($_POST['salir'])) { 
                     require '../Gch.Connet/conection.php';
                     require '../Gch.Connet/conect.php';
+                    infoout();
                     sale_usuario();
+                    salirf();
                     //session_destroy();
-                    //salirf();
-                    /* */
                     global $redir;
-                    $redir = "<script type='text/javascript'>
-                        function redir(){
-                        window.location.href='#';
-                      }
-                      setTimeout('redir()',1);
-                      </script>";
                     print ($redir);
-                  }
+                }
 
     if(isset($_POST['login'])){
-                //process_login();
-                /**/
-                global $redir;
-                $redir = "<script type='text/javascript'>
-                    function redir(){
-                    window.location.href='#';
-                    }
-                    setTimeout('redir()',1);
-                    </script>";
-                print ($redir);
-              }
+                    //process_login();
+                    global $redir;
+                    print ($redir);
+                }
 
-  function sale_usuario(){
+              ////////////////////			   ////////////////////
+////////////////////				////////////////////				////////////////////
+            ////////////////////			   ///////////////////
 
-        global $db;
-        global $db_name;
-        global $userid;
-        $userid = @$_SESSION['uid'];
+function infoout() {
+
+    global $dateadout;
+    $dateadout = date('Y-m-d/H:i:s');
+
+    global $logtext;
+    $logtext = PHP_EOL.PHP_EOL."** FIN DE SESION ".$_SESSION['uNombre']." ".$_SESSION['uApellidos']." => ".$dateadout.PHP_EOL.PHP_EOL;
+	
+    global $logdate;
+    $logdate = date('Y_m_d');
+    global $filename;
+    $filename = "../Gch.Log/".$logdate."_".$_SESSION['uref'].".log";
+    $log = fopen($filename, 'ab+');
+    fwrite($log, $logtext);
+    fclose($log);
+}
+
+function sale_usuario(){
+
+    global $db;
+    global $db_name;
+    global $userid;
+    $userid = $_SESSION['uid'];
+        
+    global $dateadout;
+    $dateadout = date('Y-m-d/H:i:s');
+        
+    $sqladout = "UPDATE `$db_name`.`gch_user` SET `lastout` = '$dateadout' WHERE `gch_user`.`id` = '$userid' LIMIT 1 ";
             
-        global $dateadout;
-        $dateadout = date('Y-m-d/H:i:s');
-            
-        $sqladout = "UPDATE `$db_name`.`gch_user` SET `lastout` = '$dateadout' WHERE `gch_user`.`id` = '$userid' LIMIT 1 ";
-                
-        if(mysqli_query($db, $sqladout)){
-    
-       } else { print("</br>
-                    <font color='#FF0000'>
-                * FATAL ERROR funcion sale_usuario(): ".mysqli_error($db))."</font>
-                    </br>";
-                      }
-        global $dir;
-        $dir = "../Gch.Log";
-        $text = PHP_EOL."** FIN DE SESION ".@$_SESSION['Nombre']." ".@$_SESSION['Apellidos']." => ".$dateadout;
-        $logdocu = $_SESSION['uref'];
-        $logdate = date('Y_m_d');
-        $logtext = PHP_EOL.$text.PHP_EOL.PHP_EOL;
-        $filename = $dir."/".$logdate."_".$logdocu.".log";
-        $log = fopen($filename, 'ab+');
-        fwrite($log, $logtext);
-        fclose($log);
-    
-        salirf();
-    
-              }
-    
+    if(mysqli_query($db, $sqladout)){
+
+	 } else { print("</br>
+                <font color='#FF0000'>
+            * FATAL ERROR funcion sale_usuario(): ".mysqli_error($db))."</font>
+                </br>";
+                  }
+      }
+
   function salirf() { unset($_SESSION['uid']);
                       unset($_SESSION['uNivel']);
                       unset($_SESSION['uNombre']);
@@ -114,7 +113,6 @@
                       unset($_SESSION['uPassword']);
                       unset($_SESSION['uDireccion']);
                       unset($_SESSION['uTlf1']);
-                      unset($_SESSION['a']);
                     }
 
   function process_login(){
@@ -126,7 +124,7 @@
 
 ?>
 
-<body id="page-top" onresize="setCookie()">
+<body id="page-top">
 
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
@@ -203,7 +201,7 @@
           global $m;
           if(($h >= 6 )&&($h <= 13 )){ $m = "BUENOS DÍAS: "; }
           elseif(($h >= 14 )&&($h <= 21 )){ $m = "BUENAS TARDES: "; }
-          elseif(($h >= 22 )&&($h <= 5 )){ $m = "BUENAS NOCHES: "; }
+          elseif(($h >= 22 )||($h <= 5 )){ $m = "BUENAS NOCHES: "; }
           print ("<h6 style=\"color: #fbaf00\">
                         ".$m.strtoupper($_SESSION['uNombre'])." ".strtoupper($_SESSION['uApellidos'])."
                   </h6>");
