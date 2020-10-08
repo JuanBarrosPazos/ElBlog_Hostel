@@ -2,7 +2,10 @@
 //session_start();
 
 	//require '../Gch.Inclu/error_hidden.php';
-	require 'Inc_Header_Nav_Headu.php';
+	global $headtot;
+	$headtot = "headu";
+	require 'Inc_Header_Nav_Head_Total.php';
+	//require 'Inc_Header_Nav_Headu.php';
 	require '../Gch.Connet/conection.php';
 	require '../Gch.Connet/conect.php';
 

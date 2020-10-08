@@ -3,7 +3,10 @@ session_start();
 
 	//require '../Gch.Inclu/error_hidden.php';
 	if (@$_SESSION['Nivel'] == 'admin'){ 
-		  	require 'Inc_Header_Nav_Headu.php'; 
+			global $headtot;
+			$headtot = "headu";
+			require 'Inc_Header_Nav_Head_Total.php';
+			//require 'Inc_Header_Nav_Headu.php';
 			global $winclose;
 			$winclose = "<div align='right' class='BorderSup BorderInf'>
 			<form name='closewindow' action='$_SERVER[PHP_SELF]'  onsubmit=\"window.close()\">
@@ -12,7 +15,10 @@ session_start();
 			</form>
 				</div>";
 					}
-	else{ 	require 'Inc_Header_Nav_Head.php';
+	else{ 	global $headtot;
+			$headtot = "head";
+			require 'Inc_Header_Nav_Head_Total.php';
+			//require 'Inc_Header_Nav_Head.php';
 			global $winclose;
 			$winclose = ""; 
 				}

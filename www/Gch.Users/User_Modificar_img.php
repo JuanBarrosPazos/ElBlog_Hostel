@@ -2,7 +2,10 @@
 session_start();
 
 	//require '../Gch.Inclu/error_hidden.php';
-	require 'Inc_Header_Nav_Headu.php';
+	global $headtot;
+	$headtot = "headu";
+	require 'Inc_Header_Nav_Head_Total.php';
+	//require 'Inc_Header_Nav_Headu.php';
 	require '../Gch.Connet/conection.php';
 	require '../Gch.Connet/conect.php';
 
@@ -315,16 +318,30 @@ function show_form($errors=''){
 				</tr>
 				 </table>");
 				}
-		
+
+	if (@$_SESSION['Nivel'] == 'admin')	{ 
+			global $cancelbuttom;
+			$cancelbuttom = "<div align='right' class='BorderSup BorderInf'>
+					<form name='closewindow' action='User_Modificar_01.php'class=\"form\">
+									<input type='submit' value='CANCELAR Y VOLVER' />
+									<input type='hidden' name='volver' value=1 />
+					</form>
+			<form name='closewindow' action='$_SERVER[PHP_SELF]' onsubmit=\"window.close()\" class=\"form\">
+				<input type='submit' value='CERRAR VENTANA' />
+				<input type='hidden' name='oculto2' value=1 />
+			</form>
+							</div>"; 
+	} else { global $cancelbuttom;
+			 $cancelbuttom = "<div align='right' class='BorderSup BorderInf'>
+			 <form name='closewindow' action='$_SERVER[PHP_SELF]'  onsubmit=\"window.close()\" >
+					 <input type='submit' value='CERRAR VENTANA' />
+					 <input type='hidden' name='oculto2' value=1 />
+			 </form></div>";
+				 }
+
 	print("<div class=\"juancentra\" style=\"margin-top:20px; width:98vw !important;\">
 
-			<div align='right' class='BorderSup BorderInf'>
-				<form name='closewindow' action='User_Modificar_01.php'>
-					<input type='submit' value='CANCELAR Y VOLVER' />
-					<input type='hidden' name='volver' value=1 />
-				</form>
-			</div>
-			
+			".$cancelbuttom."
 			<div class='BorderInf' align='center'>
 				SELECCIONE UNA NUEVA IMAGEN.<br>
 				IMAGEN ACTUAL DE : </br>".$defaults['Nombre']." ".$defaults['Apellidos'].".
@@ -354,19 +371,7 @@ function show_form($errors=''){
 			
 		<div class='BorderSup'></div>
 				
-				<div align='right' class='BorderSup'>
-			<form name='closewindow' action='User_Modificar_01.php'  \">
-					<input type='submit' value='CANCELAR Y VOLVER' />
-					<input type='hidden' name='volver' value=1 />
-			</form>
-				</div>
-
-				<div align='right' class='BorderSup BorderInf'>
-			<form name='closewindow' action='$_SERVER[PHP_SELF]'  onsubmit=\"window.close()\">
-											<input type='submit' value='CERRAR VENTANA' />
-											<input type='hidden' name='oculto2' value=1 />
-			</form>
-				</div>
+			".$cancelbuttom."
 
 			</div>");
 		}

@@ -1,5 +1,35 @@
 <?php
-  session_start();
+  //session_start();
+
+if ($headtot == "headu2") { session_start();
+                            global $headbutton;
+                            $headtot = "";
+                            global $stylea;
+                            $stylea = "";
+                            global $styleb;
+                            $styleb = "";
+} elseif ($headtot == "head") {
+    global $headbutton;
+    $headbutton = "<button class=\"navbar-toggler navbar-toggler-right\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarResponsive\" aria-controls=\"navbarResponsive\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">Menu<i class=\"fas fa-bars\"></i></button>";
+    global $stylea;
+    $stylea = "";
+    global $styleb;
+    $styleb = "";
+} elseif ($headtot == "headu") { global $headbutton;
+                                 $headtot = ""; 
+                                 global $stylea;
+                                 $stylea = "style=\"background-color:transparent !important;\"";
+                                 global $styleb;
+                                 $styleb = "style=\"padding-top: 12px !important;\"";
+}  else { session_start();
+        global $headbutton;
+        $headbutton = "<button class=\"navbar-toggler navbar-toggler-right\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarResponsive\" aria-controls=\"navbarResponsive\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">Menu<i class=\"fas fa-bars\"></i></button>";
+        global $stylea;
+        $stylea = "";
+        global $styleb;
+        $styleb = "";
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -7,7 +37,7 @@
 
 <head>
 
-  <title>Juan Barros Pazos - Contact</title>
+  <title>Juan Barros Pazos - Users</title>
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -52,24 +82,22 @@
                   }
 
       if(isset($_POST['login'])){
-              //process_login();
-              /**/
-              global $redir;
-              $redir = "<script type='text/javascript'>
-                  function redir(){
-                  window.location.href='#';
-                  }
-                  setTimeout('redir()',1);
-                  </script>";
-              print ($redir);
-              
-            }
+            //process_login();
+            /**/
+            global $redir;
+            $redir = "<script type='text/javascript'>
+                function redir(){
+                window.location.href='#';
+                }
+                setTimeout('redir()',1);
+                </script>";
+            print ($redir);
+            
+          }
 
-                    ////////////////////				   ////////////////////
-      ////////////////////				////////////////////				////////////////////
-                ////////////////////				  ///////////////////
-  
- function infoout() {
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+  function infoout() {
 
     global $dateadout;
     $dateadout = date('Y-m-d/H:i:s');
@@ -105,13 +133,13 @@
             * FATAL ERROR funcion sale_usuario(): ".mysqli_error($db))."</font>
                 </br>";
                   }
+
     }
 
     function salirf() {	unset($_SESSION['uid']);
                         unset($_SESSION['uNivel']);
                         unset($_SESSION['uNombre']);
                         unset($_SESSION['uApellidos']);
-                        unset($_SESSION['udoc']);
                         unset($_SESSION['uEmail']);
                         unset($_SESSION['uUsuario']);
                         unset($_SESSION['uPassword']);
@@ -132,13 +160,25 @@
 <body id="page-top">
 
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" >
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav"
+        <?php echo $stylea; ?>
+    > <!-- FIN NAV -->
+
     <div class="container">
 
       <a class="navbar-brand js-scroll-trigger" href="../index.php?inicio=1">
         <!-- Juan Barros Pazos</a> -->
         <img src="../Gch.Img.Sys/LogoBMoll.png" class="imglogo" />
       </a>
+
+    <?php echo $headbutton; ?>  
+
+    <!-- 
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+    -->  
 
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav text-uppercase ml-auto">
@@ -190,7 +230,7 @@
   <!-- Header -->
   <header class="masthead">
     <div class="container">
-      <div class="intro-text">
+    <div class="intro-text" <?php echo $styleb; ?> > <!-- FINAL DIV -->
         <!--
         <div class="intro-lead-in">Welcome To Juan Barros Pazos</div>
         -->

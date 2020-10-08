@@ -139,7 +139,7 @@
     <div class="container">
 
       <?php 
-      
+        
         require 'Gch.Artic/Art_Ver_index.php'; 
 
       ?>
