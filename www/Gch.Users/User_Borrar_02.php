@@ -160,20 +160,22 @@ function process_form(){
 	$tablenameb = "gch_opiniones";
 	$tablenameb = "`".$tablenameb."`";
 	$sqlab = "UPDATE `$db_name`.$tablenameb SET `refuser` = 'userdel' WHERE $tablenameb.`refuser` = '$_SESSION[delrefart]' ";
-	if(mysqli_query($db, $sqlab)){ 
-	} else { print("<font color='#FF0000'>L159: </font></br>&nbsp;&nbsp;".mysqli_error($db))."</br>"; }
-
-	// SE GRABAN LOS DATOS EN LOG DEL ADMIN
-	global $deletet2;
-	global $deletet;
-	$deletet = $deletet2;
+	if(mysqli_query($db, $sqlab)){
+				global $modifref;
+				$modifref = "Tabla Opiniones Modif ref user x userdel";
+	} else { print("<font color='#FF0000'>L159: </font></br>&nbsp;&nbsp;".mysqli_error($db))."</br>"; 
+				global $modifref;
+				$modifref = "Error: Tabla Opiniones Modif ref user ".mysqli_error($db);
+			}
 
 	} // FIN PRIMER IF SI SE BORRA EL USER DE LA BBDD
 	  // => ELSE BORRADO NO OK PRIMER QUERY
 		else {print("<font color='#FF0000'>SE HA PRODUCIDO UN ERROR: </font>
 					</br>&nbsp;&nbsp;".mysqli_error($db))."</br>";
 					show_form ();
-						}
+					global $texerror;
+					$texerror = "ERROR BORRADO USER L.162\n\t ".mysqli_error($db);
+					}
 	
 	} // FIN FUNCTION
 
@@ -347,31 +349,20 @@ function show_form(){
 
 function info_02(){
 
-	global $nombre;
-	global $apellido;	
-	global $rf;
-	
-	$rf = $_POST['ref'];
-	$nombre = $_POST['Nombre'];
-	$apellido = $_POST['Apellidos'];
-		
+	global $modifref;
+	global $texerror;
+
+	global $imgorg;
+	global $delimguser;
+	if (!file_exists($imgorg)) {$delimguser = "BORRADA IMAGEN USER => ".$imgorg; }
+	else { $delimguser = "ERROR BORRADO IMAGEN USER => ".$imgorg; }
+
 	$ActionTime = date('H:i:s');
 
-	global $dir;
-	$dir = "../Gch.Log";
-	
-	global $ddr;
-	global $deletet;	
-	global $text;
-	$text = PHP_EOL."- USER BORRARDO ".$ActionTime.PHP_EOL."\t ID: ".$_POST['id'].PHP_EOL."\t Nombre: ".$nombre." ".$apellido.PHP_EOL."\t Ref: ".$rf.". Nivel: ".$_POST['Nivel'].PHP_EOL."\t User: ".$_POST['Usuario'].". Pass: ".$_POST['Password'];
+	global $logtext;	
+	$logtext = PHP_EOL."- USER BORRARDO ".$ActionTime.PHP_EOL."\t ID: ".$_POST['id'].PHP_EOL."\t Nombre: ".$_POST['Nombre']." ".$_POST['Apellidos'].PHP_EOL."\t Ref: ".$_POST['ref'].". Nivel: ".$_POST['Nivel'].PHP_EOL."\t User: ".$_POST['Usuario'].". Pass: ".$_POST['Password'].$delimguser.PHP_EOL.$modifref.PHP_EOL.$texerror.PHP_EOL;
 
-	$logdocu = $_SESSION['uref'];
-	$logdate = date('Y_m_d');
-	$logtext = $text.PHP_EOL.$deletet.PHP_EOL.$ddr;
-	$filename = $dir."/".$logdate."_".$logdocu.".log";
-	$log = fopen($filename, 'ab+');
-	fwrite($log, $logtext);
-	fclose($log);
+    require 'Inc_Log_Total.php';
 
 	}
 
@@ -381,32 +372,12 @@ function info_02(){
 
 function info_01(){
 
-	global $nombre;
-	global $apellido;
-	global $rf;
-	
-	$rf = $_POST['ref'];
-	$nombre = $_POST['Nombre'];
-	$apellido = $_POST['Apellidos'];
-		
-	global $orden;
-	$orden = isset($_POST['Orden']);	
-
 	$ActionTime = date('H:i:s');
 
-	global $dir;
-	$dir = "../Gch.Log";
+	global $logtext;	
+	$logtext = PHP_EOL."- USER WEB BORRAR SELECCIONADO ".$ActionTime.PHP_EOL."\t ID:".$_POST['id'].PHP_EOL."\t Nombre: ".$_POST['Nombre']." ".$_POST['Apellidos'].PHP_EOL."\t Ref: ".$_POST['ref'].". Nivel: ".$_POST['Nivel'].PHP_EOL."\t User: ".$_POST['Usuario'].". Pass: ".$_POST['Password'].PHP_EOL;
 
-global $text;
-$text = PHP_EOL."- USER BORRAR SELECCIONADO ".$ActionTime.PHP_EOL."\t ID:".$_POST['id'].PHP_EOL."\t Nombre: ".$nombre." ".$apellido.PHP_EOL."\t Ref: ".$rf.". Nivel: ".$_POST['Nivel'].PHP_EOL."\t User: ".$_POST['Usuario'].". Pass: ".$_POST['Password'];
-
-	$logdocu = $_SESSION['uref'];
-	$logdate = date('Y_m_d');
-	$logtext = $text.PHP_EOL;
-	$filename = $dir."/".$logdate."_".$logdocu.".log";
-	$log = fopen($filename, 'ab+');
-	fwrite($log, $logtext);
-	fclose($log);
+    require 'Inc_Log_Total.php';
 
 	}
 

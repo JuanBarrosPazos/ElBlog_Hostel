@@ -30,25 +30,26 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if (@$_SESSION['uNivel'] == 'useru'){ ver_todo(); } 
-
-	elseif ((@$_SESSION['uNivel'] == 'adminu')||(@$_SESSION['Nivel'] == 'admin')){ 
+if (@$_SESSION['uNivel'] == 'useru'){ ver_todo(); 
+									  info();
+} elseif ((@$_SESSION['uNivel'] == 'adminu')||(@$_SESSION['Nivel'] == 'admin')){ 
 		
 			if(isset($_POST['todo'])){  
 				show_form();							
 				ver_todo();
-				//info();
+				info();
 				}
 			
 			elseif(isset($_POST['oculto'])){
 			if($form_errors = validate_form()){
 			show_form($form_errors);
-			} else {  process_form();
-			//info();
+			} else { process_form();
+					 info();
 			}
 		}
 			else { show_form();
 				   ver_todo();
+				   info();
 				}
 	} 
 
@@ -165,6 +166,35 @@ function ver_todo(){
 		
 	}
 
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
+
+function info(){
+
+	global $orden;
+	if (isset($_POST['Orden'])) { $orden = $_POST['Orden']; }
+	else { $orden = '`id` ASC'; }
+
+	global $rf;
+	if (isset($_POST['ref'])) { $rf = $_POST['ref']; }
+	else { $rf = ''; }
+
+	global $titulo;
+	if (isset($_POST['todo'])){ $titulo = "FILTRO TODOS LOS USUARIOS ".$orden; }
+	elseif (isset($_POST['oculto'])){ 
+		$titulo = "FILTRO => ".PHP_EOL."** NOMBRE ".$_POST['Nombre'].PHP_EOL."** APELLIDOS ".$_POST['Apellidos'].PHP_EOL."ORDEN: ".$orden;
+		}
+	else { $titulo = "ACCESO A USUARIOS MODIFICAR 1 "; }
+
+	$ActionTime = date('H:i:s');
+
+	global $logtext;
+	$logtext = PHP_EOL."- ADMIN USER WEB ".$ActionTime.PHP_EOL."\t ACCION => ".$titulo.PHP_EOL;
+
+    require 'Inc_Log_Total.php';
+
+	}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

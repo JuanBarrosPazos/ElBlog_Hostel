@@ -71,23 +71,14 @@ function user_entrada(){
 
 	function infoin() {
 
-		global $datein;
-		$datein = date('Y-m-d/H:i:s');
+		global $ActionTime;
+		$ActionTime = date('Y-m-d/H:i:s');
 
 		//echo 	$_SESSION['ref'];
 		global $logtext;
-		$logtext = PHP_EOL."** INICIO SESION => ".$datein.PHP_EOL.".\t User Ref: ".$_SESSION['uref'].PHP_EOL.".\t User Name: ".$_SESSION['uNombre']." ".$_SESSION['uApellidos'].PHP_EOL;
+		$logtext = PHP_EOL."** INICIO SESION => ".$ActionTime.PHP_EOL.".\t USER REF: ".$_SESSION['uref'].PHP_EOL.".\t USER NIVEL: ".$_SESSION['uNivel'].PHP_EOL.".\t USER NAME: ".$_SESSION['uNombre']." ".$_SESSION['uApellidos'].PHP_EOL;
 	
-		global $inforut;
-		global $logdate;
-		$logdate = date('Y_m_d');
-		global $filename;
-		$filename = $inforut."Gch.Log/".$logdate."_".$_SESSION['uref'].".log";
-		//echo $filename;
-		global $log;
-		$log = fopen($filename, 'ab+');
-		fwrite($log, $logtext);
-		fclose($log);
+		require 'Inc_Log_Total.php';
 	
 	}
 

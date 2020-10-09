@@ -147,13 +147,13 @@ function process_form(){
 
 				} else {
 				print("<font color='#FF0000'>
-						* MODIFIQUE LA ENTRADA 206: </font>
+						* MODIFIQUE LA ENTRADA 141: </font>
 						</br>
 						&nbsp;&nbsp;&nbsp;".mysqli_error($db))."
 						</br>";
 						show_form ();
 						global $texerror;
-						$texerror = "\n\t ".mysqli_error($db);
+						$texerror = "ERROR MODIFICAR USER L.141\n\t ".mysqli_error($db);
 							}
 		
 		} // FIN CONDICIONAL ADMIN
@@ -312,28 +312,14 @@ function show_form($errors=''){
 
 function info_02(){
 
-	global $ruta;
-	
+	global $texerror;
+
 	$ActionTime = date('H:i:s');
 	
-	if($_SESSION['refcl'] == $_SESSION['uref']){	global $ruta;
-												$ruta = $_SESSION['refcl'];}
-	elseif($_SESSION['refcl'] != $_SESSION['uref']){	global $ruta;
-													$ruta = $_SESSION['uref'];}
-	
-	global $dir;
-	$dir = "../Gch.Log";
-	
-	global $text;
-	$text = PHP_EOL."- USER MODIFICADO ".$ActionTime.PHP_EOL."\t ID:".$_POST['id'].PHP_EOL."\t Nombre: ".$_POST['Nombre']." ".$_POST['Apellidos'].PHP_EOL."\t Ref: ".$_SESSION['uref'].PHP_EOL."\t Nivel: ".$_POST['Nivel'].PHP_EOL."\t User: ".$_POST['Usuario'].".\n\t Pass: ".$_POST['Password'].".\n\t ".$_POST['doc'].": ".$_POST['dni'].$_POST['ldni'].".\n\t Email: ".$_POST['Email'].PHP_EOL."\t Direccion: ".$_POST['Direccion'].PHP_EOL."\t Telefono 1: ".$_POST['Tlf1'].PHP_EOL."\t Telefono 2: ".$_POST['Tlf2'].PHP_EOL."\t Imagen: ".$_POST['myimg'];
+	global $logtext;
+	$logtext = PHP_EOL."- USER WEB MODIFICADO ".$ActionTime.PHP_EOL."\t ID:".$_POST['id'].PHP_EOL."\t Nombre: ".$_POST['Nombre']." ".$_POST['Apellidos'].PHP_EOL."\t Ref: ".$_SESSION['uref'].PHP_EOL."\t Nivel: ".$_POST['Nivel'].PHP_EOL."\t User: ".$_POST['Usuario'].".\n\t Pass: ".$_POST['Password'].".\n\t Email: ".$_POST['Email'].PHP_EOL."\t Direccion: ".$_POST['Direccion'].PHP_EOL."\t Telefono 1: ".$_POST['Tlf1'].PHP_EOL."\t Imagen: ".$_POST['myimg'].PHP_EOL.$texerror.PHP_EOL;
 
-	$logdocu = $ruta;
-	$logdate = date('Y_m_d');
-	$logtext = $text.PHP_EOL;
-	$filename = $dir."/".$logdate."_".$logdocu.".log";
-	$log = fopen($filename, 'ab+');
-	fwrite($log, $logtext);
-	fclose($log);
+    require 'Inc_Log_Total.php';
 
 	}
 
@@ -343,26 +329,12 @@ function info_02(){
 
 function info_01(){
 
-	global $texerror;
-
-	global $orden;
-	$orden = isset($_POST['Orden']);	
-
 	$ActionTime = date('H:i:s');
 
-	global $dir;
-	$dir = "../Gch.Log";
-	
-	global $text;
-	$text = PHP_EOL."- USER MODIFICAR SELECCIONADO ".$ActionTime.PHP_EOL."\t ID:".$_POST['id'].PHP_EOL."\t Nombre: ".$_POST['Nombre']." ".$_POST['Apellidos'].PHP_EOL."\t Ref: ".$_POST['ref'].PHP_EOL."\t Nivel: ".$_POST['Nivel'].PHP_EOL."\t User: ".$_POST['Usuario'].".\n\t Pass: ".$_POST['Password'].".\n\t Email: ".$_POST['Email'].PHP_EOL."\t Direccion: ".$_POST['Direccion'].PHP_EOL."\t Telefono 1: ".$_POST['Tlf1'].PHP_EOL."\t Imagen: ".$_POST['myimg'];
+	global $logtext;
+	$logtext = PHP_EOL."- USER WEB MODIFICAR SELECCIONADO ".$ActionTime.PHP_EOL."\t ID:".$_POST['id'].PHP_EOL."\t Nombre: ".$_POST['Nombre']." ".$_POST['Apellidos'].PHP_EOL."\t Ref: ".$_POST['ref'].PHP_EOL."\t Nivel: ".$_POST['Nivel'].PHP_EOL."\t User: ".$_POST['Usuario'].".\n\t Pass: ".$_POST['Password'].".\n\t Email: ".$_POST['Email'].PHP_EOL."\t Direccion: ".$_POST['Direccion'].PHP_EOL."\t Telefono 1: ".$_POST['Tlf1'].PHP_EOL."\t Imagen: ".$_POST['myimg'].PHP_EOL;
 
-	$logdocu = $_SESSION['uref'];
-	$logdate = date('Y_m_d');
-	$logtext = $text.$texerror.PHP_EOL;
-	$filename = $dir."/".$logdate."_".$logdocu.".log";
-	$log = fopen($filename, 'ab+');
-	fwrite($log, $logtext);
-	fclose($log);
+    require 'Inc_Log_Total.php';
 
 	}
 

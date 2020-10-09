@@ -60,8 +60,6 @@ if ($headtot == "headu2") { session_start();
 </head>
 
 <?php
-      global $inforut;
-      $inforut = "../";
       require 'Only.index.user.php';
 
       if (isset($_POST['salir'])) { 
@@ -99,19 +97,14 @@ if ($headtot == "headu2") { session_start();
 
   function infoout() {
 
-    global $dateadout;
-    $dateadout = date('Y-m-d/H:i:s');
+    global $ActionTime;
+    $ActionTime = date('Y-m-d/H:i:s');
 
     global $logtext;
-    $logtext = PHP_EOL.PHP_EOL."** FIN DE SESION ".$_SESSION['uNombre']." ".$_SESSION['uApellidos']." => ".$dateadout.PHP_EOL.PHP_EOL;
-    global $logdate;
-    $logdate = date('Y_m_d');
-    global $filename;
-    $filename = "../Gch.Log/".$logdate."_".$_SESSION['uref'].".log";
-    $log = fopen($filename, 'ab+');
-    fwrite($log, $logtext);
-    fclose($log);
+    $logtext = PHP_EOL.PHP_EOL."** FIN DE SESION => ".$ActionTime.PHP_EOL.".\t USER REF: ".$_SESSION['uref'].PHP_EOL.".\t USER NIVEL: ".$_SESSION['uNivel'].PHP_EOL.".\t USER: ".$_SESSION['uNombre']." ".$_SESSION['uApellidos'].PHP_EOL;
 
+    require 'Inc_Log_Total.php';
+    
  }
 
  function sale_usuario(){

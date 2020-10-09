@@ -10,7 +10,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if (($_SESSION['uNivel'] == 'adminu')||($_SESSION['uNivel'] == 'useru') || ($_SESSION['uNivel'] == 'plusu')||($_SESSION['Nivel'] == 'admin')){
+if (($_SESSION['uNivel'] == 'adminu')||($_SESSION['uNivel'] == 'useru') ||($_SESSION['Nivel'] == 'admin') ||($_SESSION['Nivel'] == 'plus')){
 				
 	global $nombre;
 	global $apellido;
@@ -35,173 +35,103 @@ function process_form(){
 	
 	print("<table align='center' width='auto'>
 				<tr>
-					<th colspan=3  class='BorderInf'>
-						DATOS DEL USUARIO
-					</th>
+					<th colspan=3  class='BorderInf'>DATOS DEL USUARIO</th>
 				</tr>
 				
 				<tr>
-					<td align='right' width=110px>
-						ID:
-					</td>
-					<td align='left'>"
-						.$_POST['id'].
-					"</td>
+					<td align='right' width=110px>ID:</td>
+					<td align='left'>".$_POST['id']."</td>
 					<td rowspan='5' align='right' width='120px'>
 	<img src='../Gch.Img.User/".$_POST['myimg']."' height='120px' width='90px' />
 					</td>
 				</tr>
 				
 				<tr>
-					<td align='right'>
-						Nivel:
-					</td>
-					<td align='left'>"
-						.$_POST['Nivel'].
-					"</td>
+					<td align='right'>Nivel:</td>
+					<td align='left'>".$_POST['Nivel']."</td>
 				</tr>
 				
 				<tr>
-					<td align='right'>
-						Referencia:
-					</td>
-					<td align='left'>"
-						.$_POST['ref'].
-					"</td>
+					<td align='right'>Referencia:</td>
+					<td align='left'>".$_POST['ref']."</td>
 				</tr>
 				
 				<tr>
-					<td align='right'>
-						Nombre:
-					</td>
-					<td align='left'>"
-						.$_POST['Nombre'].
-					"</td>
+					<td align='right'>Nombre:</td>
+					<td align='left'>".$_POST['Nombre']."</td>
 				</tr>
 				
 				<tr>
-					<td align='right'>
-						Apellidos:
-					</td>
-					<td align='left'>"
-						.$_POST['Apellidos'].
-					"</td>
+					<td align='right'>Apellidos:</td>
+					<td align='left'>".$_POST['Apellidos']."</td>
 				</tr>				
 				
 				<tr>
-					<td align='right'>
-						Documento:
-					</td>
-					<td align='left'>"
-						.$_POST['doc'].
-					"</td>
+					<td align='right'>Documento:</td>
+					<td align='left'>".$_POST['doc']."</td>
 				</tr>				
 				
 				<tr>
-					<td align='right'>
-						N&uacute;mero:
-					</td>
-					<td align='left' colspan='2'>"
-						.$_POST['dni'].
-					"</td>
+					<td align='right'>N&uacute;mero:</td>
+					<td align='left' colspan='2'>".$_POST['dni']."</td>
 				</tr>				
 				
 				<tr>
-					<td align='right'>
-						Control:
-					</td>
-					<td align='left' colspan='2'>"
-						.$_POST['ldni'].
-					"</td>
+					<td align='right'>Control:</td>
+					<td align='left' colspan='2'>".$_POST['ldni']."</td>
 				</tr>				
 				
 				<tr>
-					<td align='right'>
-						Mail:
-					</td>
-					<td align='left' colspan='2'>"
-						.$_POST['Email'].
-					"</td>
+					<td align='right'>Mail:</td>
+					<td align='left' colspan='2'>".$_POST['Email']."</td>
 				</tr>
 				
 				<tr>
-					<td align='right'>
-						Usuario:
-					</td>
-					<td align='left' colspan='2'>"
-						.$_POST['Usuario'].
-					"</td>
+					<td align='right'>Usuario:</td>
+					<td align='left' colspan='2'>".$_POST['Usuario']."</td>
 				</tr>
 				
 				<tr>
-					<td align='right'>
-						Password:
-					</td>
-					<td align='left' colspan='2'>"
-						.$_POST['Password'].
-					"</td>
+					<td align='right'>Password:</td>
+					<td align='left' colspan='2'>".$_POST['Password']."</td>
 				</tr>
 				
 				<tr>
-					<td align='right'>
-						Direcci&oacute;n:
-					</td>
-					<td align='left' colspan='2'>"
-						.$_POST['Direccion'].
-					"</td>
+					<td align='right'>Direcci&oacute;n:</td>
+					<td align='left' colspan='2'>".$_POST['Direccion']."</td>
 				</tr>
 				
 				<tr>
-					<td align='right'>
-						Tel&eacute;fono 1:
-					</td>
-					<td align='left' colspan='2'>"
-						.$_POST['Tlf1'].
-					"</td>
+					<td align='right'>Tel&eacute;fono 1:</td>
+					<td align='left' colspan='2'>".$_POST['Tlf1']."</td>
 				</tr>
 				
 				<tr>
-					<td align='right'>
-						Tel&eacute;fono 2:
-					</td>
-					<td align='left' colspan='2'>"
-						.$_POST['Tlf2'].
-					"</td>
+					<td align='right'>Tel&eacute;fono 2:</td>
+					<td align='left' colspan='2'>".$_POST['Tlf2']."</td>
 				</tr>
 				
 				<tr>
-					<td align='right'>
-						Last IN:
-					</td>
-					<td align='left' colspan='2'>"
-						.$_POST['lastin'].
-					"</td>
+					<td align='right'>Last IN:</td>
+					<td align='left' colspan='2'>".$_POST['lastin']."</td>
 				</tr>
 				
 				<tr>
-					<td align='right'>
-						Last Out:
-					</td>
-					<td align='left' colspan='2'>"
-						.$_POST['lastout'].
-					"</td>
+					<td align='right'>Last Out:</td>
+					<td align='left' colspan='2'>".$_POST['lastout']."</td>
 				</tr>
 				
 				<tr>
-					<td align='right'>
-						Nº Visitas:
-					</td>
-					<td align='left' colspan='2'>"
-						.$_POST['visitadmin'].
-					"</td>
+					<td align='right'>Nº Visitas:</td>
+					<td align='left' colspan='2'>".$_POST['visitadmin']."</td>
 				</tr>
 				
 				<tr>
 					<td colspan=3 align='right' class='BorderSup'>
-	<form name='closewindow' action='$_SERVER[PHP_SELF]'  onsubmit=\"window.close()\">
-											<input type='submit' value='CERRAR VENTANA' />
-											<input type='hidden' name='oculto2' value=1 />
-			</form>
+				<form name='closewindow' action='$_SERVER[PHP_SELF]'  onsubmit=\"window.close()\">
+						<input type='submit' value='CERRAR VENTANA' />
+						<input type='hidden' name='oculto2' value=1 />
+				</form>
 					</td>
 				</tr>
 			</table>"); 
@@ -214,28 +144,12 @@ function process_form(){
 
 function info(){
 
-	global $nombre;
-	global $apellido;
-		
-	$rf = $_POST['ref'];
-	$nombre = $_POST['Nombre'];
-	$apellido = $_POST['Apellidos'];
-		
 	$ActionTime = date('H:i:s');
 	
-	global $dir;
-	$dir = "../Gch.Log";
-	
-	global $text;
-	$text = PHP_EOL."- USERS VER DETALLES ".$ActionTime.PHP_EOL."\t Nombre: ".$nombre." ".$apellido;
+	global $logtext;
+	$logtext = PHP_EOL."- USERS VER DETALLES ".$ActionTime.PHP_EOL."\t User Ref: ".$_POST['ref'].PHP_EOL."\t Nombre: ".$_POST['Nombre']." ".$_POST['Apellidos'];
 
-	$logdocu = $_SESSION['uref'];
-	$logdate = date('Y_m_d');
-	$logtext = $text.PHP_EOL;
-	$filename = $dir."/".$logdate."_".$logdocu.".log";
-	$log = fopen($filename, 'ab+');
-	fwrite($log, $logtext);
-	fclose($log);
+    require 'Inc_Log_Total.php';
 
 	}
 

@@ -140,6 +140,8 @@ function process_form(){
 		
 		if( file_exists( '../Gch.Img.User/'.$_SESSION['smyimg'])){
 			unlink('../Gch.Img.User/'.$_SESSION['smyimg']);
+			global $unlinkodlimg;
+			$unlinkodlimg = "../Gch.Img.User/".$_SESSION['smyimg'];
 		}else{}
 
 		$extension = substr($_FILES['myimg']['name'],-3);
@@ -153,6 +155,18 @@ function process_form(){
 		$rename_filename = "../Gch.Img.User/".$new_name;	
 		rename($destination_file, $rename_filename);
 		$_SESSION['new_name'] = $new_name;
+
+		global $volvergestion;
+		if (@$_SESSION['Nivel'] == 'admin'){
+		$volvergestion = "<tr>
+							<td colspan=3 align='right' class='BorderSup'>
+								<form name='closewindow' action='User_Modificar_01.php'  \">
+									<input type='submit' value='VOLVER A GESTION USUARIOS' />
+									<input type='hidden' name='volver' value=1 />
+								</form>
+							</td>
+						 </tr>";
+		} else {$volvergestion = ""; }
 
 	global $db;
 	global $db_name;
@@ -228,14 +242,7 @@ function process_form(){
 		</form>
 					</td>
 				</tr>
-				<tr>
-					<td colspan=3 align='right' class='BorderSup'>
-						<form name='closewindow' action='User_Modificar_01.php'  \">
-							<input type='submit' value='VOLVER A GESTION USUARIOS' />
-							<input type='hidden' name='volver' value=1 />
-						</form>
-					</td>
-				</tr>
+				".$volvergestion."
 			</table>" );
 				} else {
 				print("<font color='#FF0000'>
@@ -292,10 +299,7 @@ function show_form($errors=''){
 							'ref' => $_SESSION['sref'],
 							'myimg' => isset($_POST['myimg']),
 							'Nivel' => $_POST['Nivel'],
-							'Email' => $_POST['Email'],
 							'Usuario' => $_POST['Usuario'],
-							'Password' => $_POST['Password'],
-							'Direccion' => $_POST['Direccion'],
 							'Tlf1' => $_POST['Tlf1'],
 						);
 								}
@@ -382,28 +386,16 @@ function show_form($errors=''){
 
 function info_02(){
 
-	global $nombre;
-	global $apellido;
 	global $destination_file;	
 	global $rename_filename;
+	global $unlinkodlimg;
 
 	$ActionTime = date('H:i:s');
 
-	$rf = $_POST['ref'];
+	global $logtext;
+	$logtext = PHP_EOL."- USER WEB IMAGEN MODIFICADA ".$ActionTime.PHP_EOL."\t ID:".$_POST['id'].PHP_EOL."\t Nombre: ".$_POST['Nombre']." ".$_POST['Apellidos'].PHP_EOL."\t Ref: ".$_POST['ref'].PHP_EOL."\t Delete Old Imagen: ".$unlinkodlimg.PHP_EOL."\t Upload Imagen: ".$destination_file.PHP_EOL."\t Rename New Imagen: ".$rename_filename.PHP_EOL;
 
-	global $dir;
-	$dir = "../Gch.Log";
-
-	global $text;
-	$text = PHP_EOL."- ADMIN MODIFICAR IMG MODIFICADA ".$ActionTime.PHP_EOL."\t ID:".$_POST['id'].PHP_EOL."\t Nombre: ".$nombre." ".$apellido.PHP_EOL."\t Ref: ".$rf.PHP_EOL."\t Upload Imagen: ".$destination_file.PHP_EOL."\t Rename Imagen: ".$rename_filename;
-
-	$logdocu = $_SESSION['uref'];
-	$logdate = date('Y_m_d');
-	$logtext = $text.PHP_EOL;
-	$filename = $dir."/".$logdate."_".$logdocu.".log";
-	$log = fopen($filename, 'ab+');
-	fwrite($log, $logtext);
-	fclose($log);
+    require 'Inc_Log_Total.php';
 
 	}
 
@@ -413,29 +405,12 @@ function info_02(){
 
 function info_01(){
 
-	
-	global $nombre;
-	global $apellido;
-
 	$ActionTime = date('H:i:s');
 
-	$rf = $_POST['ref'];
-	$nombre = $_POST['Nombre'];
-	$apellido = $_POST['Apellidos'];
+	global $logtext;
+	$logtext = PHP_EOL."- USER WEB MODIFICAR IMAGEN ACCESO ".$ActionTime.PHP_EOL."\t ID:".$_POST['id'].PHP_EOL."\t Nombre: ".$_POST['Nombre']." ".$_POST['Apellidos'].PHP_EOL."\t Ref: ".$_POST['ref'].PHP_EOL."\t Imagen: ".$_POST['myimg'].PHP_EOL;
 
-	global $dir;
-	$dir = "../Gch.Log";
-
-	global $text;
-	$text = PHP_EOL."- ADMIN MODIFICAR IMG SELECCIONADA ".$ActionTime.PHP_EOL."\t ID:".$_POST['id'].PHP_EOL."\t Nombre: ".$nombre." ".$apellido.PHP_EOL."\t Ref: ".$rf.PHP_EOL."\t Imagen: ".$_POST['myimg'];
-
-	$logdocu = $_SESSION['uref'];
-	$logdate = date('Y_m_d');
-	$logtext = $text.PHP_EOL;
-	$filename = $dir."/".$logdate."_".$logdocu.".log";
-	$log = fopen($filename, 'ab+');
-	fwrite($log, $logtext);
-	fclose($log);
+    require 'Inc_Log_Total.php';
 
 	}
 

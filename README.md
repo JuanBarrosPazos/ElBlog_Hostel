@@ -1,6 +1,7 @@
 
-# ElBlog_Hostel.F7.V44 ESTABLE
-* AJUSTES GENERALES DE CODIGO
+# ElBlog_Hostel.F7.V45
+### 2020.10.09
+* AJUSTES .LOG ACTIVIDAD DE USUARIOS
 
 ----
 
@@ -15,6 +16,12 @@
 ## * REPOSITORIO MEGA.NZ: 
 
 * https://mega.nz/folder/K8thzLTC#hGByFrZ83XqvY0U6b_w8eQ
+
+----
+
+### 2020.10.09
+# ElBlog_Hostel.F7.V45
+* AJUSTES .LOG ACTIVIDAD USUARIOS
 
 ----
 
