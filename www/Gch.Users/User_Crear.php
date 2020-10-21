@@ -183,8 +183,10 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 	global $logtext;
 	$logtext = PHP_EOL."- CREADO NUEVO WEB USUARIO ".$datein.PHP_EOL."\t User Ref: ".$rf.PHP_EOL."\t Name: ".$_POST['Nombre']." ".$_POST['Apellidos'].PHP_EOL."\t Nivel: ".$_POST['Nivel'].PHP_EOL."\t User: ".$_POST['Usuario'].PHP_EOL."\t Pass: ".$_POST['Password'].PHP_EOL;
 
+	/*
 	global $loguser;
 	$loguser = $rf;
+	*/
 	
     require 'Inc_Log_Total.php';
 
