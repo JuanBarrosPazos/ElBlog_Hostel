@@ -561,29 +561,14 @@ function admin_entrada(){
 				</br>";
 							}
 					
-	global $dir;
-	$dir = "../Gch.Log";
-
 global $datos;
-global $logdocu;
-$logdocu = $_SESSION['ref'];
-global $logdate;
-$logdate = date('Y_m_d');
+
 //echo 	$_SESSION['ref'];
 global $logtext;
-$logtext = PHP_EOL."** INICIO SESION => ".$datein;
-$logtext = $logtext.PHP_EOL.".\t User Ref: ".$_SESSION['ref'];
-$logtext = $logtext.PHP_EOL.".\t User Name: ".$_SESSION['Nombre']." ".$_SESSION['Apellidos'];
-$logtext = $logtext.PHP_EOL.$datos;
+$logtext = PHP_EOL."** INICIO SESION => ".$datein.PHP_EOL.".\t User Ref: ".$_SESSION['ref'].PHP_EOL.".\t User Name: ".$_SESSION['Nombre']." ".$_SESSION['Apellidos'].PHP_EOL.$datos;
 
-global $filename;
-global $log;
-$filename = $dir."/".$logdate."_".$logdocu.".log";
-//echo $filename;
-$log = fopen($filename, 'ab+');
-fwrite($log, $logtext);
-fclose($log);
-
+	require 'Inc_Log_Total.php';
+	
 	}
 
 				   ////////////////////				   ////////////////////

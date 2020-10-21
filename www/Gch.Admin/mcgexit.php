@@ -40,9 +40,6 @@ function info(){
 	global $db_name;
 	global $userid;
 	
-	global $dir;
-	$dir = "../Gch.Log";
-
 	global $dateadout;
 	$dateadout = date('Y-m-d/H:i:s');
 
@@ -55,15 +52,11 @@ function info(){
 		* FATAL ERROR funcion admin_entrada(): </font></br> ".mysqli_error($db))."
 				</br>";
 					}
-					
-	$text = PHP_EOL."** FIN DE SESION ".$_SESSION['Nombre']." ".$_SESSION['Apellidos']." => ".$dateadout;
-	$logdocu = $_SESSION['ref'];
-	$logdate = date('Y_m_d');
-	$logtext = PHP_EOL.$text.PHP_EOL.PHP_EOL;
-	$filename = $dir."/".$logdate."_".$logdocu.".log";
-	$log = fopen($filename, 'ab+');
-	fwrite($log, $logtext);
-	fclose($log);
+	
+	global $logtext;
+	$logtext = PHP_EOL.PHP_EOL."** FIN DE SESION ".$_SESSION['Nombre']." ".$_SESSION['Apellidos']." => ".$dateadout.PHP_EOL.PHP_EOL;
+
+	require 'Inc_Log_Total.php';
 
 	}
 

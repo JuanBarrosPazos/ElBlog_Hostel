@@ -258,16 +258,10 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 
 	$datein = date('Y-m-d/H:i:s');
 	
-	global $dir;
-	$dir = "../Gch.Log";
-
-	$logdocu = $_SESSION['ref'];
-	$logdate = date('Y_m_d');
+	global $logtext;
 	$logtext = PHP_EOL."- CREADO NUEVO USUARIO ".$datein.PHP_EOL."\t User Ref: ".$rf.PHP_EOL."\t Name: ".$_POST['Nombre']." ".$_POST['Apellidos'].PHP_EOL."\t User: ".$_POST['Usuario'].PHP_EOL."\t Pass: ".$_POST['Password'].PHP_EOL;
-	$filename = $dir."/".$logdate."_".$logdocu.".log";
-	$log = fopen($filename, 'ab+');
-	fwrite($log, $logtext);
-	fclose($log);
+
+	require 'Inc_Log_Total.php';
 
 	} else { print("</br>
 				<font color='#FF0000'>

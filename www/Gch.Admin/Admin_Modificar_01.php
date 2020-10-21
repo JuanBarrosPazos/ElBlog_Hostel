@@ -177,19 +177,10 @@ function info(){
 		
 	$ActionTime = date('H:i:s');
 
-	global $dir;
-	$dir = "../Gch.Log";
-	
-	global $text;
-	$text = PHP_EOL."- USER MODIFICAR BUSCAR ".$ActionTime.PHP_EOL."\t Filtro => ".$nombre." ".$apellido;
+	global $logtext;
+	$logtext = PHP_EOL."- USER MODIFICAR BUSCAR ".$ActionTime.PHP_EOL."\t Filtro => ".$nombre." ".$apellido.PHP_EOL;
 
-	$logdocu = $_SESSION['ref'];
-	$logdate = date('Y_m_d');
-	$logtext = $text.PHP_EOL;
-	$filename = $dir."/".$logdate."_".$logdocu.".log";
-	$log = fopen($filename, 'ab+');
-	fwrite($log, $logtext);
-	fclose($log);
+	require 'Inc_Log_Total.php';
 
 	}
 
