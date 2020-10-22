@@ -469,28 +469,32 @@ function ver_todo(){
 			
 		} else {
 			if(mysqli_num_rows($qb)== 0){
-							print ("<table align='center'>
-										<tr>
-											<td aling='center'>
-												<font color='#FF0000'>
-													NO HAY DATOS
-												</font>
-											</td>
-										</tr>
-									</table>");
-			} else {
-			print ("<div class='row'> <!-- Titulo -->
-					<div class='col-lg-12 text-center'>
-					  <h2 class='section-heading text-uppercase'>Noticias</h2>
-					  <!--
-					  <h3 class='section-subheading text-muted'>Lorem ipsum dolor sit amet consectetur.</h3>
-					  -->
-					</div>
-				  	</div>
+				print ("<table align='center'>
+						<tr>
+							<td style='text-align:center'>
+								<h4>
+									<a href='../Gch.Admin/access.php' target='_blank'>
+								NO HAY DATOS
+									<br>
+								CREE SU PRIMERA NOTICIA
+									</a>
+								</h4>
+							</td>
+						</tr>
+				</table>");
+	} else {
+		print ("<div class='row'> <!-- Titulo -->
+				<div class='col-lg-12 text-center'>
+				  <h2 class='section-heading text-uppercase'>Noticias</h2>
+				  <!--
+				  <h3 class='section-subheading text-muted'>Lorem ipsum dolor sit amet consectetur.</h3>
+				  -->
+				</div>
+			  	</div>
 					
-					<div class='row'> <!-- Inicio class row-->
-					<div class='col-lg-12'>  <!-- Inicio class col-lg-12 -->
-					<ul class='timeline'> <!-- Inicio Ul class timeline -->
+				<div class='row'> <!-- Inicio class row-->
+				<div class='col-lg-12'>  <!-- Inicio class col-lg-12 -->
+				<ul class='timeline'> <!-- Inicio Ul class timeline -->
 									");
 			
 				global $estilo;

@@ -241,11 +241,12 @@ function show_form($errors=''){
 
 	global $db;
 	global $db_name;
+	/*
 	$nu =  "SELECT * FROM `$db_name`.`gch_user` WHERE `gch_user`.`dni` <> '$_SESSION[mydni]'";
 		$user = mysqli_query($db, $nu);
 		//$ruser = mysqli_fetch_assoc($user);
 		$nuser = mysqli_num_rows($user);
-	
+	*/
 
 	print("<div class=\"juancentramail\" style=\"margin-top:4px; width: 62vw !important;\">
 			<div class='BorderInf' align='center'>

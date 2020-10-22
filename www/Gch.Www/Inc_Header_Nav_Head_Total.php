@@ -21,7 +21,7 @@
 
 <?php
 
-    if ($head == "headp") {  /*require '../Gch.Users/Only.index.user.php';*/ 
+    if ($head == "headp") { require '../Gch.Users/Only.index.user.php'; /* */ 
                             global $redir;
                             $redir = "<script type='text/javascript'>
                                 function redir(){
@@ -30,8 +30,6 @@
                             setTimeout('redir()',1);
                             </script>";
     } elseif ($head == "head2") { 
-                            global $inforut;
-                            $inforut = "../";
                             require '../Gch.Users/Only.index.user.php'; 
                             global $redir;
                             $redir = "<script type='text/javascript'>

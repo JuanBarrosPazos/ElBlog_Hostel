@@ -11,10 +11,15 @@
               }
     else { $loguser = $rf; }
 
+    global $inforut;
+    global $logrut;
+    if (@$inforut == "index"){ $logrut = ""; }
+    else { $logrut = "../"; }
+
     global $logdate;
     $logdate = date('Y_m_d');
     global $filename;
-    $filename = "../Gch.Log/".$logdate."_".$loguser.".log";
+    $filename = $logrut."Gch.Log/".$logdate."_".$loguser.".log";
     $log = fopen($filename, 'ab+');
     fwrite($log, $logtext);
     fclose($log);
