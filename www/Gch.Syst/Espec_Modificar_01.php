@@ -235,7 +235,7 @@ function ver_todo(){
 								".$rowb['id']."
 						</td>
 
-						<td class='BorderInfDch'>
+						<td class='BorderInfDch' style=\"text-align:left;\">
 								".$rowb['espec']."
 						</td>
 

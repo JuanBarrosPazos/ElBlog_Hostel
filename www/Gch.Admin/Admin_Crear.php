@@ -566,11 +566,14 @@ function show_form($errors=''){
 					<td colspan='2'  align='right' valign='middle'  class='BorderSup'>
 						<input type='submit' value='REGISTRAR CON ESTOS DATOS' />
 						<input type='hidden' name='oculto' value=1 />
+					</form>														
+					<form name='closewindow' action='Admin_Modificar_01.php'  \">
+						<input type='submit' value='VOLVER A ADMIN GESTION' />
+					</form>
 						
 					</td>
 					
 				</tr>
-		</form>														
 			</table>"); 
 			} // FIN CONDICIONAL NUMERO USUARIOS
 	

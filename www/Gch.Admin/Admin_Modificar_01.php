@@ -91,7 +91,11 @@ function show_form($errors=''){
 
 	global $uptitulo;
 	$uptitulo = "<div class=\"BorderInf\" style=\"text-align:center; display:block;\">
-					<form name='ver' action='../Gch.Users/User_Modificar_01.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=840px,height=600px')\" class='whiletotala'>
+						<form name='closewindow' action='Admin_Crear.php'  class='form' \">
+							<input type='submit' value='CREAR NUEVO ADMIN' />
+							<input type='hidden' name='volver' value=1 />
+						</form>
+					<form name='ver' action='../Gch.Users/User_Modificar_01.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=840px,height=600px')\" class='form'>
 						<input type='submit' value='MODIFICAR USUARIOS COMUNES' />
 					</form>
 				</div>";
