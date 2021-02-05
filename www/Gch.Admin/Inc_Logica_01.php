@@ -17,4 +17,6 @@ else { show_form();
 	   ver_todo();
 			}
 
+			/* Creado por Juan Manuel Barros Pazos 2020/21 */
+
 ?>

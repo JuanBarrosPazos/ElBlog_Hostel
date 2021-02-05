@@ -204,6 +204,9 @@ function sale_usuario(){
                         ".$m.strtoupper($_SESSION['uNombre'])." ".strtoupper($_SESSION['uApellidos'])."
                   </h6>");
             } else { }
+
+      /* Creado por Juan Manuel Barros Pazos 2020/21 */
+
       ?>
       </div>
     </div>

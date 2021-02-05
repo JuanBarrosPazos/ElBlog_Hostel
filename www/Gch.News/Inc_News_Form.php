@@ -78,4 +78,6 @@
 		$conte = $contem/*."<div id=\"".$refnews."\"></div>"*/;
 	}
 
+	/* Creado por Juan Manuel Barros Pazos 2020/21 */
+
 ?>

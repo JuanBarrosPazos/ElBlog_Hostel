@@ -191,5 +191,6 @@ else {	$defaults = array (	'isla' => @$_SESSION['isla'],
 				}
 					}	else {print ("</td></tr></table>");}			
 				
+/* Creado por Juan Manuel Barros Pazos 2020/21 */
 
 ?>

@@ -14,4 +14,6 @@ print("<table align='center' style=\"margin-top:120px;margin-bottom:120px\">
 						</tr>
 					</table>");
 
+	/* Creado por Juan Manuel Barros Pazos 2020/21 */
+
 ?>

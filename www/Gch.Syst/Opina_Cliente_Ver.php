@@ -260,4 +260,4 @@ require '../Gch.Users/Inc_Footer.php';
 
 require '../Gch.Www/Inc_Jquery_Boots_Foot.php';
 		
-/* Creado por Juan Barros Pazos 2019 */
+/* Creado por Juan Manuel Barros Pazos 2020/21 */

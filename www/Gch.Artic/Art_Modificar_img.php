@@ -516,5 +516,5 @@ $text = PHP_EOL."- ADMIN MODIFICAR IMG SELECCIONADA ".$ActionTime.PHP_EOL."\t ID
 
 	//require '../Gch.Inclu/Admin_Inclu_02.php';
 		
-/* Creado por Juan Barros Pazos 2019 */
+/* Creado por Juan Manuel Barros Pazos 2020/21 */
 ?>

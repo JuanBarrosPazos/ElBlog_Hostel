@@ -452,4 +452,6 @@
 		$logtext = $logtext.PHP_EOL.$dbconecterror;
 		$logtext = $logtext.PHP_EOL.$data0.$table1.$table1b.$table2.$table3.$table4.$table5.$table6.$table7.$table8.$table9.$table10.$table11.$table12.$table13.$table14.PHP_EOL;
 
+/* Creado por Juan Manuel Barros Pazos 2020/21 */
+
 ?>

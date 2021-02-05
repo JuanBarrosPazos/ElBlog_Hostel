@@ -19,4 +19,6 @@ print(" <input type='hidden' name='id' value='".$rowb['id']."' />
         <input type='hidden' name='lastout' value='".$rowb['lastout']."' />
         <input type='hidden' name='visitadmin' value='".$rowb['visitadmin']."' />");
 
+        /* Creado por Juan Manuel Barros Pazos 2020/21 */
+
 ?>

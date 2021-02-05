@@ -32,4 +32,6 @@ print(" <input name='id' type='hidden' value='".$rowb['id']."' />
         <input name='Tlf1' type='hidden' value='".$rowb['Tlf1']."' />
         <input name='Tlf2' type='hidden' value='".$rowb['Tlf2']."' />");
 
+        /* Creado por Juan Manuel Barros Pazos 2020/21 */
+
 ?>

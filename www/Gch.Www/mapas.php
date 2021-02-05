@@ -132,6 +132,8 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARE4CKZ7TaoIjACPRduNigIzl
   require 'Inc_Footer.php';  
   require 'Inc_Jquery_Boots_Foot.php';  
   
+  /* Creado por Juan Manuel Barros Pazos 2020/21 */
+
   ?>
 
 </body>

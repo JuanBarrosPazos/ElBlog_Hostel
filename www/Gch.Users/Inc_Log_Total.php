@@ -24,4 +24,6 @@
     fwrite($log, $logtext);
     fclose($log);
 
+    /* Creado por Juan Manuel Barros Pazos 2020/21 */
+
 ?>

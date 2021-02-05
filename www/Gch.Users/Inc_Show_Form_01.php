@@ -105,4 +105,6 @@ print(" <div class=\"juancentramail col-xs-12 col-sm-12 col-lg-6\" >
         </div>");
                 }	// CONDICIONAL NIVEL ADMIN
 
+/* Creado por Juan Manuel Barros Pazos 2020/21 */
+
 ?>

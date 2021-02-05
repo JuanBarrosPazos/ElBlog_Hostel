@@ -74,4 +74,6 @@ $text = "<table align='center' style=\"margin-top:-16px;\">
 			} 
 		} 
 
+/* Creado por Juan Manuel Barros Pazos 2020/21 */
+
 ?>

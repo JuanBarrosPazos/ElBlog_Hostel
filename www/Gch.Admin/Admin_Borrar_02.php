@@ -566,6 +566,6 @@ require 'Inc_Log_Total.php';
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-/* Creado por Juan Barros Pazos 2020 */
+/* Creado por Juan Manuel Barros Pazos 2020/21 */
 
 ?>

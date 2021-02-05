@@ -162,6 +162,6 @@ function info(){
 
 	require '../Gch.Inclu/Admin_Inclu_02.php';
 		
-/* Creado por Juan Barros Pazos 2020 */
+/* Creado por Juan Manuel Barros Pazos 2020/21 */
 
 ?>

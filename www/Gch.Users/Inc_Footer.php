@@ -45,7 +45,9 @@
   <?php
 
     require 'Inc_Boton_Modalu.php';
-    
+  
+    /* Creado por Juan Manuel Barros Pazos 2020/21 */
+
   ?>
 
 

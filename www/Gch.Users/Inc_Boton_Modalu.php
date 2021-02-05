@@ -23,6 +23,9 @@
         print("
         <form class=\"form-signin text-center\" name='log' method='post' action='$_SERVER[PHP_SELF]'>
         ");
+
+        /* Creado por Juan Manuel Barros Pazos 2020/21 */
+
         ?>
 
           <img class="mb-4" src="../Gch.Img.Sys/LogoBMoll.png" alt="" width="40%" height="40%">

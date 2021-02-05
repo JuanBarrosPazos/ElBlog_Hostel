@@ -148,5 +148,6 @@ if( file_exists($ruta.$nombre) ){
 
 } // FIN SI NO EXISTE LA IMAGEN
 
+/* Creado por Juan Manuel Barros Pazos 2020/21 */
 
 ?>

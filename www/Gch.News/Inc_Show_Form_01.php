@@ -277,4 +277,6 @@
 			</form>														
 		</table>");
 
+		/* Creado por Juan Manuel Barros Pazos 2020/21 */
+
 ?>

@@ -60,4 +60,6 @@
 		$errors [] = "REF AYUNTAMIENTO: <font color='#FF0000'>No Permitidos #$&<>()[]{}</font>";
 		}
 
+		/* Creado por Juan Manuel Barros Pazos 2020/21 */
+
 ?>

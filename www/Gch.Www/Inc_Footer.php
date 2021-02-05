@@ -43,5 +43,9 @@
   <!-- End Footer -->
 
   <?php
+  
     require 'Inc_Boton_Modal.php';
+
+    /* Creado por Juan Manuel Barros Pazos 2020/21 */
+
   ?>

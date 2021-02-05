@@ -529,4 +529,6 @@
 
                 } // FIN SI EL CAMPO NO ESTA VACIO
 
+	/* Creado por Juan Manuel Barros Pazos 2020/21 */
+
 ?>

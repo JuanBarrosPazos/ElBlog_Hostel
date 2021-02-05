@@ -25,5 +25,7 @@ if (!$db){ die ("Es imposible conectar con la bbdd ".$db_name."</br>".mysqli_con
             </html> ");
             
             } else { /* echo "ESTOY CONECTADO"; */ }
-            
+
+    /* Creado por Juan Manuel Barros Pazos 2020/21 */
+
 ?>

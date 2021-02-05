@@ -7,4 +7,6 @@ global $rtbbdd; $rtbbdd = '';
 global $rtnews; $rtnews = '../Gch.News/';
 global $rtsyst; $rtsyst = '../Gch.Syst/';
 
+/* Creado por Juan Manuel Barros Pazos 2020/21 */
+
 ?>

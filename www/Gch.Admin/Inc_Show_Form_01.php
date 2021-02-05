@@ -78,4 +78,6 @@ print(" <div class=\"BorderSup\" style=\"text-align:center; display:block; margi
         </div>");
                 }	// CONDICIONAL NIVEL ADMIN
 
+  /* Creado por Juan Manuel Barros Pazos 2020/21 */
+              
 ?>
