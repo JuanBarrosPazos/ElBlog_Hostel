@@ -665,7 +665,7 @@ function ver_todo(){
 								 $nres = $nres;}
 	else{ $nres = $num_total_rows;}
 
-	//pongo el n�mero de registros total, el tama�o de p�gina y la p�gina que se muestra
+	//pongo el numero de registros total, el tamaño de pagina y la pagina que se muestra
 	echo '<div style="clear:both"></div>
 	<h7>* Restaurantes: '.$nres.' de '.$num_total_rows.' * P&aacute;gina '.$page.' de ' .$total_pages.'.</h7>';
 
@@ -791,14 +791,14 @@ function ver_todo(){
 
         for ($i=1;$i<=$total_pages;$i++) {
             if ($page == $i) {
-                echo '<li class="page-item active"><a class="page-link" href="#">'.$page.'</a></li>';
+                echo '<li class="page-item active"><a href="#">'.$page.'</a></li>';
             } else {
-                echo '<li class="page-item"><a class="page-link" href="index.php?page='.$i.'">'.$i.'</a></li>';
+                echo '<li class="page-item"><a href="index.php?page='.$i.'">'.$i.'</a></li>';
             }
         }
 
         if ($page != $total_pages) {
-            echo '<li class="page-item"><a class="page-link" href="index.php?page='.($page+1).'"><span aria-hidden="true">&raquo;</span></a></li>';
+            echo '<li class="page-item"><a href="index.php?page='.($page+1).'"><span aria-hidden="true">&raquo;</span></a></li>';
         }
     }
     echo '</ul>';
